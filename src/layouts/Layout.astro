@@ -11,7 +11,7 @@ const {
   description = "Depuis 37 ans, nous aidons des enfants défavorisés à sortir de l'échec scolaire. Plus de 2 000 élèves ont pu retrouver le chemin de la confiance, de l'estime de soi et de la réussite.",
 } = Astro.props;
 
-const ogImage = "/images/school-uodv3.jpg";
+const ogImage = new URL("/images/school-uodv3.jpg", Astro.url).href;
 ---
 
 <!doctype html>
@@ -53,6 +53,9 @@ const ogImage = "/images/school-uodv3.jpg";
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
 
     <title>{title}</title>
