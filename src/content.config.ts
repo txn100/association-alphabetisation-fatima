@@ -10,9 +10,9 @@ const news = defineCollection({
     year: z.string(),
     category: z.string(),
     title: z.string(),
-    description: z.string(),
-    image: z.string(),
-    imageAlt: z.string(),
+    description: z.string().optional().default(''),
+    image: z.string().optional().default(''),
+    imageAlt: z.string().optional().default(''),
   }),
 });
 
