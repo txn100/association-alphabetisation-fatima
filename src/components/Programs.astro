@@ -1,0 +1,126 @@
+---
+const steps = [
+  {
+    level: "Niveaux 1–2",
+    title: "Alphabétisation",
+    icon: "fas fa-book-reader",
+    ages: "6 – 10 ans",
+    description:
+      "Les fondations. Les enfants déscolarisés apprennent à lire, écrire et compter dans un cadre bienveillant. L'objectif : rattraper le retard et redonner confiance.",
+    color: "blue",
+    image: "/images/school-uodv4.jpg",
+    imageAlt: "Élèves en activité créative à l'école",
+  },
+  {
+    level: "Niveaux 3–5",
+    title: "Préparation CPE (PSAC)",
+    icon: "fas fa-graduation-cap",
+    ages: "10 – 14 ans",
+    description:
+      "Les élèves approfondissent leurs compétences académiques pour se présenter au Certificate of Primary Education (PSAC) et intégrer le système scolaire classique.",
+    color: "blue",
+    image: "/images/classroom-uodv.jpg",
+    imageAlt: "Salle informatique de l'école",
+  },
+  {
+    level: "Filière Vocational",
+    title: "Formation Pré-Vocationnelle",
+    icon: "fas fa-tools",
+    ages: "15 – 17 ans",
+    description:
+      "Depuis 2000, un programme pratique pour les adolescents : coiffure, esthétique, cuisine, informatique. L'objectif : l'employabilité et l'autonomie.",
+    color: "pink",
+    image: "/images/nail-workshop.webp",
+    imageAlt: "Atelier d'onglerie — formation professionnelle",
+  },
+];
+---
+
+<section id="parcours" class="py-12 md:py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10 md:mb-16">
+      <h2 class="font-heading text-2xl sm:text-3xl font-bold text-gray-800 mb-4">
+        Le Parcours de Nos Élèves
+      </h2>
+      <p class="text-gray-600 max-w-2xl mx-auto">
+        Un chemin progressif adapté au rythme de chaque enfant, de
+        l'alphabétisation à l'insertion professionnelle.
+      </p>
+    </div>
+
+    <!-- Journey Timeline -->
+    <div class="relative">
+      <!-- Connecting line (desktop) -->
+      <div
+        class="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 -translate-y-1/2 z-0"
+      >
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5 md:gap-8 relative z-10">
+        {
+          steps.map((step, i) => (
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 group relative">
+              {/* Step number badge */}
+              <div class="absolute top-4 right-4 w-8 h-8 bg-white/80 backdrop-blur rounded-full flex items-center justify-center text-sm font-bold text-gray-500 group-hover:bg-brand-blue group-hover:text-white transition z-20">
+                {i + 1}
+              </div>
+
+              {/* Image */}
+              <div class="h-40 overflow-hidden">
+                <img
+                  src={step.image}
+                  alt={step.imageAlt}
+                  class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                  loading="lazy"
+                  decoding="async"
+                  width="400"
+                  height="160"
+                />
+              </div>
+
+              <div
+                class:list={[
+                  "h-1",
+                  step.color === "pink" ? "bg-brand-pink" : "bg-brand-blue",
+                ]}
+              />
+
+              <div class="p-6">
+                <span
+                  class:list={[
+                    "inline-block text-xs font-bold uppercase tracking-wider px-2 py-1 rounded mb-3",
+                    step.color === "pink"
+                      ? "bg-brand-light-pink text-brand-pink"
+                      : "bg-blue-50 text-brand-blue",
+                  ]}
+                >
+                  {step.level}
+                </span>
+
+                <h3 class="font-heading text-xl font-bold text-gray-800 mb-1">
+                  {step.title}
+                </h3>
+
+                <p class="text-sm text-gray-400 font-semibold mb-3">
+                  <i class="fas fa-child mr-1" />
+                  {step.ages}
+                </p>
+
+                <p class="text-gray-600 text-sm leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Arrow indicators (mobile) -->
+    <div class="flex justify-center mt-8 md:hidden">
+      <span class="text-gray-400 text-sm font-semibold">
+        <i class="fas fa-arrow-down mr-1"></i> Progression
+      </span>
+    </div>
+  </div>
+</section>

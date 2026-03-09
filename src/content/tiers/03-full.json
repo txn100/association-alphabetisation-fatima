@@ -1,0 +1,9 @@
+{
+  "amount": 4000,
+  "label": "Rs 4,000",
+  "period": "/mois",
+  "description": "Scolarité complète d'un élève",
+  "icon": "fas fa-graduation-cap",
+  "highlighted": true,
+  "order": 3
+}

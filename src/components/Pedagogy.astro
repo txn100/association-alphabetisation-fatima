@@ -1,0 +1,127 @@
+---
+import { getCollection } from 'astro:content';
+
+const features = [
+  {
+    title: "Approche Holistique",
+    description: "Développement intellectuel, émotionnel et social.",
+  },
+  {
+    title: "Activités Valorisantes",
+    description: "Natation, Football, Danse, Chant et Arts créatifs.",
+  },
+  {
+    title: "Compétences de Vie",
+    description: "Préparation au CPE (PSAC) ou à la vie professionnelle selon le profil.",
+  },
+];
+
+const newsEntries = await getCollection('news');
+const news = newsEntries
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
+  .slice(0, 4)
+  .map(entry => entry.data);
+---
+
+<section id="pedagogie" class="py-12 md:py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-10 md:gap-16">
+      <!-- Pedagogy -->
+      <div>
+        <h2 class="font-heading text-2xl sm:text-3xl font-bold text-gray-800 mb-4 md:mb-6">
+          Une Pédagogie Différente
+        </h2>
+        <p class="text-gray-600 mb-8">
+          Inspirée par la méthode d'<strong>Alfred Ireland</strong>, notre école
+          ne classe pas les élèves par âge, mais par
+          <strong>niveau de compétence</strong>. Répartis en 5 niveaux, chaque
+          enfant progresse à son propre rythme vers la maîtrise de la lecture, de
+          l'écriture et du calcul.
+        </p>
+
+        <ul class="space-y-4">
+          {
+            features.map((feature) => (
+              <li class="flex items-start">
+                <i class="fas fa-check-circle text-brand-pink mt-1 mr-3" />
+                <div>
+                  <strong class="block text-gray-800">{feature.title}</strong>
+                  <span class="text-sm text-gray-600">{feature.description}</span>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <!-- Photo grid -->
+        <div class="mt-8 grid grid-cols-2 gap-3">
+          <img
+            src="/images/school-uodv2.jpg"
+            alt="Bâtiment de l'école de Fatima"
+            class="rounded-lg object-cover h-32 w-full"
+            loading="lazy"
+            decoding="async"
+            width="400"
+            height="128"
+          />
+          <img
+            src="/images/food-donation.jpg"
+            alt="Distribution alimentaire à l'école"
+            class="rounded-lg object-cover h-32 w-full"
+            loading="lazy"
+            decoding="async"
+            width="400"
+            height="128"
+          />
+        </div>
+      </div>
+
+      <!-- News Feed -->
+      <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+        <h3
+          class="font-heading text-xl font-bold text-brand-pink mb-6 flex items-center"
+        >
+          <i class="far fa-newspaper mr-2"></i> Actualités Récentes
+        </h3>
+
+        <div class="space-y-6">
+          {
+            news.map((item, i) => (
+              <div class="flex gap-4">
+                <div class="flex-shrink-0 flex flex-col items-center">
+                  <span class="block text-xs font-bold text-gray-400 uppercase">
+                    {item.month}
+                  </span>
+                  <span class="block text-xl font-bold text-brand-blue">
+                    {item.day}
+                  </span>
+                  {i < news.length - 1 && (
+                    <div class="h-full w-px bg-gray-300 mt-2" />
+                  )}
+                </div>
+                <div class="w-full">
+                  {item.image && (
+                    <img
+                      src={item.image}
+                      alt={item.imageAlt}
+                      class="w-full h-32 object-cover rounded-lg mb-3"
+                      loading="lazy"
+                      decoding="async"
+                      width="400"
+                      height="128"
+                    />
+                  )}
+                  <h4 class="font-bold text-gray-800 text-sm">{item.title}</h4>
+                  <p class="text-xs text-gray-500 mb-2">
+                    {item.year} &bull; {item.category}
+                  </p>
+                  <p class="text-sm text-gray-600">{item.description}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

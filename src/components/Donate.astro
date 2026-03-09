@@ -1,0 +1,322 @@
+---
+import { getCollection } from 'astro:content';
+
+const tierEntries = await getCollection('tiers');
+const tiers = tierEntries
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(entry => entry.data);
+---
+
+<!-- Emotional lead-in with image -->
+<section class="relative py-10 md:py-16 overflow-hidden">
+  <div class="absolute inset-0">
+    <img src="/images/school-uodv4.jpg" alt="Élèves en classe" class="w-full h-full object-cover" loading="lazy" decoding="async" />
+    <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/90 to-brand-blue/80"></div>
+  </div>
+  <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <p class="text-brand-yellow font-bold text-sm uppercase tracking-widest mb-3">Votre impact</p>
+    <h2 class="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-4">
+      Un geste simple, un avenir <span class="text-brand-yellow">transformé</span>
+    </h2>
+    <p class="text-white/85 max-w-2xl mx-auto text-sm sm:text-base md:text-lg leading-relaxed">
+      Pour poursuivre cette belle mission, nous avons besoin de <strong class="text-white">VOUS</strong>&nbsp;!
+      Des jeunes de 11 à 18 ans issus de milieux défavorisés comptent sur votre soutien.
+    </p>
+  </div>
+</section>
+
+<!-- Main donation area -->
+<section id="faire-un-don" class="py-12 md:py-20 bg-brand-light relative">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Social proof bar -->
+    <div class="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-10 mb-8 md:mb-14 text-center">
+      <div>
+        <span class="block text-2xl font-extrabold font-heading text-brand-blue">2 000+</span>
+        <span class="text-xs text-gray-500 font-semibold uppercase tracking-wide">Élèves aidés</span>
+      </div>
+      <div class="hidden sm:block w-px bg-gray-300"></div>
+      <div>
+        <span class="block text-2xl font-extrabold font-heading text-brand-pink">37 ans</span>
+        <span class="text-xs text-gray-500 font-semibold uppercase tracking-wide">D'engagement</span>
+      </div>
+      <div class="hidden sm:block w-px bg-gray-300"></div>
+      <div>
+        <span class="block text-2xl font-extrabold font-heading text-brand-blue">160</span>
+        <span class="text-xs text-gray-500 font-semibold uppercase tracking-wide">Élèves cette année</span>
+      </div>
+      <div class="hidden sm:block w-px bg-gray-300"></div>
+      <div>
+        <span class="block text-2xl font-extrabold font-heading text-brand-pink">100%</span>
+        <span class="text-xs text-gray-500 font-semibold uppercase tracking-wide">Dédié aux élèves</span>
+      </div>
+    </div>
+
+    <div class="grid lg:grid-cols-5 gap-8">
+      <!-- Left: Tiers + Impact + Bank (3 cols) -->
+      <div class="lg:col-span-3 space-y-6">
+        <!-- Sponsorship Tiers — Anchoring: show highest first visually, pre-select middle -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100">
+          <h3 class="font-heading font-bold text-gray-800 text-lg mb-2">
+            <i class="fas fa-hand-holding-heart text-brand-pink mr-2"></i>
+            Devenez Parrain
+          </h3>
+          <p class="text-sm text-gray-500 mb-6">Choisissez la formule qui vous convient. Chaque roupie compte.</p>
+
+          <div class="space-y-3" id="tier-options">
+            {tiers.map((tier, i) => (
+              <label class:list={[
+                "flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition group",
+                tier.highlighted
+                  ? "border-brand-pink bg-brand-light-pink/30 relative ring-1 ring-brand-pink/20"
+                  : "border-gray-200 hover:border-brand-blue"
+              ]}>
+                {tier.highlighted && (
+                  <span class="absolute -top-2.5 right-4 bg-brand-pink text-white text-xs font-bold px-3 py-0.5 rounded-full shadow-sm">Le plus choisi</span>
+                )}
+                <input
+                  type="radio"
+                  name="tier"
+                  value={tier.amount}
+                  class:list={[
+                    "w-5 h-5",
+                    tier.highlighted ? "text-brand-pink accent-brand-pink" : "text-brand-blue accent-brand-blue"
+                  ]}
+                  checked={i === 0}
+                />
+                <div class="flex-1">
+                  <span class="font-bold text-gray-800">{tier.label}<span class="font-normal text-gray-400 text-sm"> {tier.period}</span></span>
+                  <span class="block text-sm text-gray-500 mt-0.5">
+                    <i class:list={[tier.icon, tier.highlighted ? "text-brand-pink/60" : "text-brand-blue/60", "mr-1"]} />
+                    {tier.description}
+                  </span>
+                </div>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        <!-- Impact visualization — shows what the money does -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100">
+          <h4 class="font-bold text-gray-800 mb-5 flex items-center">
+            <i class="fas fa-chart-pie mr-2 text-brand-pink"></i>
+            Votre Don en Action
+          </h4>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+            <div class="p-3">
+              <div class="w-12 h-12 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-2">
+                <i class="fas fa-utensils text-brand-blue"></i>
+              </div>
+              <span class="block text-xs font-bold text-gray-700">Repas</span>
+              <span class="block text-[11px] text-gray-400">Quotidien</span>
+            </div>
+            <div class="p-3">
+              <div class="w-12 h-12 mx-auto bg-pink-50 rounded-full flex items-center justify-center mb-2">
+                <i class="fas fa-book-open text-brand-pink"></i>
+              </div>
+              <span class="block text-xs font-bold text-gray-700">Fournitures</span>
+              <span class="block text-[11px] text-gray-400">Scolaires</span>
+            </div>
+            <div class="p-3">
+              <div class="w-12 h-12 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-2">
+                <i class="fas fa-chalkboard-teacher text-brand-blue"></i>
+              </div>
+              <span class="block text-xs font-bold text-gray-700">Enseignants</span>
+              <span class="block text-[11px] text-gray-400">Qualifiés</span>
+            </div>
+            <div class="p-3">
+              <div class="w-12 h-12 mx-auto bg-pink-50 rounded-full flex items-center justify-center mb-2">
+                <i class="fas fa-bus text-brand-pink"></i>
+              </div>
+              <span class="block text-xs font-bold text-gray-700">Sorties</span>
+              <span class="block text-[11px] text-gray-400">Éducatives</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bank Details — Trust signal -->
+        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100">
+          <h4 class="font-bold text-gray-800 mb-4 flex items-center">
+            <i class="fas fa-university mr-2 text-brand-blue"></i>
+            Virement Bancaire
+          </h4>
+          <div class="grid sm:grid-cols-2 gap-4 text-sm">
+            <div>
+              <span class="text-gray-500 block">Banque</span>
+              <span class="font-bold text-gray-800">MCB (Mauritius Commercial Bank)</span>
+            </div>
+            <div>
+              <span class="text-gray-500 block">N° de compte</span>
+              <span class="font-mono font-bold text-brand-blue text-lg">000162618670</span>
+            </div>
+            <div>
+              <span class="text-gray-500 block">Titulaire</span>
+              <span class="font-bold text-gray-800">Association d'Alphabétisation de Fatima</span>
+            </div>
+            <div>
+              <span class="text-gray-500 block">Référence</span>
+              <span class="font-bold text-gray-800">DON + votre nom</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form + Trust signals (2 cols) -->
+      <div class="lg:col-span-2">
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden lg:sticky lg:top-24">
+          <div class="bg-gradient-to-r from-brand-blue to-brand-pink p-5 text-center">
+            <h3 class="font-heading font-bold text-white text-lg">
+              <i class="fas fa-paper-plane mr-2"></i>
+              Formulaire de Parrainage
+            </h3>
+            <p class="text-white/80 text-xs mt-1">Nous vous recontacterons sous 48h</p>
+          </div>
+
+          <!-- Emotional image inside form card -->
+          <div class="relative h-32 overflow-hidden">
+            <img src="/images/school-uodv3.jpg" alt="Le bâtiment de l'association" class="w-full h-full object-cover" loading="lazy" decoding="async" />
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white"></div>
+          </div>
+
+          <form id="parrainage-form" class="p-6 space-y-4 -mt-6 relative z-10">
+            <div>
+              <label for="nom" class="block text-sm font-semibold text-gray-700 mb-1">Nom complet *</label>
+              <input
+                type="text"
+                id="nom"
+                name="nom"
+                required
+                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm"
+                placeholder="Votre nom"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-semibold text-gray-700 mb-1">Email *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm"
+                placeholder="votre@email.com"
+              />
+            </div>
+
+            <div>
+              <label for="telephone" class="block text-sm font-semibold text-gray-700 mb-1">Téléphone</label>
+              <input
+                type="tel"
+                id="telephone"
+                name="telephone"
+                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm"
+                placeholder="+230 5xxx xxxx"
+              />
+            </div>
+
+            <div>
+              <label for="formule" class="block text-sm font-semibold text-gray-700 mb-1">Formule choisie</label>
+              <select
+                id="formule"
+                name="formule"
+                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm bg-white"
+              >
+                {tiers.map((tier) => (
+                  <option value={tier.amount} selected={tier.highlighted}>{tier.label}{tier.period} — {tier.description}</option>
+                ))}
+                <option value="libre">Don libre — selon vos moyens et votre cœur</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-semibold text-gray-700 mb-1">Message (optionnel)</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="2"
+                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm resize-none"
+                placeholder="Votre message..."
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-gradient-to-r from-brand-pink to-brand-blue text-white font-bold py-3.5 rounded-lg hover:opacity-90 transition shadow-md text-base"
+            >
+              <i class="fas fa-heart mr-2"></i> Envoyer ma demande
+            </button>
+
+            <!-- Trust signals below CTA -->
+            <div class="flex items-center justify-center gap-4 pt-2">
+              <span class="flex items-center text-[11px] text-gray-400">
+                <i class="fas fa-lock mr-1"></i> Données sécurisées
+              </span>
+              <span class="flex items-center text-[11px] text-gray-400">
+                <i class="fas fa-receipt mr-1"></i> Reçu fiscal NSIF
+              </span>
+            </div>
+          </form>
+        </div>
+
+        <!-- Contact quick links -->
+        <div class="mt-4 grid grid-cols-2 gap-3">
+          <a
+            href="tel:+23026130032"
+            class="flex items-center gap-2 bg-white rounded-xl p-3 border border-gray-100 shadow-sm hover:border-brand-blue transition text-sm"
+          >
+            <i class="fas fa-phone text-brand-blue"></i>
+            <span class="text-gray-600">261 30 32</span>
+          </a>
+          <a
+            href="tel:+23026167019"
+            class="flex items-center gap-2 bg-white rounded-xl p-3 border border-gray-100 shadow-sm hover:border-brand-pink transition text-sm"
+          >
+            <i class="fas fa-phone text-brand-pink"></i>
+            <span class="text-gray-600">261 67 19</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Company CSR Info -->
+    <div class="mt-12 text-center max-w-2xl mx-auto">
+      <h4 class="font-bold text-gray-600 mb-2">Pour les entreprises (CSR)</h4>
+      <p class="text-sm text-gray-500">
+        Code CSR : <strong>NCSRF/2017/0278</strong>. Vous souhaitez financer un projet
+        spécifique (Salle informatique, Sorties éducatives) ?<br />
+        Contactez <strong>Pauline Martin</strong> (Présidente) au
+        <span class="text-brand-blue font-bold">(230) 261 30 32</span>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("parrainage-form") as HTMLFormElement;
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const nom = data.get("nom");
+    const email = data.get("email");
+    const tel = data.get("telephone");
+    const formule = form.querySelector<HTMLSelectElement>("#formule")?.selectedOptions[0]?.text;
+    const msg = data.get("message");
+
+    const subject = encodeURIComponent(`Demande de Parrainage — ${nom}`);
+    const body = encodeURIComponent(
+      `Bonjour,\n\nJe souhaite devenir parrain.\n\nNom : ${nom}\nEmail : ${email}\nTéléphone : ${tel || "Non renseigné"}\nFormule : ${formule}\n\nMessage :\n${msg || "(aucun)"}\n\nCordialement`
+    );
+    window.location.href = `mailto:direction@ecolefatima.com?subject=${subject}&body=${body}`;
+  });
+
+  // Sync tier radio buttons with select
+  document.querySelectorAll<HTMLInputElement>('input[name="tier"]').forEach((radio) => {
+    radio.addEventListener("change", () => {
+      const select = document.getElementById("formule") as HTMLSelectElement;
+      const val = radio.value;
+      for (const opt of select.options) {
+        if (opt.value === val) { select.value = val; break; }
+      }
+    });
+  });
+</script>

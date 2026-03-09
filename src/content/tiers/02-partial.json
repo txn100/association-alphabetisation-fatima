@@ -1,0 +1,9 @@
+{
+  "amount": 2000,
+  "label": "Rs 2,000",
+  "period": "/mois",
+  "description": "Scolarité partielle d'un élève",
+  "icon": "fas fa-book",
+  "highlighted": false,
+  "order": 2
+}

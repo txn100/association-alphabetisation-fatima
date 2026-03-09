@@ -1,0 +1,16 @@
+{
+  "name": "ecole-de-fatima",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@keystatic/core": "^0.5.48",
+    "@tailwindcss/vite": "^4.1.3",
+    "astro": "^5.18.0",
+    "tailwindcss": "^4.1.3"
+  }
+}
