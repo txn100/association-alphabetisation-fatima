@@ -2,10 +2,10 @@ import { config, fields, collection } from '@keystatic/core';
 
 export default config({
   storage: {
-    kind: 'cloud',
+    kind: process.env.NODE_ENV === 'production' ? 'cloud' : 'local',
   },
   cloud: {
-    project: 'ecole-de-fatima/ecole-de-fatima',
+    project: 'editeur-association/association',
   },
   collections: {
     news: collection({
