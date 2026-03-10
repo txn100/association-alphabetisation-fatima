@@ -10,7 +10,7 @@ const tiers = tierEntries
 <!-- Emotional lead-in with image -->
 <section class="relative py-10 md:py-16 overflow-hidden">
   <div class="absolute inset-0">
-    <img src="/images/school-uodv4.jpg" alt="Élèves en classe" class="w-full h-full object-cover" loading="lazy" decoding="async" />
+    <img src="/images/school-uodv4.webp" alt="Élèves en classe" class="w-full h-full object-cover" loading="lazy" decoding="async" />
     <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/90 to-brand-blue/80"></div>
   </div>
   <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -107,15 +107,15 @@ const tiers = tierEntries
                 <div class="mt-2 bg-gray-50 rounded-xl p-4 border border-gray-200">
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                     <div>
-                      <span class="text-gray-400 text-xs uppercase tracking-wide block mb-0.5">Banque</span>
+                      <span class="text-gray-500 text-xs uppercase tracking-wide block mb-0.5">Banque</span>
                       <span class="font-bold text-gray-800">MCB</span>
                     </div>
                     <div>
-                      <span class="text-gray-400 text-xs uppercase tracking-wide block mb-0.5">N° de compte</span>
+                      <span class="text-gray-500 text-xs uppercase tracking-wide block mb-0.5">N° de compte</span>
                       <span class="font-mono font-bold text-brand-blue text-base">000162618670</span>
                     </div>
                     <div class="sm:col-span-2">
-                      <span class="text-gray-400 text-xs uppercase tracking-wide block mb-0.5">Titulaire</span>
+                      <span class="text-gray-500 text-xs uppercase tracking-wide block mb-0.5">Titulaire</span>
                       <span class="font-bold text-gray-800">Association d'Alphabétisation de Fatima</span>
                     </div>
                   </div>
@@ -146,12 +146,12 @@ const tiers = tierEntries
 
           <!-- Trust signal + receipt note -->
           <div class="border-t border-gray-100 pt-5 text-center space-y-2">
-            <p class="text-xs text-gray-400 flex items-center justify-center gap-1.5">
-              <i class="fas fa-shield-alt text-green-400"></i>
+            <p class="text-xs text-gray-500 flex items-center justify-center gap-1.5">
+              <i class="fas fa-shield-alt text-green-500"></i>
               100% de votre don est dédié aux élèves
             </p>
-            <p class="text-xs text-gray-400">
-              Pour un reçu fiscal, contactez-nous au <a href="tel:+23026130032" class="text-brand-blue hover:underline">261 30 32</a>
+            <p class="text-xs text-gray-500">
+              Pour un reçu fiscal, contactez-nous au <a href="tel:+23026130032" class="text-brand-blue underline hover:text-brand-dark">261 30 32</a>
             </p>
           </div>
         </div>
@@ -197,7 +197,7 @@ const tiers = tierEntries
                   <i class:list={[tier.icon, tier.highlighted ? "text-brand-pink" : "text-brand-blue"]} />
                 </div>
                 <div class="flex-1">
-                  <span class="font-bold text-gray-800">{tier.label}<span class="font-normal text-gray-400 text-sm"> {tier.period}</span></span>
+                  <span class="font-bold text-gray-800">{tier.label}<span class="font-normal text-gray-500 text-sm"> {tier.period}</span></span>
                   <span class="block text-sm text-gray-500 mt-0.5">{tier.description}</span>
                 </div>
                 <i class:list={[
@@ -293,10 +293,10 @@ const tiers = tierEntries
 
               <!-- Trust signals -->
               <div class="flex items-center justify-center gap-4 pt-2">
-                <span class="flex items-center text-[11px] text-gray-400">
+                <span class="flex items-center text-[11px] text-gray-500">
                   <i class="fas fa-clock mr-1"></i> Réponse sous 48h
                 </span>
-                <span class="flex items-center text-[11px] text-gray-400">
+                <span class="flex items-center text-[11px] text-gray-500">
                   <i class="fas fa-receipt mr-1"></i> Reçu fiscal NSIF
                 </span>
               </div>
@@ -318,28 +318,28 @@ const tiers = tierEntries
             <i class="fas fa-utensils text-brand-blue"></i>
           </div>
           <span class="block text-xs font-bold text-gray-700">Repas</span>
-          <span class="block text-[11px] text-gray-400">Quotidien</span>
+          <span class="block text-[11px] text-gray-500">Quotidien</span>
         </div>
         <div class="p-3">
           <div class="w-12 h-12 mx-auto bg-pink-50 rounded-full flex items-center justify-center mb-2">
             <i class="fas fa-book-open text-brand-pink"></i>
           </div>
           <span class="block text-xs font-bold text-gray-700">Fournitures</span>
-          <span class="block text-[11px] text-gray-400">Scolaires</span>
+          <span class="block text-[11px] text-gray-500">Scolaires</span>
         </div>
         <div class="p-3">
           <div class="w-12 h-12 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-2">
             <i class="fas fa-chalkboard-teacher text-brand-blue"></i>
           </div>
           <span class="block text-xs font-bold text-gray-700">Enseignants</span>
-          <span class="block text-[11px] text-gray-400">Qualifiés</span>
+          <span class="block text-[11px] text-gray-500">Qualifiés</span>
         </div>
         <div class="p-3">
           <div class="w-12 h-12 mx-auto bg-pink-50 rounded-full flex items-center justify-center mb-2">
             <i class="fas fa-bus text-brand-pink"></i>
           </div>
           <span class="block text-xs font-bold text-gray-700">Sorties</span>
-          <span class="block text-[11px] text-gray-400">Éducatives</span>
+          <span class="block text-[11px] text-gray-500">Éducatives</span>
         </div>
       </div>
     </div>

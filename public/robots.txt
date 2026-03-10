@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Keystatic admin area
+User-agent: *
+Disallow: /keystatic
