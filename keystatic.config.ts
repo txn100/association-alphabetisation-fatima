@@ -48,6 +48,30 @@ export default config({
         order: fields.integer({ label: 'Ordre d\'affichage' }),
       },
     }),
+    programs: collection({
+      label: 'Parcours Scolaire',
+      slugField: 'title',
+      path: 'src/content/programs/*',
+      format: { data: 'json' },
+      schema: {
+        title: fields.slug({ name: { label: 'Titre du programme' } }),
+        level: fields.text({ label: 'Niveau', description: 'Ex: Niveaux 1–2, Filière Vocational' }),
+        icon: fields.text({ label: 'Icône FontAwesome', description: 'Ex: fas fa-book-reader' }),
+        ages: fields.text({ label: 'Tranche d\'âge', description: 'Ex: 6 – 10 ans' }),
+        description: fields.text({ label: 'Description', multiline: true }),
+        color: fields.select({
+          label: 'Couleur',
+          options: [
+            { label: 'Bleu', value: 'blue' },
+            { label: 'Rose', value: 'pink' },
+          ],
+          defaultValue: 'blue',
+        }),
+        image: fields.text({ label: 'Chemin de l\'image', description: 'Ex: /images/photo.jpg' }),
+        imageAlt: fields.text({ label: 'Texte alternatif de l\'image' }),
+        order: fields.integer({ label: 'Ordre d\'affichage', description: '1 = premier programme' }),
+      },
+    }),
     tiers: collection({
       label: 'Formules de Parrainage',
       slugField: 'label',

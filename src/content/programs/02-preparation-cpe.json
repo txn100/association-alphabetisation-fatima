@@ -1,0 +1,11 @@
+{
+  "level": "Niveaux 3–5",
+  "title": "Préparation CPE (PSAC)",
+  "icon": "fas fa-graduation-cap",
+  "ages": "10 – 14 ans",
+  "description": "Les élèves approfondissent leurs compétences académiques pour se présenter au Certificate of Primary Education (PSAC) et intégrer le système scolaire classique.",
+  "color": "blue",
+  "image": "/images/classroom-uodv.jpg",
+  "imageAlt": "Salle informatique de l'école",
+  "order": 2
+}

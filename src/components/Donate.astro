@@ -27,10 +27,10 @@ const tiers = tierEntries
 
 <!-- Main donation area -->
 <section id="faire-un-don" class="py-12 md:py-20 bg-brand-light relative">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
 
     <!-- Social proof bar -->
-    <div class="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-10 mb-8 md:mb-14 text-center">
+    <div class="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-10 mb-8 md:mb-12 text-center">
       <div>
         <span class="block text-2xl font-extrabold font-heading text-brand-blue">2 000+</span>
         <span class="text-xs text-gray-500 font-semibold uppercase tracking-wide">Élèves aidés</span>
@@ -52,230 +52,314 @@ const tiers = tierEntries
       </div>
     </div>
 
-    <div class="grid lg:grid-cols-5 gap-8">
-      <!-- Left: Tiers + Impact + Bank (3 cols) -->
-      <div class="lg:col-span-3 space-y-6">
-        <!-- Sponsorship Tiers — Anchoring: show highest first visually, pre-select middle -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100">
-          <h3 class="font-heading font-bold text-gray-800 text-lg mb-2">
-            <i class="fas fa-hand-holding-heart text-brand-pink mr-2"></i>
+    <!-- Tab Toggle -->
+    <div class="flex rounded-xl bg-white shadow-md p-1.5 mb-8 border border-gray-100 max-w-md mx-auto">
+      <button
+        id="tab-don"
+        type="button"
+        class="donate-tab flex-1 py-3 px-4 rounded-lg font-bold text-sm transition-all duration-200 bg-brand-blue text-white shadow-sm"
+        data-tab="don"
+      >
+        <i class="fas fa-gift mr-1.5"></i>Don Ponctuel
+      </button>
+      <button
+        id="tab-parrain"
+        type="button"
+        class="donate-tab flex-1 py-3 px-4 rounded-lg font-bold text-sm transition-all duration-200 text-gray-500 hover:text-gray-700"
+        data-tab="parrain"
+      >
+        <i class="fas fa-hand-holding-heart mr-1.5"></i>Devenir Parrain
+      </button>
+    </div>
+
+    <!-- ==================== DON PONCTUEL TAB ==================== -->
+    <div id="panel-don" class="donate-panel">
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-brand-blue to-brand-light-blue p-5 sm:p-6 text-center">
+          <h3 class="font-heading font-bold text-white text-lg sm:text-xl">
+            Faire un don maintenant
+          </h3>
+          <p class="text-white/80 text-sm mt-1">Par virement bancaire ou mobile</p>
+        </div>
+
+        <div class="p-6 sm:p-8 space-y-6">
+
+          <!-- Step-by-step instructions -->
+          <div class="space-y-4">
+            <div class="flex gap-4 items-start">
+              <div class="flex-shrink-0 w-8 h-8 bg-brand-blue/10 rounded-full flex items-center justify-center">
+                <span class="text-brand-blue font-bold text-sm">1</span>
+              </div>
+              <div>
+                <p class="font-bold text-gray-800 text-sm">Ouvrez votre app bancaire</p>
+                <p class="text-gray-500 text-sm">MCB Juice, MCB Mobile, ou votre banque habituelle</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 items-start">
+              <div class="flex-shrink-0 w-8 h-8 bg-brand-blue/10 rounded-full flex items-center justify-center">
+                <span class="text-brand-blue font-bold text-sm">2</span>
+              </div>
+              <div>
+                <p class="font-bold text-gray-800 text-sm">Effectuez un virement vers</p>
+                <div class="mt-2 bg-gray-50 rounded-xl p-4 border border-gray-200">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                    <div>
+                      <span class="text-gray-400 text-xs uppercase tracking-wide block mb-0.5">Banque</span>
+                      <span class="font-bold text-gray-800">MCB</span>
+                    </div>
+                    <div>
+                      <span class="text-gray-400 text-xs uppercase tracking-wide block mb-0.5">N° de compte</span>
+                      <span class="font-mono font-bold text-brand-blue text-base">000162618670</span>
+                    </div>
+                    <div class="sm:col-span-2">
+                      <span class="text-gray-400 text-xs uppercase tracking-wide block mb-0.5">Titulaire</span>
+                      <span class="font-bold text-gray-800">Association d'Alphabétisation de Fatima</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex gap-4 items-start">
+              <div class="flex-shrink-0 w-8 h-8 bg-brand-blue/10 rounded-full flex items-center justify-center">
+                <span class="text-brand-blue font-bold text-sm">3</span>
+              </div>
+              <div>
+                <p class="font-bold text-gray-800 text-sm">En référence, indiquez</p>
+                <p class="mt-1 font-mono bg-brand-blue/5 text-brand-blue font-bold px-3 py-1.5 rounded-lg inline-block text-sm">DON + votre nom</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 items-start">
+              <div class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-check text-green-600 text-xs"></i>
+              </div>
+              <div>
+                <p class="font-bold text-gray-800 text-sm">Prévenez-nous <span class="font-normal text-gray-500">(optionnel)</span></p>
+                <p class="text-gray-500 text-sm">Pour recevoir votre reçu fiscal NSIF</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trust signal + receipt note -->
+          <div class="border-t border-gray-100 pt-5 text-center space-y-2">
+            <p class="text-xs text-gray-400 flex items-center justify-center gap-1.5">
+              <i class="fas fa-shield-alt text-green-400"></i>
+              100% de votre don est dédié aux élèves
+            </p>
+            <p class="text-xs text-gray-400">
+              Pour un reçu fiscal, contactez-nous au <a href="tel:+23026130032" class="text-brand-blue hover:underline">261 30 32</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== DEVENIR PARRAIN TAB ==================== -->
+    <div id="panel-parrain" class="donate-panel hidden">
+      <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-brand-pink to-brand-blue p-5 sm:p-6 text-center">
+          <h3 class="font-heading font-bold text-white text-lg sm:text-xl">
             Devenez Parrain
           </h3>
-          <p class="text-sm text-gray-500 mb-6">Choisissez la formule qui vous convient. Chaque roupie compte.</p>
+          <p class="text-white/80 text-sm mt-1">Un engagement mensuel qui change une vie</p>
+        </div>
 
-          <div class="space-y-3" id="tier-options">
-            {tiers.map((tier, i) => (
-              <label class:list={[
-                "flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition group",
-                tier.highlighted
-                  ? "border-brand-pink bg-brand-light-pink/30 relative ring-1 ring-brand-pink/20"
-                  : "border-gray-200 hover:border-brand-blue"
-              ]}>
+        <div class="p-6 sm:p-8">
+
+          <!-- Tier cards as clickable buttons -->
+          <p class="text-sm text-gray-500 mb-4">Choisissez votre formule de parrainage :</p>
+          <div class="space-y-3 mb-8" id="tier-cards">
+            {tiers.map((tier) => (
+              <button
+                type="button"
+                class:list={[
+                  "tier-card w-full flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-all duration-200 group",
+                  tier.highlighted
+                    ? "border-brand-pink bg-brand-light-pink/30 relative ring-1 ring-brand-pink/20"
+                    : "border-gray-200 hover:border-brand-blue hover:shadow-sm"
+                ]}
+                data-amount={tier.amount}
+                data-label={`${tier.label}${tier.period} — ${tier.description}`}
+              >
                 {tier.highlighted && (
                   <span class="absolute -top-2.5 right-4 bg-brand-pink text-white text-xs font-bold px-3 py-0.5 rounded-full shadow-sm">Le plus choisi</span>
                 )}
-                <input
-                  type="radio"
-                  name="tier"
-                  value={tier.amount}
-                  class:list={[
-                    "w-5 h-5",
-                    tier.highlighted ? "text-brand-pink accent-brand-pink" : "text-brand-blue accent-brand-blue"
-                  ]}
-                  checked={i === 0}
-                />
+                <div class:list={[
+                  "flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center",
+                  tier.highlighted ? "bg-brand-pink/10" : "bg-brand-blue/10"
+                ]}>
+                  <i class:list={[tier.icon, tier.highlighted ? "text-brand-pink" : "text-brand-blue"]} />
+                </div>
                 <div class="flex-1">
                   <span class="font-bold text-gray-800">{tier.label}<span class="font-normal text-gray-400 text-sm"> {tier.period}</span></span>
-                  <span class="block text-sm text-gray-500 mt-0.5">
-                    <i class:list={[tier.icon, tier.highlighted ? "text-brand-pink/60" : "text-brand-blue/60", "mr-1"]} />
-                    {tier.description}
-                  </span>
+                  <span class="block text-sm text-gray-500 mt-0.5">{tier.description}</span>
                 </div>
-              </label>
+                <i class:list={[
+                  "fas fa-chevron-right text-sm transition-transform group-hover:translate-x-0.5",
+                  tier.highlighted ? "text-brand-pink/40" : "text-gray-300"
+                ]} />
+              </button>
             ))}
           </div>
-        </div>
 
-        <!-- Impact visualization — shows what the money does -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100">
-          <h4 class="font-bold text-gray-800 mb-5 flex items-center">
-            <i class="fas fa-chart-pie mr-2 text-brand-pink"></i>
-            Votre Don en Action
-          </h4>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-            <div class="p-3">
-              <div class="w-12 h-12 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-2">
-                <i class="fas fa-utensils text-brand-blue"></i>
-              </div>
-              <span class="block text-xs font-bold text-gray-700">Repas</span>
-              <span class="block text-[11px] text-gray-400">Quotidien</span>
-            </div>
-            <div class="p-3">
-              <div class="w-12 h-12 mx-auto bg-pink-50 rounded-full flex items-center justify-center mb-2">
-                <i class="fas fa-book-open text-brand-pink"></i>
-              </div>
-              <span class="block text-xs font-bold text-gray-700">Fournitures</span>
-              <span class="block text-[11px] text-gray-400">Scolaires</span>
-            </div>
-            <div class="p-3">
-              <div class="w-12 h-12 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-2">
-                <i class="fas fa-chalkboard-teacher text-brand-blue"></i>
-              </div>
-              <span class="block text-xs font-bold text-gray-700">Enseignants</span>
-              <span class="block text-[11px] text-gray-400">Qualifiés</span>
-            </div>
-            <div class="p-3">
-              <div class="w-12 h-12 mx-auto bg-pink-50 rounded-full flex items-center justify-center mb-2">
-                <i class="fas fa-bus text-brand-pink"></i>
-              </div>
-              <span class="block text-xs font-bold text-gray-700">Sorties</span>
-              <span class="block text-[11px] text-gray-400">Éducatives</span>
-            </div>
-          </div>
-        </div>
+          <!-- Compact form -->
+          <div id="parrain-form-wrapper" class="border-t border-gray-100 pt-6">
+            <h4 class="font-bold text-gray-800 text-sm mb-4 flex items-center">
+              <i class="fas fa-paper-plane text-brand-pink mr-2"></i>
+              Vos coordonnées
+            </h4>
 
-        <!-- Bank Details — Trust signal -->
-        <div class="bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100">
-          <h4 class="font-bold text-gray-800 mb-4 flex items-center">
-            <i class="fas fa-university mr-2 text-brand-blue"></i>
-            Virement Bancaire
-          </h4>
-          <div class="grid sm:grid-cols-2 gap-4 text-sm">
-            <div>
-              <span class="text-gray-500 block">Banque</span>
-              <span class="font-bold text-gray-800">MCB (Mauritius Commercial Bank)</span>
-            </div>
-            <div>
-              <span class="text-gray-500 block">N° de compte</span>
-              <span class="font-mono font-bold text-brand-blue text-lg">000162618670</span>
-            </div>
-            <div>
-              <span class="text-gray-500 block">Titulaire</span>
-              <span class="font-bold text-gray-800">Association d'Alphabétisation de Fatima</span>
-            </div>
-            <div>
-              <span class="text-gray-500 block">Référence</span>
-              <span class="font-bold text-gray-800">DON + votre nom</span>
-            </div>
+            <form id="parrainage-form" class="space-y-3">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <input
+                    type="text"
+                    id="nom"
+                    name="nom"
+                    required
+                    class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm"
+                    placeholder="Nom complet *"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="tel"
+                    id="telephone"
+                    name="telephone"
+                    class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm"
+                    placeholder="Téléphone"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm"
+                  placeholder="Email *"
+                />
+              </div>
+
+              <div>
+                <select
+                  id="formule"
+                  name="formule"
+                  class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm bg-white"
+                >
+                  {tiers.map((tier) => (
+                    <option value={tier.amount} selected={tier.highlighted}>{tier.label}{tier.period} — {tier.description}</option>
+                  ))}
+                  <option value="libre">Montant libre</option>
+                </select>
+              </div>
+
+              <div>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="2"
+                  class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm resize-none"
+                  placeholder="Message (optionnel)"
+                ></textarea>
+              </div>
+
+              <!-- Dual CTA: WhatsApp primary, email secondary -->
+              <div class="space-y-2 pt-1">
+                <button
+                  type="button"
+                  id="parrain-whatsapp"
+                  class="w-full flex items-center justify-center gap-2 py-3.5 bg-[#25D366] text-white font-bold rounded-xl hover:bg-[#1fb855] transition shadow-md text-sm"
+                >
+                  <i class="fab fa-whatsapp text-lg"></i>
+                  Envoyer via WhatsApp
+                </button>
+                <button
+                  type="submit"
+                  class="w-full flex items-center justify-center gap-2 py-3 bg-white text-gray-600 font-semibold rounded-xl border border-gray-200 hover:border-brand-pink hover:text-brand-pink transition text-sm"
+                >
+                  <i class="fas fa-envelope"></i>
+                  Ou envoyer par email
+                </button>
+              </div>
+
+              <!-- Trust signals -->
+              <div class="flex items-center justify-center gap-4 pt-2">
+                <span class="flex items-center text-[11px] text-gray-400">
+                  <i class="fas fa-clock mr-1"></i> Réponse sous 48h
+                </span>
+                <span class="flex items-center text-[11px] text-gray-400">
+                  <i class="fas fa-receipt mr-1"></i> Reçu fiscal NSIF
+                </span>
+              </div>
+            </form>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Right: Form + Trust signals (2 cols) -->
-      <div class="lg:col-span-2">
-        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden lg:sticky lg:top-24">
-          <div class="bg-gradient-to-r from-brand-blue to-brand-pink p-5 text-center">
-            <h3 class="font-heading font-bold text-white text-lg">
-              <i class="fas fa-paper-plane mr-2"></i>
-              Formulaire de Parrainage
-            </h3>
-            <p class="text-white/80 text-xs mt-1">Nous vous recontacterons sous 48h</p>
+    <!-- Votre Don en Action — shared, below the tabs -->
+    <div class="mt-10 bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100">
+      <h4 class="font-bold text-gray-800 mb-5 flex items-center justify-center">
+        <i class="fas fa-chart-pie mr-2 text-brand-pink"></i>
+        Votre Don en Action
+      </h4>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+        <div class="p-3">
+          <div class="w-12 h-12 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-2">
+            <i class="fas fa-utensils text-brand-blue"></i>
           </div>
-
-          <!-- Emotional image inside form card -->
-          <div class="relative h-32 overflow-hidden">
-            <img src="/images/school-uodv3.jpg" alt="Le bâtiment de l'association" class="w-full h-full object-cover" loading="lazy" decoding="async" />
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-white"></div>
-          </div>
-
-          <form id="parrainage-form" class="p-6 space-y-4 -mt-6 relative z-10">
-            <div>
-              <label for="nom" class="block text-sm font-semibold text-gray-700 mb-1">Nom complet *</label>
-              <input
-                type="text"
-                id="nom"
-                name="nom"
-                required
-                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm"
-                placeholder="Votre nom"
-              />
-            </div>
-
-            <div>
-              <label for="email" class="block text-sm font-semibold text-gray-700 mb-1">Email *</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm"
-                placeholder="votre@email.com"
-              />
-            </div>
-
-            <div>
-              <label for="telephone" class="block text-sm font-semibold text-gray-700 mb-1">Téléphone</label>
-              <input
-                type="tel"
-                id="telephone"
-                name="telephone"
-                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm"
-                placeholder="+230 5xxx xxxx"
-              />
-            </div>
-
-            <div>
-              <label for="formule" class="block text-sm font-semibold text-gray-700 mb-1">Formule choisie</label>
-              <select
-                id="formule"
-                name="formule"
-                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm bg-white"
-              >
-                {tiers.map((tier) => (
-                  <option value={tier.amount} selected={tier.highlighted}>{tier.label}{tier.period} — {tier.description}</option>
-                ))}
-                <option value="libre">Don libre — selon vos moyens et votre cœur</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="message" class="block text-sm font-semibold text-gray-700 mb-1">Message (optionnel)</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="2"
-                class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm resize-none"
-                placeholder="Votre message..."
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              class="w-full bg-gradient-to-r from-brand-pink to-brand-blue text-white font-bold py-3.5 rounded-lg hover:opacity-90 transition shadow-md text-base"
-            >
-              <i class="fas fa-heart mr-2"></i> Envoyer ma demande
-            </button>
-
-            <!-- Trust signals below CTA -->
-            <div class="flex items-center justify-center gap-4 pt-2">
-              <span class="flex items-center text-[11px] text-gray-400">
-                <i class="fas fa-envelope mr-1"></i> Via votre messagerie
-              </span>
-              <span class="flex items-center text-[11px] text-gray-400">
-                <i class="fas fa-receipt mr-1"></i> Reçu fiscal NSIF
-              </span>
-            </div>
-          </form>
+          <span class="block text-xs font-bold text-gray-700">Repas</span>
+          <span class="block text-[11px] text-gray-400">Quotidien</span>
         </div>
-
-        <!-- Contact quick links -->
-        <div class="mt-4 grid grid-cols-2 gap-3">
-          <a
-            href="tel:+23026130032"
-            class="flex items-center gap-2 bg-white rounded-xl p-3 border border-gray-100 shadow-sm hover:border-brand-blue transition text-sm"
-          >
-            <i class="fas fa-phone text-brand-blue"></i>
-            <span class="text-gray-600">261 30 32</span>
-          </a>
-          <a
-            href="tel:+23026167019"
-            class="flex items-center gap-2 bg-white rounded-xl p-3 border border-gray-100 shadow-sm hover:border-brand-pink transition text-sm"
-          >
-            <i class="fas fa-phone text-brand-pink"></i>
-            <span class="text-gray-600">261 67 19</span>
-          </a>
+        <div class="p-3">
+          <div class="w-12 h-12 mx-auto bg-pink-50 rounded-full flex items-center justify-center mb-2">
+            <i class="fas fa-book-open text-brand-pink"></i>
+          </div>
+          <span class="block text-xs font-bold text-gray-700">Fournitures</span>
+          <span class="block text-[11px] text-gray-400">Scolaires</span>
+        </div>
+        <div class="p-3">
+          <div class="w-12 h-12 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-2">
+            <i class="fas fa-chalkboard-teacher text-brand-blue"></i>
+          </div>
+          <span class="block text-xs font-bold text-gray-700">Enseignants</span>
+          <span class="block text-[11px] text-gray-400">Qualifiés</span>
+        </div>
+        <div class="p-3">
+          <div class="w-12 h-12 mx-auto bg-pink-50 rounded-full flex items-center justify-center mb-2">
+            <i class="fas fa-bus text-brand-pink"></i>
+          </div>
+          <span class="block text-xs font-bold text-gray-700">Sorties</span>
+          <span class="block text-[11px] text-gray-400">Éducatives</span>
         </div>
       </div>
+    </div>
+
+    <!-- Contact quick links -->
+    <div class="mt-6 grid grid-cols-2 gap-3 max-w-sm mx-auto">
+      <a
+        href="tel:+23026130032"
+        class="flex items-center justify-center gap-2 bg-white rounded-xl p-3 border border-gray-100 shadow-sm hover:border-brand-blue transition text-sm"
+      >
+        <i class="fas fa-phone text-brand-blue"></i>
+        <span class="text-gray-600">261 30 32</span>
+      </a>
+      <a
+        href="tel:+23026167019"
+        class="flex items-center justify-center gap-2 bg-white rounded-xl p-3 border border-gray-100 shadow-sm hover:border-brand-pink transition text-sm"
+      >
+        <i class="fas fa-phone text-brand-pink"></i>
+        <span class="text-gray-600">261 67 19</span>
+      </a>
     </div>
 
     <!-- Company CSR Info -->
@@ -292,31 +376,101 @@ const tiers = tierEntries
 </section>
 
 <script>
-  const form = document.getElementById("parrainage-form") as HTMLFormElement;
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-    const nom = data.get("nom");
-    const email = data.get("email");
-    const tel = data.get("telephone");
-    const formule = form.querySelector<HTMLSelectElement>("#formule")?.selectedOptions[0]?.text;
-    const msg = data.get("message");
+  // ===== Tab switching =====
+  const tabs = document.querySelectorAll<HTMLButtonElement>('.donate-tab');
+  const panels = document.querySelectorAll<HTMLElement>('.donate-panel');
 
-    const subject = encodeURIComponent(`Demande de Parrainage — ${nom}`);
-    const body = encodeURIComponent(
-      `Bonjour,\n\nJe souhaite devenir parrain.\n\nNom : ${nom}\nEmail : ${email}\nTéléphone : ${tel || "Non renseigné"}\nFormule : ${formule}\n\nMessage :\n${msg || "(aucun)"}\n\nCordialement`
-    );
-    window.location.href = `mailto:direction@ecolefatima.com?subject=${subject}&body=${body}`;
-  });
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
 
-  // Sync tier radio buttons with select
-  document.querySelectorAll<HTMLInputElement>('input[name="tier"]').forEach((radio) => {
-    radio.addEventListener("change", () => {
-      const select = document.getElementById("formule") as HTMLSelectElement;
-      const val = radio.value;
-      for (const opt of select.options) {
-        if (opt.value === val) { select.value = val; break; }
-      }
+      // Update tab styles
+      tabs.forEach(t => {
+        if (t.dataset.tab === target) {
+          t.classList.add('bg-brand-blue', 'text-white', 'shadow-sm');
+          t.classList.remove('text-gray-500', 'hover:text-gray-700');
+          if (target === 'parrain') {
+            t.classList.remove('bg-brand-blue');
+            t.classList.add('bg-brand-pink');
+          }
+        } else {
+          t.classList.remove('bg-brand-blue', 'bg-brand-pink', 'text-white', 'shadow-sm');
+          t.classList.add('text-gray-500', 'hover:text-gray-700');
+        }
+      });
+
+      // Show/hide panels
+      panels.forEach((panel, i) => {
+        if ((target === 'don' && i === 0) || (target === 'parrain' && i === 1)) {
+          panel.classList.remove('hidden');
+        } else {
+          panel.classList.add('hidden');
+        }
+      });
     });
   });
+
+  // ===== Tier card clicks → select formule + scroll to form =====
+  document.querySelectorAll<HTMLButtonElement>('.tier-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const amount = card.dataset.amount;
+      const select = document.getElementById('formule') as HTMLSelectElement;
+
+      // Update select
+      for (const opt of select.options) {
+        if (opt.value === amount) { select.value = amount!; break; }
+      }
+
+      // Highlight selected card
+      document.querySelectorAll('.tier-card').forEach(c => {
+        c.classList.remove('ring-2', 'ring-brand-pink', 'border-brand-pink');
+      });
+      card.classList.add('ring-2', 'ring-brand-pink', 'border-brand-pink');
+
+      // Scroll to form
+      document.getElementById('parrain-form-wrapper')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  });
+
+  // ===== Parrainage form: email submit =====
+  const form = document.getElementById('parrainage-form') as HTMLFormElement;
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    sendParrainageVia('email');
+  });
+
+  // ===== Parrainage form: WhatsApp submit =====
+  document.getElementById('parrain-whatsapp')?.addEventListener('click', () => {
+    const nom = (document.getElementById('nom') as HTMLInputElement).value;
+    const email = (document.getElementById('email') as HTMLInputElement).value;
+
+    if (!nom || !email) {
+      // Trigger native validation
+      form.reportValidity();
+      return;
+    }
+    sendParrainageVia('whatsapp');
+  });
+
+  function sendParrainageVia(method: 'email' | 'whatsapp') {
+    const data = new FormData(form);
+    const nom = data.get('nom');
+    const email = data.get('email');
+    const tel = data.get('telephone') || 'Non renseigné';
+    const formule = (document.getElementById('formule') as HTMLSelectElement).selectedOptions[0]?.text;
+    const msg = data.get('message') || '(aucun)';
+
+    if (method === 'whatsapp') {
+      const text = encodeURIComponent(
+        `Bonjour,\n\nJe souhaite devenir parrain.\n\nNom : ${nom}\nEmail : ${email}\nTéléphone : ${tel}\nFormule : ${formule}\n\nMessage : ${msg}`
+      );
+      window.open(`https://wa.me/23052611030?text=${text}`, '_blank');
+    } else {
+      const subject = encodeURIComponent(`Demande de Parrainage — ${nom}`);
+      const body = encodeURIComponent(
+        `Bonjour,\n\nJe souhaite devenir parrain.\n\nNom : ${nom}\nEmail : ${email}\nTéléphone : ${tel}\nFormule : ${formule}\n\nMessage :\n${msg}\n\nCordialement`
+      );
+      window.location.href = `mailto:direction@ecolefatima.com?subject=${subject}&body=${body}`;
+    }
+  }
 </script>

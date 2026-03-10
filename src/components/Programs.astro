@@ -1,39 +1,10 @@
 ---
-const steps = [
-  {
-    level: "Niveaux 1–2",
-    title: "Alphabétisation",
-    icon: "fas fa-book-reader",
-    ages: "6 – 10 ans",
-    description:
-      "Les fondations. Les enfants déscolarisés apprennent à lire, écrire et compter dans un cadre bienveillant. L'objectif : rattraper le retard et redonner confiance.",
-    color: "blue",
-    image: "/images/school-uodv4.jpg",
-    imageAlt: "Élèves en activité créative à l'école",
-  },
-  {
-    level: "Niveaux 3–5",
-    title: "Préparation CPE (PSAC)",
-    icon: "fas fa-graduation-cap",
-    ages: "10 – 14 ans",
-    description:
-      "Les élèves approfondissent leurs compétences académiques pour se présenter au Certificate of Primary Education (PSAC) et intégrer le système scolaire classique.",
-    color: "blue",
-    image: "/images/classroom-uodv.jpg",
-    imageAlt: "Salle informatique de l'école",
-  },
-  {
-    level: "Filière Vocational",
-    title: "Formation Pré-Vocationnelle",
-    icon: "fas fa-tools",
-    ages: "15 – 17 ans",
-    description:
-      "Depuis 2000, un programme pratique pour les adolescents : coiffure, esthétique, cuisine, informatique. L'objectif : l'employabilité et l'autonomie.",
-    color: "pink",
-    image: "/images/nail-workshop.webp",
-    imageAlt: "Atelier d'onglerie — formation professionnelle",
-  },
-];
+import { getCollection } from 'astro:content';
+
+const programEntries = await getCollection('programs');
+const steps = programEntries
+  .sort((a, b) => a.data.order - b.data.order)
+  .map(entry => entry.data);
 ---
 
 <section id="parcours" class="py-12 md:py-20 bg-gray-50">

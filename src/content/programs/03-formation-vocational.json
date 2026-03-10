@@ -1,0 +1,11 @@
+{
+  "level": "Filière Vocational",
+  "title": "Formation Pré-Vocationnelle",
+  "icon": "fas fa-tools",
+  "ages": "15 – 17 ans",
+  "description": "Depuis 2000, un programme pratique pour les adolescents : coiffure, esthétique, cuisine, informatique. L'objectif : l'employabilité et l'autonomie.",
+  "color": "pink",
+  "image": "/images/nail-workshop.webp",
+  "imageAlt": "Atelier d'onglerie — formation professionnelle",
+  "order": 3
+}
