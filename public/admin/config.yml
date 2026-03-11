@@ -2,6 +2,7 @@ backend:
   name: github
   repo: txn100/association-alphabetisation-fatima
   branch: main
+  base_url: https://sveltia-cms-auth.sacha-749.workers.dev
 
 locale: fr
 
