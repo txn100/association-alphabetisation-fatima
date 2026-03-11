@@ -64,6 +64,28 @@ type Query {
   programsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ProgramsFilter): ProgramsConnection!
   tiers(relativePath: String): Tiers!
   tiersConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TiersFilter): TiersConnection!
+  hero(relativePath: String): Hero!
+  heroConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HeroFilter): HeroConnection!
+  about(relativePath: String): About!
+  aboutConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: AboutFilter): AboutConnection!
+  footer(relativePath: String): Footer!
+  footerConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: FooterFilter): FooterConnection!
+  navigation(relativePath: String): Navigation!
+  navigationConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: NavigationFilter): NavigationConnection!
+  impact(relativePath: String): Impact!
+  impactConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ImpactFilter): ImpactConnection!
+  pedagogy(relativePath: String): Pedagogy!
+  pedagogyConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PedagogyFilter): PedagogyConnection!
+  donate(relativePath: String): Donate!
+  donateConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: DonateFilter): DonateConnection!
+  site(relativePath: String): Site!
+  siteConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SiteFilter): SiteConnection!
+  statsSection(relativePath: String): StatsSection!
+  statsSectionConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: StatsSectionFilter): StatsSectionConnection!
+  programsSection(relativePath: String): ProgramsSection!
+  programsSectionConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ProgramsSectionFilter): ProgramsSectionConnection!
+  gallerySection(relativePath: String): GallerySection!
+  gallerySectionConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GallerySectionFilter): GallerySectionConnection!
 }
 
 input DocumentFilter {
@@ -72,6 +94,17 @@ input DocumentFilter {
   stats: StatsFilter
   programs: ProgramsFilter
   tiers: TiersFilter
+  hero: HeroFilter
+  about: AboutFilter
+  footer: FooterFilter
+  navigation: NavigationFilter
+  impact: ImpactFilter
+  pedagogy: PedagogyFilter
+  donate: DonateFilter
+  site: SiteFilter
+  statsSection: StatsSectionFilter
+  programsSection: ProgramsSectionFilter
+  gallerySection: GallerySectionFilter
 }
 
 type DocumentConnectionEdges {
@@ -97,7 +130,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = News | Gallery | Stats | Programs | Tiers | Folder
+union DocumentNode = News | Gallery | Stats | Programs | Tiers | Hero | About | Footer | Navigation | Impact | Pedagogy | Donate | Site | StatsSection | ProgramsSection | GallerySection | Folder
 
 type News implements Node & Document {
   title: String!
@@ -292,6 +325,534 @@ type TiersConnection implements Connection {
   edges: [TiersConnectionEdges]
 }
 
+type Hero implements Node & Document {
+  tagline: String!
+  subtitle: String
+  primaryButton: String
+  secondaryButton: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input HeroFilter {
+  tagline: StringFilter
+  subtitle: StringFilter
+  primaryButton: StringFilter
+  secondaryButton: StringFilter
+}
+
+type HeroConnectionEdges {
+  cursor: String!
+  node: Hero
+}
+
+type HeroConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [HeroConnectionEdges]
+}
+
+type AboutPhotos {
+  src: String!
+  alt: String!
+}
+
+type About implements Node & Document {
+  heading: String!
+  paragraph1: String
+  paragraph2: String
+  paragraph3: String
+  quote: String
+  mainImage: String
+  mainImageAlt: String
+  photos: [AboutPhotos]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input AboutPhotosFilter {
+  src: ImageFilter
+  alt: StringFilter
+}
+
+input AboutFilter {
+  heading: StringFilter
+  paragraph1: StringFilter
+  paragraph2: StringFilter
+  paragraph3: StringFilter
+  quote: StringFilter
+  mainImage: ImageFilter
+  mainImageAlt: StringFilter
+  photos: AboutPhotosFilter
+}
+
+type AboutConnectionEdges {
+  cursor: String!
+  node: About
+}
+
+type AboutConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [AboutConnectionEdges]
+}
+
+type Footer implements Node & Document {
+  orgDescription: String!
+  president: String
+  director: String
+  contactHeading: String
+  address: String
+  phone1: String
+  phone1Link: String
+  phone2: String
+  phone2Link: String
+  email: String
+  whatsappNumber: String
+  transparencyHeading: String
+  ngoRegistered: String
+  nsifCode: String
+  csrCode: String
+  copyright: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input FooterFilter {
+  orgDescription: StringFilter
+  president: StringFilter
+  director: StringFilter
+  contactHeading: StringFilter
+  address: StringFilter
+  phone1: StringFilter
+  phone1Link: StringFilter
+  phone2: StringFilter
+  phone2Link: StringFilter
+  email: StringFilter
+  whatsappNumber: StringFilter
+  transparencyHeading: StringFilter
+  ngoRegistered: StringFilter
+  nsifCode: StringFilter
+  csrCode: StringFilter
+  copyright: StringFilter
+}
+
+type FooterConnectionEdges {
+  cursor: String!
+  node: Footer
+}
+
+type FooterConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [FooterConnectionEdges]
+}
+
+type NavigationLinks {
+  label: String!
+}
+
+type Navigation implements Node & Document {
+  links: [NavigationLinks]
+  ctaText: String!
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input NavigationLinksFilter {
+  label: StringFilter
+}
+
+input NavigationFilter {
+  links: NavigationLinksFilter
+  ctaText: StringFilter
+}
+
+type NavigationConnectionEdges {
+  cursor: String!
+  node: Navigation
+}
+
+type NavigationConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [NavigationConnectionEdges]
+}
+
+type ImpactImages {
+  src: String!
+  alt: String!
+}
+
+type Impact implements Node & Document {
+  sinceLabel: String!
+  headline: String
+  description: String
+  images: [ImpactImages]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ImpactImagesFilter {
+  src: ImageFilter
+  alt: StringFilter
+}
+
+input ImpactFilter {
+  sinceLabel: StringFilter
+  headline: StringFilter
+  description: StringFilter
+  images: ImpactImagesFilter
+}
+
+type ImpactConnectionEdges {
+  cursor: String!
+  node: Impact
+}
+
+type ImpactConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [ImpactConnectionEdges]
+}
+
+type PedagogyFeatures {
+  title: String!
+  description: String!
+}
+
+type PedagogyPhotos {
+  src: String!
+  alt: String!
+}
+
+type Pedagogy implements Node & Document {
+  heading: String!
+  description: String
+  features: [PedagogyFeatures]
+  newsHeading: String
+  photos: [PedagogyPhotos]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input PedagogyFeaturesFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input PedagogyPhotosFilter {
+  src: ImageFilter
+  alt: StringFilter
+}
+
+input PedagogyFilter {
+  heading: StringFilter
+  description: StringFilter
+  features: PedagogyFeaturesFilter
+  newsHeading: StringFilter
+  photos: PedagogyPhotosFilter
+}
+
+type PedagogyConnectionEdges {
+  cursor: String!
+  node: Pedagogy
+}
+
+type PedagogyConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [PedagogyConnectionEdges]
+}
+
+type DonateEmotionalHeader {
+  badge: String
+  heading: String
+  headingHighlight: String
+  description: String
+}
+
+type DonateSocialProof {
+  value: String!
+  label: String!
+}
+
+type DonateTabs {
+  donLabel: String
+  parrainLabel: String
+}
+
+type DonateDonPonctuelSteps {
+  title: String!
+  detail: String
+}
+
+type DonateDonPonctuel {
+  heading: String
+  subtitle: String
+  steps: [DonateDonPonctuelSteps]
+  referenceFormat: String
+  bankName: String
+  accountNumber: String
+  accountHolder: String
+  trustSignal: String
+  receiptNote: String
+}
+
+type DonateParrainSection {
+  heading: String
+  subtitle: String
+  chooseLabel: String
+  highlightedBadge: String
+  freeAmountOption: String
+  formHeading: String
+  namePlaceholder: String
+  phonePlaceholder: String
+  emailPlaceholder: String
+  messagePlaceholder: String
+  whatsappButton: String
+  emailButton: String
+  responseTime: String
+  receiptLabel: String
+}
+
+type DonateDonEnActionItems {
+  icon: String!
+  title: String!
+  subtitle: String!
+}
+
+type DonateDonEnAction {
+  heading: String
+  items: [DonateDonEnActionItems]
+}
+
+type DonateCsr {
+  heading: String
+  text: String
+  csrCode: String
+  contactName: String
+  contactRole: String
+}
+
+type Donate implements Node & Document {
+  emotionalHeader: DonateEmotionalHeader
+  socialProof: [DonateSocialProof]
+  tabs: DonateTabs
+  donPonctuel: DonateDonPonctuel
+  parrainSection: DonateParrainSection
+  donEnAction: DonateDonEnAction
+  csr: DonateCsr
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input DonateEmotionalHeaderFilter {
+  badge: StringFilter
+  heading: StringFilter
+  headingHighlight: StringFilter
+  description: StringFilter
+}
+
+input DonateSocialProofFilter {
+  value: StringFilter
+  label: StringFilter
+}
+
+input DonateTabsFilter {
+  donLabel: StringFilter
+  parrainLabel: StringFilter
+}
+
+input DonateDonPonctuelStepsFilter {
+  title: StringFilter
+  detail: StringFilter
+}
+
+input DonateDonPonctuelFilter {
+  heading: StringFilter
+  subtitle: StringFilter
+  steps: DonateDonPonctuelStepsFilter
+  referenceFormat: StringFilter
+  bankName: StringFilter
+  accountNumber: StringFilter
+  accountHolder: StringFilter
+  trustSignal: StringFilter
+  receiptNote: StringFilter
+}
+
+input DonateParrainSectionFilter {
+  heading: StringFilter
+  subtitle: StringFilter
+  chooseLabel: StringFilter
+  highlightedBadge: StringFilter
+  freeAmountOption: StringFilter
+  formHeading: StringFilter
+  namePlaceholder: StringFilter
+  phonePlaceholder: StringFilter
+  emailPlaceholder: StringFilter
+  messagePlaceholder: StringFilter
+  whatsappButton: StringFilter
+  emailButton: StringFilter
+  responseTime: StringFilter
+  receiptLabel: StringFilter
+}
+
+input DonateDonEnActionItemsFilter {
+  icon: StringFilter
+  title: StringFilter
+  subtitle: StringFilter
+}
+
+input DonateDonEnActionFilter {
+  heading: StringFilter
+  items: DonateDonEnActionItemsFilter
+}
+
+input DonateCsrFilter {
+  heading: StringFilter
+  text: StringFilter
+  csrCode: StringFilter
+  contactName: StringFilter
+  contactRole: StringFilter
+}
+
+input DonateFilter {
+  emotionalHeader: DonateEmotionalHeaderFilter
+  socialProof: DonateSocialProofFilter
+  tabs: DonateTabsFilter
+  donPonctuel: DonateDonPonctuelFilter
+  parrainSection: DonateParrainSectionFilter
+  donEnAction: DonateDonEnActionFilter
+  csr: DonateCsrFilter
+}
+
+type DonateConnectionEdges {
+  cursor: String!
+  node: Donate
+}
+
+type DonateConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [DonateConnectionEdges]
+}
+
+type Site implements Node & Document {
+  title: String!
+  description: String
+  organizationName: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input SiteFilter {
+  title: StringFilter
+  description: StringFilter
+  organizationName: StringFilter
+}
+
+type SiteConnectionEdges {
+  cursor: String!
+  node: Site
+}
+
+type SiteConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [SiteConnectionEdges]
+}
+
+type StatsSectionBadges {
+  label: String!
+}
+
+type StatsSection implements Node & Document {
+  badges: [StatsSectionBadges]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input StatsSectionBadgesFilter {
+  label: StringFilter
+}
+
+input StatsSectionFilter {
+  badges: StatsSectionBadgesFilter
+}
+
+type StatsSectionConnectionEdges {
+  cursor: String!
+  node: StatsSection
+}
+
+type StatsSectionConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [StatsSectionConnectionEdges]
+}
+
+type ProgramsSection implements Node & Document {
+  heading: String!
+  description: String
+  mobileIndicator: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ProgramsSectionFilter {
+  heading: StringFilter
+  description: StringFilter
+  mobileIndicator: StringFilter
+}
+
+type ProgramsSectionConnectionEdges {
+  cursor: String!
+  node: ProgramsSection
+}
+
+type ProgramsSectionConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [ProgramsSectionConnectionEdges]
+}
+
+type GallerySection implements Node & Document {
+  heading: String!
+  headingHighlight: String
+  description: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input GallerySectionFilter {
+  heading: StringFilter
+  headingHighlight: StringFilter
+  description: StringFilter
+}
+
+type GallerySectionConnectionEdges {
+  cursor: String!
+  node: GallerySection
+}
+
+type GallerySectionConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [GallerySectionConnectionEdges]
+}
+
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
@@ -308,6 +869,28 @@ type Mutation {
   createPrograms(relativePath: String!, params: ProgramsMutation!): Programs!
   updateTiers(relativePath: String!, params: TiersMutation!): Tiers!
   createTiers(relativePath: String!, params: TiersMutation!): Tiers!
+  updateHero(relativePath: String!, params: HeroMutation!): Hero!
+  createHero(relativePath: String!, params: HeroMutation!): Hero!
+  updateAbout(relativePath: String!, params: AboutMutation!): About!
+  createAbout(relativePath: String!, params: AboutMutation!): About!
+  updateFooter(relativePath: String!, params: FooterMutation!): Footer!
+  createFooter(relativePath: String!, params: FooterMutation!): Footer!
+  updateNavigation(relativePath: String!, params: NavigationMutation!): Navigation!
+  createNavigation(relativePath: String!, params: NavigationMutation!): Navigation!
+  updateImpact(relativePath: String!, params: ImpactMutation!): Impact!
+  createImpact(relativePath: String!, params: ImpactMutation!): Impact!
+  updatePedagogy(relativePath: String!, params: PedagogyMutation!): Pedagogy!
+  createPedagogy(relativePath: String!, params: PedagogyMutation!): Pedagogy!
+  updateDonate(relativePath: String!, params: DonateMutation!): Donate!
+  createDonate(relativePath: String!, params: DonateMutation!): Donate!
+  updateSite(relativePath: String!, params: SiteMutation!): Site!
+  createSite(relativePath: String!, params: SiteMutation!): Site!
+  updateStatsSection(relativePath: String!, params: StatsSectionMutation!): StatsSection!
+  createStatsSection(relativePath: String!, params: StatsSectionMutation!): StatsSection!
+  updateProgramsSection(relativePath: String!, params: ProgramsSectionMutation!): ProgramsSection!
+  createProgramsSection(relativePath: String!, params: ProgramsSectionMutation!): ProgramsSection!
+  updateGallerySection(relativePath: String!, params: GallerySectionMutation!): GallerySection!
+  createGallerySection(relativePath: String!, params: GallerySectionMutation!): GallerySection!
 }
 
 input DocumentUpdateMutation {
@@ -316,6 +899,17 @@ input DocumentUpdateMutation {
   stats: StatsMutation
   programs: ProgramsMutation
   tiers: TiersMutation
+  hero: HeroMutation
+  about: AboutMutation
+  footer: FooterMutation
+  navigation: NavigationMutation
+  impact: ImpactMutation
+  pedagogy: PedagogyMutation
+  donate: DonateMutation
+  site: SiteMutation
+  statsSection: StatsSectionMutation
+  programsSection: ProgramsSectionMutation
+  gallerySection: GallerySectionMutation
   relativePath: String
 }
 
@@ -325,6 +919,17 @@ input DocumentMutation {
   stats: StatsMutation
   programs: ProgramsMutation
   tiers: TiersMutation
+  hero: HeroMutation
+  about: AboutMutation
+  footer: FooterMutation
+  navigation: NavigationMutation
+  impact: ImpactMutation
+  pedagogy: PedagogyMutation
+  donate: DonateMutation
+  site: SiteMutation
+  statsSection: StatsSectionMutation
+  programsSection: ProgramsSectionMutation
+  gallerySection: GallerySectionMutation
 }
 
 input NewsMutation {
@@ -372,6 +977,193 @@ input TiersMutation {
   icon: String
   highlighted: Boolean
   order: Float
+}
+
+input HeroMutation {
+  tagline: String
+  subtitle: String
+  primaryButton: String
+  secondaryButton: String
+}
+
+input AboutPhotosMutation {
+  src: String
+  alt: String
+}
+
+input AboutMutation {
+  heading: String
+  paragraph1: String
+  paragraph2: String
+  paragraph3: String
+  quote: String
+  mainImage: String
+  mainImageAlt: String
+  photos: [AboutPhotosMutation]
+}
+
+input FooterMutation {
+  orgDescription: String
+  president: String
+  director: String
+  contactHeading: String
+  address: String
+  phone1: String
+  phone1Link: String
+  phone2: String
+  phone2Link: String
+  email: String
+  whatsappNumber: String
+  transparencyHeading: String
+  ngoRegistered: String
+  nsifCode: String
+  csrCode: String
+  copyright: String
+}
+
+input NavigationLinksMutation {
+  label: String
+}
+
+input NavigationMutation {
+  links: [NavigationLinksMutation]
+  ctaText: String
+}
+
+input ImpactImagesMutation {
+  src: String
+  alt: String
+}
+
+input ImpactMutation {
+  sinceLabel: String
+  headline: String
+  description: String
+  images: [ImpactImagesMutation]
+}
+
+input PedagogyFeaturesMutation {
+  title: String
+  description: String
+}
+
+input PedagogyPhotosMutation {
+  src: String
+  alt: String
+}
+
+input PedagogyMutation {
+  heading: String
+  description: String
+  features: [PedagogyFeaturesMutation]
+  newsHeading: String
+  photos: [PedagogyPhotosMutation]
+}
+
+input DonateEmotionalHeaderMutation {
+  badge: String
+  heading: String
+  headingHighlight: String
+  description: String
+}
+
+input DonateSocialProofMutation {
+  value: String
+  label: String
+}
+
+input DonateTabsMutation {
+  donLabel: String
+  parrainLabel: String
+}
+
+input DonateDonPonctuelStepsMutation {
+  title: String
+  detail: String
+}
+
+input DonateDonPonctuelMutation {
+  heading: String
+  subtitle: String
+  steps: [DonateDonPonctuelStepsMutation]
+  referenceFormat: String
+  bankName: String
+  accountNumber: String
+  accountHolder: String
+  trustSignal: String
+  receiptNote: String
+}
+
+input DonateParrainSectionMutation {
+  heading: String
+  subtitle: String
+  chooseLabel: String
+  highlightedBadge: String
+  freeAmountOption: String
+  formHeading: String
+  namePlaceholder: String
+  phonePlaceholder: String
+  emailPlaceholder: String
+  messagePlaceholder: String
+  whatsappButton: String
+  emailButton: String
+  responseTime: String
+  receiptLabel: String
+}
+
+input DonateDonEnActionItemsMutation {
+  icon: String
+  title: String
+  subtitle: String
+}
+
+input DonateDonEnActionMutation {
+  heading: String
+  items: [DonateDonEnActionItemsMutation]
+}
+
+input DonateCsrMutation {
+  heading: String
+  text: String
+  csrCode: String
+  contactName: String
+  contactRole: String
+}
+
+input DonateMutation {
+  emotionalHeader: DonateEmotionalHeaderMutation
+  socialProof: [DonateSocialProofMutation]
+  tabs: DonateTabsMutation
+  donPonctuel: DonateDonPonctuelMutation
+  parrainSection: DonateParrainSectionMutation
+  donEnAction: DonateDonEnActionMutation
+  csr: DonateCsrMutation
+}
+
+input SiteMutation {
+  title: String
+  description: String
+  organizationName: String
+}
+
+input StatsSectionBadgesMutation {
+  label: String
+}
+
+input StatsSectionMutation {
+  badges: [StatsSectionBadgesMutation]
+}
+
+input ProgramsSectionMutation {
+  heading: String
+  description: String
+  mobileIndicator: String
+}
+
+input GallerySectionMutation {
+  heading: String
+  headingHighlight: String
+  description: String
 }
 
 schema {

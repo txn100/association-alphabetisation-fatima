@@ -1,10 +1,13 @@
 // tina/config.ts
 import { defineConfig } from "tinacms";
 var branch = process.env.GITHUB_BRANCH || process.env.CF_PAGES_BRANCH || process.env.HEAD || "tina";
+var singletonUI = {
+  allowedActions: { create: false, delete: false }
+};
 var config_default = defineConfig({
   branch,
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "",
-  token: process.env.TINA_TOKEN || "",
+  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "9bff4b70-8364-4205-b688-7c79939891bf",
+  token: process.env.TINA_TOKEN || "df0d4de26bb81e822baf560320e818282cff16e9",
   build: {
     outputFolder: "admin",
     publicFolder: "public"
@@ -17,72 +20,22 @@ var config_default = defineConfig({
   },
   schema: {
     collections: [
+      // ── Multi-document collections ──
       {
         name: "news",
         label: "Actualit\xE9s",
         path: "src/content/news",
         format: "json",
         fields: [
-          {
-            type: "string",
-            name: "title",
-            label: "Titre",
-            isTitle: true,
-            required: true
-          },
-          {
-            type: "string",
-            name: "date",
-            label: "Date de publication",
-            description: "Format: YYYY-MM-DD (ex: 2026-03-01)",
-            required: true
-          },
-          {
-            type: "string",
-            name: "month",
-            label: "Mois (abr\xE9g\xE9)",
-            description: "Ex: F\xE9v, Mar, Avr, D\xE9c",
-            required: true
-          },
-          {
-            type: "string",
-            name: "day",
-            label: "Jour",
-            description: "Ex: 09, 24",
-            required: true
-          },
-          {
-            type: "string",
-            name: "year",
-            label: "Ann\xE9e",
-            description: "Ex: 2026",
-            required: true
-          },
-          {
-            type: "string",
-            name: "category",
-            label: "Cat\xE9gorie",
-            required: true,
-            options: ["Formation", "Culture", "Vie Scolaire", "Environnement"]
-          },
-          {
-            type: "string",
-            name: "description",
-            label: "Description",
-            ui: {
-              component: "textarea"
-            }
-          },
-          {
-            type: "image",
-            name: "image",
-            label: "Image"
-          },
-          {
-            type: "string",
-            name: "imageAlt",
-            label: "Texte alternatif de l'image"
-          }
+          { type: "string", name: "title", label: "Titre", isTitle: true, required: true },
+          { type: "string", name: "date", label: "Date de publication", description: "Format: YYYY-MM-DD (ex: 2026-03-01)", required: true },
+          { type: "string", name: "month", label: "Mois (abr\xE9g\xE9)", description: "Ex: F\xE9v, Mar, Avr, D\xE9c", required: true },
+          { type: "string", name: "day", label: "Jour", description: "Ex: 09, 24", required: true },
+          { type: "string", name: "year", label: "Ann\xE9e", description: "Ex: 2026", required: true },
+          { type: "string", name: "category", label: "Cat\xE9gorie", required: true, options: ["Formation", "Culture", "Vie Scolaire", "Environnement"] },
+          { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+          { type: "image", name: "image", label: "Image" },
+          { type: "string", name: "imageAlt", label: "Texte alternatif de l'image" }
         ]
       },
       {
@@ -91,19 +44,8 @@ var config_default = defineConfig({
         path: "src/content/gallery",
         format: "json",
         fields: [
-          {
-            type: "image",
-            name: "src",
-            label: "Image",
-            required: true
-          },
-          {
-            type: "string",
-            name: "alt",
-            label: "Description de la photo",
-            isTitle: true,
-            required: true
-          },
+          { type: "image", name: "src", label: "Image", required: true },
+          { type: "string", name: "alt", label: "Description de la photo", isTitle: true, required: true },
           {
             type: "string",
             name: "span",
@@ -116,12 +58,7 @@ var config_default = defineConfig({
               { value: "col-span-2 row-span-2", label: "Grande (2x2)" }
             ]
           },
-          {
-            type: "number",
-            name: "order",
-            label: "Ordre d'affichage",
-            required: true
-          }
+          { type: "number", name: "order", label: "Ordre d'affichage", required: true }
         ]
       },
       {
@@ -130,26 +67,9 @@ var config_default = defineConfig({
         path: "src/content/stats",
         format: "json",
         fields: [
-          {
-            type: "string",
-            name: "value",
-            label: "Valeur",
-            isTitle: true,
-            required: true,
-            description: "Ex: 2 000+, 160+, 15"
-          },
-          {
-            type: "string",
-            name: "label",
-            label: "Description",
-            required: true
-          },
-          {
-            type: "number",
-            name: "order",
-            label: "Ordre d'affichage",
-            required: true
-          }
+          { type: "string", name: "value", label: "Valeur", isTitle: true, required: true, description: "Ex: 2 000+, 160+, 15" },
+          { type: "string", name: "label", label: "Description", required: true },
+          { type: "number", name: "order", label: "Ordre d'affichage", required: true }
         ]
       },
       {
@@ -158,71 +78,15 @@ var config_default = defineConfig({
         path: "src/content/programs",
         format: "json",
         fields: [
-          {
-            type: "string",
-            name: "title",
-            label: "Titre du programme",
-            isTitle: true,
-            required: true
-          },
-          {
-            type: "string",
-            name: "level",
-            label: "Niveau",
-            description: "Ex: Niveaux 1\u20132, Fili\xE8re Vocational",
-            required: true
-          },
-          {
-            type: "string",
-            name: "icon",
-            label: "Ic\xF4ne FontAwesome",
-            description: "Ex: fas fa-book-reader",
-            required: true
-          },
-          {
-            type: "string",
-            name: "ages",
-            label: "Tranche d'\xE2ge",
-            description: "Ex: 6 \u2013 10 ans",
-            required: true
-          },
-          {
-            type: "string",
-            name: "description",
-            label: "Description",
-            required: true,
-            ui: {
-              component: "textarea"
-            }
-          },
-          {
-            type: "string",
-            name: "color",
-            label: "Couleur",
-            required: true,
-            options: [
-              { value: "blue", label: "Bleu" },
-              { value: "pink", label: "Rose" }
-            ]
-          },
-          {
-            type: "image",
-            name: "image",
-            label: "Image",
-            required: true
-          },
-          {
-            type: "string",
-            name: "imageAlt",
-            label: "Texte alternatif de l'image",
-            required: true
-          },
-          {
-            type: "number",
-            name: "order",
-            label: "Ordre d'affichage",
-            required: true
-          }
+          { type: "string", name: "title", label: "Titre du programme", isTitle: true, required: true },
+          { type: "string", name: "level", label: "Niveau", description: "Ex: Niveaux 1\u20132, Fili\xE8re Vocational", required: true },
+          { type: "string", name: "icon", label: "Ic\xF4ne FontAwesome", description: "Ex: fas fa-book-reader", required: true },
+          { type: "string", name: "ages", label: "Tranche d'\xE2ge", description: "Ex: 6 \u2013 10 ans", required: true },
+          { type: "string", name: "description", label: "Description", required: true, ui: { component: "textarea" } },
+          { type: "string", name: "color", label: "Couleur", required: true, options: [{ value: "blue", label: "Bleu" }, { value: "pink", label: "Rose" }] },
+          { type: "image", name: "image", label: "Image", required: true },
+          { type: "string", name: "imageAlt", label: "Texte alternatif de l'image", required: true },
+          { type: "number", name: "order", label: "Ordre d'affichage", required: true }
         ]
       },
       {
@@ -231,52 +95,332 @@ var config_default = defineConfig({
         path: "src/content/tiers",
         format: "json",
         fields: [
+          { type: "number", name: "amount", label: "Montant (Rs)", required: true },
+          { type: "string", name: "label", label: "Label", isTitle: true, required: true, description: "Ex: Rs 800" },
+          { type: "string", name: "period", label: "P\xE9riode", description: "Ex: /mois", required: true },
+          { type: "string", name: "description", label: "Description", description: "Ex: 1 repas par jour pour un \xE9l\xE8ve", required: true },
+          { type: "string", name: "icon", label: "Ic\xF4ne FontAwesome", description: "Ex: fas fa-utensils", required: true },
+          { type: "boolean", name: "highlighted", label: "Mettre en avant" },
+          { type: "number", name: "order", label: "Ordre d'affichage", required: true }
+        ]
+      },
+      // ── Singleton collections (one file each in src/data/) ──
+      {
+        name: "hero",
+        label: "Hero (Accueil)",
+        path: "src/data",
+        format: "json",
+        ui: singletonUI,
+        match: { include: "hero" },
+        fields: [
+          { type: "string", name: "tagline", label: "Titre principal", isTitle: true, required: true },
+          { type: "string", name: "subtitle", label: "Sous-titre", ui: { component: "textarea" } },
+          { type: "string", name: "primaryButton", label: "Bouton principal" },
+          { type: "string", name: "secondaryButton", label: "Bouton secondaire" }
+        ]
+      },
+      {
+        name: "about",
+        label: "Notre Histoire",
+        path: "src/data",
+        format: "json",
+        ui: singletonUI,
+        match: { include: "about" },
+        fields: [
+          { type: "string", name: "heading", label: "Titre", isTitle: true, required: true },
+          { type: "string", name: "paragraph1", label: "Paragraphe 1", ui: { component: "textarea" } },
+          { type: "string", name: "paragraph2", label: "Paragraphe 2", ui: { component: "textarea" } },
+          { type: "string", name: "paragraph3", label: "Paragraphe 3", ui: { component: "textarea" } },
+          { type: "string", name: "quote", label: "Citation", ui: { component: "textarea" } },
+          { type: "image", name: "mainImage", label: "Image principale" },
+          { type: "string", name: "mainImageAlt", label: "Alt image principale" },
           {
-            type: "number",
-            name: "amount",
-            label: "Montant (Rs)",
-            required: true
-          },
-          {
-            type: "string",
-            name: "label",
-            label: "Label",
-            isTitle: true,
-            required: true,
-            description: "Ex: Rs 800"
-          },
-          {
-            type: "string",
-            name: "period",
-            label: "P\xE9riode",
-            description: "Ex: /mois",
-            required: true
-          },
-          {
-            type: "string",
-            name: "description",
-            label: "Description",
-            description: "Ex: 1 repas par jour pour un \xE9l\xE8ve",
-            required: true
-          },
-          {
-            type: "string",
-            name: "icon",
-            label: "Ic\xF4ne FontAwesome",
-            description: "Ex: fas fa-utensils",
-            required: true
-          },
-          {
-            type: "boolean",
-            name: "highlighted",
-            label: "Mettre en avant"
-          },
-          {
-            type: "number",
-            name: "order",
-            label: "Ordre d'affichage",
-            required: true
+            type: "object",
+            name: "photos",
+            label: "Photos",
+            list: true,
+            fields: [
+              { type: "image", name: "src", label: "Image", required: true },
+              { type: "string", name: "alt", label: "Description", required: true }
+            ]
           }
+        ]
+      },
+      {
+        name: "footer",
+        label: "Pied de page",
+        path: "src/data",
+        format: "json",
+        ui: singletonUI,
+        match: { include: "footer" },
+        fields: [
+          { type: "string", name: "orgDescription", label: "Description de l'ONG", isTitle: true, required: true, ui: { component: "textarea" } },
+          { type: "string", name: "president", label: "Pr\xE9sidente" },
+          { type: "string", name: "director", label: "Directrice" },
+          { type: "string", name: "contactHeading", label: "Titre contact" },
+          { type: "string", name: "address", label: "Adresse", ui: { component: "textarea" } },
+          { type: "string", name: "phone1", label: "T\xE9l\xE9phone 1" },
+          { type: "string", name: "phone1Link", label: "Lien tel 1" },
+          { type: "string", name: "phone2", label: "T\xE9l\xE9phone 2" },
+          { type: "string", name: "phone2Link", label: "Lien tel 2" },
+          { type: "string", name: "email", label: "Email" },
+          { type: "string", name: "whatsappNumber", label: "Num\xE9ro WhatsApp" },
+          { type: "string", name: "transparencyHeading", label: "Titre transparence" },
+          { type: "string", name: "ngoRegistered", label: "ONG enregistr\xE9e" },
+          { type: "string", name: "nsifCode", label: "Code NSIF" },
+          { type: "string", name: "csrCode", label: "Code CSR" },
+          { type: "string", name: "copyright", label: "Copyright" }
+        ]
+      },
+      {
+        name: "navigation",
+        label: "Navigation",
+        path: "src/data",
+        format: "json",
+        ui: singletonUI,
+        match: { include: "navigation" },
+        fields: [
+          {
+            type: "object",
+            name: "links",
+            label: "Liens de navigation",
+            list: true,
+            fields: [
+              { type: "string", name: "label", label: "Texte du lien", required: true }
+            ]
+          },
+          { type: "string", name: "ctaText", label: "Texte du bouton CTA", isTitle: true, required: true }
+        ]
+      },
+      {
+        name: "impact",
+        label: "Banni\xE8re Impact",
+        path: "src/data",
+        format: "json",
+        ui: singletonUI,
+        match: { include: "impact" },
+        fields: [
+          { type: "string", name: "sinceLabel", label: "Label (Depuis...)", isTitle: true, required: true },
+          { type: "string", name: "headline", label: "Titre principal" },
+          { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+          {
+            type: "object",
+            name: "images",
+            label: "Images de fond",
+            list: true,
+            fields: [
+              { type: "image", name: "src", label: "Image", required: true },
+              { type: "string", name: "alt", label: "Description", required: true }
+            ]
+          }
+        ]
+      },
+      {
+        name: "pedagogy",
+        label: "P\xE9dagogie",
+        path: "src/data",
+        format: "json",
+        ui: singletonUI,
+        match: { include: "pedagogy" },
+        fields: [
+          { type: "string", name: "heading", label: "Titre", isTitle: true, required: true },
+          { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+          {
+            type: "object",
+            name: "features",
+            label: "Points forts",
+            list: true,
+            fields: [
+              { type: "string", name: "title", label: "Titre", required: true },
+              { type: "string", name: "description", label: "Description", required: true }
+            ]
+          },
+          { type: "string", name: "newsHeading", label: "Titre actualit\xE9s" },
+          {
+            type: "object",
+            name: "photos",
+            label: "Photos",
+            list: true,
+            fields: [
+              { type: "image", name: "src", label: "Image", required: true },
+              { type: "string", name: "alt", label: "Description", required: true }
+            ]
+          }
+        ]
+      },
+      {
+        name: "donate",
+        label: "Section Don",
+        path: "src/data",
+        format: "json",
+        ui: singletonUI,
+        match: { include: "donate" },
+        fields: [
+          {
+            type: "object",
+            name: "emotionalHeader",
+            label: "En-t\xEAte \xE9motionnel",
+            fields: [
+              { type: "string", name: "badge", label: "Badge" },
+              { type: "string", name: "heading", label: "Titre" },
+              { type: "string", name: "headingHighlight", label: "Mot en surbrillance" },
+              { type: "string", name: "description", label: "Description", ui: { component: "textarea" } }
+            ]
+          },
+          {
+            type: "object",
+            name: "socialProof",
+            label: "Preuves sociales",
+            list: true,
+            fields: [
+              { type: "string", name: "value", label: "Valeur", required: true },
+              { type: "string", name: "label", label: "Label", required: true }
+            ]
+          },
+          {
+            type: "object",
+            name: "tabs",
+            label: "Onglets",
+            fields: [
+              { type: "string", name: "donLabel", label: "Label Don" },
+              { type: "string", name: "parrainLabel", label: "Label Parrainage" }
+            ]
+          },
+          {
+            type: "object",
+            name: "donPonctuel",
+            label: "Don Ponctuel",
+            fields: [
+              { type: "string", name: "heading", label: "Titre" },
+              { type: "string", name: "subtitle", label: "Sous-titre" },
+              {
+                type: "object",
+                name: "steps",
+                label: "\xC9tapes",
+                list: true,
+                fields: [
+                  { type: "string", name: "title", label: "Titre", required: true },
+                  { type: "string", name: "detail", label: "D\xE9tail" }
+                ]
+              },
+              { type: "string", name: "referenceFormat", label: "Format r\xE9f\xE9rence" },
+              { type: "string", name: "bankName", label: "Nom banque" },
+              { type: "string", name: "accountNumber", label: "Num\xE9ro de compte" },
+              { type: "string", name: "accountHolder", label: "Titulaire du compte" },
+              { type: "string", name: "trustSignal", label: "Message de confiance" },
+              { type: "string", name: "receiptNote", label: "Note re\xE7u fiscal" }
+            ]
+          },
+          {
+            type: "object",
+            name: "parrainSection",
+            label: "Section Parrainage",
+            fields: [
+              { type: "string", name: "heading", label: "Titre" },
+              { type: "string", name: "subtitle", label: "Sous-titre" },
+              { type: "string", name: "chooseLabel", label: "Label choix formule" },
+              { type: "string", name: "highlightedBadge", label: "Badge mis en avant" },
+              { type: "string", name: "freeAmountOption", label: "Option montant libre" },
+              { type: "string", name: "formHeading", label: "Titre formulaire" },
+              { type: "string", name: "namePlaceholder", label: "Placeholder nom" },
+              { type: "string", name: "phonePlaceholder", label: "Placeholder t\xE9l\xE9phone" },
+              { type: "string", name: "emailPlaceholder", label: "Placeholder email" },
+              { type: "string", name: "messagePlaceholder", label: "Placeholder message" },
+              { type: "string", name: "whatsappButton", label: "Bouton WhatsApp" },
+              { type: "string", name: "emailButton", label: "Bouton Email" },
+              { type: "string", name: "responseTime", label: "Temps de r\xE9ponse" },
+              { type: "string", name: "receiptLabel", label: "Label re\xE7u fiscal" }
+            ]
+          },
+          {
+            type: "object",
+            name: "donEnAction",
+            label: "Don en Action",
+            fields: [
+              { type: "string", name: "heading", label: "Titre" },
+              {
+                type: "object",
+                name: "items",
+                label: "\xC9l\xE9ments",
+                list: true,
+                fields: [
+                  { type: "string", name: "icon", label: "Ic\xF4ne FontAwesome", required: true },
+                  { type: "string", name: "title", label: "Titre", required: true },
+                  { type: "string", name: "subtitle", label: "Sous-titre", required: true }
+                ]
+              }
+            ]
+          },
+          {
+            type: "object",
+            name: "csr",
+            label: "Section CSR",
+            fields: [
+              { type: "string", name: "heading", label: "Titre" },
+              { type: "string", name: "text", label: "Texte", ui: { component: "textarea" } },
+              { type: "string", name: "csrCode", label: "Code CSR" },
+              { type: "string", name: "contactName", label: "Nom du contact" },
+              { type: "string", name: "contactRole", label: "R\xF4le du contact" }
+            ]
+          }
+        ]
+      },
+      {
+        name: "site",
+        label: "Param\xE8tres du site",
+        path: "src/data",
+        format: "json",
+        ui: singletonUI,
+        match: { include: "site" },
+        fields: [
+          { type: "string", name: "title", label: "Titre du site", isTitle: true, required: true },
+          { type: "string", name: "description", label: "Description SEO", ui: { component: "textarea" } },
+          { type: "string", name: "organizationName", label: "Nom de l'organisation" }
+        ]
+      },
+      {
+        name: "statsSection",
+        label: "Section Statistiques",
+        path: "src/data",
+        format: "json",
+        ui: singletonUI,
+        match: { include: "stats-section" },
+        fields: [
+          {
+            type: "object",
+            name: "badges",
+            label: "Badges d'accr\xE9ditation",
+            list: true,
+            fields: [
+              { type: "string", name: "label", label: "Texte du badge", required: true }
+            ]
+          }
+        ]
+      },
+      {
+        name: "programsSection",
+        label: "Section Parcours",
+        path: "src/data",
+        format: "json",
+        ui: singletonUI,
+        match: { include: "programs-section" },
+        fields: [
+          { type: "string", name: "heading", label: "Titre", isTitle: true, required: true },
+          { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+          { type: "string", name: "mobileIndicator", label: "Texte indicateur mobile" }
+        ]
+      },
+      {
+        name: "gallerySection",
+        label: "Section Galerie",
+        path: "src/data",
+        format: "json",
+        ui: singletonUI,
+        match: { include: "gallery-section" },
+        fields: [
+          { type: "string", name: "heading", label: "Titre", isTitle: true, required: true },
+          { type: "string", name: "headingHighlight", label: "Mot en surbrillance" },
+          { type: "string", name: "description", label: "Description", ui: { component: "textarea" } }
         ]
       }
     ]
