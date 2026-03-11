@@ -49,3 +49,186 @@ fragment TiersParts on Tiers {
   highlighted
   order
 }
+
+fragment HeroParts on Hero {
+  __typename
+  tagline
+  subtitle
+  primaryButton
+  secondaryButton
+}
+
+fragment AboutParts on About {
+  __typename
+  heading
+  paragraph1
+  paragraph2
+  paragraph3
+  quote
+  mainImage
+  mainImageAlt
+  photos {
+    __typename
+    src
+    alt
+  }
+}
+
+fragment FooterParts on Footer {
+  __typename
+  orgDescription
+  president
+  director
+  contactHeading
+  address
+  phone1
+  phone1Link
+  phone2
+  phone2Link
+  email
+  whatsappNumber
+  transparencyHeading
+  ngoRegistered
+  nsifCode
+  csrCode
+  copyright
+}
+
+fragment NavigationParts on Navigation {
+  __typename
+  links {
+    __typename
+    label
+  }
+  ctaText
+}
+
+fragment ImpactParts on Impact {
+  __typename
+  sinceLabel
+  headline
+  description
+  images {
+    __typename
+    src
+    alt
+  }
+}
+
+fragment PedagogyParts on Pedagogy {
+  __typename
+  heading
+  description
+  features {
+    __typename
+    title
+    description
+  }
+  newsHeading
+  photos {
+    __typename
+    src
+    alt
+  }
+}
+
+fragment DonateParts on Donate {
+  __typename
+  emotionalHeader {
+    __typename
+    badge
+    heading
+    headingHighlight
+    description
+  }
+  socialProof {
+    __typename
+    value
+    label
+  }
+  tabs {
+    __typename
+    donLabel
+    parrainLabel
+  }
+  donPonctuel {
+    __typename
+    heading
+    subtitle
+    steps {
+      __typename
+      title
+      detail
+    }
+    referenceFormat
+    bankName
+    accountNumber
+    accountHolder
+    trustSignal
+    receiptNote
+  }
+  parrainSection {
+    __typename
+    heading
+    subtitle
+    chooseLabel
+    highlightedBadge
+    freeAmountOption
+    formHeading
+    namePlaceholder
+    phonePlaceholder
+    emailPlaceholder
+    messagePlaceholder
+    whatsappButton
+    emailButton
+    responseTime
+    receiptLabel
+  }
+  donEnAction {
+    __typename
+    heading
+    items {
+      __typename
+      icon
+      title
+      subtitle
+    }
+  }
+  csr {
+    __typename
+    heading
+    text
+    csrCode
+    contactName
+    contactRole
+  }
+}
+
+fragment SiteParts on Site {
+  __typename
+  title
+  description
+  organizationName
+}
+
+fragment StatsSectionParts on StatsSection {
+  __typename
+  badges {
+    __typename
+    label
+  }
+}
+
+fragment ProgramsSectionParts on ProgramsSection {
+  __typename
+  heading
+  description
+  mobileIndicator
+}
+
+fragment GallerySectionParts on GallerySection {
+  __typename
+  heading
+  headingHighlight
+  description
+}

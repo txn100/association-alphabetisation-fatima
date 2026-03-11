@@ -1,0 +1,66 @@
+{
+  "emotionalHeader": {
+    "badge": "Votre impact",
+    "heading": "Un geste simple, un avenir",
+    "headingHighlight": "transformé",
+    "description": "Pour poursuivre cette belle mission, nous avons besoin de VOUS ! Des jeunes de 11 à 18 ans issus de milieux défavorisés comptent sur votre soutien."
+  },
+  "socialProof": [
+    { "value": "2 000+", "label": "Élèves aidés" },
+    { "value": "37 ans", "label": "D'engagement" },
+    { "value": "160", "label": "Élèves cette année" },
+    { "value": "100%", "label": "Dédié aux élèves" }
+  ],
+  "tabs": {
+    "donLabel": "Don Ponctuel",
+    "parrainLabel": "Devenir Parrain"
+  },
+  "donPonctuel": {
+    "heading": "Faire un don maintenant",
+    "subtitle": "Par virement bancaire ou mobile",
+    "steps": [
+      { "title": "Ouvrez votre app bancaire", "detail": "MCB Juice, MCB Mobile, ou votre banque habituelle" },
+      { "title": "Effectuez un virement vers", "detail": "" },
+      { "title": "En référence, indiquez", "detail": "" },
+      { "title": "Prévenez-nous", "detail": "Pour recevoir votre reçu fiscal NSIF" }
+    ],
+    "referenceFormat": "DON + votre nom",
+    "bankName": "MCB",
+    "accountNumber": "000162618670",
+    "accountHolder": "Association d'Alphabétisation de Fatima",
+    "trustSignal": "100% de votre don est dédié aux élèves",
+    "receiptNote": "Pour un reçu fiscal, contactez-nous au"
+  },
+  "parrainSection": {
+    "heading": "Devenez Parrain",
+    "subtitle": "Un engagement mensuel qui change une vie",
+    "chooseLabel": "Choisissez votre formule de parrainage :",
+    "highlightedBadge": "Le plus choisi",
+    "freeAmountOption": "Montant libre",
+    "formHeading": "Vos coordonnées",
+    "namePlaceholder": "Nom complet *",
+    "phonePlaceholder": "Téléphone",
+    "emailPlaceholder": "Email *",
+    "messagePlaceholder": "Message (optionnel)",
+    "whatsappButton": "Envoyer via WhatsApp",
+    "emailButton": "Ou envoyer par email",
+    "responseTime": "Réponse sous 48h",
+    "receiptLabel": "Reçu fiscal NSIF"
+  },
+  "donEnAction": {
+    "heading": "Votre Don en Action",
+    "items": [
+      { "icon": "fas fa-utensils", "title": "Repas", "subtitle": "Quotidien" },
+      { "icon": "fas fa-book-open", "title": "Fournitures", "subtitle": "Scolaires" },
+      { "icon": "fas fa-chalkboard-teacher", "title": "Enseignants", "subtitle": "Qualifiés" },
+      { "icon": "fas fa-bus", "title": "Sorties", "subtitle": "Éducatives" }
+    ]
+  },
+  "csr": {
+    "heading": "Pour les entreprises (CSR)",
+    "text": "Vous souhaitez financer un projet spécifique (Salle informatique, Sorties éducatives) ?",
+    "csrCode": "NCSRF/2017/0278",
+    "contactName": "Pauline Martin",
+    "contactRole": "Présidente"
+  }
+}

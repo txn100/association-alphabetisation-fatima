@@ -1,25 +1,15 @@
 import { tinaField, useTina } from "tinacms/dist/react";
 
-const features = [
-  {
-    title: "Approche Holistique",
-    description: "Developpement intellectuel, emotionnel et social.",
-  },
-  {
-    title: "Activites Valorisantes",
-    description: "Natation, Football, Danse, Chant et Arts creatifs.",
-  },
-  {
-    title: "Competences de Vie",
-    description: "Preparation au CPE (PSAC) ou a la vie professionnelle selon le profil.",
-  },
-];
-
 export default function NewsVisual(props: any) {
   const { data } = useTina({
     query: props.query,
     variables: props.variables,
     data: props.data,
+  });
+  const { data: pedData } = useTina({
+    query: props.sectionQuery || "",
+    variables: props.sectionVariables || {},
+    data: props.sectionData || {},
   });
 
   const edges = data.newsConnection?.edges || [];
@@ -29,61 +19,78 @@ export default function NewsVisual(props: any) {
     .sort((a: any, b: any) => (b.date || "").localeCompare(a.date || ""))
     .slice(0, 4);
 
+  const ped = pedData?.pedagogy;
+  const features = ped?.features || [];
+  const photos = ped?.photos || [];
+
   return (
     <section id="pedagogie" className="py-12 md:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-10 md:gap-16">
           {/* Pedagogy */}
           <div className="flex flex-col">
-            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-gray-800 mb-4 md:mb-6">
-              Une Pedagogie Differente
+            <h2
+              className="font-heading text-2xl sm:text-3xl font-bold text-gray-800 mb-4 md:mb-6"
+              data-tina-field={ped ? tinaField(ped, "heading") : undefined}
+            >
+              {ped?.heading || "Une Pedagogie Differente"}
             </h2>
-            <p className="text-gray-600 mb-8">
-              Notre ecole ne classe pas les eleves par age, mais par{" "}
-              <strong>niveau de competence</strong>. Repartis en 5 niveaux, chaque
-              enfant progresse a son propre rythme vers la maitrise de la lecture, de
-              l'ecriture et du calcul.
+            <p
+              className="text-gray-600 mb-8"
+              data-tina-field={ped ? tinaField(ped, "description") : undefined}
+            >
+              {ped?.description ||
+                "Notre ecole ne classe pas les eleves par age, mais par niveau de competence."}
             </p>
 
             <ul className="space-y-4">
-              {features.map((feature) => (
-                <li key={feature.title} className="flex items-start">
+              {features.map((feature: any, i: number) => (
+                <li key={i} className="flex items-start">
                   <i className="fas fa-check-circle text-brand-pink mt-1 mr-3" />
                   <div>
-                    <strong className="block text-gray-800">{feature.title}</strong>
-                    <span className="text-sm text-gray-600">{feature.description}</span>
+                    <strong
+                      className="block text-gray-800"
+                      data-tina-field={tinaField(feature, "title")}
+                    >
+                      {feature.title}
+                    </strong>
+                    <span
+                      className="text-sm text-gray-600"
+                      data-tina-field={tinaField(feature, "description")}
+                    >
+                      {feature.description}
+                    </span>
                   </div>
                 </li>
               ))}
             </ul>
 
-            {/* Photo grid */}
-            <div className="mt-8 grid grid-cols-2 gap-3 flex-1 min-h-32">
-              <img
-                src="/images/school-uodv2.webp"
-                alt="Batiment de l'ecole de Fatima"
-                className="rounded-lg object-cover w-full h-full"
-                loading="lazy"
-                decoding="async"
-                width={400}
-                height={128}
-              />
-              <img
-                src="/images/food-donation.webp"
-                alt="Distribution alimentaire a l'ecole"
-                className="rounded-lg object-cover w-full h-full"
-                loading="lazy"
-                decoding="async"
-                width={400}
-                height={128}
-              />
-            </div>
+            {photos.length > 0 && (
+              <div className="mt-8 grid grid-cols-2 gap-3 flex-1 min-h-32">
+                {photos.map((photo: any, i: number) => (
+                  <img
+                    key={i}
+                    src={photo.src}
+                    alt={photo.alt}
+                    className="rounded-lg object-cover w-full h-full"
+                    loading="lazy"
+                    decoding="async"
+                    width={400}
+                    height={128}
+                    data-tina-field={tinaField(photo, "src")}
+                  />
+                ))}
+              </div>
+            )}
           </div>
 
           {/* News Feed */}
           <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100">
-            <h3 className="font-heading text-xl font-bold text-brand-pink mb-6 flex items-center">
-              <i className="far fa-newspaper mr-2" /> Actualites Recentes
+            <h3
+              className="font-heading text-xl font-bold text-brand-pink mb-6 flex items-center"
+              data-tina-field={ped ? tinaField(ped, "newsHeading") : undefined}
+            >
+              <i className="far fa-newspaper mr-2" /> {ped?.newsHeading || "Actualites Recentes"}
             </h3>
 
             <div className="space-y-6">

@@ -1,16 +1,15 @@
 import { tinaField, useTina } from "tinacms/dist/react";
 
-const badges = [
-  { icon: "fas fa-check-circle text-green-500", label: "Membre ANFEN" },
-  { icon: "fas fa-certificate text-brand-blue", label: "NSIF: N/1123" },
-  { icon: "fas fa-hand-holding-heart text-brand-yellow", label: "CSR: NCSRF/2017/0278" },
-];
-
 export default function StatsVisual(props: any) {
   const { data } = useTina({
     query: props.query,
     variables: props.variables,
     data: props.data,
+  });
+  const { data: sectionData } = useTina({
+    query: props.sectionQuery || "",
+    variables: props.sectionVariables || {},
+    data: props.sectionData || {},
   });
 
   const edges = data.statsConnection?.edges || [];
@@ -18,6 +17,9 @@ export default function StatsVisual(props: any) {
     .filter((e: any) => e?.node)
     .map((e: any) => e.node)
     .sort((a: any, b: any) => a.order - b.order);
+
+  const section = sectionData?.statsSection;
+  const badges = section?.badges || [];
 
   return (
     <section className="py-8 md:py-12 bg-brand-light -mt-2 relative z-20">
@@ -41,18 +43,20 @@ export default function StatsVisual(props: any) {
           ))}
         </div>
 
-        {/* Accreditation Badges */}
-        <div className="mt-8 md:mt-12 flex flex-wrap justify-center gap-3 md:gap-4 text-center">
-          {badges.map((badge) => (
-            <span
-              key={badge.label}
-              className="inline-flex items-center px-4 py-2 rounded-full border border-gray-300 bg-white text-sm font-medium text-gray-600 shadow-sm"
-            >
-              <i className={`${badge.icon} mr-2`} />
-              {badge.label}
-            </span>
-          ))}
-        </div>
+        {badges.length > 0 && (
+          <div className="mt-8 md:mt-12 flex flex-wrap justify-center gap-3 md:gap-4 text-center">
+            {badges.map((badge: any, i: number) => (
+              <span
+                key={i}
+                className="inline-flex items-center px-4 py-2 rounded-full border border-gray-300 bg-white text-sm font-medium text-gray-600 shadow-sm"
+                data-tina-field={tinaField(badge, "label")}
+              >
+                <i className="fas fa-check-circle text-green-500 mr-2" />
+                {badge.label}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

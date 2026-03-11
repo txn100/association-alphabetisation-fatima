@@ -6,6 +6,11 @@ export default function GalleryVisual(props: any) {
     variables: props.variables,
     data: props.data,
   });
+  const { data: sectionData } = useTina({
+    query: props.sectionQuery || "",
+    variables: props.sectionVariables || {},
+    data: props.sectionData || {},
+  });
 
   const edges = data.galleryConnection?.edges || [];
   const photos = edges
@@ -13,15 +18,29 @@ export default function GalleryVisual(props: any) {
     .map((e: any) => e.node)
     .sort((a: any, b: any) => a.order - b.order);
 
+  const section = sectionData?.gallerySection;
+
   return (
     <section id="galerie" className="py-12 md:py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="font-heading text-2xl sm:text-3xl font-bold text-gray-800 mb-3">
-            Notre Association en <span className="text-brand-pink">Images</span>
+            <span data-tina-field={section ? tinaField(section, "heading") : undefined}>
+              {section?.heading || "Notre Association en"}
+            </span>{" "}
+            <span
+              className="text-brand-pink"
+              data-tina-field={section ? tinaField(section, "headingHighlight") : undefined}
+            >
+              {section?.headingHighlight || "Images"}
+            </span>
           </h2>
-          <p className="text-gray-600 max-w-xl mx-auto">
-            Decouvrez le quotidien de nos eleves et les moments forts de la vie associative.
+          <p
+            className="text-gray-600 max-w-xl mx-auto"
+            data-tina-field={section ? tinaField(section, "description") : undefined}
+          >
+            {section?.description ||
+              "Decouvrez le quotidien de nos eleves et les moments forts de la vie associative."}
           </p>
         </div>
 

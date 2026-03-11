@@ -1,0 +1,10 @@
+{
+  "links": [
+    { "label": "Accueil" },
+    { "label": "Notre Histoire" },
+    { "label": "Le Parcours" },
+    { "label": "Pédagogie" },
+    { "label": "Galerie" }
+  ],
+  "ctaText": "Devenir Parrain"
+}

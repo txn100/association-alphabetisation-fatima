@@ -51,3 +51,59 @@ export function getNewsData() {
 export function getGalleryData() {
   return toConnection("gallery", readJsonDir("src/content/gallery"));
 }
+
+// ── Singleton helpers ──
+
+function readSingleton(name: string) {
+  const filePath = path.resolve("src/data", `${name}.json`);
+  const raw = fs.readFileSync(filePath, "utf-8");
+  const data = JSON.parse(raw);
+  data._sys = { filename: name, relativePath: `${name}.json` };
+  return data;
+}
+
+function toSingleton(collectionName: string, fileName: string) {
+  const item = readSingleton(fileName);
+  return {
+    data: { [collectionName]: item },
+    query: `{ ${collectionName}(relativePath: "${fileName}.json") { ... } }`,
+    variables: { relativePath: `${fileName}.json` },
+  };
+}
+
+export function getHeroData() {
+  return toSingleton("hero", "hero");
+}
+export function getAboutData() {
+  return toSingleton("about", "about");
+}
+export function getFooterData() {
+  return toSingleton("footer", "footer");
+}
+export function getNavigationData() {
+  return toSingleton("navigation", "navigation");
+}
+export function getImpactData() {
+  return toSingleton("impact", "impact");
+}
+export function getPedagogyData() {
+  return toSingleton("pedagogy", "pedagogy");
+}
+export function getDonateData() {
+  return toSingleton("donate", "donate");
+}
+export function getSiteData() {
+  return toSingleton("site", "site");
+}
+export function getStatsSectionData() {
+  return toSingleton("statsSection", "stats-section");
+}
+export function getProgramsSectionData() {
+  return toSingleton("programsSection", "programs-section");
+}
+export function getGallerySectionData() {
+  return toSingleton("gallerySection", "gallery-section");
+}
+export function getTiersData() {
+  return toConnection("tiers", readJsonDir("src/content/tiers"));
+}

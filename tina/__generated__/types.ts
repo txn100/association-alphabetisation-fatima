@@ -92,6 +92,28 @@ export type Query = {
   programsConnection: ProgramsConnection;
   tiers: Tiers;
   tiersConnection: TiersConnection;
+  hero: Hero;
+  heroConnection: HeroConnection;
+  about: About;
+  aboutConnection: AboutConnection;
+  footer: Footer;
+  footerConnection: FooterConnection;
+  navigation: Navigation;
+  navigationConnection: NavigationConnection;
+  impact: Impact;
+  impactConnection: ImpactConnection;
+  pedagogy: Pedagogy;
+  pedagogyConnection: PedagogyConnection;
+  donate: Donate;
+  donateConnection: DonateConnection;
+  site: Site;
+  siteConnection: SiteConnection;
+  statsSection: StatsSection;
+  statsSectionConnection: StatsSectionConnection;
+  programsSection: ProgramsSection;
+  programsSectionConnection: ProgramsSectionConnection;
+  gallerySection: GallerySection;
+  gallerySectionConnection: GallerySectionConnection;
 };
 
 
@@ -190,12 +212,188 @@ export type QueryTiersConnectionArgs = {
   filter?: InputMaybe<TiersFilter>;
 };
 
+
+export type QueryHeroArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryHeroConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<HeroFilter>;
+};
+
+
+export type QueryAboutArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryAboutConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<AboutFilter>;
+};
+
+
+export type QueryFooterArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryFooterConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<FooterFilter>;
+};
+
+
+export type QueryNavigationArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryNavigationConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<NavigationFilter>;
+};
+
+
+export type QueryImpactArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryImpactConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ImpactFilter>;
+};
+
+
+export type QueryPedagogyArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryPedagogyConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PedagogyFilter>;
+};
+
+
+export type QueryDonateArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryDonateConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<DonateFilter>;
+};
+
+
+export type QuerySiteArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QuerySiteConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<SiteFilter>;
+};
+
+
+export type QueryStatsSectionArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryStatsSectionConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<StatsSectionFilter>;
+};
+
+
+export type QueryProgramsSectionArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryProgramsSectionConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ProgramsSectionFilter>;
+};
+
+
+export type QueryGallerySectionArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryGallerySectionConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<GallerySectionFilter>;
+};
+
 export type DocumentFilter = {
   news?: InputMaybe<NewsFilter>;
   gallery?: InputMaybe<GalleryFilter>;
   stats?: InputMaybe<StatsFilter>;
   programs?: InputMaybe<ProgramsFilter>;
   tiers?: InputMaybe<TiersFilter>;
+  hero?: InputMaybe<HeroFilter>;
+  about?: InputMaybe<AboutFilter>;
+  footer?: InputMaybe<FooterFilter>;
+  navigation?: InputMaybe<NavigationFilter>;
+  impact?: InputMaybe<ImpactFilter>;
+  pedagogy?: InputMaybe<PedagogyFilter>;
+  donate?: InputMaybe<DonateFilter>;
+  site?: InputMaybe<SiteFilter>;
+  statsSection?: InputMaybe<StatsSectionFilter>;
+  programsSection?: InputMaybe<ProgramsSectionFilter>;
+  gallerySection?: InputMaybe<GallerySectionFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -235,7 +433,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = News | Gallery | Stats | Programs | Tiers | Folder;
+export type DocumentNode = News | Gallery | Stats | Programs | Tiers | Hero | About | Footer | Navigation | Impact | Pedagogy | Donate | Site | StatsSection | ProgramsSection | GallerySection | Folder;
 
 export type News = Node & Document & {
   __typename?: 'News';
@@ -445,6 +643,582 @@ export type TiersConnection = Connection & {
   edges?: Maybe<Array<Maybe<TiersConnectionEdges>>>;
 };
 
+export type Hero = Node & Document & {
+  __typename?: 'Hero';
+  tagline: Scalars['String']['output'];
+  subtitle?: Maybe<Scalars['String']['output']>;
+  primaryButton?: Maybe<Scalars['String']['output']>;
+  secondaryButton?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type HeroFilter = {
+  tagline?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  primaryButton?: InputMaybe<StringFilter>;
+  secondaryButton?: InputMaybe<StringFilter>;
+};
+
+export type HeroConnectionEdges = {
+  __typename?: 'HeroConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Hero>;
+};
+
+export type HeroConnection = Connection & {
+  __typename?: 'HeroConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<HeroConnectionEdges>>>;
+};
+
+export type AboutPhotos = {
+  __typename?: 'AboutPhotos';
+  src: Scalars['String']['output'];
+  alt: Scalars['String']['output'];
+};
+
+export type About = Node & Document & {
+  __typename?: 'About';
+  heading: Scalars['String']['output'];
+  paragraph1?: Maybe<Scalars['String']['output']>;
+  paragraph2?: Maybe<Scalars['String']['output']>;
+  paragraph3?: Maybe<Scalars['String']['output']>;
+  quote?: Maybe<Scalars['String']['output']>;
+  mainImage?: Maybe<Scalars['String']['output']>;
+  mainImageAlt?: Maybe<Scalars['String']['output']>;
+  photos?: Maybe<Array<Maybe<AboutPhotos>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type AboutPhotosFilter = {
+  src?: InputMaybe<ImageFilter>;
+  alt?: InputMaybe<StringFilter>;
+};
+
+export type AboutFilter = {
+  heading?: InputMaybe<StringFilter>;
+  paragraph1?: InputMaybe<StringFilter>;
+  paragraph2?: InputMaybe<StringFilter>;
+  paragraph3?: InputMaybe<StringFilter>;
+  quote?: InputMaybe<StringFilter>;
+  mainImage?: InputMaybe<ImageFilter>;
+  mainImageAlt?: InputMaybe<StringFilter>;
+  photos?: InputMaybe<AboutPhotosFilter>;
+};
+
+export type AboutConnectionEdges = {
+  __typename?: 'AboutConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<About>;
+};
+
+export type AboutConnection = Connection & {
+  __typename?: 'AboutConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<AboutConnectionEdges>>>;
+};
+
+export type Footer = Node & Document & {
+  __typename?: 'Footer';
+  orgDescription: Scalars['String']['output'];
+  president?: Maybe<Scalars['String']['output']>;
+  director?: Maybe<Scalars['String']['output']>;
+  contactHeading?: Maybe<Scalars['String']['output']>;
+  address?: Maybe<Scalars['String']['output']>;
+  phone1?: Maybe<Scalars['String']['output']>;
+  phone1Link?: Maybe<Scalars['String']['output']>;
+  phone2?: Maybe<Scalars['String']['output']>;
+  phone2Link?: Maybe<Scalars['String']['output']>;
+  email?: Maybe<Scalars['String']['output']>;
+  whatsappNumber?: Maybe<Scalars['String']['output']>;
+  transparencyHeading?: Maybe<Scalars['String']['output']>;
+  ngoRegistered?: Maybe<Scalars['String']['output']>;
+  nsifCode?: Maybe<Scalars['String']['output']>;
+  csrCode?: Maybe<Scalars['String']['output']>;
+  copyright?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type FooterFilter = {
+  orgDescription?: InputMaybe<StringFilter>;
+  president?: InputMaybe<StringFilter>;
+  director?: InputMaybe<StringFilter>;
+  contactHeading?: InputMaybe<StringFilter>;
+  address?: InputMaybe<StringFilter>;
+  phone1?: InputMaybe<StringFilter>;
+  phone1Link?: InputMaybe<StringFilter>;
+  phone2?: InputMaybe<StringFilter>;
+  phone2Link?: InputMaybe<StringFilter>;
+  email?: InputMaybe<StringFilter>;
+  whatsappNumber?: InputMaybe<StringFilter>;
+  transparencyHeading?: InputMaybe<StringFilter>;
+  ngoRegistered?: InputMaybe<StringFilter>;
+  nsifCode?: InputMaybe<StringFilter>;
+  csrCode?: InputMaybe<StringFilter>;
+  copyright?: InputMaybe<StringFilter>;
+};
+
+export type FooterConnectionEdges = {
+  __typename?: 'FooterConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Footer>;
+};
+
+export type FooterConnection = Connection & {
+  __typename?: 'FooterConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<FooterConnectionEdges>>>;
+};
+
+export type NavigationLinks = {
+  __typename?: 'NavigationLinks';
+  label: Scalars['String']['output'];
+};
+
+export type Navigation = Node & Document & {
+  __typename?: 'Navigation';
+  links?: Maybe<Array<Maybe<NavigationLinks>>>;
+  ctaText: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type NavigationLinksFilter = {
+  label?: InputMaybe<StringFilter>;
+};
+
+export type NavigationFilter = {
+  links?: InputMaybe<NavigationLinksFilter>;
+  ctaText?: InputMaybe<StringFilter>;
+};
+
+export type NavigationConnectionEdges = {
+  __typename?: 'NavigationConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Navigation>;
+};
+
+export type NavigationConnection = Connection & {
+  __typename?: 'NavigationConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<NavigationConnectionEdges>>>;
+};
+
+export type ImpactImages = {
+  __typename?: 'ImpactImages';
+  src: Scalars['String']['output'];
+  alt: Scalars['String']['output'];
+};
+
+export type Impact = Node & Document & {
+  __typename?: 'Impact';
+  sinceLabel: Scalars['String']['output'];
+  headline?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  images?: Maybe<Array<Maybe<ImpactImages>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type ImpactImagesFilter = {
+  src?: InputMaybe<ImageFilter>;
+  alt?: InputMaybe<StringFilter>;
+};
+
+export type ImpactFilter = {
+  sinceLabel?: InputMaybe<StringFilter>;
+  headline?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  images?: InputMaybe<ImpactImagesFilter>;
+};
+
+export type ImpactConnectionEdges = {
+  __typename?: 'ImpactConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Impact>;
+};
+
+export type ImpactConnection = Connection & {
+  __typename?: 'ImpactConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<ImpactConnectionEdges>>>;
+};
+
+export type PedagogyFeatures = {
+  __typename?: 'PedagogyFeatures';
+  title: Scalars['String']['output'];
+  description: Scalars['String']['output'];
+};
+
+export type PedagogyPhotos = {
+  __typename?: 'PedagogyPhotos';
+  src: Scalars['String']['output'];
+  alt: Scalars['String']['output'];
+};
+
+export type Pedagogy = Node & Document & {
+  __typename?: 'Pedagogy';
+  heading: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  features?: Maybe<Array<Maybe<PedagogyFeatures>>>;
+  newsHeading?: Maybe<Scalars['String']['output']>;
+  photos?: Maybe<Array<Maybe<PedagogyPhotos>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type PedagogyFeaturesFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type PedagogyPhotosFilter = {
+  src?: InputMaybe<ImageFilter>;
+  alt?: InputMaybe<StringFilter>;
+};
+
+export type PedagogyFilter = {
+  heading?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  features?: InputMaybe<PedagogyFeaturesFilter>;
+  newsHeading?: InputMaybe<StringFilter>;
+  photos?: InputMaybe<PedagogyPhotosFilter>;
+};
+
+export type PedagogyConnectionEdges = {
+  __typename?: 'PedagogyConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Pedagogy>;
+};
+
+export type PedagogyConnection = Connection & {
+  __typename?: 'PedagogyConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<PedagogyConnectionEdges>>>;
+};
+
+export type DonateEmotionalHeader = {
+  __typename?: 'DonateEmotionalHeader';
+  badge?: Maybe<Scalars['String']['output']>;
+  heading?: Maybe<Scalars['String']['output']>;
+  headingHighlight?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type DonateSocialProof = {
+  __typename?: 'DonateSocialProof';
+  value: Scalars['String']['output'];
+  label: Scalars['String']['output'];
+};
+
+export type DonateTabs = {
+  __typename?: 'DonateTabs';
+  donLabel?: Maybe<Scalars['String']['output']>;
+  parrainLabel?: Maybe<Scalars['String']['output']>;
+};
+
+export type DonateDonPonctuelSteps = {
+  __typename?: 'DonateDonPonctuelSteps';
+  title: Scalars['String']['output'];
+  detail?: Maybe<Scalars['String']['output']>;
+};
+
+export type DonateDonPonctuel = {
+  __typename?: 'DonateDonPonctuel';
+  heading?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  steps?: Maybe<Array<Maybe<DonateDonPonctuelSteps>>>;
+  referenceFormat?: Maybe<Scalars['String']['output']>;
+  bankName?: Maybe<Scalars['String']['output']>;
+  accountNumber?: Maybe<Scalars['String']['output']>;
+  accountHolder?: Maybe<Scalars['String']['output']>;
+  trustSignal?: Maybe<Scalars['String']['output']>;
+  receiptNote?: Maybe<Scalars['String']['output']>;
+};
+
+export type DonateParrainSection = {
+  __typename?: 'DonateParrainSection';
+  heading?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  chooseLabel?: Maybe<Scalars['String']['output']>;
+  highlightedBadge?: Maybe<Scalars['String']['output']>;
+  freeAmountOption?: Maybe<Scalars['String']['output']>;
+  formHeading?: Maybe<Scalars['String']['output']>;
+  namePlaceholder?: Maybe<Scalars['String']['output']>;
+  phonePlaceholder?: Maybe<Scalars['String']['output']>;
+  emailPlaceholder?: Maybe<Scalars['String']['output']>;
+  messagePlaceholder?: Maybe<Scalars['String']['output']>;
+  whatsappButton?: Maybe<Scalars['String']['output']>;
+  emailButton?: Maybe<Scalars['String']['output']>;
+  responseTime?: Maybe<Scalars['String']['output']>;
+  receiptLabel?: Maybe<Scalars['String']['output']>;
+};
+
+export type DonateDonEnActionItems = {
+  __typename?: 'DonateDonEnActionItems';
+  icon: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+  subtitle: Scalars['String']['output'];
+};
+
+export type DonateDonEnAction = {
+  __typename?: 'DonateDonEnAction';
+  heading?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<DonateDonEnActionItems>>>;
+};
+
+export type DonateCsr = {
+  __typename?: 'DonateCsr';
+  heading?: Maybe<Scalars['String']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
+  csrCode?: Maybe<Scalars['String']['output']>;
+  contactName?: Maybe<Scalars['String']['output']>;
+  contactRole?: Maybe<Scalars['String']['output']>;
+};
+
+export type Donate = Node & Document & {
+  __typename?: 'Donate';
+  emotionalHeader?: Maybe<DonateEmotionalHeader>;
+  socialProof?: Maybe<Array<Maybe<DonateSocialProof>>>;
+  tabs?: Maybe<DonateTabs>;
+  donPonctuel?: Maybe<DonateDonPonctuel>;
+  parrainSection?: Maybe<DonateParrainSection>;
+  donEnAction?: Maybe<DonateDonEnAction>;
+  csr?: Maybe<DonateCsr>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type DonateEmotionalHeaderFilter = {
+  badge?: InputMaybe<StringFilter>;
+  heading?: InputMaybe<StringFilter>;
+  headingHighlight?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type DonateSocialProofFilter = {
+  value?: InputMaybe<StringFilter>;
+  label?: InputMaybe<StringFilter>;
+};
+
+export type DonateTabsFilter = {
+  donLabel?: InputMaybe<StringFilter>;
+  parrainLabel?: InputMaybe<StringFilter>;
+};
+
+export type DonateDonPonctuelStepsFilter = {
+  title?: InputMaybe<StringFilter>;
+  detail?: InputMaybe<StringFilter>;
+};
+
+export type DonateDonPonctuelFilter = {
+  heading?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  steps?: InputMaybe<DonateDonPonctuelStepsFilter>;
+  referenceFormat?: InputMaybe<StringFilter>;
+  bankName?: InputMaybe<StringFilter>;
+  accountNumber?: InputMaybe<StringFilter>;
+  accountHolder?: InputMaybe<StringFilter>;
+  trustSignal?: InputMaybe<StringFilter>;
+  receiptNote?: InputMaybe<StringFilter>;
+};
+
+export type DonateParrainSectionFilter = {
+  heading?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  chooseLabel?: InputMaybe<StringFilter>;
+  highlightedBadge?: InputMaybe<StringFilter>;
+  freeAmountOption?: InputMaybe<StringFilter>;
+  formHeading?: InputMaybe<StringFilter>;
+  namePlaceholder?: InputMaybe<StringFilter>;
+  phonePlaceholder?: InputMaybe<StringFilter>;
+  emailPlaceholder?: InputMaybe<StringFilter>;
+  messagePlaceholder?: InputMaybe<StringFilter>;
+  whatsappButton?: InputMaybe<StringFilter>;
+  emailButton?: InputMaybe<StringFilter>;
+  responseTime?: InputMaybe<StringFilter>;
+  receiptLabel?: InputMaybe<StringFilter>;
+};
+
+export type DonateDonEnActionItemsFilter = {
+  icon?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+};
+
+export type DonateDonEnActionFilter = {
+  heading?: InputMaybe<StringFilter>;
+  items?: InputMaybe<DonateDonEnActionItemsFilter>;
+};
+
+export type DonateCsrFilter = {
+  heading?: InputMaybe<StringFilter>;
+  text?: InputMaybe<StringFilter>;
+  csrCode?: InputMaybe<StringFilter>;
+  contactName?: InputMaybe<StringFilter>;
+  contactRole?: InputMaybe<StringFilter>;
+};
+
+export type DonateFilter = {
+  emotionalHeader?: InputMaybe<DonateEmotionalHeaderFilter>;
+  socialProof?: InputMaybe<DonateSocialProofFilter>;
+  tabs?: InputMaybe<DonateTabsFilter>;
+  donPonctuel?: InputMaybe<DonateDonPonctuelFilter>;
+  parrainSection?: InputMaybe<DonateParrainSectionFilter>;
+  donEnAction?: InputMaybe<DonateDonEnActionFilter>;
+  csr?: InputMaybe<DonateCsrFilter>;
+};
+
+export type DonateConnectionEdges = {
+  __typename?: 'DonateConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Donate>;
+};
+
+export type DonateConnection = Connection & {
+  __typename?: 'DonateConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<DonateConnectionEdges>>>;
+};
+
+export type Site = Node & Document & {
+  __typename?: 'Site';
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  organizationName?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type SiteFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  organizationName?: InputMaybe<StringFilter>;
+};
+
+export type SiteConnectionEdges = {
+  __typename?: 'SiteConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Site>;
+};
+
+export type SiteConnection = Connection & {
+  __typename?: 'SiteConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<SiteConnectionEdges>>>;
+};
+
+export type StatsSectionBadges = {
+  __typename?: 'StatsSectionBadges';
+  label: Scalars['String']['output'];
+};
+
+export type StatsSection = Node & Document & {
+  __typename?: 'StatsSection';
+  badges?: Maybe<Array<Maybe<StatsSectionBadges>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type StatsSectionBadgesFilter = {
+  label?: InputMaybe<StringFilter>;
+};
+
+export type StatsSectionFilter = {
+  badges?: InputMaybe<StatsSectionBadgesFilter>;
+};
+
+export type StatsSectionConnectionEdges = {
+  __typename?: 'StatsSectionConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<StatsSection>;
+};
+
+export type StatsSectionConnection = Connection & {
+  __typename?: 'StatsSectionConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<StatsSectionConnectionEdges>>>;
+};
+
+export type ProgramsSection = Node & Document & {
+  __typename?: 'ProgramsSection';
+  heading: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  mobileIndicator?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type ProgramsSectionFilter = {
+  heading?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  mobileIndicator?: InputMaybe<StringFilter>;
+};
+
+export type ProgramsSectionConnectionEdges = {
+  __typename?: 'ProgramsSectionConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<ProgramsSection>;
+};
+
+export type ProgramsSectionConnection = Connection & {
+  __typename?: 'ProgramsSectionConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<ProgramsSectionConnectionEdges>>>;
+};
+
+export type GallerySection = Node & Document & {
+  __typename?: 'GallerySection';
+  heading: Scalars['String']['output'];
+  headingHighlight?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type GallerySectionFilter = {
+  heading?: InputMaybe<StringFilter>;
+  headingHighlight?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type GallerySectionConnectionEdges = {
+  __typename?: 'GallerySectionConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<GallerySection>;
+};
+
+export type GallerySectionConnection = Connection & {
+  __typename?: 'GallerySectionConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<GallerySectionConnectionEdges>>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addPendingDocument: DocumentNode;
@@ -462,6 +1236,28 @@ export type Mutation = {
   createPrograms: Programs;
   updateTiers: Tiers;
   createTiers: Tiers;
+  updateHero: Hero;
+  createHero: Hero;
+  updateAbout: About;
+  createAbout: About;
+  updateFooter: Footer;
+  createFooter: Footer;
+  updateNavigation: Navigation;
+  createNavigation: Navigation;
+  updateImpact: Impact;
+  createImpact: Impact;
+  updatePedagogy: Pedagogy;
+  createPedagogy: Pedagogy;
+  updateDonate: Donate;
+  createDonate: Donate;
+  updateSite: Site;
+  createSite: Site;
+  updateStatsSection: StatsSection;
+  createStatsSection: StatsSection;
+  updateProgramsSection: ProgramsSection;
+  createProgramsSection: ProgramsSection;
+  updateGallerySection: GallerySection;
+  createGallerySection: GallerySection;
 };
 
 
@@ -557,12 +1353,155 @@ export type MutationCreateTiersArgs = {
   params: TiersMutation;
 };
 
+
+export type MutationUpdateHeroArgs = {
+  relativePath: Scalars['String']['input'];
+  params: HeroMutation;
+};
+
+
+export type MutationCreateHeroArgs = {
+  relativePath: Scalars['String']['input'];
+  params: HeroMutation;
+};
+
+
+export type MutationUpdateAboutArgs = {
+  relativePath: Scalars['String']['input'];
+  params: AboutMutation;
+};
+
+
+export type MutationCreateAboutArgs = {
+  relativePath: Scalars['String']['input'];
+  params: AboutMutation;
+};
+
+
+export type MutationUpdateFooterArgs = {
+  relativePath: Scalars['String']['input'];
+  params: FooterMutation;
+};
+
+
+export type MutationCreateFooterArgs = {
+  relativePath: Scalars['String']['input'];
+  params: FooterMutation;
+};
+
+
+export type MutationUpdateNavigationArgs = {
+  relativePath: Scalars['String']['input'];
+  params: NavigationMutation;
+};
+
+
+export type MutationCreateNavigationArgs = {
+  relativePath: Scalars['String']['input'];
+  params: NavigationMutation;
+};
+
+
+export type MutationUpdateImpactArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ImpactMutation;
+};
+
+
+export type MutationCreateImpactArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ImpactMutation;
+};
+
+
+export type MutationUpdatePedagogyArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PedagogyMutation;
+};
+
+
+export type MutationCreatePedagogyArgs = {
+  relativePath: Scalars['String']['input'];
+  params: PedagogyMutation;
+};
+
+
+export type MutationUpdateDonateArgs = {
+  relativePath: Scalars['String']['input'];
+  params: DonateMutation;
+};
+
+
+export type MutationCreateDonateArgs = {
+  relativePath: Scalars['String']['input'];
+  params: DonateMutation;
+};
+
+
+export type MutationUpdateSiteArgs = {
+  relativePath: Scalars['String']['input'];
+  params: SiteMutation;
+};
+
+
+export type MutationCreateSiteArgs = {
+  relativePath: Scalars['String']['input'];
+  params: SiteMutation;
+};
+
+
+export type MutationUpdateStatsSectionArgs = {
+  relativePath: Scalars['String']['input'];
+  params: StatsSectionMutation;
+};
+
+
+export type MutationCreateStatsSectionArgs = {
+  relativePath: Scalars['String']['input'];
+  params: StatsSectionMutation;
+};
+
+
+export type MutationUpdateProgramsSectionArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ProgramsSectionMutation;
+};
+
+
+export type MutationCreateProgramsSectionArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ProgramsSectionMutation;
+};
+
+
+export type MutationUpdateGallerySectionArgs = {
+  relativePath: Scalars['String']['input'];
+  params: GallerySectionMutation;
+};
+
+
+export type MutationCreateGallerySectionArgs = {
+  relativePath: Scalars['String']['input'];
+  params: GallerySectionMutation;
+};
+
 export type DocumentUpdateMutation = {
   news?: InputMaybe<NewsMutation>;
   gallery?: InputMaybe<GalleryMutation>;
   stats?: InputMaybe<StatsMutation>;
   programs?: InputMaybe<ProgramsMutation>;
   tiers?: InputMaybe<TiersMutation>;
+  hero?: InputMaybe<HeroMutation>;
+  about?: InputMaybe<AboutMutation>;
+  footer?: InputMaybe<FooterMutation>;
+  navigation?: InputMaybe<NavigationMutation>;
+  impact?: InputMaybe<ImpactMutation>;
+  pedagogy?: InputMaybe<PedagogyMutation>;
+  donate?: InputMaybe<DonateMutation>;
+  site?: InputMaybe<SiteMutation>;
+  statsSection?: InputMaybe<StatsSectionMutation>;
+  programsSection?: InputMaybe<ProgramsSectionMutation>;
+  gallerySection?: InputMaybe<GallerySectionMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -572,6 +1511,17 @@ export type DocumentMutation = {
   stats?: InputMaybe<StatsMutation>;
   programs?: InputMaybe<ProgramsMutation>;
   tiers?: InputMaybe<TiersMutation>;
+  hero?: InputMaybe<HeroMutation>;
+  about?: InputMaybe<AboutMutation>;
+  footer?: InputMaybe<FooterMutation>;
+  navigation?: InputMaybe<NavigationMutation>;
+  impact?: InputMaybe<ImpactMutation>;
+  pedagogy?: InputMaybe<PedagogyMutation>;
+  donate?: InputMaybe<DonateMutation>;
+  site?: InputMaybe<SiteMutation>;
+  statsSection?: InputMaybe<StatsSectionMutation>;
+  programsSection?: InputMaybe<ProgramsSectionMutation>;
+  gallerySection?: InputMaybe<GallerySectionMutation>;
 };
 
 export type NewsMutation = {
@@ -621,6 +1571,193 @@ export type TiersMutation = {
   order?: InputMaybe<Scalars['Float']['input']>;
 };
 
+export type HeroMutation = {
+  tagline?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  primaryButton?: InputMaybe<Scalars['String']['input']>;
+  secondaryButton?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPhotosMutation = {
+  src?: InputMaybe<Scalars['String']['input']>;
+  alt?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  paragraph1?: InputMaybe<Scalars['String']['input']>;
+  paragraph2?: InputMaybe<Scalars['String']['input']>;
+  paragraph3?: InputMaybe<Scalars['String']['input']>;
+  quote?: InputMaybe<Scalars['String']['input']>;
+  mainImage?: InputMaybe<Scalars['String']['input']>;
+  mainImageAlt?: InputMaybe<Scalars['String']['input']>;
+  photos?: InputMaybe<Array<InputMaybe<AboutPhotosMutation>>>;
+};
+
+export type FooterMutation = {
+  orgDescription?: InputMaybe<Scalars['String']['input']>;
+  president?: InputMaybe<Scalars['String']['input']>;
+  director?: InputMaybe<Scalars['String']['input']>;
+  contactHeading?: InputMaybe<Scalars['String']['input']>;
+  address?: InputMaybe<Scalars['String']['input']>;
+  phone1?: InputMaybe<Scalars['String']['input']>;
+  phone1Link?: InputMaybe<Scalars['String']['input']>;
+  phone2?: InputMaybe<Scalars['String']['input']>;
+  phone2Link?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  whatsappNumber?: InputMaybe<Scalars['String']['input']>;
+  transparencyHeading?: InputMaybe<Scalars['String']['input']>;
+  ngoRegistered?: InputMaybe<Scalars['String']['input']>;
+  nsifCode?: InputMaybe<Scalars['String']['input']>;
+  csrCode?: InputMaybe<Scalars['String']['input']>;
+  copyright?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type NavigationLinksMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type NavigationMutation = {
+  links?: InputMaybe<Array<InputMaybe<NavigationLinksMutation>>>;
+  ctaText?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ImpactImagesMutation = {
+  src?: InputMaybe<Scalars['String']['input']>;
+  alt?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ImpactMutation = {
+  sinceLabel?: InputMaybe<Scalars['String']['input']>;
+  headline?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  images?: InputMaybe<Array<InputMaybe<ImpactImagesMutation>>>;
+};
+
+export type PedagogyFeaturesMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PedagogyPhotosMutation = {
+  src?: InputMaybe<Scalars['String']['input']>;
+  alt?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PedagogyMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  features?: InputMaybe<Array<InputMaybe<PedagogyFeaturesMutation>>>;
+  newsHeading?: InputMaybe<Scalars['String']['input']>;
+  photos?: InputMaybe<Array<InputMaybe<PedagogyPhotosMutation>>>;
+};
+
+export type DonateEmotionalHeaderMutation = {
+  badge?: InputMaybe<Scalars['String']['input']>;
+  heading?: InputMaybe<Scalars['String']['input']>;
+  headingHighlight?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DonateSocialProofMutation = {
+  value?: InputMaybe<Scalars['String']['input']>;
+  label?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DonateTabsMutation = {
+  donLabel?: InputMaybe<Scalars['String']['input']>;
+  parrainLabel?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DonateDonPonctuelStepsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  detail?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DonateDonPonctuelMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  steps?: InputMaybe<Array<InputMaybe<DonateDonPonctuelStepsMutation>>>;
+  referenceFormat?: InputMaybe<Scalars['String']['input']>;
+  bankName?: InputMaybe<Scalars['String']['input']>;
+  accountNumber?: InputMaybe<Scalars['String']['input']>;
+  accountHolder?: InputMaybe<Scalars['String']['input']>;
+  trustSignal?: InputMaybe<Scalars['String']['input']>;
+  receiptNote?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DonateParrainSectionMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  chooseLabel?: InputMaybe<Scalars['String']['input']>;
+  highlightedBadge?: InputMaybe<Scalars['String']['input']>;
+  freeAmountOption?: InputMaybe<Scalars['String']['input']>;
+  formHeading?: InputMaybe<Scalars['String']['input']>;
+  namePlaceholder?: InputMaybe<Scalars['String']['input']>;
+  phonePlaceholder?: InputMaybe<Scalars['String']['input']>;
+  emailPlaceholder?: InputMaybe<Scalars['String']['input']>;
+  messagePlaceholder?: InputMaybe<Scalars['String']['input']>;
+  whatsappButton?: InputMaybe<Scalars['String']['input']>;
+  emailButton?: InputMaybe<Scalars['String']['input']>;
+  responseTime?: InputMaybe<Scalars['String']['input']>;
+  receiptLabel?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DonateDonEnActionItemsMutation = {
+  icon?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DonateDonEnActionMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<DonateDonEnActionItemsMutation>>>;
+};
+
+export type DonateCsrMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
+  csrCode?: InputMaybe<Scalars['String']['input']>;
+  contactName?: InputMaybe<Scalars['String']['input']>;
+  contactRole?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type DonateMutation = {
+  emotionalHeader?: InputMaybe<DonateEmotionalHeaderMutation>;
+  socialProof?: InputMaybe<Array<InputMaybe<DonateSocialProofMutation>>>;
+  tabs?: InputMaybe<DonateTabsMutation>;
+  donPonctuel?: InputMaybe<DonateDonPonctuelMutation>;
+  parrainSection?: InputMaybe<DonateParrainSectionMutation>;
+  donEnAction?: InputMaybe<DonateDonEnActionMutation>;
+  csr?: InputMaybe<DonateCsrMutation>;
+};
+
+export type SiteMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  organizationName?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type StatsSectionBadgesMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type StatsSectionMutation = {
+  badges?: InputMaybe<Array<InputMaybe<StatsSectionBadgesMutation>>>;
+};
+
+export type ProgramsSectionMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  mobileIndicator?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type GallerySectionMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  headingHighlight?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type NewsPartsFragment = { __typename: 'News', title: string, date: string, month: string, day: string, year: string, category: string, description?: string | null, image?: string | null, imageAlt?: string | null };
 
 export type GalleryPartsFragment = { __typename: 'Gallery', src: string, alt: string, span?: string | null, order: number };
@@ -630,6 +1767,28 @@ export type StatsPartsFragment = { __typename: 'Stats', value: string, label: st
 export type ProgramsPartsFragment = { __typename: 'Programs', title: string, level: string, icon: string, ages: string, description: string, color: string, image: string, imageAlt: string, order: number };
 
 export type TiersPartsFragment = { __typename: 'Tiers', amount: number, label: string, period: string, description: string, icon: string, highlighted?: boolean | null, order: number };
+
+export type HeroPartsFragment = { __typename: 'Hero', tagline: string, subtitle?: string | null, primaryButton?: string | null, secondaryButton?: string | null };
+
+export type AboutPartsFragment = { __typename: 'About', heading: string, paragraph1?: string | null, paragraph2?: string | null, paragraph3?: string | null, quote?: string | null, mainImage?: string | null, mainImageAlt?: string | null, photos?: Array<{ __typename: 'AboutPhotos', src: string, alt: string } | null> | null };
+
+export type FooterPartsFragment = { __typename: 'Footer', orgDescription: string, president?: string | null, director?: string | null, contactHeading?: string | null, address?: string | null, phone1?: string | null, phone1Link?: string | null, phone2?: string | null, phone2Link?: string | null, email?: string | null, whatsappNumber?: string | null, transparencyHeading?: string | null, ngoRegistered?: string | null, nsifCode?: string | null, csrCode?: string | null, copyright?: string | null };
+
+export type NavigationPartsFragment = { __typename: 'Navigation', ctaText: string, links?: Array<{ __typename: 'NavigationLinks', label: string } | null> | null };
+
+export type ImpactPartsFragment = { __typename: 'Impact', sinceLabel: string, headline?: string | null, description?: string | null, images?: Array<{ __typename: 'ImpactImages', src: string, alt: string } | null> | null };
+
+export type PedagogyPartsFragment = { __typename: 'Pedagogy', heading: string, description?: string | null, newsHeading?: string | null, features?: Array<{ __typename: 'PedagogyFeatures', title: string, description: string } | null> | null, photos?: Array<{ __typename: 'PedagogyPhotos', src: string, alt: string } | null> | null };
+
+export type DonatePartsFragment = { __typename: 'Donate', emotionalHeader?: { __typename: 'DonateEmotionalHeader', badge?: string | null, heading?: string | null, headingHighlight?: string | null, description?: string | null } | null, socialProof?: Array<{ __typename: 'DonateSocialProof', value: string, label: string } | null> | null, tabs?: { __typename: 'DonateTabs', donLabel?: string | null, parrainLabel?: string | null } | null, donPonctuel?: { __typename: 'DonateDonPonctuel', heading?: string | null, subtitle?: string | null, referenceFormat?: string | null, bankName?: string | null, accountNumber?: string | null, accountHolder?: string | null, trustSignal?: string | null, receiptNote?: string | null, steps?: Array<{ __typename: 'DonateDonPonctuelSteps', title: string, detail?: string | null } | null> | null } | null, parrainSection?: { __typename: 'DonateParrainSection', heading?: string | null, subtitle?: string | null, chooseLabel?: string | null, highlightedBadge?: string | null, freeAmountOption?: string | null, formHeading?: string | null, namePlaceholder?: string | null, phonePlaceholder?: string | null, emailPlaceholder?: string | null, messagePlaceholder?: string | null, whatsappButton?: string | null, emailButton?: string | null, responseTime?: string | null, receiptLabel?: string | null } | null, donEnAction?: { __typename: 'DonateDonEnAction', heading?: string | null, items?: Array<{ __typename: 'DonateDonEnActionItems', icon: string, title: string, subtitle: string } | null> | null } | null, csr?: { __typename: 'DonateCsr', heading?: string | null, text?: string | null, csrCode?: string | null, contactName?: string | null, contactRole?: string | null } | null };
+
+export type SitePartsFragment = { __typename: 'Site', title: string, description?: string | null, organizationName?: string | null };
+
+export type StatsSectionPartsFragment = { __typename: 'StatsSection', badges?: Array<{ __typename: 'StatsSectionBadges', label: string } | null> | null };
+
+export type ProgramsSectionPartsFragment = { __typename: 'ProgramsSection', heading: string, description?: string | null, mobileIndicator?: string | null };
+
+export type GallerySectionPartsFragment = { __typename: 'GallerySection', heading: string, headingHighlight?: string | null, description?: string | null };
 
 export type NewsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -726,6 +1885,215 @@ export type TiersConnectionQueryVariables = Exact<{
 
 export type TiersConnectionQuery = { __typename?: 'Query', tiersConnection: { __typename?: 'TiersConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'TiersConnectionEdges', cursor: string, node?: { __typename: 'Tiers', id: string, amount: number, label: string, period: string, description: string, icon: string, highlighted?: boolean | null, order: number, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
+export type HeroQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type HeroQuery = { __typename?: 'Query', hero: { __typename: 'Hero', id: string, tagline: string, subtitle?: string | null, primaryButton?: string | null, secondaryButton?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type HeroConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<HeroFilter>;
+}>;
+
+
+export type HeroConnectionQuery = { __typename?: 'Query', heroConnection: { __typename?: 'HeroConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HeroConnectionEdges', cursor: string, node?: { __typename: 'Hero', id: string, tagline: string, subtitle?: string | null, primaryButton?: string | null, secondaryButton?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type AboutQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type AboutQuery = { __typename?: 'Query', about: { __typename: 'About', id: string, heading: string, paragraph1?: string | null, paragraph2?: string | null, paragraph3?: string | null, quote?: string | null, mainImage?: string | null, mainImageAlt?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, photos?: Array<{ __typename: 'AboutPhotos', src: string, alt: string } | null> | null } };
+
+export type AboutConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<AboutFilter>;
+}>;
+
+
+export type AboutConnectionQuery = { __typename?: 'Query', aboutConnection: { __typename?: 'AboutConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AboutConnectionEdges', cursor: string, node?: { __typename: 'About', id: string, heading: string, paragraph1?: string | null, paragraph2?: string | null, paragraph3?: string | null, quote?: string | null, mainImage?: string | null, mainImageAlt?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, photos?: Array<{ __typename: 'AboutPhotos', src: string, alt: string } | null> | null } | null } | null> | null } };
+
+export type FooterQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type FooterQuery = { __typename?: 'Query', footer: { __typename: 'Footer', id: string, orgDescription: string, president?: string | null, director?: string | null, contactHeading?: string | null, address?: string | null, phone1?: string | null, phone1Link?: string | null, phone2?: string | null, phone2Link?: string | null, email?: string | null, whatsappNumber?: string | null, transparencyHeading?: string | null, ngoRegistered?: string | null, nsifCode?: string | null, csrCode?: string | null, copyright?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type FooterConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<FooterFilter>;
+}>;
+
+
+export type FooterConnectionQuery = { __typename?: 'Query', footerConnection: { __typename?: 'FooterConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'FooterConnectionEdges', cursor: string, node?: { __typename: 'Footer', id: string, orgDescription: string, president?: string | null, director?: string | null, contactHeading?: string | null, address?: string | null, phone1?: string | null, phone1Link?: string | null, phone2?: string | null, phone2Link?: string | null, email?: string | null, whatsappNumber?: string | null, transparencyHeading?: string | null, ngoRegistered?: string | null, nsifCode?: string | null, csrCode?: string | null, copyright?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type NavigationQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type NavigationQuery = { __typename?: 'Query', navigation: { __typename: 'Navigation', id: string, ctaText: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'NavigationLinks', label: string } | null> | null } };
+
+export type NavigationConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<NavigationFilter>;
+}>;
+
+
+export type NavigationConnectionQuery = { __typename?: 'Query', navigationConnection: { __typename?: 'NavigationConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavigationConnectionEdges', cursor: string, node?: { __typename: 'Navigation', id: string, ctaText: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'NavigationLinks', label: string } | null> | null } | null } | null> | null } };
+
+export type ImpactQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type ImpactQuery = { __typename?: 'Query', impact: { __typename: 'Impact', id: string, sinceLabel: string, headline?: string | null, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, images?: Array<{ __typename: 'ImpactImages', src: string, alt: string } | null> | null } };
+
+export type ImpactConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ImpactFilter>;
+}>;
+
+
+export type ImpactConnectionQuery = { __typename?: 'Query', impactConnection: { __typename?: 'ImpactConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ImpactConnectionEdges', cursor: string, node?: { __typename: 'Impact', id: string, sinceLabel: string, headline?: string | null, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, images?: Array<{ __typename: 'ImpactImages', src: string, alt: string } | null> | null } | null } | null> | null } };
+
+export type PedagogyQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type PedagogyQuery = { __typename?: 'Query', pedagogy: { __typename: 'Pedagogy', id: string, heading: string, description?: string | null, newsHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, features?: Array<{ __typename: 'PedagogyFeatures', title: string, description: string } | null> | null, photos?: Array<{ __typename: 'PedagogyPhotos', src: string, alt: string } | null> | null } };
+
+export type PedagogyConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PedagogyFilter>;
+}>;
+
+
+export type PedagogyConnectionQuery = { __typename?: 'Query', pedagogyConnection: { __typename?: 'PedagogyConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PedagogyConnectionEdges', cursor: string, node?: { __typename: 'Pedagogy', id: string, heading: string, description?: string | null, newsHeading?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, features?: Array<{ __typename: 'PedagogyFeatures', title: string, description: string } | null> | null, photos?: Array<{ __typename: 'PedagogyPhotos', src: string, alt: string } | null> | null } | null } | null> | null } };
+
+export type DonateQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type DonateQuery = { __typename?: 'Query', donate: { __typename: 'Donate', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, emotionalHeader?: { __typename: 'DonateEmotionalHeader', badge?: string | null, heading?: string | null, headingHighlight?: string | null, description?: string | null } | null, socialProof?: Array<{ __typename: 'DonateSocialProof', value: string, label: string } | null> | null, tabs?: { __typename: 'DonateTabs', donLabel?: string | null, parrainLabel?: string | null } | null, donPonctuel?: { __typename: 'DonateDonPonctuel', heading?: string | null, subtitle?: string | null, referenceFormat?: string | null, bankName?: string | null, accountNumber?: string | null, accountHolder?: string | null, trustSignal?: string | null, receiptNote?: string | null, steps?: Array<{ __typename: 'DonateDonPonctuelSteps', title: string, detail?: string | null } | null> | null } | null, parrainSection?: { __typename: 'DonateParrainSection', heading?: string | null, subtitle?: string | null, chooseLabel?: string | null, highlightedBadge?: string | null, freeAmountOption?: string | null, formHeading?: string | null, namePlaceholder?: string | null, phonePlaceholder?: string | null, emailPlaceholder?: string | null, messagePlaceholder?: string | null, whatsappButton?: string | null, emailButton?: string | null, responseTime?: string | null, receiptLabel?: string | null } | null, donEnAction?: { __typename: 'DonateDonEnAction', heading?: string | null, items?: Array<{ __typename: 'DonateDonEnActionItems', icon: string, title: string, subtitle: string } | null> | null } | null, csr?: { __typename: 'DonateCsr', heading?: string | null, text?: string | null, csrCode?: string | null, contactName?: string | null, contactRole?: string | null } | null } };
+
+export type DonateConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<DonateFilter>;
+}>;
+
+
+export type DonateConnectionQuery = { __typename?: 'Query', donateConnection: { __typename?: 'DonateConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'DonateConnectionEdges', cursor: string, node?: { __typename: 'Donate', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, emotionalHeader?: { __typename: 'DonateEmotionalHeader', badge?: string | null, heading?: string | null, headingHighlight?: string | null, description?: string | null } | null, socialProof?: Array<{ __typename: 'DonateSocialProof', value: string, label: string } | null> | null, tabs?: { __typename: 'DonateTabs', donLabel?: string | null, parrainLabel?: string | null } | null, donPonctuel?: { __typename: 'DonateDonPonctuel', heading?: string | null, subtitle?: string | null, referenceFormat?: string | null, bankName?: string | null, accountNumber?: string | null, accountHolder?: string | null, trustSignal?: string | null, receiptNote?: string | null, steps?: Array<{ __typename: 'DonateDonPonctuelSteps', title: string, detail?: string | null } | null> | null } | null, parrainSection?: { __typename: 'DonateParrainSection', heading?: string | null, subtitle?: string | null, chooseLabel?: string | null, highlightedBadge?: string | null, freeAmountOption?: string | null, formHeading?: string | null, namePlaceholder?: string | null, phonePlaceholder?: string | null, emailPlaceholder?: string | null, messagePlaceholder?: string | null, whatsappButton?: string | null, emailButton?: string | null, responseTime?: string | null, receiptLabel?: string | null } | null, donEnAction?: { __typename: 'DonateDonEnAction', heading?: string | null, items?: Array<{ __typename: 'DonateDonEnActionItems', icon: string, title: string, subtitle: string } | null> | null } | null, csr?: { __typename: 'DonateCsr', heading?: string | null, text?: string | null, csrCode?: string | null, contactName?: string | null, contactRole?: string | null } | null } | null } | null> | null } };
+
+export type SiteQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type SiteQuery = { __typename?: 'Query', site: { __typename: 'Site', id: string, title: string, description?: string | null, organizationName?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type SiteConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<SiteFilter>;
+}>;
+
+
+export type SiteConnectionQuery = { __typename?: 'Query', siteConnection: { __typename?: 'SiteConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SiteConnectionEdges', cursor: string, node?: { __typename: 'Site', id: string, title: string, description?: string | null, organizationName?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type StatsSectionQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type StatsSectionQuery = { __typename?: 'Query', statsSection: { __typename: 'StatsSection', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, badges?: Array<{ __typename: 'StatsSectionBadges', label: string } | null> | null } };
+
+export type StatsSectionConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<StatsSectionFilter>;
+}>;
+
+
+export type StatsSectionConnectionQuery = { __typename?: 'Query', statsSectionConnection: { __typename?: 'StatsSectionConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'StatsSectionConnectionEdges', cursor: string, node?: { __typename: 'StatsSection', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, badges?: Array<{ __typename: 'StatsSectionBadges', label: string } | null> | null } | null } | null> | null } };
+
+export type ProgramsSectionQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type ProgramsSectionQuery = { __typename?: 'Query', programsSection: { __typename: 'ProgramsSection', id: string, heading: string, description?: string | null, mobileIndicator?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type ProgramsSectionConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ProgramsSectionFilter>;
+}>;
+
+
+export type ProgramsSectionConnectionQuery = { __typename?: 'Query', programsSectionConnection: { __typename?: 'ProgramsSectionConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProgramsSectionConnectionEdges', cursor: string, node?: { __typename: 'ProgramsSection', id: string, heading: string, description?: string | null, mobileIndicator?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type GallerySectionQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type GallerySectionQuery = { __typename?: 'Query', gallerySection: { __typename: 'GallerySection', id: string, heading: string, headingHighlight?: string | null, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type GallerySectionConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<GallerySectionFilter>;
+}>;
+
+
+export type GallerySectionConnectionQuery = { __typename?: 'Query', gallerySectionConnection: { __typename?: 'GallerySectionConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'GallerySectionConnectionEdges', cursor: string, node?: { __typename: 'GallerySection', id: string, heading: string, headingHighlight?: string | null, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
 export const NewsPartsFragmentDoc = gql`
     fragment NewsParts on News {
   __typename
@@ -781,6 +2149,200 @@ export const TiersPartsFragmentDoc = gql`
   icon
   highlighted
   order
+}
+    `;
+export const HeroPartsFragmentDoc = gql`
+    fragment HeroParts on Hero {
+  __typename
+  tagline
+  subtitle
+  primaryButton
+  secondaryButton
+}
+    `;
+export const AboutPartsFragmentDoc = gql`
+    fragment AboutParts on About {
+  __typename
+  heading
+  paragraph1
+  paragraph2
+  paragraph3
+  quote
+  mainImage
+  mainImageAlt
+  photos {
+    __typename
+    src
+    alt
+  }
+}
+    `;
+export const FooterPartsFragmentDoc = gql`
+    fragment FooterParts on Footer {
+  __typename
+  orgDescription
+  president
+  director
+  contactHeading
+  address
+  phone1
+  phone1Link
+  phone2
+  phone2Link
+  email
+  whatsappNumber
+  transparencyHeading
+  ngoRegistered
+  nsifCode
+  csrCode
+  copyright
+}
+    `;
+export const NavigationPartsFragmentDoc = gql`
+    fragment NavigationParts on Navigation {
+  __typename
+  links {
+    __typename
+    label
+  }
+  ctaText
+}
+    `;
+export const ImpactPartsFragmentDoc = gql`
+    fragment ImpactParts on Impact {
+  __typename
+  sinceLabel
+  headline
+  description
+  images {
+    __typename
+    src
+    alt
+  }
+}
+    `;
+export const PedagogyPartsFragmentDoc = gql`
+    fragment PedagogyParts on Pedagogy {
+  __typename
+  heading
+  description
+  features {
+    __typename
+    title
+    description
+  }
+  newsHeading
+  photos {
+    __typename
+    src
+    alt
+  }
+}
+    `;
+export const DonatePartsFragmentDoc = gql`
+    fragment DonateParts on Donate {
+  __typename
+  emotionalHeader {
+    __typename
+    badge
+    heading
+    headingHighlight
+    description
+  }
+  socialProof {
+    __typename
+    value
+    label
+  }
+  tabs {
+    __typename
+    donLabel
+    parrainLabel
+  }
+  donPonctuel {
+    __typename
+    heading
+    subtitle
+    steps {
+      __typename
+      title
+      detail
+    }
+    referenceFormat
+    bankName
+    accountNumber
+    accountHolder
+    trustSignal
+    receiptNote
+  }
+  parrainSection {
+    __typename
+    heading
+    subtitle
+    chooseLabel
+    highlightedBadge
+    freeAmountOption
+    formHeading
+    namePlaceholder
+    phonePlaceholder
+    emailPlaceholder
+    messagePlaceholder
+    whatsappButton
+    emailButton
+    responseTime
+    receiptLabel
+  }
+  donEnAction {
+    __typename
+    heading
+    items {
+      __typename
+      icon
+      title
+      subtitle
+    }
+  }
+  csr {
+    __typename
+    heading
+    text
+    csrCode
+    contactName
+    contactRole
+  }
+}
+    `;
+export const SitePartsFragmentDoc = gql`
+    fragment SiteParts on Site {
+  __typename
+  title
+  description
+  organizationName
+}
+    `;
+export const StatsSectionPartsFragmentDoc = gql`
+    fragment StatsSectionParts on StatsSection {
+  __typename
+  badges {
+    __typename
+    label
+  }
+}
+    `;
+export const ProgramsSectionPartsFragmentDoc = gql`
+    fragment ProgramsSectionParts on ProgramsSection {
+  __typename
+  heading
+  description
+  mobileIndicator
+}
+    `;
+export const GallerySectionPartsFragmentDoc = gql`
+    fragment GallerySectionParts on GallerySection {
+  __typename
+  heading
+  headingHighlight
+  description
 }
     `;
 export const NewsDocument = gql`
@@ -1068,6 +2630,633 @@ export const TiersConnectionDocument = gql`
   }
 }
     ${TiersPartsFragmentDoc}`;
+export const HeroDocument = gql`
+    query hero($relativePath: String!) {
+  hero(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...HeroParts
+  }
+}
+    ${HeroPartsFragmentDoc}`;
+export const HeroConnectionDocument = gql`
+    query heroConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: HeroFilter) {
+  heroConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...HeroParts
+      }
+    }
+  }
+}
+    ${HeroPartsFragmentDoc}`;
+export const AboutDocument = gql`
+    query about($relativePath: String!) {
+  about(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...AboutParts
+  }
+}
+    ${AboutPartsFragmentDoc}`;
+export const AboutConnectionDocument = gql`
+    query aboutConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: AboutFilter) {
+  aboutConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...AboutParts
+      }
+    }
+  }
+}
+    ${AboutPartsFragmentDoc}`;
+export const FooterDocument = gql`
+    query footer($relativePath: String!) {
+  footer(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...FooterParts
+  }
+}
+    ${FooterPartsFragmentDoc}`;
+export const FooterConnectionDocument = gql`
+    query footerConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: FooterFilter) {
+  footerConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...FooterParts
+      }
+    }
+  }
+}
+    ${FooterPartsFragmentDoc}`;
+export const NavigationDocument = gql`
+    query navigation($relativePath: String!) {
+  navigation(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...NavigationParts
+  }
+}
+    ${NavigationPartsFragmentDoc}`;
+export const NavigationConnectionDocument = gql`
+    query navigationConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: NavigationFilter) {
+  navigationConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...NavigationParts
+      }
+    }
+  }
+}
+    ${NavigationPartsFragmentDoc}`;
+export const ImpactDocument = gql`
+    query impact($relativePath: String!) {
+  impact(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ImpactParts
+  }
+}
+    ${ImpactPartsFragmentDoc}`;
+export const ImpactConnectionDocument = gql`
+    query impactConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ImpactFilter) {
+  impactConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ImpactParts
+      }
+    }
+  }
+}
+    ${ImpactPartsFragmentDoc}`;
+export const PedagogyDocument = gql`
+    query pedagogy($relativePath: String!) {
+  pedagogy(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...PedagogyParts
+  }
+}
+    ${PedagogyPartsFragmentDoc}`;
+export const PedagogyConnectionDocument = gql`
+    query pedagogyConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: PedagogyFilter) {
+  pedagogyConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...PedagogyParts
+      }
+    }
+  }
+}
+    ${PedagogyPartsFragmentDoc}`;
+export const DonateDocument = gql`
+    query donate($relativePath: String!) {
+  donate(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...DonateParts
+  }
+}
+    ${DonatePartsFragmentDoc}`;
+export const DonateConnectionDocument = gql`
+    query donateConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: DonateFilter) {
+  donateConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...DonateParts
+      }
+    }
+  }
+}
+    ${DonatePartsFragmentDoc}`;
+export const SiteDocument = gql`
+    query site($relativePath: String!) {
+  site(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...SiteParts
+  }
+}
+    ${SitePartsFragmentDoc}`;
+export const SiteConnectionDocument = gql`
+    query siteConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: SiteFilter) {
+  siteConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...SiteParts
+      }
+    }
+  }
+}
+    ${SitePartsFragmentDoc}`;
+export const StatsSectionDocument = gql`
+    query statsSection($relativePath: String!) {
+  statsSection(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...StatsSectionParts
+  }
+}
+    ${StatsSectionPartsFragmentDoc}`;
+export const StatsSectionConnectionDocument = gql`
+    query statsSectionConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: StatsSectionFilter) {
+  statsSectionConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...StatsSectionParts
+      }
+    }
+  }
+}
+    ${StatsSectionPartsFragmentDoc}`;
+export const ProgramsSectionDocument = gql`
+    query programsSection($relativePath: String!) {
+  programsSection(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ProgramsSectionParts
+  }
+}
+    ${ProgramsSectionPartsFragmentDoc}`;
+export const ProgramsSectionConnectionDocument = gql`
+    query programsSectionConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ProgramsSectionFilter) {
+  programsSectionConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ProgramsSectionParts
+      }
+    }
+  }
+}
+    ${ProgramsSectionPartsFragmentDoc}`;
+export const GallerySectionDocument = gql`
+    query gallerySection($relativePath: String!) {
+  gallerySection(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...GallerySectionParts
+  }
+}
+    ${GallerySectionPartsFragmentDoc}`;
+export const GallerySectionConnectionDocument = gql`
+    query gallerySectionConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: GallerySectionFilter) {
+  gallerySectionConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...GallerySectionParts
+      }
+    }
+  }
+}
+    ${GallerySectionPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -1100,6 +3289,72 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     tiersConnection(variables?: TiersConnectionQueryVariables, options?: C): Promise<{data: TiersConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TiersConnectionQueryVariables, query: string}> {
         return requester<{data: TiersConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TiersConnectionQueryVariables, query: string}, TiersConnectionQueryVariables>(TiersConnectionDocument, variables, options);
+      },
+    hero(variables: HeroQueryVariables, options?: C): Promise<{data: HeroQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HeroQueryVariables, query: string}> {
+        return requester<{data: HeroQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HeroQueryVariables, query: string}, HeroQueryVariables>(HeroDocument, variables, options);
+      },
+    heroConnection(variables?: HeroConnectionQueryVariables, options?: C): Promise<{data: HeroConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HeroConnectionQueryVariables, query: string}> {
+        return requester<{data: HeroConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: HeroConnectionQueryVariables, query: string}, HeroConnectionQueryVariables>(HeroConnectionDocument, variables, options);
+      },
+    about(variables: AboutQueryVariables, options?: C): Promise<{data: AboutQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutQueryVariables, query: string}> {
+        return requester<{data: AboutQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutQueryVariables, query: string}, AboutQueryVariables>(AboutDocument, variables, options);
+      },
+    aboutConnection(variables?: AboutConnectionQueryVariables, options?: C): Promise<{data: AboutConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutConnectionQueryVariables, query: string}> {
+        return requester<{data: AboutConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutConnectionQueryVariables, query: string}, AboutConnectionQueryVariables>(AboutConnectionDocument, variables, options);
+      },
+    footer(variables: FooterQueryVariables, options?: C): Promise<{data: FooterQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterQueryVariables, query: string}> {
+        return requester<{data: FooterQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterQueryVariables, query: string}, FooterQueryVariables>(FooterDocument, variables, options);
+      },
+    footerConnection(variables?: FooterConnectionQueryVariables, options?: C): Promise<{data: FooterConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterConnectionQueryVariables, query: string}> {
+        return requester<{data: FooterConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterConnectionQueryVariables, query: string}, FooterConnectionQueryVariables>(FooterConnectionDocument, variables, options);
+      },
+    navigation(variables: NavigationQueryVariables, options?: C): Promise<{data: NavigationQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavigationQueryVariables, query: string}> {
+        return requester<{data: NavigationQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavigationQueryVariables, query: string}, NavigationQueryVariables>(NavigationDocument, variables, options);
+      },
+    navigationConnection(variables?: NavigationConnectionQueryVariables, options?: C): Promise<{data: NavigationConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavigationConnectionQueryVariables, query: string}> {
+        return requester<{data: NavigationConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: NavigationConnectionQueryVariables, query: string}, NavigationConnectionQueryVariables>(NavigationConnectionDocument, variables, options);
+      },
+    impact(variables: ImpactQueryVariables, options?: C): Promise<{data: ImpactQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ImpactQueryVariables, query: string}> {
+        return requester<{data: ImpactQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ImpactQueryVariables, query: string}, ImpactQueryVariables>(ImpactDocument, variables, options);
+      },
+    impactConnection(variables?: ImpactConnectionQueryVariables, options?: C): Promise<{data: ImpactConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ImpactConnectionQueryVariables, query: string}> {
+        return requester<{data: ImpactConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ImpactConnectionQueryVariables, query: string}, ImpactConnectionQueryVariables>(ImpactConnectionDocument, variables, options);
+      },
+    pedagogy(variables: PedagogyQueryVariables, options?: C): Promise<{data: PedagogyQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PedagogyQueryVariables, query: string}> {
+        return requester<{data: PedagogyQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PedagogyQueryVariables, query: string}, PedagogyQueryVariables>(PedagogyDocument, variables, options);
+      },
+    pedagogyConnection(variables?: PedagogyConnectionQueryVariables, options?: C): Promise<{data: PedagogyConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PedagogyConnectionQueryVariables, query: string}> {
+        return requester<{data: PedagogyConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PedagogyConnectionQueryVariables, query: string}, PedagogyConnectionQueryVariables>(PedagogyConnectionDocument, variables, options);
+      },
+    donate(variables: DonateQueryVariables, options?: C): Promise<{data: DonateQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: DonateQueryVariables, query: string}> {
+        return requester<{data: DonateQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: DonateQueryVariables, query: string}, DonateQueryVariables>(DonateDocument, variables, options);
+      },
+    donateConnection(variables?: DonateConnectionQueryVariables, options?: C): Promise<{data: DonateConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: DonateConnectionQueryVariables, query: string}> {
+        return requester<{data: DonateConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: DonateConnectionQueryVariables, query: string}, DonateConnectionQueryVariables>(DonateConnectionDocument, variables, options);
+      },
+    site(variables: SiteQueryVariables, options?: C): Promise<{data: SiteQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteQueryVariables, query: string}> {
+        return requester<{data: SiteQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteQueryVariables, query: string}, SiteQueryVariables>(SiteDocument, variables, options);
+      },
+    siteConnection(variables?: SiteConnectionQueryVariables, options?: C): Promise<{data: SiteConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteConnectionQueryVariables, query: string}> {
+        return requester<{data: SiteConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: SiteConnectionQueryVariables, query: string}, SiteConnectionQueryVariables>(SiteConnectionDocument, variables, options);
+      },
+    statsSection(variables: StatsSectionQueryVariables, options?: C): Promise<{data: StatsSectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: StatsSectionQueryVariables, query: string}> {
+        return requester<{data: StatsSectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: StatsSectionQueryVariables, query: string}, StatsSectionQueryVariables>(StatsSectionDocument, variables, options);
+      },
+    statsSectionConnection(variables?: StatsSectionConnectionQueryVariables, options?: C): Promise<{data: StatsSectionConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: StatsSectionConnectionQueryVariables, query: string}> {
+        return requester<{data: StatsSectionConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: StatsSectionConnectionQueryVariables, query: string}, StatsSectionConnectionQueryVariables>(StatsSectionConnectionDocument, variables, options);
+      },
+    programsSection(variables: ProgramsSectionQueryVariables, options?: C): Promise<{data: ProgramsSectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProgramsSectionQueryVariables, query: string}> {
+        return requester<{data: ProgramsSectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProgramsSectionQueryVariables, query: string}, ProgramsSectionQueryVariables>(ProgramsSectionDocument, variables, options);
+      },
+    programsSectionConnection(variables?: ProgramsSectionConnectionQueryVariables, options?: C): Promise<{data: ProgramsSectionConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProgramsSectionConnectionQueryVariables, query: string}> {
+        return requester<{data: ProgramsSectionConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProgramsSectionConnectionQueryVariables, query: string}, ProgramsSectionConnectionQueryVariables>(ProgramsSectionConnectionDocument, variables, options);
+      },
+    gallerySection(variables: GallerySectionQueryVariables, options?: C): Promise<{data: GallerySectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GallerySectionQueryVariables, query: string}> {
+        return requester<{data: GallerySectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GallerySectionQueryVariables, query: string}, GallerySectionQueryVariables>(GallerySectionDocument, variables, options);
+      },
+    gallerySectionConnection(variables?: GallerySectionConnectionQueryVariables, options?: C): Promise<{data: GallerySectionConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GallerySectionConnectionQueryVariables, query: string}> {
+        return requester<{data: GallerySectionConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GallerySectionConnectionQueryVariables, query: string}, GallerySectionConnectionQueryVariables>(GallerySectionConnectionDocument, variables, options);
       }
     };
   }
@@ -1148,7 +3403,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "https://content.tinajs.io/1.5/content/9bff4b70-8364-4205-b688-7c79939891bf/github/tina",
+        url: "http://localhost:4001/graphql",
         queries,
       })
     )

@@ -1,40 +1,88 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Navbar from "../components/Navbar.astro";
-import Hero from "../components/Hero.astro";
-import About from "../components/About.astro";
-import ImpactBanner from "../components/ImpactBanner.astro";
-import Donate from "../components/Donate.astro";
-import Footer from "../components/Footer.astro";
 
 // Visual editing React wrappers (only hydrate inside TinaCMS admin)
+import NavbarVisual from "../components/react/NavbarVisual";
+import HeroVisual from "../components/react/HeroVisual";
 import StatsVisual from "../components/react/StatsVisual";
+import AboutVisual from "../components/react/AboutVisual";
 import ProgramsVisual from "../components/react/ProgramsVisual";
+import ImpactBannerVisual from "../components/react/ImpactBannerVisual";
 import NewsVisual from "../components/react/NewsVisual";
 import GalleryVisual from "../components/react/GalleryVisual";
+import DonateVisual from "../components/react/DonateVisual";
+import FooterVisual from "../components/react/FooterVisual";
 
 // Read content files directly at build time (no GraphQL server needed).
 // In the TinaCMS admin iframe, React components hydrate and use
 // useTina() to subscribe to live GraphQL updates for visual editing.
-import { getStatsData, getProgramsData, getNewsData, getGalleryData } from "../lib/content";
+import {
+  getStatsData, getProgramsData, getNewsData, getGalleryData, getTiersData,
+  getHeroData, getAboutData, getFooterData, getNavigationData,
+  getImpactData, getPedagogyData, getDonateData,
+  getStatsSectionData, getProgramsSectionData, getGallerySectionData,
+} from "../lib/content";
 
 const statsData = getStatsData();
 const programsData = getProgramsData();
 const newsData = getNewsData();
 const galleryData = getGalleryData();
+const tiersData = getTiersData();
+
+const heroData = getHeroData();
+const aboutData = getAboutData();
+const footerData = getFooterData();
+const navigationData = getNavigationData();
+const impactData = getImpactData();
+const pedagogyData = getPedagogyData();
+const donateData = getDonateData();
+
+const statsSectionData = getStatsSectionData();
+const programsSectionData = getProgramsSectionData();
+const gallerySectionData = getGallerySectionData();
 ---
 
 <Layout>
-  <Navbar />
+  <NavbarVisual {...navigationData} client:tina />
   <main>
-    <Hero />
-    <StatsVisual {...statsData} client:tina />
-    <About />
-    <ProgramsVisual {...programsData} client:tina />
-    <ImpactBanner />
-    <NewsVisual {...newsData} client:tina />
-    <GalleryVisual {...galleryData} client:tina />
-    <Donate />
+    <HeroVisual {...heroData} client:tina />
+    <StatsVisual
+      {...statsData}
+      sectionData={statsSectionData.data}
+      sectionQuery={statsSectionData.query}
+      sectionVariables={statsSectionData.variables}
+      client:tina
+    />
+    <AboutVisual {...aboutData} client:tina />
+    <ProgramsVisual
+      {...programsData}
+      sectionData={programsSectionData.data}
+      sectionQuery={programsSectionData.query}
+      sectionVariables={programsSectionData.variables}
+      client:tina
+    />
+    <ImpactBannerVisual {...impactData} client:tina />
+    <NewsVisual
+      {...newsData}
+      sectionData={pedagogyData.data}
+      sectionQuery={pedagogyData.query}
+      sectionVariables={pedagogyData.variables}
+      client:tina
+    />
+    <GalleryVisual
+      {...galleryData}
+      sectionData={gallerySectionData.data}
+      sectionQuery={gallerySectionData.query}
+      sectionVariables={gallerySectionData.variables}
+      client:tina
+    />
+    <DonateVisual
+      {...donateData}
+      tiersData={tiersData.data}
+      tiersQuery={tiersData.query}
+      tiersVariables={tiersData.variables}
+      client:tina
+    />
   </main>
-  <Footer />
+  <FooterVisual {...footerData} client:tina />
 </Layout>

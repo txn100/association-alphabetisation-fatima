@@ -6,6 +6,11 @@ export default function ProgramsVisual(props: any) {
     variables: props.variables,
     data: props.data,
   });
+  const { data: sectionData } = useTina({
+    query: props.sectionQuery || "",
+    variables: props.sectionVariables || {},
+    data: props.sectionData || {},
+  });
 
   const edges = data.programsConnection?.edges || [];
   const steps = edges
@@ -13,21 +18,28 @@ export default function ProgramsVisual(props: any) {
     .map((e: any) => e.node)
     .sort((a: any, b: any) => a.order - b.order);
 
+  const section = sectionData?.programsSection;
+
   return (
     <section id="parcours" className="py-12 md:py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 md:mb-16">
-          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-gray-800 mb-4">
-            Le Parcours de Nos Eleves
+          <h2
+            className="font-heading text-2xl sm:text-3xl font-bold text-gray-800 mb-4"
+            data-tina-field={section ? tinaField(section, "heading") : undefined}
+          >
+            {section?.heading || "Le Parcours de Nos Eleves"}
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Un chemin progressif adapte au rythme de chaque enfant, de
-            l'alphabetisation a l'insertion professionnelle.
+          <p
+            className="text-gray-600 max-w-2xl mx-auto"
+            data-tina-field={section ? tinaField(section, "description") : undefined}
+          >
+            {section?.description ||
+              "Un chemin progressif adapte au rythme de chaque enfant, de l'alphabetisation a l'insertion professionnelle."}
           </p>
         </div>
 
         <div className="relative">
-          {/* Connecting line (desktop) */}
           <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 -translate-y-1/2 z-0" />
 
           <div className="grid md:grid-cols-3 gap-5 md:gap-8 relative z-10">
@@ -36,12 +48,10 @@ export default function ProgramsVisual(props: any) {
                 key={step._sys?.filename}
                 className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 group relative"
               >
-                {/* Step number badge */}
                 <div className="absolute top-4 right-4 w-8 h-8 bg-white/80 backdrop-blur rounded-full flex items-center justify-center text-sm font-bold text-gray-500 group-hover:bg-brand-blue group-hover:text-white transition z-20">
                   {i + 1}
                 </div>
 
-                {/* Image */}
                 <div className="h-40 overflow-hidden" data-tina-field={tinaField(step, "image")}>
                   <img
                     src={step.image}
@@ -92,10 +102,12 @@ export default function ProgramsVisual(props: any) {
           </div>
         </div>
 
-        {/* Arrow indicators (mobile) */}
         <div className="flex justify-center mt-8 md:hidden">
-          <span className="text-gray-500 text-sm font-semibold">
-            <i className="fas fa-arrow-down mr-1" /> Progression
+          <span
+            className="text-gray-500 text-sm font-semibold"
+            data-tina-field={section ? tinaField(section, "mobileIndicator") : undefined}
+          >
+            <i className="fas fa-arrow-down mr-1" /> {section?.mobileIndicator || "Progression"}
           </span>
         </div>
       </div>
