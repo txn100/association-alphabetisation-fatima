@@ -2,26 +2,36 @@
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import Hero from "../components/Hero.astro";
-import Stats from "../components/Stats.astro";
 import About from "../components/About.astro";
-import Programs from "../components/Programs.astro";
 import ImpactBanner from "../components/ImpactBanner.astro";
-import Pedagogy from "../components/Pedagogy.astro";
-import Gallery from "../components/Gallery.astro";
 import Donate from "../components/Donate.astro";
 import Footer from "../components/Footer.astro";
+
+// Visual editing React wrappers (only hydrate inside TinaCMS admin)
+import StatsVisual from "../components/react/StatsVisual";
+import ProgramsVisual from "../components/react/ProgramsVisual";
+import NewsVisual from "../components/react/NewsVisual";
+import GalleryVisual from "../components/react/GalleryVisual";
+
+// Query TinaCMS GraphQL for visual editing data
+import client from "../../tina/__generated__/client";
+
+const statsData = await client.queries.statsConnection();
+const programsData = await client.queries.programsConnection();
+const newsData = await client.queries.newsConnection();
+const galleryData = await client.queries.galleryConnection();
 ---
 
 <Layout>
   <Navbar />
   <main>
     <Hero />
-    <Stats />
+    <StatsVisual {...statsData} client:tina />
     <About />
-    <Programs />
+    <ProgramsVisual {...programsData} client:tina />
     <ImpactBanner />
-    <Pedagogy />
-    <Gallery />
+    <NewsVisual {...newsData} client:tina />
+    <GalleryVisual {...galleryData} client:tina />
     <Donate />
   </main>
   <Footer />
