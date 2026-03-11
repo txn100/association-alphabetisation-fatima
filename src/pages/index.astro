@@ -23,23 +23,17 @@ import {
   getStatsSectionData, getProgramsSectionData, getGallerySectionData,
 } from "../lib/content";
 
-const statsData = getStatsData();
-const programsData = getProgramsData();
-const newsData = getNewsData();
-const galleryData = getGalleryData();
-const tiersData = getTiersData();
-
-const heroData = getHeroData();
-const aboutData = getAboutData();
-const footerData = getFooterData();
-const navigationData = getNavigationData();
-const impactData = getImpactData();
-const pedagogyData = getPedagogyData();
-const donateData = getDonateData();
-
-const statsSectionData = getStatsSectionData();
-const programsSectionData = getProgramsSectionData();
-const gallerySectionData = getGallerySectionData();
+const [
+  statsData, programsData, newsData, galleryData, tiersData,
+  heroData, aboutData, footerData, navigationData,
+  impactData, pedagogyData, donateData,
+  statsSectionData, programsSectionData, gallerySectionData,
+] = await Promise.all([
+  getStatsData(), getProgramsData(), getNewsData(), getGalleryData(), getTiersData(),
+  getHeroData(), getAboutData(), getFooterData(), getNavigationData(),
+  getImpactData(), getPedagogyData(), getDonateData(),
+  getStatsSectionData(), getProgramsSectionData(), getGallerySectionData(),
+]);
 ---
 
 <Layout>
