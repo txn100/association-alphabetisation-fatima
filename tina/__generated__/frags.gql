@@ -1,0 +1,51 @@
+fragment NewsParts on News {
+  __typename
+  title
+  date
+  month
+  day
+  year
+  category
+  description
+  image
+  imageAlt
+}
+
+fragment GalleryParts on Gallery {
+  __typename
+  src
+  alt
+  span
+  order
+}
+
+fragment StatsParts on Stats {
+  __typename
+  value
+  label
+  order
+}
+
+fragment ProgramsParts on Programs {
+  __typename
+  title
+  level
+  icon
+  ages
+  description
+  color
+  image
+  imageAlt
+  order
+}
+
+fragment TiersParts on Tiers {
+  __typename
+  amount
+  label
+  period
+  description
+  icon
+  highlighted
+  order
+}

@@ -4,6 +4,7 @@ dist/
 .DS_Store
 .env
 .env.*
+!.env.example
 *.local
 .wrangler/
-tina/__generated__/
+tina/__generated__/.cache/
