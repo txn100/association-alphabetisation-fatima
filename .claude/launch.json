@@ -3,9 +3,15 @@
   "configurations": [
     {
       "name": "dev",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["node_modules/astro/astro.js", "dev", "--port", "4321", "--host"],
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["astro", "dev", "--port", "4321", "--host"],
       "port": 4321
+    },
+    {
+      "name": "astro-only",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["astro", "dev", "--port", "4323", "--host"],
+      "port": 4323
     },
     {
       "name": "preview",

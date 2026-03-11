@@ -12,9 +12,19 @@ export default function HeroVisual(props: any) {
   return (
     <section
       id="accueil"
-      className="relative hero-bg h-screen min-h-[500px] flex items-center justify-center pt-16 md:pt-20"
+      className="relative hero-bg h-screen min-h-[500px] flex items-center justify-center pt-20 md:pt-24"
     >
       <div className="relative z-10 text-center px-5 max-w-4xl mx-auto">
+        <img
+          src="/images/logo-fatima-2019.png"
+          alt="Logo Association d'Alphabétisation de Fatima"
+          className="h-16 sm:h-20 md:h-24 w-auto mx-auto mb-3 md:mb-4 drop-shadow-lg"
+          width={96}
+          height={96}
+        />
+        <p className="text-sm sm:text-base md:text-lg tracking-[0.2em] uppercase text-white/90 font-semibold mb-3 md:mb-4 drop-shadow">
+          Association d'Alphabétisation de Fatima
+        </p>
         <h1
           className="font-heading text-[1.7rem] sm:text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4 md:mb-6 drop-shadow-md"
           data-tina-field={hero ? tinaField(hero, "tagline") : undefined}
