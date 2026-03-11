@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
 
-# Keystatic admin area
+# CMS admin area
 User-agent: *
-Disallow: /keystatic
+Disallow: /admin
