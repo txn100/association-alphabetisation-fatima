@@ -2,7 +2,7 @@ name: Deploy to Cloudflare Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, tina]
 
 jobs:
   deploy:
@@ -22,4 +22,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=association-alphabetisation-fatima
+          command: pages deploy dist --project-name=association-alphabetisation-fatima --branch=${{ github.ref_name }}
