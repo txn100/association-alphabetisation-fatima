@@ -14,15 +14,15 @@ export default function HeroVisual(props: any) {
       id="accueil"
       className="relative hero-bg h-screen min-h-[500px] flex items-center justify-center pt-20 md:pt-24"
     >
-      <div className="relative z-10 text-center px-5 max-w-4xl mx-auto">
+      <div className="relative z-10 text-center px-4 sm:px-5 max-w-4xl mx-auto">
         <img
           src="/images/logo-fatima-2019.png"
           alt="Logo Association d'Alphabétisation de Fatima"
-          className="h-16 sm:h-20 md:h-24 w-auto mx-auto mb-3 md:mb-4 drop-shadow-lg"
+          className="h-14 sm:h-20 md:h-24 w-auto mx-auto mb-2 sm:mb-3 md:mb-4 drop-shadow-lg"
           width={96}
           height={96}
         />
-        <p className="text-sm sm:text-base md:text-lg tracking-[0.2em] uppercase text-white/90 font-semibold mb-3 md:mb-4 drop-shadow">
+        <p className="text-[0.65rem] sm:text-sm md:text-lg tracking-[0.15em] sm:tracking-[0.2em] uppercase text-white/90 font-semibold mb-2 sm:mb-3 md:mb-4 drop-shadow">
           Association d'Alphabétisation de Fatima
         </p>
         <h1
