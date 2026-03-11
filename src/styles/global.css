@@ -68,3 +68,17 @@ a, button, input, select, textarea {
 .wave-bottom .shape-fill {
   fill: var(--color-brand-light);
 }
+
+/* Navbar title: show on all screens, but adjust for very small phones */
+@media (max-width: 359px) {
+  .navbar-title {
+    font-size: 0.625rem; /* 10px on tiny screens (<360px) */
+    max-width: 10rem;
+  }
+}
+
+@media (min-width: 360px) and (max-width: 639px) {
+  .navbar-title {
+    font-size: 0.75rem; /* 12px on normal mobile */
+  }
+}

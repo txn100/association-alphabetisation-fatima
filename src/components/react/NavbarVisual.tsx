@@ -39,17 +39,17 @@ export default function NavbarVisual(props: any) {
       aria-label="Navigation principale"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 sm:h-20 md:h-24 items-center">
+        <div className="flex justify-between h-14 sm:h-16 md:h-20 items-center">
           {/* Logo */}
-          <a href="#accueil" onClick={smoothScroll("#accueil")} className="flex-shrink-0 flex items-center gap-2">
+          <a href="#accueil" onClick={smoothScroll("#accueil")} className="flex-shrink-0 flex items-center gap-1.5 sm:gap-2">
             <img
-              src="/images/logo-fatima-2019.png"
+              src="/images/logo-fatima-hq.webp"
               alt="Logo Association d'Alphabétisation de Fatima"
-              className="h-12 sm:h-16 md:h-20 w-auto"
-              width={80}
-              height={80}
+              className="h-9 sm:h-12 md:h-16 w-auto flex-shrink-0"
+              width={64}
+              height={64}
             />
-            <span className="font-heading font-bold text-brand-blue leading-tight text-[11px] sm:text-sm md:text-base">
+            <span className="navbar-title font-heading font-bold text-brand-blue leading-tight text-xs sm:text-sm md:text-base">
               Association d'Alphabétisation<br className="hidden lg:block" /> de Fatima
             </span>
           </a>
