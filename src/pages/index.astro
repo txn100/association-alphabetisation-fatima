@@ -13,13 +13,15 @@ import ProgramsVisual from "../components/react/ProgramsVisual";
 import NewsVisual from "../components/react/NewsVisual";
 import GalleryVisual from "../components/react/GalleryVisual";
 
-// Query TinaCMS GraphQL for visual editing data
-import client from "../../tina/__generated__/client";
+// Read content files directly at build time (no GraphQL server needed).
+// In the TinaCMS admin iframe, React components hydrate and use
+// useTina() to subscribe to live GraphQL updates for visual editing.
+import { getStatsData, getProgramsData, getNewsData, getGalleryData } from "../lib/content";
 
-const statsData = await client.queries.statsConnection();
-const programsData = await client.queries.programsConnection();
-const newsData = await client.queries.newsConnection();
-const galleryData = await client.queries.galleryConnection();
+const statsData = getStatsData();
+const programsData = getProgramsData();
+const newsData = getNewsData();
+const galleryData = getGalleryData();
 ---
 
 <Layout>
