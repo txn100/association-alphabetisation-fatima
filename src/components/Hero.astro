@@ -1,3 +1,7 @@
+---
+import heroData from '../data/hero.json';
+---
+
 <section
   id="accueil"
   class="relative hero-bg h-screen min-h-[500px] flex items-center justify-center pt-16 md:pt-20"
@@ -6,27 +10,25 @@
     <h1
       class="font-heading text-[1.7rem] sm:text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4 md:mb-6 drop-shadow-md"
     >
-      Ensemble, donnons à ces enfants<br class="hidden sm:block" /> une chance de réussir&nbsp;!
+      {heroData.tagline}
     </h1>
     <p
       class="text-base sm:text-lg md:text-xl text-gray-100 mb-6 md:mb-8 max-w-2xl mx-auto font-light leading-relaxed"
     >
-      Depuis 37 ans, nous aidons des enfants défavorisés à sortir de
-      l'échec scolaire. Plus de <strong class="text-white">2&nbsp;000 élèves</strong> ont pu
-      retrouver le chemin de la confiance, de l'estime de soi et de la réussite.
+      {heroData.subtitle}
     </p>
     <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
       <a
         href="#apropos"
         class="px-8 py-3.5 sm:py-3 bg-white text-brand-blue font-bold rounded-lg shadow-lg hover:bg-gray-100 transition duration-300 text-sm sm:text-base"
       >
-        Découvrir notre mission
+        {heroData.primaryButton}
       </a>
       <a
         href="#faire-un-don"
         class="px-8 py-3.5 sm:py-3 bg-brand-pink text-white font-bold rounded-lg hover:bg-pink-600 transition duration-300 shadow-lg text-sm sm:text-base"
       >
-        <i class="fas fa-heart mr-2"></i>Devenir Parrain
+        <i class="fas fa-heart mr-2"></i>{heroData.secondaryButton}
       </a>
     </div>
   </div>

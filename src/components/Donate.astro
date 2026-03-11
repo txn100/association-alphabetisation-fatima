@@ -1,10 +1,16 @@
 ---
 import { getCollection } from 'astro:content';
+import donateData from '../data/donate.json';
+import footerData from '../data/footer.json';
 
 const tierEntries = await getCollection('tiers');
 const tiers = tierEntries
   .sort((a, b) => a.data.order - b.data.order)
   .map(entry => entry.data);
+
+const d = donateData;
+const colors = ["text-brand-blue", "text-brand-pink", "text-brand-blue", "text-brand-pink"];
+const bgColors = ["bg-blue-50", "bg-pink-50", "bg-blue-50", "bg-pink-50"];
 ---
 
 <!-- Emotional lead-in with image -->
@@ -14,13 +20,12 @@ const tiers = tierEntries
     <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/90 to-brand-blue/80"></div>
   </div>
   <div class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <p class="text-brand-yellow font-bold text-sm uppercase tracking-widest mb-3">Votre impact</p>
+    <p class="text-brand-yellow font-bold text-sm uppercase tracking-widest mb-3">{d.emotionalHeader.badge}</p>
     <h2 class="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-4">
-      Un geste simple, un avenir <span class="text-brand-yellow">transformé</span>
+      {d.emotionalHeader.heading} <span class="text-brand-yellow">{d.emotionalHeader.headingHighlight}</span>
     </h2>
     <p class="text-white/85 max-w-2xl mx-auto text-sm sm:text-base md:text-lg leading-relaxed">
-      Pour poursuivre cette belle mission, nous avons besoin de <strong class="text-white">VOUS</strong>&nbsp;!
-      Des jeunes de 11 à 18 ans issus de milieux défavorisés comptent sur votre soutien.
+      {d.emotionalHeader.description}
     </p>
   </div>
 </section>
@@ -31,25 +36,15 @@ const tiers = tierEntries
 
     <!-- Social proof bar -->
     <div class="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-10 mb-8 md:mb-12 text-center">
-      <div>
-        <span class="block text-2xl font-extrabold font-heading text-brand-blue">2 000+</span>
-        <span class="text-xs text-gray-500 font-semibold uppercase tracking-wide">Élèves aidés</span>
-      </div>
-      <div class="hidden sm:block w-px bg-gray-300"></div>
-      <div>
-        <span class="block text-2xl font-extrabold font-heading text-brand-pink">37 ans</span>
-        <span class="text-xs text-gray-500 font-semibold uppercase tracking-wide">D'engagement</span>
-      </div>
-      <div class="hidden sm:block w-px bg-gray-300"></div>
-      <div>
-        <span class="block text-2xl font-extrabold font-heading text-brand-blue">160</span>
-        <span class="text-xs text-gray-500 font-semibold uppercase tracking-wide">Élèves cette année</span>
-      </div>
-      <div class="hidden sm:block w-px bg-gray-300"></div>
-      <div>
-        <span class="block text-2xl font-extrabold font-heading text-brand-pink">100%</span>
-        <span class="text-xs text-gray-500 font-semibold uppercase tracking-wide">Dédié aux élèves</span>
-      </div>
+      {d.socialProof.map((item, i) => (
+        <>
+          <div>
+            <span class:list={["block text-2xl font-extrabold font-heading", colors[i % 4]]}>{item.value}</span>
+            <span class="text-xs text-gray-500 font-semibold uppercase tracking-wide">{item.label}</span>
+          </div>
+          {i < d.socialProof.length - 1 && <div class="hidden sm:block w-px bg-gray-300" />}
+        </>
+      ))}
     </div>
 
     <!-- Tab Toggle -->
@@ -60,7 +55,7 @@ const tiers = tierEntries
         class="donate-tab flex-1 py-3 px-4 rounded-lg font-bold text-sm transition-all duration-200 bg-brand-blue text-white shadow-sm"
         data-tab="don"
       >
-        <i class="fas fa-gift mr-1.5"></i>Don Ponctuel
+        <i class="fas fa-gift mr-1.5"></i>{d.tabs.donLabel}
       </button>
       <button
         id="tab-parrain"
@@ -68,7 +63,7 @@ const tiers = tierEntries
         class="donate-tab flex-1 py-3 px-4 rounded-lg font-bold text-sm transition-all duration-200 text-gray-500 hover:text-gray-700"
         data-tab="parrain"
       >
-        <i class="fas fa-hand-holding-heart mr-1.5"></i>Devenir Parrain
+        <i class="fas fa-hand-holding-heart mr-1.5"></i>{d.tabs.parrainLabel}
       </button>
     </div>
 
@@ -79,79 +74,66 @@ const tiers = tierEntries
         <!-- Header -->
         <div class="bg-gradient-to-r from-brand-blue to-brand-light-blue p-5 sm:p-6 text-center">
           <h3 class="font-heading font-bold text-white text-lg sm:text-xl">
-            Faire un don maintenant
+            {d.donPonctuel.heading}
           </h3>
-          <p class="text-white/80 text-sm mt-1">Par virement bancaire ou mobile</p>
+          <p class="text-white/80 text-sm mt-1">{d.donPonctuel.subtitle}</p>
         </div>
 
         <div class="p-6 sm:p-8 space-y-6">
 
           <!-- Step-by-step instructions -->
           <div class="space-y-4">
-            <div class="flex gap-4 items-start">
-              <div class="flex-shrink-0 w-8 h-8 bg-brand-blue/10 rounded-full flex items-center justify-center">
-                <span class="text-brand-blue font-bold text-sm">1</span>
-              </div>
-              <div>
-                <p class="font-bold text-gray-800 text-sm">Ouvrez votre app bancaire</p>
-                <p class="text-gray-500 text-sm">MCB Juice, MCB Mobile, ou votre banque habituelle</p>
-              </div>
-            </div>
-
-            <div class="flex gap-4 items-start">
-              <div class="flex-shrink-0 w-8 h-8 bg-brand-blue/10 rounded-full flex items-center justify-center">
-                <span class="text-brand-blue font-bold text-sm">2</span>
-              </div>
-              <div>
-                <p class="font-bold text-gray-800 text-sm">Effectuez un virement vers</p>
-                <div class="mt-2 bg-gray-50 rounded-xl p-4 border border-gray-200">
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                    <div>
-                      <span class="text-gray-500 text-xs uppercase tracking-wide block mb-0.5">Banque</span>
-                      <span class="font-bold text-gray-800">MCB</span>
-                    </div>
-                    <div>
-                      <span class="text-gray-500 text-xs uppercase tracking-wide block mb-0.5">N° de compte</span>
-                      <span class="font-mono font-bold text-brand-blue text-base">000162618670</span>
-                    </div>
-                    <div class="sm:col-span-2">
-                      <span class="text-gray-500 text-xs uppercase tracking-wide block mb-0.5">Titulaire</span>
-                      <span class="font-bold text-gray-800">Association d'Alphabétisation de Fatima</span>
-                    </div>
+            {d.donPonctuel.steps.map((step, i) => (
+              <div class="flex gap-4 items-start">
+                {i < 3 ? (
+                  <div class="flex-shrink-0 w-8 h-8 bg-brand-blue/10 rounded-full flex items-center justify-center">
+                    <span class="text-brand-blue font-bold text-sm">{i + 1}</span>
                   </div>
+                ) : (
+                  <div class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                    <i class="fas fa-check text-green-600 text-xs" />
+                  </div>
+                )}
+                <div>
+                  <p class="font-bold text-gray-800 text-sm">
+                    {step.title}
+                    {i === 3 && <span class="font-normal text-gray-500"> (optionnel)</span>}
+                  </p>
+                  {step.detail && <p class="text-gray-500 text-sm">{step.detail}</p>}
+                  {i === 1 && (
+                    <div class="mt-2 bg-gray-50 rounded-xl p-4 border border-gray-200">
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                        <div>
+                          <span class="text-gray-500 text-xs uppercase tracking-wide block mb-0.5">Banque</span>
+                          <span class="font-bold text-gray-800">{d.donPonctuel.bankName}</span>
+                        </div>
+                        <div>
+                          <span class="text-gray-500 text-xs uppercase tracking-wide block mb-0.5">N° de compte</span>
+                          <span class="font-mono font-bold text-brand-blue text-base">{d.donPonctuel.accountNumber}</span>
+                        </div>
+                        <div class="sm:col-span-2">
+                          <span class="text-gray-500 text-xs uppercase tracking-wide block mb-0.5">Titulaire</span>
+                          <span class="font-bold text-gray-800">{d.donPonctuel.accountHolder}</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {i === 2 && (
+                    <p class="mt-1 font-mono bg-brand-blue/5 text-brand-blue font-bold px-3 py-1.5 rounded-lg inline-block text-sm">{d.donPonctuel.referenceFormat}</p>
+                  )}
                 </div>
               </div>
-            </div>
-
-            <div class="flex gap-4 items-start">
-              <div class="flex-shrink-0 w-8 h-8 bg-brand-blue/10 rounded-full flex items-center justify-center">
-                <span class="text-brand-blue font-bold text-sm">3</span>
-              </div>
-              <div>
-                <p class="font-bold text-gray-800 text-sm">En référence, indiquez</p>
-                <p class="mt-1 font-mono bg-brand-blue/5 text-brand-blue font-bold px-3 py-1.5 rounded-lg inline-block text-sm">DON + votre nom</p>
-              </div>
-            </div>
-
-            <div class="flex gap-4 items-start">
-              <div class="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                <i class="fas fa-check text-green-600 text-xs"></i>
-              </div>
-              <div>
-                <p class="font-bold text-gray-800 text-sm">Prévenez-nous <span class="font-normal text-gray-500">(optionnel)</span></p>
-                <p class="text-gray-500 text-sm">Pour recevoir votre reçu fiscal NSIF</p>
-              </div>
-            </div>
+            ))}
           </div>
 
           <!-- Trust signal + receipt note -->
           <div class="border-t border-gray-100 pt-5 text-center space-y-2">
             <p class="text-xs text-gray-500 flex items-center justify-center gap-1.5">
               <i class="fas fa-shield-alt text-green-500"></i>
-              100% de votre don est dédié aux élèves
+              {d.donPonctuel.trustSignal}
             </p>
             <p class="text-xs text-gray-500">
-              Pour un reçu fiscal, contactez-nous au <a href="tel:+23026130032" class="text-brand-blue underline hover:text-brand-dark">261 30 32</a>
+              {d.donPonctuel.receiptNote} <a href={`tel:${footerData.phone1Link}`} class="text-brand-blue underline hover:text-brand-dark">{footerData.phone1.replace('(230) ', '')}</a>
             </p>
           </div>
         </div>
@@ -165,15 +147,15 @@ const tiers = tierEntries
         <!-- Header -->
         <div class="bg-gradient-to-r from-brand-pink to-brand-blue p-5 sm:p-6 text-center">
           <h3 class="font-heading font-bold text-white text-lg sm:text-xl">
-            Devenez Parrain
+            {d.parrainSection.heading}
           </h3>
-          <p class="text-white/80 text-sm mt-1">Un engagement mensuel qui change une vie</p>
+          <p class="text-white/80 text-sm mt-1">{d.parrainSection.subtitle}</p>
         </div>
 
         <div class="p-6 sm:p-8">
 
           <!-- Tier cards as clickable buttons -->
-          <p class="text-sm text-gray-500 mb-4">Choisissez votre formule de parrainage :</p>
+          <p class="text-sm text-gray-500 mb-4">{d.parrainSection.chooseLabel}</p>
           <div class="space-y-3 mb-8" id="tier-cards">
             {tiers.map((tier) => (
               <button
@@ -188,7 +170,7 @@ const tiers = tierEntries
                 data-label={`${tier.label}${tier.period} — ${tier.description}`}
               >
                 {tier.highlighted && (
-                  <span class="absolute -top-2.5 right-4 bg-brand-pink text-white text-xs font-bold px-3 py-0.5 rounded-full shadow-sm">Le plus choisi</span>
+                  <span class="absolute -top-2.5 right-4 bg-brand-pink text-white text-xs font-bold px-3 py-0.5 rounded-full shadow-sm">{d.parrainSection.highlightedBadge}</span>
                 )}
                 <div class:list={[
                   "flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center",
@@ -212,7 +194,7 @@ const tiers = tierEntries
           <div id="parrain-form-wrapper" class="border-t border-gray-100 pt-6">
             <h4 class="font-bold text-gray-800 text-sm mb-4 flex items-center">
               <i class="fas fa-paper-plane text-brand-pink mr-2"></i>
-              Vos coordonnées
+              {d.parrainSection.formHeading}
             </h4>
 
             <form id="parrainage-form" class="space-y-3">
@@ -224,7 +206,7 @@ const tiers = tierEntries
                     name="nom"
                     required
                     class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm"
-                    placeholder="Nom complet *"
+                    placeholder={d.parrainSection.namePlaceholder}
                   />
                 </div>
                 <div>
@@ -233,7 +215,7 @@ const tiers = tierEntries
                     id="telephone"
                     name="telephone"
                     class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm"
-                    placeholder="Téléphone"
+                    placeholder={d.parrainSection.phonePlaceholder}
                   />
                 </div>
               </div>
@@ -245,7 +227,7 @@ const tiers = tierEntries
                   name="email"
                   required
                   class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm"
-                  placeholder="Email *"
+                  placeholder={d.parrainSection.emailPlaceholder}
                 />
               </div>
 
@@ -258,7 +240,7 @@ const tiers = tierEntries
                   {tiers.map((tier) => (
                     <option value={tier.amount} selected={tier.highlighted}>{tier.label}{tier.period} — {tier.description}</option>
                   ))}
-                  <option value="libre">Montant libre</option>
+                  <option value="libre">{d.parrainSection.freeAmountOption}</option>
                 </select>
               </div>
 
@@ -268,7 +250,7 @@ const tiers = tierEntries
                   name="message"
                   rows="2"
                   class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm resize-none"
-                  placeholder="Message (optionnel)"
+                  placeholder={d.parrainSection.messagePlaceholder}
                 ></textarea>
               </div>
 
@@ -280,24 +262,24 @@ const tiers = tierEntries
                   class="w-full flex items-center justify-center gap-2 py-3.5 bg-[#25D366] text-white font-bold rounded-xl hover:bg-[#1fb855] transition shadow-md text-sm"
                 >
                   <i class="fab fa-whatsapp text-lg"></i>
-                  Envoyer via WhatsApp
+                  {d.parrainSection.whatsappButton}
                 </button>
                 <button
                   type="submit"
                   class="w-full flex items-center justify-center gap-2 py-3 bg-white text-gray-600 font-semibold rounded-xl border border-gray-200 hover:border-brand-pink hover:text-brand-pink transition text-sm"
                 >
                   <i class="fas fa-envelope"></i>
-                  Ou envoyer par email
+                  {d.parrainSection.emailButton}
                 </button>
               </div>
 
               <!-- Trust signals -->
               <div class="flex items-center justify-center gap-4 pt-2">
                 <span class="flex items-center text-[11px] text-gray-500">
-                  <i class="fas fa-clock mr-1"></i> Réponse sous 48h
+                  <i class="fas fa-clock mr-1"></i> {d.parrainSection.responseTime}
                 </span>
                 <span class="flex items-center text-[11px] text-gray-500">
-                  <i class="fas fa-receipt mr-1"></i> Reçu fiscal NSIF
+                  <i class="fas fa-receipt mr-1"></i> {d.parrainSection.receiptLabel}
                 </span>
               </div>
             </form>
@@ -310,72 +292,59 @@ const tiers = tierEntries
     <div class="mt-10 bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100">
       <h4 class="font-bold text-gray-800 mb-5 flex items-center justify-center">
         <i class="fas fa-chart-pie mr-2 text-brand-pink"></i>
-        Votre Don en Action
+        {d.donEnAction.heading}
       </h4>
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-        <div class="p-3">
-          <div class="w-12 h-12 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-2">
-            <i class="fas fa-utensils text-brand-blue"></i>
+        {d.donEnAction.items.map((item, i) => (
+          <div class="p-3">
+            <div class:list={["w-12 h-12 mx-auto rounded-full flex items-center justify-center mb-2", bgColors[i % 4]]}>
+              <i class:list={[item.icon, colors[i % 4]]} />
+            </div>
+            <span class="block text-xs font-bold text-gray-700">{item.title}</span>
+            <span class="block text-[11px] text-gray-500">{item.subtitle}</span>
           </div>
-          <span class="block text-xs font-bold text-gray-700">Repas</span>
-          <span class="block text-[11px] text-gray-500">Quotidien</span>
-        </div>
-        <div class="p-3">
-          <div class="w-12 h-12 mx-auto bg-pink-50 rounded-full flex items-center justify-center mb-2">
-            <i class="fas fa-book-open text-brand-pink"></i>
-          </div>
-          <span class="block text-xs font-bold text-gray-700">Fournitures</span>
-          <span class="block text-[11px] text-gray-500">Scolaires</span>
-        </div>
-        <div class="p-3">
-          <div class="w-12 h-12 mx-auto bg-blue-50 rounded-full flex items-center justify-center mb-2">
-            <i class="fas fa-chalkboard-teacher text-brand-blue"></i>
-          </div>
-          <span class="block text-xs font-bold text-gray-700">Enseignants</span>
-          <span class="block text-[11px] text-gray-500">Qualifiés</span>
-        </div>
-        <div class="p-3">
-          <div class="w-12 h-12 mx-auto bg-pink-50 rounded-full flex items-center justify-center mb-2">
-            <i class="fas fa-bus text-brand-pink"></i>
-          </div>
-          <span class="block text-xs font-bold text-gray-700">Sorties</span>
-          <span class="block text-[11px] text-gray-500">Éducatives</span>
-        </div>
+        ))}
       </div>
     </div>
 
     <!-- Contact quick links -->
     <div class="mt-6 grid grid-cols-2 gap-3 max-w-sm mx-auto">
       <a
-        href="tel:+23026130032"
+        href={`tel:${footerData.phone1Link}`}
         class="flex items-center justify-center gap-2 bg-white rounded-xl p-3 border border-gray-100 shadow-sm hover:border-brand-blue transition text-sm"
       >
         <i class="fas fa-phone text-brand-blue"></i>
-        <span class="text-gray-600">261 30 32</span>
+        <span class="text-gray-600">{footerData.phone1.replace('(230) ', '')}</span>
       </a>
       <a
-        href="tel:+23026167019"
+        href={`tel:${footerData.phone2Link}`}
         class="flex items-center justify-center gap-2 bg-white rounded-xl p-3 border border-gray-100 shadow-sm hover:border-brand-pink transition text-sm"
       >
         <i class="fas fa-phone text-brand-pink"></i>
-        <span class="text-gray-600">261 67 19</span>
+        <span class="text-gray-600">{footerData.phone2.replace('(230) ', '')}</span>
       </a>
     </div>
 
     <!-- Company CSR Info -->
     <div class="mt-12 text-center max-w-2xl mx-auto">
-      <h4 class="font-bold text-gray-600 mb-2">Pour les entreprises (CSR)</h4>
+      <h4 class="font-bold text-gray-600 mb-2">{d.csr.heading}</h4>
       <p class="text-sm text-gray-500">
-        Code CSR : <strong>NCSRF/2017/0278</strong>. Vous souhaitez financer un projet
-        spécifique (Salle informatique, Sorties éducatives) ?<br />
-        Contactez <strong>Pauline Martin</strong> (Présidente) au
-        <span class="text-brand-blue font-bold">(230) 261 30 32</span>.
+        Code CSR : <strong>{d.csr.csrCode}</strong>. {d.csr.text}<br />
+        Contactez <strong>{d.csr.contactName}</strong> ({d.csr.contactRole}) au
+        <span class="text-brand-blue font-bold">{footerData.phone1}</span>.
       </p>
     </div>
   </div>
 </section>
 
+<script define:vars={{ whatsappNumber: footerData.whatsappNumber, emailAddress: footerData.email }}>
+  // Make data available to client-side JS
+  window.__donateConfig = { whatsappNumber, emailAddress };
+</script>
+
 <script>
+  const config = (window as any).__donateConfig;
+
   // ===== Tab switching =====
   const tabs = document.querySelectorAll<HTMLButtonElement>('.donate-tab');
   const panels = document.querySelectorAll<HTMLElement>('.donate-panel');
@@ -384,7 +353,6 @@ const tiers = tierEntries
     tab.addEventListener('click', () => {
       const target = tab.dataset.tab;
 
-      // Update tab styles
       tabs.forEach(t => {
         if (t.dataset.tab === target) {
           t.classList.add('bg-brand-blue', 'text-white', 'shadow-sm');
@@ -399,7 +367,6 @@ const tiers = tierEntries
         }
       });
 
-      // Show/hide panels
       panels.forEach((panel, i) => {
         if ((target === 'don' && i === 0) || (target === 'parrain' && i === 1)) {
           panel.classList.remove('hidden');
@@ -410,24 +377,21 @@ const tiers = tierEntries
     });
   });
 
-  // ===== Tier card clicks → select formule + scroll to form =====
+  // ===== Tier card clicks =====
   document.querySelectorAll<HTMLButtonElement>('.tier-card').forEach(card => {
     card.addEventListener('click', () => {
       const amount = card.dataset.amount;
       const select = document.getElementById('formule') as HTMLSelectElement;
 
-      // Update select
       for (const opt of select.options) {
         if (opt.value === amount) { select.value = amount!; break; }
       }
 
-      // Highlight selected card
       document.querySelectorAll('.tier-card').forEach(c => {
         c.classList.remove('ring-2', 'ring-brand-pink', 'border-brand-pink');
       });
       card.classList.add('ring-2', 'ring-brand-pink', 'border-brand-pink');
 
-      // Scroll to form
       document.getElementById('parrain-form-wrapper')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
   });
@@ -445,7 +409,6 @@ const tiers = tierEntries
     const email = (document.getElementById('email') as HTMLInputElement).value;
 
     if (!nom || !email) {
-      // Trigger native validation
       form.reportValidity();
       return;
     }
@@ -464,13 +427,13 @@ const tiers = tierEntries
       const text = encodeURIComponent(
         `Bonjour,\n\nJe souhaite devenir parrain.\n\nNom : ${nom}\nEmail : ${email}\nTéléphone : ${tel}\nFormule : ${formule}\n\nMessage : ${msg}`
       );
-      window.open(`https://wa.me/23052611030?text=${text}`, '_blank');
+      window.open(`https://wa.me/${config.whatsappNumber}?text=${text}`, '_blank');
     } else {
       const subject = encodeURIComponent(`Demande de Parrainage — ${nom}`);
       const body = encodeURIComponent(
         `Bonjour,\n\nJe souhaite devenir parrain.\n\nNom : ${nom}\nEmail : ${email}\nTéléphone : ${tel}\nFormule : ${formule}\n\nMessage :\n${msg}\n\nCordialement`
       );
-      window.location.href = `mailto:direction@ecolefatima.com?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:${config.emailAddress}?subject=${subject}&body=${body}`;
     }
   }
 </script>

@@ -1,15 +1,18 @@
 ---
 import { getCollection } from 'astro:content';
+import statsSection from '../data/stats-section.json';
 
 const statsEntries = await getCollection('stats');
 const stats = statsEntries
   .sort((a, b) => a.data.order - b.data.order)
   .map(entry => ({ value: entry.data.value, label: entry.data.label }));
 
-const badges = [
-  { icon: "fas fa-check-circle text-green-500", label: "Membre ANFEN" },
-  { icon: "fas fa-certificate text-brand-blue", label: "NSIF: N/1123" },
-  { icon: "fas fa-hand-holding-heart text-brand-yellow", label: "CSR: NCSRF/2017/0278" },
+const badgeIcons = [
+  "fas fa-check-circle text-green-500",
+  "fas fa-certificate text-brand-blue",
+  "fas fa-hand-holding-heart text-brand-yellow",
+  "fas fa-shield-alt text-brand-pink",
+  "fas fa-award text-brand-blue",
 ];
 ---
 
@@ -35,9 +38,9 @@ const badges = [
     <!-- Accreditation Badges -->
     <div class="mt-8 md:mt-12 flex flex-wrap justify-center gap-3 md:gap-4 text-center">
       {
-        badges.map((badge) => (
+        statsSection.badges.map((badge, i) => (
           <span class="inline-flex items-center px-4 py-2 rounded-full border border-gray-300 bg-white text-sm font-medium text-gray-600 shadow-sm">
-            <i class={`${badge.icon} mr-2`} />
+            <i class={`${badgeIcons[i] || badgeIcons[0]} mr-2`} />
             {badge.label}
           </span>
         ))

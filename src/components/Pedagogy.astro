@@ -1,20 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-
-const features = [
-  {
-    title: "Approche Holistique",
-    description: "Développement intellectuel, émotionnel et social.",
-  },
-  {
-    title: "Activités Valorisantes",
-    description: "Natation, Football, Danse, Chant et Arts créatifs.",
-  },
-  {
-    title: "Compétences de Vie",
-    description: "Préparation au CPE (PSAC) ou à la vie professionnelle selon le profil.",
-  },
-];
+import pedagogyData from '../data/pedagogy.json';
 
 const newsEntries = await getCollection('news');
 const news = newsEntries
@@ -29,18 +15,15 @@ const news = newsEntries
       <!-- Pedagogy -->
       <div class="flex flex-col">
         <h2 class="font-heading text-2xl sm:text-3xl font-bold text-gray-800 mb-4 md:mb-6">
-          Une Pédagogie Différente
+          {pedagogyData.heading}
         </h2>
         <p class="text-gray-600 mb-8">
-          Notre école ne classe pas les élèves par âge, mais par
-          <strong>niveau de compétence</strong>. Répartis en 5 niveaux, chaque
-          enfant progresse à son propre rythme vers la maîtrise de la lecture, de
-          l'écriture et du calcul.
+          {pedagogyData.description}
         </p>
 
         <ul class="space-y-4">
           {
-            features.map((feature) => (
+            pedagogyData.features.map((feature) => (
               <li class="flex items-start">
                 <i class="fas fa-check-circle text-brand-pink mt-1 mr-3" />
                 <div>
@@ -52,26 +35,19 @@ const news = newsEntries
           }
         </ul>
 
-        <!-- Photo grid — grows to fill remaining height -->
+        <!-- Photo grid -->
         <div class="mt-8 grid grid-cols-2 gap-3 flex-1 min-h-32">
-          <img
-            src="/images/school-uodv2.webp"
-            alt="Bâtiment de l'école de Fatima"
-            class="rounded-lg object-cover w-full h-full"
-            loading="lazy"
-            decoding="async"
-            width="400"
-            height="128"
-          />
-          <img
-            src="/images/food-donation.webp"
-            alt="Distribution alimentaire à l'école"
-            class="rounded-lg object-cover w-full h-full"
-            loading="lazy"
-            decoding="async"
-            width="400"
-            height="128"
-          />
+          {pedagogyData.photos.map((photo) => (
+            <img
+              src={photo.src}
+              alt={photo.alt}
+              class="rounded-lg object-cover w-full h-full"
+              loading="lazy"
+              decoding="async"
+              width="400"
+              height="128"
+            />
+          ))}
         </div>
       </div>
 
@@ -80,7 +56,7 @@ const news = newsEntries
         <h3
           class="font-heading text-xl font-bold text-brand-pink mb-6 flex items-center"
         >
-          <i class="far fa-newspaper mr-2"></i> Actualités Récentes
+          <i class="far fa-newspaper mr-2"></i> {pedagogyData.newsHeading}
         </h3>
 
         <div class="space-y-6">

@@ -15,6 +15,245 @@ media_library:
   max_file_size: 2048000
 
 collections:
+  # ============================================================
+  # CONTENU DES SECTIONS (file-based — one file per section)
+  # ============================================================
+  - name: sections
+    label: "Contenu du Site"
+    description: "Modifiez tous les textes visibles sur le site"
+    files:
+      # ---------- SEO ----------
+      - name: site
+        label: "Référencement (SEO)"
+        file: "src/data/site.json"
+        fields:
+          - { name: title, label: "Titre du site", widget: string, hint: "Affiché dans l'onglet du navigateur et sur Google" }
+          - { name: description, label: "Description du site", widget: text, hint: "Texte affiché sous le titre sur Google (max ~160 caractères)" }
+          - { name: organizationName, label: "Nom de l'association", widget: string, hint: "Nom officiel affiché dans les résultats Google" }
+
+      # ---------- Navigation ----------
+      - name: navigation
+        label: "Menu de Navigation"
+        file: "src/data/navigation.json"
+        fields:
+          - name: links
+            label: "Liens du menu"
+            widget: list
+            max: 6
+            fields:
+              - { name: label, label: "Texte affiché", widget: string, hint: "Ex: Accueil, Notre Histoire, Galerie" }
+          - { name: ctaText, label: "Bouton principal (rose)", widget: string, hint: "Le bouton en haut à droite, ex: Devenir Parrain" }
+
+      # ---------- Bannière d'accueil ----------
+      - name: hero
+        label: "Bannière d'Accueil"
+        file: "src/data/hero.json"
+        fields:
+          - { name: tagline, label: "Slogan principal", widget: string, hint: "Le grand titre sur la bannière d'accueil" }
+          - { name: subtitle, label: "Sous-titre", widget: text, hint: "Le texte descriptif sous le slogan" }
+          - { name: primaryButton, label: "Bouton principal (blanc)", widget: string, hint: "Ex: Découvrir notre mission" }
+          - { name: secondaryButton, label: "Bouton secondaire (rose)", widget: string, hint: "Ex: Devenir Parrain" }
+
+      # ---------- Notre Histoire ----------
+      - name: about
+        label: "Notre Histoire"
+        file: "src/data/about.json"
+        fields:
+          - { name: heading, label: "Titre de la section", widget: string }
+          - { name: paragraph1, label: "Premier paragraphe", widget: text, hint: "L'histoire de la fondation en 1989" }
+          - { name: paragraph2, label: "Deuxième paragraphe", widget: text, hint: "La situation aujourd'hui (nombre d'élèves, enseignants, etc.)" }
+          - { name: paragraph3, label: "Troisième paragraphe", widget: text, hint: "L'objectif de l'association" }
+          - { name: quote, label: "Citation mise en avant", widget: text, hint: "La citation en rose à côté de la photo" }
+          - { name: mainImage, label: "Photo principale", widget: image, hint: "La grande photo à gauche de la section" }
+          - { name: mainImageAlt, label: "Description de la photo principale", widget: string, hint: "Texte pour les malvoyants, décrivez la photo" }
+          - name: photos
+            label: "Petites photos en bas"
+            widget: list
+            max: 3
+            fields:
+              - { name: src, label: "Image", widget: image }
+              - { name: alt, label: "Description de la photo", widget: string }
+
+      # ---------- Bannière d'impact ----------
+      - name: impact
+        label: "Bannière d'Impact"
+        file: "src/data/impact.json"
+        fields:
+          - { name: sinceLabel, label: "Petit texte du haut", widget: string, hint: "Ex: Depuis 1989" }
+          - { name: headline, label: "Titre principal", widget: string, hint: "Ex: Plus de 2 000 vies transformées" }
+          - { name: description, label: "Description", widget: text, hint: "Le texte sous le titre" }
+          - name: images
+            label: "Images de fond (3 photos)"
+            widget: list
+            max: 3
+            fields:
+              - { name: src, label: "Image", widget: image }
+              - { name: alt, label: "Description de la photo", widget: string }
+
+      # ---------- Section Parcours ----------
+      - name: programs-section
+        label: "Section Parcours (titre)"
+        file: "src/data/programs-section.json"
+        fields:
+          - { name: heading, label: "Titre de la section", widget: string, hint: "Ex: Le Parcours de Nos Élèves" }
+          - { name: description, label: "Description", widget: text, hint: "Le texte sous le titre" }
+          - { name: mobileIndicator, label: "Texte indicateur mobile", widget: string, hint: "Petit texte affiché sur téléphone, ex: Progression" }
+
+      # ---------- Pédagogie ----------
+      - name: pedagogy
+        label: "Pédagogie"
+        file: "src/data/pedagogy.json"
+        fields:
+          - { name: heading, label: "Titre de la section", widget: string }
+          - { name: description, label: "Description", widget: text, hint: "Explication de la pédagogie par niveau" }
+          - name: features
+            label: "Points forts"
+            widget: list
+            max: 5
+            fields:
+              - { name: title, label: "Titre", widget: string, hint: "Ex: Approche Holistique" }
+              - { name: description, label: "Description", widget: string, hint: "Ex: Développement intellectuel, émotionnel et social." }
+          - { name: newsHeading, label: "Titre de la section Actualités", widget: string, hint: "Ex: Actualités Récentes" }
+          - name: photos
+            label: "Photos de la section"
+            widget: list
+            max: 2
+            fields:
+              - { name: src, label: "Image", widget: image }
+              - { name: alt, label: "Description de la photo", widget: string }
+
+      # ---------- Section Galerie ----------
+      - name: gallery-section
+        label: "Section Galerie (titre)"
+        file: "src/data/gallery-section.json"
+        fields:
+          - { name: heading, label: "Titre de la section", widget: string, hint: "Première partie du titre, ex: Notre Association en" }
+          - { name: headingHighlight, label: "Mot mis en couleur", widget: string, hint: "Le mot en rose à la fin du titre, ex: Images" }
+          - { name: description, label: "Description", widget: text }
+
+      # ---------- Section Dons ----------
+      - name: donate
+        label: "Section Dons"
+        file: "src/data/donate.json"
+        fields:
+          - name: emotionalHeader
+            label: "En-tête de la section"
+            widget: object
+            fields:
+              - { name: badge, label: "Petit badge", widget: string, hint: "Ex: Votre impact" }
+              - { name: heading, label: "Titre principal", widget: string, hint: "Ex: Un geste simple, un avenir" }
+              - { name: headingHighlight, label: "Mot mis en couleur", widget: string, hint: "Le mot en jaune à la fin, ex: transformé" }
+              - { name: description, label: "Description", widget: text }
+          - name: socialProof
+            label: "Chiffres clés (barre du haut)"
+            widget: list
+            max: 4
+            fields:
+              - { name: value, label: "Valeur", widget: string, hint: "Ex: 2 000+, 37 ans, 160" }
+              - { name: label, label: "Description", widget: string, hint: "Ex: Élèves aidés, D'engagement" }
+          - name: tabs
+            label: "Onglets"
+            widget: object
+            fields:
+              - { name: donLabel, label: "Onglet Don", widget: string, hint: "Ex: Don Ponctuel" }
+              - { name: parrainLabel, label: "Onglet Parrainage", widget: string, hint: "Ex: Devenir Parrain" }
+          - name: donPonctuel
+            label: "Onglet Don Ponctuel"
+            widget: object
+            fields:
+              - { name: heading, label: "Titre", widget: string }
+              - { name: subtitle, label: "Sous-titre", widget: string }
+              - name: steps
+                label: "Étapes"
+                widget: list
+                max: 4
+                fields:
+                  - { name: title, label: "Titre de l'étape", widget: string }
+                  - { name: detail, label: "Détail", widget: string, required: false }
+              - { name: referenceFormat, label: "Format de référence bancaire", widget: string, hint: "Ex: DON + votre nom" }
+              - { name: bankName, label: "Nom de la banque", widget: string }
+              - { name: accountNumber, label: "Numéro de compte", widget: string }
+              - { name: accountHolder, label: "Titulaire du compte", widget: string }
+              - { name: trustSignal, label: "Message de confiance", widget: string, hint: "Ex: 100% de votre don est dédié aux élèves" }
+              - { name: receiptNote, label: "Note pour le reçu fiscal", widget: string }
+          - name: parrainSection
+            label: "Onglet Parrainage"
+            widget: object
+            fields:
+              - { name: heading, label: "Titre", widget: string }
+              - { name: subtitle, label: "Sous-titre", widget: string }
+              - { name: chooseLabel, label: "Texte au-dessus des formules", widget: string }
+              - { name: highlightedBadge, label: "Badge formule recommandée", widget: string, hint: "Ex: Le plus choisi" }
+              - { name: freeAmountOption, label: "Option montant libre", widget: string }
+              - { name: formHeading, label: "Titre du formulaire", widget: string }
+              - { name: namePlaceholder, label: "Placeholder nom", widget: string }
+              - { name: phonePlaceholder, label: "Placeholder téléphone", widget: string }
+              - { name: emailPlaceholder, label: "Placeholder email", widget: string }
+              - { name: messagePlaceholder, label: "Placeholder message", widget: string }
+              - { name: whatsappButton, label: "Texte bouton WhatsApp", widget: string }
+              - { name: emailButton, label: "Texte bouton email", widget: string }
+              - { name: responseTime, label: "Délai de réponse", widget: string, hint: "Ex: Réponse sous 48h" }
+              - { name: receiptLabel, label: "Label reçu fiscal", widget: string }
+          - name: donEnAction
+            label: "Votre Don en Action"
+            widget: object
+            fields:
+              - { name: heading, label: "Titre", widget: string }
+              - name: items
+                label: "Utilisations du don"
+                widget: list
+                max: 4
+                fields:
+                  - { name: icon, label: "Icône", widget: select, options: ["fas fa-utensils", "fas fa-book-open", "fas fa-chalkboard-teacher", "fas fa-bus", "fas fa-heart", "fas fa-home", "fas fa-graduation-cap", "fas fa-laptop", "fas fa-futbol", "fas fa-music"], hint: "Choisissez une icône" }
+                  - { name: title, label: "Titre", widget: string }
+                  - { name: subtitle, label: "Sous-titre", widget: string }
+          - name: csr
+            label: "Section Entreprises (CSR)"
+            widget: object
+            fields:
+              - { name: heading, label: "Titre", widget: string }
+              - { name: text, label: "Description", widget: text }
+              - { name: csrCode, label: "Code CSR", widget: string }
+              - { name: contactName, label: "Nom du contact", widget: string }
+              - { name: contactRole, label: "Rôle du contact", widget: string }
+
+      # ---------- Pied de Page ----------
+      - name: footer
+        label: "Pied de Page et Contact"
+        file: "src/data/footer.json"
+        fields:
+          - { name: orgDescription, label: "Description de l'association", widget: text, hint: "Court texte décrivant l'ONG dans le pied de page" }
+          - { name: president, label: "Nom de la présidente", widget: string }
+          - { name: director, label: "Nom de la directrice", widget: string }
+          - { name: contactHeading, label: "Titre section Contact", widget: string }
+          - { name: address, label: "Adresse", widget: text, hint: "Adresse complète de l'association" }
+          - { name: phone1, label: "Téléphone 1 (affiché)", widget: string, hint: "Ex: (230) 261 30 32" }
+          - { name: phone1Link, label: "Téléphone 1 (lien)", widget: string, hint: "Format international sans espaces, ex: +23026130032" }
+          - { name: phone2, label: "Téléphone 2 (affiché)", widget: string, hint: "Ex: (230) 261 67 19" }
+          - { name: phone2Link, label: "Téléphone 2 (lien)", widget: string, hint: "Format international sans espaces, ex: +23026167019" }
+          - { name: email, label: "Adresse email", widget: string }
+          - { name: whatsappNumber, label: "Numéro WhatsApp", widget: string, hint: "Sans +, sans espaces, ex: 23052611030" }
+          - { name: transparencyHeading, label: "Titre section Transparence", widget: string }
+          - { name: ngoRegistered, label: "ONG enregistrée", widget: string, hint: "Ex: Oui" }
+          - { name: nsifCode, label: "Code NSIF", widget: string }
+          - { name: csrCode, label: "Code CSR", widget: string }
+          - { name: copyright, label: "Texte copyright", widget: string, hint: "Le texte tout en bas du site" }
+
+      # ---------- Badges accréditations ----------
+      - name: stats-section
+        label: "Badges d'Accréditation"
+        file: "src/data/stats-section.json"
+        fields:
+          - name: badges
+            label: "Badges affichés sous les statistiques"
+            widget: list
+            max: 5
+            fields:
+              - { name: label, label: "Texte du badge", widget: string, hint: "Ex: Membre ANFEN, NSIF: N/1123" }
+
+  # ============================================================
+  # COLLECTIONS (folder-based — multiple entries)
+  # ============================================================
   - name: news
     label: "Actualités"
     folder: src/content/news

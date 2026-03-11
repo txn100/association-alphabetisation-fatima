@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import siteData from '../data/site.json';
+import footerData from '../data/footer.json';
 
 interface Props {
   title?: string;
@@ -7,8 +9,8 @@ interface Props {
 }
 
 const {
-  title = "Association d'Alphabétisation de Fatima — Trou-aux-Biches, Maurice",
-  description = "Depuis 37 ans, nous aidons des enfants défavorisés à sortir de l'échec scolaire. Plus de 2 000 élèves ont pu retrouver le chemin de la confiance, de l'estime de soi et de la réussite.",
+  title = siteData.title,
+  description = siteData.description,
 } = Astro.props;
 
 const ogImage = new URL("/images/school-uodv3.jpg", Astro.url).href;
@@ -75,8 +77,8 @@ const ogImage = new URL("/images/school-uodv3.jpg", Astro.url).href;
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "EducationalOrganization",
-      "name": "Association d'Alphabétisation de Fatima",
-      "alternateName": "Association d'Alphabétisation de Fatima",
+      "name": siteData.organizationName,
+      "alternateName": siteData.organizationName,
       "description": description,
       "foundingDate": "1989",
       "address": {
@@ -85,8 +87,8 @@ const ogImage = new URL("/images/school-uodv3.jpg", Astro.url).href;
         "addressLocality": "Triolet",
         "addressCountry": "MU"
       },
-      "telephone": "+230-261-30-32",
-      "email": "direction@ecolefatima.com"
+      "telephone": footerData.phone1Link,
+      "email": footerData.email
     })} />
   </head>
   <body class="font-sans text-gray-700 bg-gray-50 antialiased">

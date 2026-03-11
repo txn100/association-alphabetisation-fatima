@@ -1,11 +1,8 @@
 ---
-const links = [
-  { href: "#accueil", label: "Accueil" },
-  { href: "#apropos", label: "Notre Histoire" },
-  { href: "#parcours", label: "Le Parcours" },
-  { href: "#pedagogie", label: "Pédagogie" },
-  { href: "#galerie", label: "Galerie" },
-];
+import navData from '../data/navigation.json';
+
+const hrefs = ["#accueil", "#apropos", "#parcours", "#pedagogie", "#galerie"];
+const links = navData.links.map((link, i) => ({ href: hrefs[i] || "#", label: link.label }));
 ---
 
 <nav
@@ -45,7 +42,7 @@ const links = [
           href="#faire-un-don"
           class="bg-brand-pink hover:bg-pink-600 text-white px-5 py-2 rounded-full font-bold shadow-sm transition transform hover:scale-105"
         >
-          <i class="fas fa-heart mr-2"></i> Devenir Parrain
+          <i class="fas fa-heart mr-2"></i> {navData.ctaText}
         </a>
       </div>
 
@@ -82,7 +79,7 @@ const links = [
         href="#faire-un-don"
         class="block px-3 py-3 mt-4 text-center rounded-md text-base font-bold bg-brand-pink text-white"
       >
-        Devenir Parrain
+        {navData.ctaText}
       </a>
     </div>
   </div>
@@ -98,7 +95,6 @@ const links = [
     btn.setAttribute("aria-expanded", String(!isOpen));
   });
 
-  // Close mobile menu when clicking a link
   menu.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
       menu.classList.add("hidden");
@@ -106,7 +102,6 @@ const links = [
     });
   });
 
-  // Close mobile menu on scroll
   window.addEventListener(
     "scroll",
     () => {
@@ -118,7 +113,6 @@ const links = [
     { passive: true },
   );
 
-  // Smooth scroll for anchor links
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", (e) => {
       e.preventDefault();
@@ -129,7 +123,6 @@ const links = [
     });
   });
 
-  // Navbar scroll effect
   const navbar = document.getElementById("navbar")!;
   window.addEventListener(
     "scroll",

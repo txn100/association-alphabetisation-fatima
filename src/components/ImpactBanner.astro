@@ -1,17 +1,21 @@
+---
+import impactData from '../data/impact.json';
+---
+
 <section class="relative h-64 md:h-80 overflow-hidden">
   <div class="absolute inset-0 grid grid-cols-3">
-    <img src="/images/marine-program.webp" alt="Programme marin" class="w-full h-full object-cover" loading="lazy" decoding="async" />
-    <img src="/images/food-donation.webp" alt="Solidarité communautaire" class="w-full h-full object-cover" loading="lazy" decoding="async" />
-    <img src="/images/music-performance.webp" alt="Spectacle musical" class="w-full h-full object-cover" loading="lazy" decoding="async" />
+    {impactData.images.map((img) => (
+      <img src={img.src} alt={img.alt} class="w-full h-full object-cover" loading="lazy" decoding="async" />
+    ))}
   </div>
   <div class="absolute inset-0 bg-gradient-to-r from-brand-blue/85 via-brand-dark/70 to-brand-pink/85 flex items-center justify-center">
     <div class="text-center px-4">
-      <p class="text-white/80 text-sm uppercase tracking-widest font-bold mb-3">Depuis 1989</p>
+      <p class="text-white/80 text-sm uppercase tracking-widest font-bold mb-3">{impactData.sinceLabel}</p>
       <h3 class="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-4">
-        Plus de 2&nbsp;000 vies transformées
+        {impactData.headline}
       </h3>
       <p class="text-white/90 max-w-xl mx-auto text-sm md:text-base">
-        Chaque jour, 160 élèves trouvent ici un lieu d'apprentissage, de respect et d'espoir.
+        {impactData.description}
       </p>
     </div>
   </div>

@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import programsSection from '../data/programs-section.json';
 
 const programEntries = await getCollection('programs');
 const steps = programEntries
@@ -11,11 +12,10 @@ const steps = programEntries
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-10 md:mb-16">
       <h2 class="font-heading text-2xl sm:text-3xl font-bold text-gray-800 mb-4">
-        Le Parcours de Nos Élèves
+        {programsSection.heading}
       </h2>
       <p class="text-gray-600 max-w-2xl mx-auto">
-        Un chemin progressif adapté au rythme de chaque enfant, de
-        l'alphabétisation à l'insertion professionnelle.
+        {programsSection.description}
       </p>
     </div>
 
@@ -31,12 +31,10 @@ const steps = programEntries
         {
           steps.map((step, i) => (
             <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300 group relative">
-              {/* Step number badge */}
               <div class="absolute top-4 right-4 w-8 h-8 bg-white/80 backdrop-blur rounded-full flex items-center justify-center text-sm font-bold text-gray-500 group-hover:bg-brand-blue group-hover:text-white transition z-20">
                 {i + 1}
               </div>
 
-              {/* Image */}
               <div class="h-40 overflow-hidden">
                 <img
                   src={step.image}
@@ -90,7 +88,7 @@ const steps = programEntries
     <!-- Arrow indicators (mobile) -->
     <div class="flex justify-center mt-8 md:hidden">
       <span class="text-gray-500 text-sm font-semibold">
-        <i class="fas fa-arrow-down mr-1"></i> Progression
+        <i class="fas fa-arrow-down mr-1"></i> {programsSection.mobileIndicator}
       </span>
     </div>
   </div>

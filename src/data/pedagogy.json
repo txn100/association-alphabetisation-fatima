@@ -1,0 +1,14 @@
+{
+  "heading": "Une Pédagogie Différente",
+  "description": "Notre école ne classe pas les élèves par âge, mais par niveau de compétence. Répartis en 5 niveaux, chaque enfant progresse à son propre rythme vers la maîtrise de la lecture, de l'écriture et du calcul.",
+  "features": [
+    { "title": "Approche Holistique", "description": "Développement intellectuel, émotionnel et social." },
+    { "title": "Activités Valorisantes", "description": "Natation, Football, Danse, Chant et Arts créatifs." },
+    { "title": "Compétences de Vie", "description": "Préparation au CPE (PSAC) ou à la vie professionnelle selon le profil." }
+  ],
+  "newsHeading": "Actualités Récentes",
+  "photos": [
+    { "src": "/images/school-uodv2.webp", "alt": "Bâtiment de l'école de Fatima" },
+    { "src": "/images/food-donation.webp", "alt": "Distribution alimentaire à l'école" }
+  ]
+}

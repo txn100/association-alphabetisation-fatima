@@ -1,5 +1,8 @@
 ---
+import footerData from '../data/footer.json';
+
 const year = new Date().getFullYear();
+const addressLines = footerData.address.split('\n');
 ---
 
 <footer id="contact" class="bg-brand-dark text-gray-300 pt-10 md:pt-16 pb-8">
@@ -20,44 +23,43 @@ const year = new Date().getFullYear();
           <h3 class="text-white font-bold text-lg">Association d'Alphabétisation de Fatima</h3>
         </div>
         <p class="text-sm leading-relaxed mb-6 opacity-80">
-          Une ONG dédiée à l'éducation et à l'intégration sociale des enfants
-          vulnérables du nord de l'île Maurice.
+          {footerData.orgDescription}
         </p>
         <div class="space-y-2">
           <p class="text-sm font-semibold text-brand-pink">
-            Présidente : Pauline Martin
+            Présidente : {footerData.president}
           </p>
           <p class="text-sm font-semibold text-brand-light-blue">
-            Directrice : Maryline Lamy
+            Directrice : {footerData.director}
           </p>
         </div>
       </div>
 
       <!-- Contact -->
       <div>
-        <h4 class="text-white font-bold text-lg mb-6">Nous Contacter</h4>
+        <h4 class="text-white font-bold text-lg mb-6">{footerData.contactHeading}</h4>
         <ul class="space-y-4 text-sm">
           <li class="flex items-start">
             <i class="fas fa-map-marker-alt mt-1 mr-3 text-brand-blue"></i>
-            <span>Trou aux Biches Road,<br />Triolet (Paroisse de Fatima)</span>
+            <span>{addressLines.map((line, i) => <>{i > 0 && <br />}{line}</>)}</span>
           </li>
           <li class="flex items-center">
             <i class="fas fa-phone mr-3 text-brand-blue"></i>
-            <a href="tel:+23026130032" class="hover:text-white transition"
-              >(230) 261 30 32</a
+            <a href={`tel:${footerData.phone1Link}`} class="hover:text-white transition"
+              >{footerData.phone1}</a
             >
           </li>
           <li class="flex items-center">
             <i class="fas fa-phone mr-3 text-brand-blue"></i>
-            <a href="tel:+23026167019" class="hover:text-white transition"
-              >(230) 261 67 19</a
+            <a href={`tel:${footerData.phone2Link}`} class="hover:text-white transition"
+              >{footerData.phone2}</a
             >
           </li>
           <li class="flex items-center">
             <i class="fas fa-envelope mr-3 text-brand-blue"></i>
             <a
-              href="mailto:direction@ecolefatima.com"
-              class="hover:text-white transition">direction@ecolefatima.com</a
+              href={`mailto:${footerData.email}`}
+              class="hover:text-white transition">{footerData.email}</a
             >
           </li>
         </ul>
@@ -65,7 +67,7 @@ const year = new Date().getFullYear();
 
       <!-- Accreditation -->
       <div>
-        <h4 class="text-white font-bold text-lg mb-6">Transparence</h4>
+        <h4 class="text-white font-bold text-lg mb-6">{footerData.transparencyHeading}</h4>
         <div class="bg-gray-800 p-4 rounded-lg border border-gray-700">
           <p class="text-xs text-gray-400 mb-2 uppercase tracking-wide">
             Accréditations Officielles
@@ -73,15 +75,15 @@ const year = new Date().getFullYear();
           <ul class="space-y-2 text-sm">
             <li class="flex justify-between">
               <span>Reg. ONG:</span>
-              <span class="text-white font-mono">Oui</span>
+              <span class="text-white font-mono">{footerData.ngoRegistered}</span>
             </li>
             <li class="flex justify-between">
               <span>NSIF Code:</span>
-              <span class="text-white font-mono">N/1123</span>
+              <span class="text-white font-mono">{footerData.nsifCode}</span>
             </li>
             <li class="flex justify-between">
               <span>CSR Code:</span>
-              <span class="text-white font-mono">NCSRF/2017/0278</span>
+              <span class="text-white font-mono">{footerData.csrCode}</span>
             </li>
           </ul>
         </div>
@@ -90,7 +92,7 @@ const year = new Date().getFullYear();
 
     <div class="border-t border-gray-700 pt-8 text-center text-sm text-gray-500">
       <p>
-        &copy; {year} Association d'Alphabétisation de Fatima. Tous droits réservés.
+        &copy; {year} {footerData.copyright}
       </p>
     </div>
   </div>
