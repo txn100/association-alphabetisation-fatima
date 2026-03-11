@@ -4,6 +4,8 @@ backend:
   branch: main
   base_url: https://sveltia-cms-auth.sacha-749.workers.dev
 
+publish_mode: editorial_workflow
+
 locale: fr
 
 media_folder: public/images
