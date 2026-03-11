@@ -2,7 +2,8 @@
 import { defineConfig } from "tinacms";
 var branch = process.env.GITHUB_BRANCH || process.env.CF_PAGES_BRANCH || process.env.HEAD || "tina";
 var singletonUI = {
-  allowedActions: { create: false, delete: false }
+  allowedActions: { create: false, delete: false },
+  router: () => "/"
 };
 var config_default = defineConfig({
   branch,
@@ -26,6 +27,7 @@ var config_default = defineConfig({
         label: "Actualit\xE9s",
         path: "src/content/news",
         format: "json",
+        ui: { router: () => "/" },
         fields: [
           { type: "string", name: "title", label: "Titre", isTitle: true, required: true },
           { type: "string", name: "date", label: "Date de publication", description: "Format: YYYY-MM-DD (ex: 2026-03-01)", required: true },
@@ -43,6 +45,7 @@ var config_default = defineConfig({
         label: "Galerie Photos",
         path: "src/content/gallery",
         format: "json",
+        ui: { router: () => "/" },
         fields: [
           { type: "image", name: "src", label: "Image", required: true },
           { type: "string", name: "alt", label: "Description de la photo", isTitle: true, required: true },
@@ -66,6 +69,7 @@ var config_default = defineConfig({
         label: "Statistiques",
         path: "src/content/stats",
         format: "json",
+        ui: { router: () => "/" },
         fields: [
           { type: "string", name: "value", label: "Valeur", isTitle: true, required: true, description: "Ex: 2 000+, 160+, 15" },
           { type: "string", name: "label", label: "Description", required: true },
@@ -77,6 +81,7 @@ var config_default = defineConfig({
         label: "Parcours Scolaire",
         path: "src/content/programs",
         format: "json",
+        ui: { router: () => "/" },
         fields: [
           { type: "string", name: "title", label: "Titre du programme", isTitle: true, required: true },
           { type: "string", name: "level", label: "Niveau", description: "Ex: Niveaux 1\u20132, Fili\xE8re Vocational", required: true },
@@ -94,6 +99,7 @@ var config_default = defineConfig({
         label: "Formules de Parrainage",
         path: "src/content/tiers",
         format: "json",
+        ui: { router: () => "/" },
         fields: [
           { type: "number", name: "amount", label: "Montant (Rs)", required: true },
           { type: "string", name: "label", label: "Label", isTitle: true, required: true, description: "Ex: Rs 800" },
