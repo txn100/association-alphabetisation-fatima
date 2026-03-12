@@ -47,26 +47,52 @@ a, button, input, select, textarea {
   }
 }
 
-/* Wave divider */
-.wave-bottom {
+/* Ocean wave divider — Mauritius-inspired layered waves */
+.ocean-waves {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
+  height: 120px;
   overflow: hidden;
-  line-height: 0;
-  transform: rotate(180deg);
+  z-index: 5;
 }
 
-.wave-bottom svg {
-  position: relative;
+@media (min-width: 640px) {
+  .ocean-waves {
+    height: 150px;
+  }
+}
+
+.ocean-waves svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: calc(100% + 2px);
   display: block;
-  width: calc(100% + 1.3px);
-  height: 70px;
 }
 
-.wave-bottom .shape-fill {
-  fill: var(--color-brand-light);
+/* Back wave — deep ocean */
+.ocean-waves .wave-deep {
+  height: 120px;
+  opacity: 0.5;
+}
+
+/* Middle wave — turquoise lagoon */
+.ocean-waves .wave-mid {
+  height: 100px;
+  opacity: 0.6;
+}
+
+/* Front wave — foam/shore blending into content */
+.ocean-waves .wave-shore {
+  height: 80px;
+}
+
+@media (min-width: 640px) {
+  .ocean-waves .wave-deep { height: 150px; }
+  .ocean-waves .wave-mid { height: 125px; }
+  .ocean-waves .wave-shore { height: 100px; }
 }
 
 /* Navbar title: show on all screens, but adjust for very small phones */
