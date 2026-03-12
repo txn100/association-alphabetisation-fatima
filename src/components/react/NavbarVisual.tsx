@@ -79,6 +79,7 @@ export default function NavbarVisual(props: any) {
 
           {/* Mobile Menu Button */}
           <button
+            id="mobile-menu-btn"
             className="md:hidden text-gray-600 hover:text-brand-blue focus:outline-none p-2 -mr-2"
             aria-expanded={menuOpen}
             aria-label="Ouvrir le menu"
@@ -89,32 +90,33 @@ export default function NavbarVisual(props: any) {
         </div>
       </div>
 
-      {/* Mobile Menu Panel */}
-      {menuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {links.map((link: any, i: number) => (
-              <a
-                key={i}
-                href={sectionAnchors[i] || "#"}
-                onClick={smoothScroll(sectionAnchors[i] || "#")}
-                className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-gray-50"
-                data-tina-field={tinaField(link, "label")}
-              >
-                {link.label}
-              </a>
-            ))}
+      {/* Mobile Menu Panel — always in DOM, toggled via CSS + JS */}
+      <div
+        id="mobile-menu-panel"
+        className={`md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg ${menuOpen ? "" : "hidden"}`}
+      >
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          {links.map((link: any, i: number) => (
             <a
-              href="#faire-un-don"
-              onClick={smoothScroll("#faire-un-don")}
-              className="block px-3 py-3 mt-4 text-center rounded-md text-base font-bold bg-brand-pink text-white"
-              data-tina-field={nav ? tinaField(nav, "ctaText") : undefined}
+              key={i}
+              href={sectionAnchors[i] || "#"}
+              onClick={smoothScroll(sectionAnchors[i] || "#")}
+              className="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-gray-50"
+              data-tina-field={tinaField(link, "label")}
             >
-              {ctaText}
+              {link.label}
             </a>
-          </div>
+          ))}
+          <a
+            href="#faire-un-don"
+            onClick={smoothScroll("#faire-un-don")}
+            className="mobile-nav-link block px-3 py-3 mt-4 text-center rounded-md text-base font-bold bg-brand-pink text-white"
+            data-tina-field={nav ? tinaField(nav, "ctaText") : undefined}
+          >
+            {ctaText}
+          </a>
         </div>
-      )}
+      </div>
     </nav>
   );
 }

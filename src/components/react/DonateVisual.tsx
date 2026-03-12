@@ -132,6 +132,7 @@ export default function DonateVisual(props: any) {
           <div className="flex rounded-xl bg-white shadow-md p-1.5 mb-8 border border-gray-100 max-w-md mx-auto">
             <button
               type="button"
+              data-tab-btn="don"
               className={`flex-1 py-3 px-4 rounded-lg font-bold text-sm transition-all duration-200 ${
                 activeTab === "don" ? "bg-brand-blue text-white shadow-sm" : "text-gray-500 hover:text-gray-700"
               }`}
@@ -142,6 +143,7 @@ export default function DonateVisual(props: any) {
             </button>
             <button
               type="button"
+              data-tab-btn="parrain"
               className={`flex-1 py-3 px-4 rounded-lg font-bold text-sm transition-all duration-200 ${
                 activeTab === "parrain" ? "bg-brand-pink text-white shadow-sm" : "text-gray-500 hover:text-gray-700"
               }`}
@@ -152,8 +154,8 @@ export default function DonateVisual(props: any) {
             </button>
           </div>
 
-          {/* DON PONCTUEL TAB */}
-          {activeTab === "don" && (
+          {/* DON PONCTUEL TAB — always in DOM, toggled via CSS */}
+          <div data-tab-content="don" className={activeTab !== "don" ? "hidden" : ""}>
             <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
               <div className="bg-gradient-to-r from-brand-blue to-brand-light-blue p-5 sm:p-6 text-center">
                 <h3
@@ -256,10 +258,10 @@ export default function DonateVisual(props: any) {
                 </div>
               </div>
             </div>
-          )}
+          </div>
 
-          {/* DEVENIR PARRAIN TAB */}
-          {activeTab === "parrain" && (
+          {/* DEVENIR PARRAIN TAB — always in DOM, toggled via CSS */}
+          <div data-tab-content="parrain" className={activeTab !== "parrain" ? "hidden" : ""}>
             <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
               <div className="bg-gradient-to-r from-brand-pink to-brand-blue p-5 sm:p-6 text-center">
                 <h3
@@ -336,7 +338,7 @@ export default function DonateVisual(props: any) {
                     {parrain?.formHeading || "Vos coordonnées"}
                   </h4>
 
-                  <form ref={formRef} className="space-y-3" onSubmit={(e) => { e.preventDefault(); sendVia("email"); }}>
+                  <form ref={formRef} id="parrain-form" className="space-y-3" onSubmit={(e) => { e.preventDefault(); sendVia("email"); }}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <input
                         type="text"
@@ -385,6 +387,7 @@ export default function DonateVisual(props: any) {
                     <div className="space-y-2 pt-1">
                       <button
                         type="button"
+                        data-send="whatsapp"
                         onClick={() => sendVia("whatsapp")}
                         className="w-full flex items-center justify-center gap-2 py-3.5 bg-[#25D366] text-white font-bold rounded-xl hover:bg-[#1fb855] transition shadow-md text-sm"
                         data-tina-field={parrain ? tinaField(parrain, "whatsappButton") : undefined}
@@ -394,6 +397,7 @@ export default function DonateVisual(props: any) {
                       </button>
                       <button
                         type="submit"
+                        data-send="email"
                         className="w-full flex items-center justify-center gap-2 py-3 bg-white text-gray-600 font-semibold rounded-xl border border-gray-200 hover:border-brand-pink hover:text-brand-pink transition text-sm"
                         data-tina-field={parrain ? tinaField(parrain, "emailButton") : undefined}
                       >
@@ -420,7 +424,7 @@ export default function DonateVisual(props: any) {
                 </div>
               </div>
             </div>
-          )}
+          </div>
 
           {/* Votre Don en Action */}
           {donAction && (

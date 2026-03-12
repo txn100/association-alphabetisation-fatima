@@ -80,3 +80,118 @@ const [
   </main>
   <FooterVisual {...footerData} client:tina />
 </Layout>
+
+<!-- Vanilla JS for interactive elements (client:tina doesn't hydrate on production) -->
+<script>
+  // Skip if inside TinaCMS admin iframe (React handles everything there)
+  if (window.self === window.top) {
+    // === MOBILE MENU TOGGLE ===
+    const menuBtn = document.getElementById("mobile-menu-btn");
+    const menuPanel = document.getElementById("mobile-menu-panel");
+    if (menuBtn && menuPanel) {
+      menuBtn.addEventListener("click", () => {
+        const isOpen = !menuPanel.classList.contains("hidden");
+        menuPanel.classList.toggle("hidden", isOpen);
+        menuBtn.setAttribute("aria-expanded", String(!isOpen));
+      });
+      // Close menu when a nav link is clicked
+      menuPanel.querySelectorAll(".mobile-nav-link").forEach((link) => {
+        link.addEventListener("click", () => {
+          menuPanel.classList.add("hidden");
+          menuBtn.setAttribute("aria-expanded", "false");
+        });
+      });
+      // Close menu on scroll
+      window.addEventListener("scroll", () => {
+        if (!menuPanel.classList.contains("hidden")) {
+          menuPanel.classList.add("hidden");
+          menuBtn.setAttribute("aria-expanded", "false");
+        }
+      }, { passive: true });
+    }
+
+    // === SMOOTH SCROLL for anchor links ===
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const href = (link as HTMLAnchorElement).getAttribute("href");
+        if (!href || href === "#") return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+
+    // === DONATE TAB SWITCHING ===
+    const tabBtns = document.querySelectorAll("[data-tab-btn]");
+    const tabContents = document.querySelectorAll("[data-tab-content]");
+    tabBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const tab = (btn as HTMLElement).dataset.tabBtn;
+        // Update button styles
+        tabBtns.forEach((b) => {
+          const bTab = (b as HTMLElement).dataset.tabBtn;
+          if (bTab === tab) {
+            b.className = b.className
+              .replace("text-gray-500 hover:text-gray-700", "")
+              .replace("bg-brand-blue text-white shadow-sm", "")
+              .replace("bg-brand-pink text-white shadow-sm", "")
+              + (bTab === "don" ? " bg-brand-blue text-white shadow-sm" : " bg-brand-pink text-white shadow-sm");
+          } else {
+            b.className = b.className
+              .replace("bg-brand-blue text-white shadow-sm", "")
+              .replace("bg-brand-pink text-white shadow-sm", "")
+              + " text-gray-500 hover:text-gray-700";
+          }
+        });
+        // Show/hide tab content
+        tabContents.forEach((content) => {
+          const cTab = (content as HTMLElement).dataset.tabContent;
+          content.classList.toggle("hidden", cTab !== tab);
+        });
+      });
+    });
+
+    // === PARRAIN FORM: WhatsApp & Email send ===
+    const parrainForm = document.getElementById("parrain-form") as HTMLFormElement | null;
+    if (parrainForm) {
+      const getFormData = () => {
+        const fd = new FormData(parrainForm);
+        const nom = fd.get("nom") as string;
+        const email = fd.get("email") as string;
+        const tel = fd.get("telephone") || "Non renseigné";
+        const selectEl = parrainForm.querySelector("select") as HTMLSelectElement;
+        const formule = selectEl?.selectedOptions[0]?.text || "";
+        const msg = fd.get("message") || "(aucun)";
+        return { nom, email, tel, formule, msg };
+      };
+
+      // WhatsApp button
+      const waBtn = parrainForm.querySelector('[data-send="whatsapp"]');
+      if (waBtn) {
+        waBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const { nom, email, tel, formule, msg } = getFormData();
+          if (!nom || !email) { parrainForm.reportValidity(); return; }
+          const text = encodeURIComponent(
+            `Bonjour,\n\nJe souhaite devenir parrain.\n\nNom : ${nom}\nEmail : ${email}\nTéléphone : ${tel}\nFormule : ${formule}\n\nMessage : ${msg}`
+          );
+          window.open(`https://wa.me/23052611030?text=${text}`, "_blank");
+        });
+      }
+
+      // Email button (form submit)
+      parrainForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const { nom, email, tel, formule, msg } = getFormData();
+        if (!nom || !email) { parrainForm.reportValidity(); return; }
+        const subject = encodeURIComponent(`Demande de Parrainage — ${nom}`);
+        const body = encodeURIComponent(
+          `Bonjour,\n\nJe souhaite devenir parrain.\n\nNom : ${nom}\nEmail : ${email}\nTéléphone : ${tel}\nFormule : ${formule}\n\nMessage :\n${msg}\n\nCordialement`
+        );
+        window.location.href = `mailto:direction@ecolefatima.com?subject=${subject}&body=${body}`;
+      });
+    }
+  }
+</script>
