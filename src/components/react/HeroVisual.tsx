@@ -12,32 +12,32 @@ export default function HeroVisual(props: any) {
   return (
     <section
       id="accueil"
-      className="relative hero-bg h-screen min-h-[500px] flex items-center justify-center pt-20 md:pt-24"
+      className="relative hero-bg h-screen min-h-[500px] flex items-start sm:items-center justify-center pt-16 sm:pt-20 md:pt-24"
     >
-      <div className="relative z-10 text-center px-4 sm:px-5 max-w-4xl mx-auto">
+      <div className="relative z-10 text-center px-4 sm:px-5 max-w-4xl mx-auto mt-4 sm:mt-0">
         <img
           src="/images/logo-fatima-2019.png"
           alt="Logo Association d'Alphabétisation de Fatima"
-          className="h-14 sm:h-20 md:h-24 w-auto mx-auto mb-2 sm:mb-3 md:mb-4 drop-shadow-lg"
+          className="h-16 sm:h-20 md:h-24 w-auto mx-auto mb-1.5 sm:mb-3 md:mb-4 drop-shadow-lg"
           width={96}
           height={96}
         />
-        <p className="text-[0.65rem] sm:text-sm md:text-lg tracking-[0.15em] sm:tracking-[0.2em] uppercase text-white/90 font-semibold mb-2 sm:mb-3 md:mb-4 drop-shadow">
+        <p className="text-[0.65rem] sm:text-sm md:text-lg tracking-[0.15em] sm:tracking-[0.2em] uppercase text-white/90 font-semibold mb-1.5 sm:mb-3 md:mb-4 drop-shadow">
           Association d'Alphabétisation de Fatima
         </p>
         <h1
-          className="font-heading text-[1.7rem] sm:text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4 md:mb-6 drop-shadow-md"
+          className="font-heading text-[1.7rem] sm:text-4xl md:text-5xl font-extrabold text-white leading-tight mb-2 sm:mb-4 md:mb-6 drop-shadow-md"
           data-tina-field={hero ? tinaField(hero, "tagline") : undefined}
         >
           {hero?.tagline || "Ensemble, donnons à ces enfants une chance de réussir !"}
         </h1>
         <p
-          className="text-base sm:text-lg md:text-xl text-gray-100 mb-6 md:mb-8 max-w-2xl mx-auto font-light leading-relaxed"
+          className="text-sm sm:text-lg md:text-xl text-gray-100 mb-3 sm:mb-6 md:mb-8 max-w-2xl mx-auto font-light leading-relaxed"
           data-tina-field={hero ? tinaField(hero, "subtitle") : undefined}
         >
           {hero?.subtitle || ""}
         </p>
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center">
           <a
             href="#apropos"
             className="px-8 py-3.5 sm:py-3 bg-white text-brand-blue font-bold rounded-lg shadow-lg hover:bg-gray-100 transition duration-300 text-sm sm:text-base"
