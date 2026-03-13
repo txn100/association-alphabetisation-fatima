@@ -214,7 +214,7 @@ export default defineConfig({
             type: "object", name: "links", label: "Liens de navigation", list: true,
             fields: [
               { type: "string", name: "label", label: "Texte du lien", required: true },
-              { type: "string", name: "href", label: "Ancre de section", description: "Ex: #accueil, #apropos, #projets", required: true },
+              { type: "string", name: "href", label: "Ancre de section", description: "Ex: #accueil, #apropos, #projets" },
             ],
           },
           { type: "string", name: "navbarTitle", label: "Titre à côté du logo", required: true },

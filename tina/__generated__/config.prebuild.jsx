@@ -213,7 +213,7 @@ var config_default = defineConfig({
             list: true,
             fields: [
               { type: "string", name: "label", label: "Texte du lien", required: true },
-              { type: "string", name: "href", label: "Ancre de section", description: "Ex: #accueil, #apropos, #projets", required: true }
+              { type: "string", name: "href", label: "Ancre de section", description: "Ex: #accueil, #apropos, #projets" }
             ]
           },
           { type: "string", name: "navbarTitle", label: "Titre \xE0 c\xF4t\xE9 du logo", required: true },

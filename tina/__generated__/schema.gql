@@ -501,7 +501,7 @@ type FooterConnection implements Connection {
 
 type NavigationLinks {
   label: String!
-  href: String!
+  href: String
 }
 
 type Navigation implements Node & Document {
