@@ -46,7 +46,7 @@ export default function NavbarVisual(props: any) {
             <img
               src="/images/logo-fatima-hq.webp"
               alt="Logo Association d'Alphabétisation de Fatima"
-              className="h-10 sm:h-12 md:h-16 w-auto flex-shrink-0"
+              className="h-9 sm:h-11 md:h-14 w-auto flex-shrink-0"
               width={64}
               height={64}
             />
@@ -59,7 +59,7 @@ export default function NavbarVisual(props: any) {
           </a>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8 items-center">
+          <div className="hidden md:flex space-x-4 lg:space-x-6 xl:space-x-8 items-center">
             {links.map((link: any, i: number) => (
               <a
                 key={i}
