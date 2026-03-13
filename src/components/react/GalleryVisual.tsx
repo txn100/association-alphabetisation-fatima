@@ -13,10 +13,14 @@ export default function GalleryVisual(props: any) {
   });
 
   const edges = data.galleryConnection?.edges || [];
-  const photos = edges
+  const allPhotos = edges
     .filter((e: any) => e?.node)
     .map((e: any) => e.node)
     .sort((a: any, b: any) => a.order - b.order);
+
+  // In TinaCMS admin (iframe), show placeholders; on production, hide them
+  const isAdmin = typeof window !== "undefined" && window.self !== window.top;
+  const photos = isAdmin ? allPhotos : allPhotos.filter((p: any) => p.src);
 
   const section = sectionData?.gallerySection;
 
@@ -51,13 +55,22 @@ export default function GalleryVisual(props: any) {
               className={`overflow-hidden rounded-xl group ${photo.span || ""}`}
               data-tina-field={tinaField(photo, "src")}
             >
-              <img
-                src={photo.src}
-                alt={photo.alt}
-                className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                loading="lazy"
-                decoding="async"
-              />
+              {photo.src ? (
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <div className="w-full h-full border-2 border-dashed border-gray-300 bg-gray-100 flex flex-col items-center justify-center text-gray-400 rounded-xl">
+                  <svg className="w-8 h-8 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4v16m8-8H4" />
+                  </svg>
+                  <span className="text-xs">Ajouter une photo</span>
+                </div>
+              )}
             </div>
           ))}
         </div>

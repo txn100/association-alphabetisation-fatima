@@ -13,6 +13,7 @@ export default function NavbarVisual(props: any) {
   const nav = data?.navigation;
   const links = nav?.links || [];
   const ctaText = nav?.ctaText || "Devenir Parrain";
+  const navbarTitle = nav?.navbarTitle || "Association d'Alphabétisation de Fatima";
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -49,8 +50,11 @@ export default function NavbarVisual(props: any) {
               width={64}
               height={64}
             />
-            <span className="navbar-title font-heading font-bold text-brand-blue leading-tight text-xs sm:text-sm md:text-base">
-              Association d'Alphabétisation<br className="hidden lg:block" /> de Fatima
+            <span
+              className="navbar-title font-heading font-bold text-brand-blue leading-tight text-xs sm:text-sm md:text-base"
+              data-tina-field={nav ? tinaField(nav, "navbarTitle") : undefined}
+            >
+              {navbarTitle}
             </span>
           </a>
 

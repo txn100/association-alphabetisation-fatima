@@ -196,6 +196,7 @@ export default defineConfig({
               { type: "string", name: "label", label: "Texte du lien", required: true },
             ],
           },
+          { type: "string", name: "navbarTitle", label: "Titre à côté du logo", required: true },
           { type: "string", name: "ctaText", label: "Texte du bouton CTA", isTitle: true, required: true },
         ],
       },

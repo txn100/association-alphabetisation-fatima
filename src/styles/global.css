@@ -56,6 +56,7 @@ a, button, input, select, textarea {
   height: 120px;
   overflow: hidden;
   z-index: 5;
+  pointer-events: none;
 }
 
 @media (min-width: 640px) {
