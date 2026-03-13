@@ -44,7 +44,7 @@ a, button, input, select, textarea {
 @media (max-width: 768px) {
   .hero-bg {
     background-attachment: scroll;
-    background-position: center 65%;
+    background-position: center 75%;
   }
 }
 
