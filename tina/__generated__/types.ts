@@ -863,6 +863,7 @@ export type FooterConnection = Connection & {
 export type NavigationLinks = {
   __typename?: 'NavigationLinks';
   label: Scalars['String']['output'];
+  href: Scalars['String']['output'];
 };
 
 export type Navigation = Node & Document & {
@@ -877,6 +878,7 @@ export type Navigation = Node & Document & {
 
 export type NavigationLinksFilter = {
   label?: InputMaybe<StringFilter>;
+  href?: InputMaybe<StringFilter>;
 };
 
 export type NavigationFilter = {
@@ -1773,6 +1775,7 @@ export type FooterMutation = {
 
 export type NavigationLinksMutation = {
   label?: InputMaybe<Scalars['String']['input']>;
+  href?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NavigationMutation = {
@@ -1941,7 +1944,7 @@ export type AboutPartsFragment = { __typename: 'About', heading: string, paragra
 
 export type FooterPartsFragment = { __typename: 'Footer', orgDescription: string, president?: string | null, director?: string | null, contactHeading?: string | null, address?: string | null, phone1?: string | null, phone1Link?: string | null, phone2?: string | null, phone2Link?: string | null, email?: string | null, whatsappNumber?: string | null, transparencyHeading?: string | null, ngoRegistered?: string | null, nsifCode?: string | null, csrCode?: string | null, copyright?: string | null };
 
-export type NavigationPartsFragment = { __typename: 'Navigation', navbarTitle: string, ctaText: string, links?: Array<{ __typename: 'NavigationLinks', label: string } | null> | null };
+export type NavigationPartsFragment = { __typename: 'Navigation', navbarTitle: string, ctaText: string, links?: Array<{ __typename: 'NavigationLinks', label: string, href: string } | null> | null };
 
 export type ImpactPartsFragment = { __typename: 'Impact', sinceLabel: string, headline?: string | null, description?: string | null, images?: Array<{ __typename: 'ImpactImages', src: string, alt: string } | null> | null };
 
@@ -2135,7 +2138,7 @@ export type NavigationQueryVariables = Exact<{
 }>;
 
 
-export type NavigationQuery = { __typename?: 'Query', navigation: { __typename: 'Navigation', id: string, navbarTitle: string, ctaText: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'NavigationLinks', label: string } | null> | null } };
+export type NavigationQuery = { __typename?: 'Query', navigation: { __typename: 'Navigation', id: string, navbarTitle: string, ctaText: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'NavigationLinks', label: string, href: string } | null> | null } };
 
 export type NavigationConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -2147,7 +2150,7 @@ export type NavigationConnectionQueryVariables = Exact<{
 }>;
 
 
-export type NavigationConnectionQuery = { __typename?: 'Query', navigationConnection: { __typename?: 'NavigationConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavigationConnectionEdges', cursor: string, node?: { __typename: 'Navigation', id: string, navbarTitle: string, ctaText: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'NavigationLinks', label: string } | null> | null } | null } | null> | null } };
+export type NavigationConnectionQuery = { __typename?: 'Query', navigationConnection: { __typename?: 'NavigationConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavigationConnectionEdges', cursor: string, node?: { __typename: 'Navigation', id: string, navbarTitle: string, ctaText: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'NavigationLinks', label: string, href: string } | null> | null } | null } | null> | null } };
 
 export type ImpactQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2427,6 +2430,7 @@ export const NavigationPartsFragmentDoc = gql`
   links {
     __typename
     label
+    href
   }
   navbarTitle
   ctaText
@@ -3761,7 +3765,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "http://localhost:9000/graphql",
+        url: "http://localhost:4001/graphql",
         queries,
       })
     )

@@ -12,6 +12,11 @@ export default function DonateVisual(props: any) {
     variables: props.tiersVariables || {},
     data: props.tiersData || {},
   });
+  const { data: footerData } = useTina({
+    query: props.footerQuery || "",
+    variables: props.footerVariables || {},
+    data: props.footerData || {},
+  });
 
   const donate = data?.donate;
   const header = donate?.emotionalHeader;
@@ -21,6 +26,13 @@ export default function DonateVisual(props: any) {
   const parrain = donate?.parrainSection;
   const donAction = donate?.donEnAction;
   const csr = donate?.csr;
+
+  // Contact info from footer (centralized source of truth)
+  const footer = footerData?.footer;
+  const whatsappNumber = footer?.whatsappNumber || "23052611030";
+  const contactEmail = footer?.email || "direction@ecolefatima.com";
+  const phone1 = footer?.phone1 || "261 30 32";
+  const phone1Link = footer?.phone1Link || "+23026130032";
 
   const tiersEdges = tiersData?.tiersConnection?.edges || [];
   const tiers = tiersEdges
@@ -56,13 +68,13 @@ export default function DonateVisual(props: any) {
       const text = encodeURIComponent(
         `Bonjour,\n\nJe souhaite devenir parrain.\n\nNom : ${nom}\nEmail : ${email}\nTéléphone : ${tel}\nFormule : ${formule}\n\nMessage : ${msg}`
       );
-      window.open(`https://wa.me/23052611030?text=${text}`, "_blank");
+      window.open(`https://wa.me/${whatsappNumber}?text=${text}`, "_blank");
     } else {
       const subject = encodeURIComponent(`Demande de Parrainage — ${nom}`);
       const body = encodeURIComponent(
         `Bonjour,\n\nJe souhaite devenir parrain.\n\nNom : ${nom}\nEmail : ${email}\nTéléphone : ${tel}\nFormule : ${formule}\n\nMessage :\n${msg}\n\nCordialement`
       );
-      window.location.href = `mailto:direction@ecolefatima.com?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
     }
   };
 
@@ -129,9 +141,13 @@ export default function DonateVisual(props: any) {
           </div>
 
           {/* Tab Toggle */}
-          <div className="flex rounded-xl bg-white shadow-md p-1.5 mb-8 border border-gray-100 max-w-md mx-auto">
+          <div className="flex rounded-xl bg-white shadow-md p-1.5 mb-8 border border-gray-100 max-w-md mx-auto" role="tablist" aria-label="Type de contribution">
             <button
               type="button"
+              role="tab"
+              id="tab-don"
+              aria-selected={activeTab === "don"}
+              aria-controls="tabpanel-don"
               data-tab-btn="don"
               className={`flex-1 py-3 px-4 rounded-lg font-bold text-sm transition-all duration-200 ${
                 activeTab === "don" ? "bg-brand-blue text-white shadow-sm" : "text-gray-500 hover:text-gray-700"
@@ -143,6 +159,10 @@ export default function DonateVisual(props: any) {
             </button>
             <button
               type="button"
+              role="tab"
+              id="tab-parrain"
+              aria-selected={activeTab === "parrain"}
+              aria-controls="tabpanel-parrain"
               data-tab-btn="parrain"
               className={`flex-1 py-3 px-4 rounded-lg font-bold text-sm transition-all duration-200 ${
                 activeTab === "parrain" ? "bg-brand-pink text-white shadow-sm" : "text-gray-500 hover:text-gray-700"
@@ -155,7 +175,7 @@ export default function DonateVisual(props: any) {
           </div>
 
           {/* DON PONCTUEL TAB — always in DOM, toggled via CSS */}
-          <div data-tab-content="don" className={activeTab !== "don" ? "hidden" : ""}>
+          <div data-tab-content="don" role="tabpanel" id="tabpanel-don" aria-labelledby="tab-don" className={activeTab !== "don" ? "hidden" : ""}>
             <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
               <div className="bg-gradient-to-r from-brand-blue to-brand-light-blue p-5 sm:p-6 text-center">
                 <h3
@@ -253,7 +273,7 @@ export default function DonateVisual(props: any) {
                     data-tina-field={don ? tinaField(don, "receiptNote") : undefined}
                   >
                     {don?.receiptNote || "Pour un reçu fiscal, contactez-nous au"}{" "}
-                    <a href="tel:+23026130032" className="text-brand-blue underline hover:text-brand-dark">261 30 32</a>
+                    <a href={`tel:${phone1Link}`} className="text-brand-blue underline hover:text-brand-dark">{phone1}</a>
                   </p>
                 </div>
               </div>
@@ -261,7 +281,7 @@ export default function DonateVisual(props: any) {
           </div>
 
           {/* DEVENIR PARRAIN TAB — always in DOM, toggled via CSS */}
-          <div data-tab-content="parrain" className={activeTab !== "parrain" ? "hidden" : ""}>
+          <div data-tab-content="parrain" role="tabpanel" id="tabpanel-parrain" aria-labelledby="tab-parrain" className={activeTab !== "parrain" ? "hidden" : ""}>
             <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
               <div className="bg-gradient-to-r from-brand-pink to-brand-blue p-5 sm:p-6 text-center">
                 <h3
@@ -340,49 +360,69 @@ export default function DonateVisual(props: any) {
 
                   <form ref={formRef} id="parrain-form" className="space-y-3" onSubmit={(e) => { e.preventDefault(); sendVia("email"); }}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label htmlFor="parrain-nom" className="sr-only">Nom complet</label>
+                        <input
+                          id="parrain-nom"
+                          type="text"
+                          name="nom"
+                          required
+                          className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm"
+                          placeholder={parrain?.namePlaceholder || "Nom complet *"}
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="parrain-tel" className="sr-only">Téléphone</label>
+                        <input
+                          id="parrain-tel"
+                          type="tel"
+                          name="telephone"
+                          className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm"
+                          placeholder={parrain?.phonePlaceholder || "Téléphone"}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="parrain-email" className="sr-only">Email</label>
                       <input
-                        type="text"
-                        name="nom"
+                        id="parrain-email"
+                        type="email"
+                        name="email"
                         required
                         className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm"
-                        placeholder={parrain?.namePlaceholder || "Nom complet *"}
-                      />
-                      <input
-                        type="tel"
-                        name="telephone"
-                        className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm"
-                        placeholder={parrain?.phonePlaceholder || "Téléphone"}
+                        placeholder={parrain?.emailPlaceholder || "Email *"}
                       />
                     </div>
 
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm"
-                      placeholder={parrain?.emailPlaceholder || "Email *"}
-                    />
+                    <div>
+                      <label htmlFor="parrain-formule" className="sr-only">Formule de parrainage</label>
+                      <select
+                        id="parrain-formule"
+                        name="formule"
+                        className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm bg-white"
+                        value={selectedTier ?? tiers.find((t: any) => t.highlighted)?.amount ?? ""}
+                        onChange={(e) => setSelectedTier(Number(e.target.value) || null)}
+                      >
+                        {tiers.map((tier: any) => (
+                          <option key={tier._sys?.filename} value={tier.amount}>
+                            {tier.label}{tier.period} — {tier.description}
+                          </option>
+                        ))}
+                        <option value="libre">{parrain?.freeAmountOption || "Montant libre"}</option>
+                      </select>
+                    </div>
 
-                    <select
-                      name="formule"
-                      className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm bg-white"
-                      value={selectedTier ?? tiers.find((t: any) => t.highlighted)?.amount ?? ""}
-                      onChange={(e) => setSelectedTier(Number(e.target.value) || null)}
-                    >
-                      {tiers.map((tier: any) => (
-                        <option key={tier._sys?.filename} value={tier.amount}>
-                          {tier.label}{tier.period} — {tier.description}
-                        </option>
-                      ))}
-                      <option value="libre">{parrain?.freeAmountOption || "Montant libre"}</option>
-                    </select>
-
-                    <textarea
-                      name="message"
-                      rows={2}
-                      className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm resize-none"
-                      placeholder={parrain?.messagePlaceholder || "Message (optionnel)"}
-                    />
+                    <div>
+                      <label htmlFor="parrain-message" className="sr-only">Message</label>
+                      <textarea
+                        id="parrain-message"
+                        name="message"
+                        rows={2}
+                        className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm resize-none"
+                        placeholder={parrain?.messagePlaceholder || "Message (optionnel)"}
+                      />
+                    </div>
 
                     <div className="space-y-2 pt-1">
                       <button

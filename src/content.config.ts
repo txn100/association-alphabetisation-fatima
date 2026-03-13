@@ -8,7 +8,7 @@ const news = defineCollection({
     month: z.string(),
     day: z.string(),
     year: z.string(),
-    category: z.string(),
+    category: z.enum(["Formation", "Culture", "Vie Scolaire", "Environnement"]),
     title: z.string(),
     description: z.string().optional().default(''),
     image: z.string().optional().default(''),
@@ -21,7 +21,7 @@ const gallery = defineCollection({
   schema: z.object({
     src: z.string(),
     alt: z.string(),
-    span: z.string(),
+    span: z.enum(["", "col-span-2", "row-span-2", "col-span-2 row-span-2"]).default(""),
     order: z.number(),
   }),
 });
@@ -43,7 +43,7 @@ const programs = defineCollection({
     icon: z.string(),
     ages: z.string().optional(),
     description: z.string(),
-    color: z.string(),
+    color: z.enum(["blue", "pink"]),
     image: z.string(),
     imageAlt: z.string(),
     order: z.number(),
@@ -54,8 +54,8 @@ const projects = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/projects' }),
   schema: z.object({
     title: z.string(),
-    category: z.string(),
-    status: z.string(),
+    category: z.enum(["Éco-responsable", "Infrastructure", "Communautaire"]),
+    status: z.enum(["completed", "in-progress", "planned"]),
     description: z.string(),
     image: z.string(),
     imageAlt: z.string(),

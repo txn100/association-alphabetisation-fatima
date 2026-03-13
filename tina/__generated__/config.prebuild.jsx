@@ -7,8 +7,8 @@ var singletonUI = {
 };
 var config_default = defineConfig({
   branch,
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "9bff4b70-8364-4205-b688-7c79939891bf",
-  token: process.env.TINA_TOKEN || "df0d4de26bb81e822baf560320e818282cff16e9",
+  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "",
+  token: process.env.TINA_TOKEN || "",
   build: {
     outputFolder: "admin",
     publicFolder: "public"
@@ -212,7 +212,8 @@ var config_default = defineConfig({
             label: "Liens de navigation",
             list: true,
             fields: [
-              { type: "string", name: "label", label: "Texte du lien", required: true }
+              { type: "string", name: "label", label: "Texte du lien", required: true },
+              { type: "string", name: "href", label: "Ancre de section", description: "Ex: #accueil, #apropos, #projets", required: true }
             ]
           },
           { type: "string", name: "navbarTitle", label: "Titre \xE0 c\xF4t\xE9 du logo", required: true },

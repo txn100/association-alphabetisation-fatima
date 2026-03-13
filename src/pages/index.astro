@@ -86,10 +86,20 @@ const [
       tiersData={tiersData.data}
       tiersQuery={tiersData.query}
       tiersVariables={tiersData.variables}
+      footerData={footerData.data}
+      footerQuery={footerData.query}
+      footerVariables={footerData.variables}
       client:tina
     />
   </main>
   <FooterVisual {...footerData} client:tina />
+  <!-- Hidden element to pass contact data to vanilla JS (avoids hardcoding) -->
+  <div id="contact-meta" hidden
+    data-whatsapp={footerData.data.footer.whatsappNumber}
+    data-email={footerData.data.footer.email}
+    data-phone1={footerData.data.footer.phone1}
+    data-phone1-link={footerData.data.footer.phone1Link}
+  ></div>
 </Layout>
 
 <!-- Vanilla JS for interactive elements (client:tina doesn't hydrate on production) -->
@@ -140,9 +150,10 @@ const [
     tabBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
         const tab = (btn as HTMLElement).dataset.tabBtn;
-        // Update button styles
+        // Update button styles + ARIA
         tabBtns.forEach((b) => {
           const bTab = (b as HTMLElement).dataset.tabBtn;
+          b.setAttribute("aria-selected", String(bTab === tab));
           if (bTab === tab) {
             b.className = b.className
               .replace("text-gray-500 hover:text-gray-700", "")
@@ -167,6 +178,11 @@ const [
     // === PARRAIN FORM: WhatsApp & Email send ===
     const parrainForm = document.getElementById("parrain-form") as HTMLFormElement | null;
     if (parrainForm) {
+      // Read contact info from data attributes (set by SSR from footer.json)
+      const contactMeta = document.getElementById("contact-meta");
+      const waNumber = contactMeta?.dataset.whatsapp || "23052611030";
+      const contactEmail = contactMeta?.dataset.email || "direction@ecolefatima.com";
+
       const getFormData = () => {
         const fd = new FormData(parrainForm);
         const nom = fd.get("nom") as string;
@@ -188,7 +204,7 @@ const [
           const text = encodeURIComponent(
             `Bonjour,\n\nJe souhaite devenir parrain.\n\nNom : ${nom}\nEmail : ${email}\nTéléphone : ${tel}\nFormule : ${formule}\n\nMessage : ${msg}`
           );
-          window.open(`https://wa.me/23052611030?text=${text}`, "_blank");
+          window.open(`https://wa.me/${waNumber}?text=${text}`, "_blank");
         });
       }
 
@@ -201,7 +217,7 @@ const [
         const body = encodeURIComponent(
           `Bonjour,\n\nJe souhaite devenir parrain.\n\nNom : ${nom}\nEmail : ${email}\nTéléphone : ${tel}\nFormule : ${formule}\n\nMessage :\n${msg}\n\nCordialement`
         );
-        window.location.href = `mailto:direction@ecolefatima.com?subject=${subject}&body=${body}`;
+        window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
       });
     }
   }

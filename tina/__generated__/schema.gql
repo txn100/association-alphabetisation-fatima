@@ -501,6 +501,7 @@ type FooterConnection implements Connection {
 
 type NavigationLinks {
   label: String!
+  href: String!
 }
 
 type Navigation implements Node & Document {
@@ -514,6 +515,7 @@ type Navigation implements Node & Document {
 
 input NavigationLinksFilter {
   label: StringFilter
+  href: StringFilter
 }
 
 input NavigationFilter {
@@ -1121,6 +1123,7 @@ input FooterMutation {
 
 input NavigationLinksMutation {
   label: String
+  href: String
 }
 
 input NavigationMutation {

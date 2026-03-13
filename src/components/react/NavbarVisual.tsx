@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { tinaField, useTina } from "tinacms/dist/react";
 
-const sectionAnchors = ["#accueil", "#apropos", "#parcours", "#projets", "#pedagogie", "#galerie"];
-
 export default function NavbarVisual(props: any) {
   const { data } = useTina({
     query: props.query,
@@ -63,12 +61,12 @@ export default function NavbarVisual(props: any) {
             {links.map((link: any, i: number) => (
               <a
                 key={i}
-                href={sectionAnchors[i] || "#"}
-                onClick={smoothScroll(sectionAnchors[i] || "#")}
+                href={link.href || "#"}
+                onClick={smoothScroll(link.href || "#")}
                 className="text-gray-600 hover:text-brand-blue font-semibold transition"
                 data-tina-field={tinaField(link, "label")}
               >
-                {sectionAnchors[i] === "#projets" && (
+                {link.href === "#projets" && (
                   <i className="fas fa-seedling text-emerald-500 mr-1 text-xs" />
                 )}
                 {link.label}
@@ -87,8 +85,9 @@ export default function NavbarVisual(props: any) {
           {/* Mobile Menu Button */}
           <button
             id="mobile-menu-btn"
-            className="md:hidden text-gray-600 hover:text-brand-blue focus:outline-none p-2 -mr-2"
+            className="md:hidden text-gray-600 hover:text-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 rounded p-2 -mr-2 outline-none"
             aria-expanded={menuOpen}
+            aria-controls="mobile-menu-panel"
             aria-label="Ouvrir le menu"
             onClick={() => setMenuOpen(!menuOpen)}
           >
@@ -106,12 +105,12 @@ export default function NavbarVisual(props: any) {
           {links.map((link: any, i: number) => (
             <a
               key={i}
-              href={sectionAnchors[i] || "#"}
-              onClick={smoothScroll(sectionAnchors[i] || "#")}
+              href={link.href || "#"}
+              onClick={smoothScroll(link.href || "#")}
               className="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-gray-50"
               data-tina-field={tinaField(link, "label")}
             >
-              {sectionAnchors[i] === "#projets" && (
+              {link.href === "#projets" && (
                 <i className="fas fa-seedling text-emerald-500 mr-1.5" />
               )}
               {link.label}

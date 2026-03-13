@@ -114,6 +114,7 @@ fragment NavigationParts on Navigation {
   links {
     __typename
     label
+    href
   }
   navbarTitle
   ctaText

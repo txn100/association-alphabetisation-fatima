@@ -1,14 +1,18 @@
 ---
 import "../styles/global.css";
 
+// Read site settings from site.json (editable via TinaCMS)
+const siteModule = await import("../data/site.json");
+const site = siteModule.default || siteModule;
+
 interface Props {
   title?: string;
   description?: string;
 }
 
 const {
-  title = "Association d'Alphabétisation de Fatima — Trou-aux-Biches, Maurice",
-  description = "Depuis 37 ans, nous aidons des enfants défavorisés à sortir de l'échec scolaire. Plus de 2 000 élèves ont pu retrouver le chemin de la confiance, de l'estime de soi et de la réussite.",
+  title = site.title || "Association d'Alphabétisation de Fatima — Trou-aux-Biches, Maurice",
+  description = site.description || "Depuis 37 ans, nous aidons des enfants défavorisés à sortir de l'échec scolaire. Plus de 2 000 élèves ont pu retrouver le chemin de la confiance, de l'estime de soi et de la réussite.",
 } = Astro.props;
 
 const ogImage = new URL("/images/school-uodv3.jpg", Astro.url).href;
@@ -44,7 +48,7 @@ const ogImage = new URL("/images/school-uodv3.jpg", Astro.url).href;
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
 
     <!-- Preload LCP hero background -->
-    <link rel="preload" as="image" type="image/webp" href="/images/fatima-fb-cover.webp" fetchpriority="high" />
+    <link rel="preload" as="image" type="image/webp" href="/images/fatima-hero-assembly.webp" fetchpriority="high" />
 
     <!-- Google Fonts (non-render-blocking) -->
     <link
