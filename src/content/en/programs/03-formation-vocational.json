@@ -1,0 +1,11 @@
+{
+  "title": "Pre-Vocational Training",
+  "level": "Vocational Track",
+  "icon": "fas fa-tools",
+  "ages": "15 – 18 years",
+  "description": "Since 2000, a hands-on program for teenagers offering activities such as massage, hairdressing, beauty, cooking, IT, woodwork, flower arranging and more.\nThe goal: employability and independence.",
+  "color": "pink",
+  "image": "/images/nail-workshop.webp",
+  "imageAlt": "Nail art workshop — vocational training",
+  "order": 3
+}

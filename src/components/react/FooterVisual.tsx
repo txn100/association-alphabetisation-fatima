@@ -1,4 +1,5 @@
 import { tinaField, useTina } from "tinacms/dist/react";
+import type { UIStrings } from "../../lib/i18n";
 
 export default function FooterVisual(props: any) {
   const { data } = useTina({
@@ -7,6 +8,7 @@ export default function FooterVisual(props: any) {
     data: props.data,
   });
 
+  const ui: UIStrings | undefined = props.ui;
   const footer = data?.footer;
   const year = new Date().getFullYear();
 
@@ -41,13 +43,13 @@ export default function FooterVisual(props: any) {
                 className="text-sm font-semibold text-brand-pink"
                 data-tina-field={footer ? tinaField(footer, "president") : undefined}
               >
-                Présidente : {footer?.president || ""}
+                {ui?.presidentLabel || "Présidente"} : {footer?.president || ""}
               </p>
               <p
                 className="text-sm font-semibold text-brand-light-blue"
                 data-tina-field={footer ? tinaField(footer, "director") : undefined}
               >
-                Directrice : {footer?.director || ""}
+                {ui?.directorLabel || "Directrice"} : {footer?.director || ""}
               </p>
             </div>
           </div>
@@ -113,7 +115,7 @@ export default function FooterVisual(props: any) {
             </h4>
             <div className="bg-gray-800 p-4 rounded-lg border border-gray-700">
               <p className="text-xs text-gray-400 mb-2 uppercase tracking-wide">
-                Accréditations Officielles
+                {ui?.accreditationsLabel || "Accréditations Officielles"}
               </p>
               <ul className="space-y-2 text-sm">
                 <li className="flex justify-between">

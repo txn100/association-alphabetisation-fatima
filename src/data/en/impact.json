@@ -1,0 +1,10 @@
+{
+  "sinceLabel": "Since 1989",
+  "headline": "More than 2,000 lives transformed",
+  "description": "Every day, 130 students find here a place of learning, respect and hope.",
+  "images": [
+    { "src": "/images/marine-program.webp", "alt": "Marine program" },
+    { "src": "/images/food-donation.webp", "alt": "Community solidarity" },
+    { "src": "/images/music-performance.webp", "alt": "Music performance" }
+  ]
+}

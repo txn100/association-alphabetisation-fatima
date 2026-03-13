@@ -1,20 +1,20 @@
 ---
 /**
- * French homepage (/).
- * Thin wrapper that loads FR content and delegates to the shared HomePage renderer.
+ * English homepage (/en/).
+ * Thin wrapper that loads EN content and delegates to the shared HomePage renderer.
  */
-import HomePage from "../components/HomePage.astro";
-import { uiStrings } from "../lib/i18n";
-import type { Locale } from "../lib/i18n";
+import HomePage from "../../components/HomePage.astro";
+import { uiStrings } from "../../lib/i18n";
+import type { Locale } from "../../lib/i18n";
 import {
   getStatsData, getProgramsData, getNewsData, getGalleryData, getTiersData,
   getHeroData, getAboutData, getFooterData, getNavigationData,
   getImpactData, getPedagogyData, getDonateData, getSiteData,
   getStatsSectionData, getProgramsSectionData, getGallerySectionData,
   getProjectsData, getProjectsSectionData,
-} from "../lib/content";
+} from "../../lib/content";
 
-const lang: Locale = "fr";
+const lang: Locale = "en";
 const ui = uiStrings[lang];
 
 const [

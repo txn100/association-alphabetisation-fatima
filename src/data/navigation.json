@@ -1,22 +1,28 @@
 {
   "links": [
     {
-      "label": "Accueil"
+      "label": "Accueil",
+      "href": "#accueil"
     },
     {
-      "label": "Notre Histoire"
+      "label": "Notre Histoire",
+      "href": "#apropos"
     },
     {
-      "label": "Le Parcours"
+      "label": "Le Parcours",
+      "href": "#parcours"
     },
     {
-      "label": "Projets"
+      "label": "Projets",
+      "href": "#projets"
     },
     {
-      "label": "Pédagogie"
+      "label": "Pédagogie",
+      "href": "#pedagogie"
     },
     {
-      "label": "Galerie"
+      "label": "Galerie",
+      "href": "#galerie"
     }
   ],
   "navbarTitle": "ASSOCIATION D'ALPHABETISATION DE FATIMA",

@@ -1,15 +1,24 @@
 import { tinaField, useTina } from "tinacms/dist/react";
+import type { UIStrings } from "../../lib/i18n";
 
-const statusConfig: Record<string, { label: string; bg: string; text: string }> = {
-  completed: { label: "Terminé", bg: "bg-emerald-100", text: "text-emerald-700" },
-  "in-progress": { label: "En cours", bg: "bg-amber-100", text: "text-amber-700" },
-  planned: { label: "Planifié", bg: "bg-blue-100", text: "text-blue-700" },
+const statusStyles: Record<string, { bg: string; text: string }> = {
+  completed: { bg: "bg-emerald-100", text: "text-emerald-700" },
+  "in-progress": { bg: "bg-amber-100", text: "text-amber-700" },
+  planned: { bg: "bg-blue-100", text: "text-blue-700" },
+};
+
+const statusLabels: Record<string, { fr: string; en: string }> = {
+  completed: { fr: "Terminé", en: "Completed" },
+  "in-progress": { fr: "En cours", en: "In Progress" },
+  planned: { fr: "Planifié", en: "Planned" },
 };
 
 const categoryIcons: Record<string, string> = {
   "Éco-responsable": "fas fa-seedling",
+  "Eco-friendly": "fas fa-seedling",
   Infrastructure: "fas fa-tools",
   Communautaire: "fas fa-hands-helping",
+  Community: "fas fa-hands-helping",
 };
 
 export default function ProjectsVisual(props: any) {
@@ -64,7 +73,12 @@ export default function ProjectsVisual(props: any) {
         {/* Projects Grid — 2 columns on desktop, 1 on mobile */}
         <div className="grid md:grid-cols-2 gap-6 md:gap-8">
           {projects.map((project: any) => {
-            const status = statusConfig[project.status] || statusConfig.completed;
+            const ui: UIStrings | undefined = props.ui;
+            const lang = props.lang || "fr";
+            const style = statusStyles[project.status] || statusStyles.completed;
+            const statusLabel = ui
+              ? (project.status === "completed" ? ui.statusCompleted : project.status === "in-progress" ? ui.statusInProgress : ui.statusPlanned)
+              : (statusLabels[project.status]?.[lang as "fr" | "en"] || statusLabels.completed[lang as "fr" | "en"]);
             const catIcon = categoryIcons[project.category] || "fas fa-project-diagram";
 
             return (
@@ -85,10 +99,10 @@ export default function ProjectsVisual(props: any) {
                   />
                   {/* Status Badge */}
                   <span
-                    className={`absolute top-3 right-3 ${status.bg} ${status.text} text-xs font-bold px-3 py-1 rounded-full shadow-sm`}
+                    className={`absolute top-3 right-3 ${style.bg} ${style.text} text-xs font-bold px-3 py-1 rounded-full shadow-sm`}
                     data-tina-field={tinaField(project, "status")}
                   >
-                    {status.label}
+                    {statusLabel}
                   </span>
                 </div>
 

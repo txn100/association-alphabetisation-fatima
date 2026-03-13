@@ -1,0 +1,9 @@
+{
+  "amount": 800,
+  "label": "Rs 800",
+  "period": "/month",
+  "description": "1 meal per day for a student",
+  "icon": "fas fa-utensils",
+  "highlighted": false,
+  "order": 1
+}

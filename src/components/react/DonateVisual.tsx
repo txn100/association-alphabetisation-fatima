@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { tinaField, useTina } from "tinacms/dist/react";
+import type { UIStrings } from "../../lib/i18n";
 
 export default function DonateVisual(props: any) {
   const { data } = useTina({
@@ -18,6 +19,7 @@ export default function DonateVisual(props: any) {
     data: props.footerData || {},
   });
 
+  const ui: UIStrings | undefined = props.ui;
   const donate = data?.donate;
   const header = donate?.emotionalHeader;
   const socialProof = donate?.socialProof || [];
@@ -54,25 +56,35 @@ export default function DonateVisual(props: any) {
     const fd = new FormData(formRef.current);
     const nom = fd.get("nom") as string;
     const email = fd.get("email") as string;
-    const tel = fd.get("telephone") || "Non renseigné";
+    const tel = fd.get("telephone") || (ui?.formPhoneNotProvided || "Non renseigné");
     const formuleEl = formRef.current.querySelector("select") as HTMLSelectElement;
     const formule = formuleEl?.selectedOptions[0]?.text || "";
-    const msg = fd.get("message") || "(aucun)";
+    const msg = fd.get("message") || (ui?.formMessageEmpty || "(aucun)");
 
     if (!nom || !email) {
       formRef.current.reportValidity();
       return;
     }
 
+    const greeting = ui?.formGreeting || "Bonjour,";
+    const intro = ui?.formIntro || "Je souhaite devenir parrain.";
+    const nameL = ui?.formNameLabel || "Nom";
+    const emailL = ui?.formEmailLabel || "Email";
+    const phoneL = ui?.formPhoneLabel || "Téléphone";
+    const formulaL = ui?.formFormulaLabel || "Formule";
+    const msgL = ui?.formMessageLabel || "Message";
+    const closing = ui?.formClosing || "Cordialement";
+    const subjectPrefix = ui?.formSubjectPrefix || "Demande de Parrainage";
+
     if (method === "whatsapp") {
       const text = encodeURIComponent(
-        `Bonjour,\n\nJe souhaite devenir parrain.\n\nNom : ${nom}\nEmail : ${email}\nTéléphone : ${tel}\nFormule : ${formule}\n\nMessage : ${msg}`
+        `${greeting}\n\n${intro}\n\n${nameL} : ${nom}\n${emailL} : ${email}\n${phoneL} : ${tel}\n${formulaL} : ${formule}\n\n${msgL} : ${msg}`
       );
       window.open(`https://wa.me/${whatsappNumber}?text=${text}`, "_blank");
     } else {
-      const subject = encodeURIComponent(`Demande de Parrainage — ${nom}`);
+      const subject = encodeURIComponent(`${subjectPrefix} — ${nom}`);
       const body = encodeURIComponent(
-        `Bonjour,\n\nJe souhaite devenir parrain.\n\nNom : ${nom}\nEmail : ${email}\nTéléphone : ${tel}\nFormule : ${formule}\n\nMessage :\n${msg}\n\nCordialement`
+        `${greeting}\n\n${intro}\n\n${nameL} : ${nom}\n${emailL} : ${email}\n${phoneL} : ${tel}\n${formulaL} : ${formule}\n\n${msgL} :\n${msg}\n\n${closing}`
       );
       window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
     }
@@ -216,7 +228,7 @@ export default function DonateVisual(props: any) {
                           <div className="mt-2 bg-gray-50 rounded-xl p-4 border border-gray-200">
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                               <div>
-                                <span className="text-gray-500 text-xs uppercase tracking-wide block mb-0.5">Banque</span>
+                                <span className="text-gray-500 text-xs uppercase tracking-wide block mb-0.5">{ui?.bankLabel || "Banque"}</span>
                                 <span
                                   className="font-bold text-gray-800"
                                   data-tina-field={don ? tinaField(don, "bankName") : undefined}
@@ -225,7 +237,7 @@ export default function DonateVisual(props: any) {
                                 </span>
                               </div>
                               <div>
-                                <span className="text-gray-500 text-xs uppercase tracking-wide block mb-0.5">N° de compte</span>
+                                <span className="text-gray-500 text-xs uppercase tracking-wide block mb-0.5">{ui?.accountLabel || "N° de compte"}</span>
                                 <span
                                   className="font-mono font-bold text-brand-blue text-base"
                                   data-tina-field={don ? tinaField(don, "accountNumber") : undefined}
@@ -234,7 +246,7 @@ export default function DonateVisual(props: any) {
                                 </span>
                               </div>
                               <div className="sm:col-span-2">
-                                <span className="text-gray-500 text-xs uppercase tracking-wide block mb-0.5">Titulaire</span>
+                                <span className="text-gray-500 text-xs uppercase tracking-wide block mb-0.5">{ui?.holderLabel || "Titulaire"}</span>
                                 <span
                                   className="font-bold text-gray-800"
                                   data-tina-field={don ? tinaField(don, "accountHolder") : undefined}
@@ -512,10 +524,10 @@ export default function DonateVisual(props: any) {
                 {csr.heading || "Pour les entreprises (CSR)"}
               </h4>
               <p className="text-sm text-gray-500">
-                Code CSR : <strong data-tina-field={tinaField(csr, "csrCode")}>{csr.csrCode || ""}</strong>.{" "}
+                {ui?.csrCodeLabel || "Code CSR"} : <strong data-tina-field={tinaField(csr, "csrCode")}>{csr.csrCode || ""}</strong>.{" "}
                 <span data-tina-field={tinaField(csr, "text")}>{csr.text || ""}</span>
                 <br />
-                Contactez <strong data-tina-field={tinaField(csr, "contactName")}>{csr.contactName || ""}</strong>{" "}
+                {ui?.csrContactLabel || "Contactez"} <strong data-tina-field={tinaField(csr, "contactName")}>{csr.contactName || ""}</strong>{" "}
                 (<span data-tina-field={tinaField(csr, "contactRole")}>{csr.contactRole || ""}</span>)
               </p>
             </div>

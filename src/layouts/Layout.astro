@@ -1,36 +1,46 @@
 ---
 import "../styles/global.css";
+import type { Locale } from "../lib/i18n";
 
-// Read site settings from site.json (editable via TinaCMS)
+// Read site settings from site.json as fallback
 const siteModule = await import("../data/site.json");
 const site = siteModule.default || siteModule;
 
 interface Props {
+  lang?: Locale;
   title?: string;
   description?: string;
 }
 
 const {
+  lang = "fr",
   title = site.title || "Association d'Alphabétisation de Fatima — Trou-aux-Biches, Maurice",
   description = site.description || "Depuis 37 ans, nous aidons des enfants défavorisés à sortir de l'échec scolaire. Plus de 2 000 élèves ont pu retrouver le chemin de la confiance, de l'estime de soi et de la réussite.",
 } = Astro.props;
 
+const ogLocale = lang === "en" ? "en_US" : "fr_FR";
 const ogImage = new URL("/images/school-uodv3.jpg", Astro.url).href;
+const baseUrl = new URL("/", Astro.url).href.replace(/\/$/, "");
 ---
 
 <!doctype html>
-<html lang="fr" class="scroll-smooth">
+<html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+
+    <!-- Hreflang for bilingual SEO -->
+    <link rel="alternate" hreflang="fr" href={`${baseUrl}/`} />
+    <link rel="alternate" hreflang="en" href={`${baseUrl}/en/`} />
+    <link rel="alternate" hreflang="x-default" href={`${baseUrl}/`} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:locale" content={ogLocale} />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -80,7 +90,7 @@ const ogImage = new URL("/images/school-uodv3.jpg", Astro.url).href;
       "@context": "https://schema.org",
       "@type": "EducationalOrganization",
       "name": "Association d'Alphabétisation de Fatima",
-      "alternateName": "Association d'Alphabétisation de Fatima",
+      "alternateName": lang === "en" ? "Fatima Literacy Association" : "Association d'Alphabétisation de Fatima",
       "description": description,
       "foundingDate": "1989",
       "address": {

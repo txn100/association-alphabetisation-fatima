@@ -1,0 +1,10 @@
+{
+  "title": "Literacy",
+  "level": "Levels 1–2",
+  "icon": "fas fa-book-reader",
+  "description": "The foundations. Out-of-school children learn to read, write and count in a caring environment. The goal: catch up and rebuild confidence.",
+  "color": "blue",
+  "image": "/images/508290475_9424064657694273_4472956032024889698_n.jpg",
+  "imageAlt": "Students at the school",
+  "order": 1
+}
