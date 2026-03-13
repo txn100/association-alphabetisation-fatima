@@ -565,7 +565,7 @@ export type Programs = Node & Document & {
   title: Scalars['String']['output'];
   level: Scalars['String']['output'];
   icon: Scalars['String']['output'];
-  ages: Scalars['String']['output'];
+  ages?: Maybe<Scalars['String']['output']>;
   description: Scalars['String']['output'];
   color: Scalars['String']['output'];
   image: Scalars['String']['output'];
@@ -645,6 +645,7 @@ export type TiersConnection = Connection & {
 
 export type Hero = Node & Document & {
   __typename?: 'Hero';
+  topLabel?: Maybe<Scalars['String']['output']>;
   tagline: Scalars['String']['output'];
   subtitle?: Maybe<Scalars['String']['output']>;
   primaryButton?: Maybe<Scalars['String']['output']>;
@@ -655,6 +656,7 @@ export type Hero = Node & Document & {
 };
 
 export type HeroFilter = {
+  topLabel?: InputMaybe<StringFilter>;
   tagline?: InputMaybe<StringFilter>;
   subtitle?: InputMaybe<StringFilter>;
   primaryButton?: InputMaybe<StringFilter>;
@@ -787,6 +789,7 @@ export type NavigationLinks = {
 export type Navigation = Node & Document & {
   __typename?: 'Navigation';
   links?: Maybe<Array<Maybe<NavigationLinks>>>;
+  navbarTitle: Scalars['String']['output'];
   ctaText: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -799,6 +802,7 @@ export type NavigationLinksFilter = {
 
 export type NavigationFilter = {
   links?: InputMaybe<NavigationLinksFilter>;
+  navbarTitle?: InputMaybe<StringFilter>;
   ctaText?: InputMaybe<StringFilter>;
 };
 
@@ -1572,6 +1576,7 @@ export type TiersMutation = {
 };
 
 export type HeroMutation = {
+  topLabel?: InputMaybe<Scalars['String']['input']>;
   tagline?: InputMaybe<Scalars['String']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
   primaryButton?: InputMaybe<Scalars['String']['input']>;
@@ -1619,6 +1624,7 @@ export type NavigationLinksMutation = {
 
 export type NavigationMutation = {
   links?: InputMaybe<Array<InputMaybe<NavigationLinksMutation>>>;
+  navbarTitle?: InputMaybe<Scalars['String']['input']>;
   ctaText?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1764,17 +1770,17 @@ export type GalleryPartsFragment = { __typename: 'Gallery', src: string, alt: st
 
 export type StatsPartsFragment = { __typename: 'Stats', value: string, label: string, order: number };
 
-export type ProgramsPartsFragment = { __typename: 'Programs', title: string, level: string, icon: string, ages: string, description: string, color: string, image: string, imageAlt: string, order: number };
+export type ProgramsPartsFragment = { __typename: 'Programs', title: string, level: string, icon: string, ages?: string | null, description: string, color: string, image: string, imageAlt: string, order: number };
 
 export type TiersPartsFragment = { __typename: 'Tiers', amount: number, label: string, period: string, description: string, icon: string, highlighted?: boolean | null, order: number };
 
-export type HeroPartsFragment = { __typename: 'Hero', tagline: string, subtitle?: string | null, primaryButton?: string | null, secondaryButton?: string | null };
+export type HeroPartsFragment = { __typename: 'Hero', topLabel?: string | null, tagline: string, subtitle?: string | null, primaryButton?: string | null, secondaryButton?: string | null };
 
 export type AboutPartsFragment = { __typename: 'About', heading: string, paragraph1?: string | null, paragraph2?: string | null, paragraph3?: string | null, quote?: string | null, mainImage?: string | null, mainImageAlt?: string | null, photos?: Array<{ __typename: 'AboutPhotos', src: string, alt: string } | null> | null };
 
 export type FooterPartsFragment = { __typename: 'Footer', orgDescription: string, president?: string | null, director?: string | null, contactHeading?: string | null, address?: string | null, phone1?: string | null, phone1Link?: string | null, phone2?: string | null, phone2Link?: string | null, email?: string | null, whatsappNumber?: string | null, transparencyHeading?: string | null, ngoRegistered?: string | null, nsifCode?: string | null, csrCode?: string | null, copyright?: string | null };
 
-export type NavigationPartsFragment = { __typename: 'Navigation', ctaText: string, links?: Array<{ __typename: 'NavigationLinks', label: string } | null> | null };
+export type NavigationPartsFragment = { __typename: 'Navigation', navbarTitle: string, ctaText: string, links?: Array<{ __typename: 'NavigationLinks', label: string } | null> | null };
 
 export type ImpactPartsFragment = { __typename: 'Impact', sinceLabel: string, headline?: string | null, description?: string | null, images?: Array<{ __typename: 'ImpactImages', src: string, alt: string } | null> | null };
 
@@ -1852,7 +1858,7 @@ export type ProgramsQueryVariables = Exact<{
 }>;
 
 
-export type ProgramsQuery = { __typename?: 'Query', programs: { __typename: 'Programs', id: string, title: string, level: string, icon: string, ages: string, description: string, color: string, image: string, imageAlt: string, order: number, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ProgramsQuery = { __typename?: 'Query', programs: { __typename: 'Programs', id: string, title: string, level: string, icon: string, ages?: string | null, description: string, color: string, image: string, imageAlt: string, order: number, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ProgramsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1864,7 +1870,7 @@ export type ProgramsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ProgramsConnectionQuery = { __typename?: 'Query', programsConnection: { __typename?: 'ProgramsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProgramsConnectionEdges', cursor: string, node?: { __typename: 'Programs', id: string, title: string, level: string, icon: string, ages: string, description: string, color: string, image: string, imageAlt: string, order: number, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ProgramsConnectionQuery = { __typename?: 'Query', programsConnection: { __typename?: 'ProgramsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProgramsConnectionEdges', cursor: string, node?: { __typename: 'Programs', id: string, title: string, level: string, icon: string, ages?: string | null, description: string, color: string, image: string, imageAlt: string, order: number, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type TiersQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1890,7 +1896,7 @@ export type HeroQueryVariables = Exact<{
 }>;
 
 
-export type HeroQuery = { __typename?: 'Query', hero: { __typename: 'Hero', id: string, tagline: string, subtitle?: string | null, primaryButton?: string | null, secondaryButton?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type HeroQuery = { __typename?: 'Query', hero: { __typename: 'Hero', id: string, topLabel?: string | null, tagline: string, subtitle?: string | null, primaryButton?: string | null, secondaryButton?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type HeroConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1902,7 +1908,7 @@ export type HeroConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HeroConnectionQuery = { __typename?: 'Query', heroConnection: { __typename?: 'HeroConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HeroConnectionEdges', cursor: string, node?: { __typename: 'Hero', id: string, tagline: string, subtitle?: string | null, primaryButton?: string | null, secondaryButton?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type HeroConnectionQuery = { __typename?: 'Query', heroConnection: { __typename?: 'HeroConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HeroConnectionEdges', cursor: string, node?: { __typename: 'Hero', id: string, topLabel?: string | null, tagline: string, subtitle?: string | null, primaryButton?: string | null, secondaryButton?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type AboutQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1947,7 +1953,7 @@ export type NavigationQueryVariables = Exact<{
 }>;
 
 
-export type NavigationQuery = { __typename?: 'Query', navigation: { __typename: 'Navigation', id: string, ctaText: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'NavigationLinks', label: string } | null> | null } };
+export type NavigationQuery = { __typename?: 'Query', navigation: { __typename: 'Navigation', id: string, navbarTitle: string, ctaText: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'NavigationLinks', label: string } | null> | null } };
 
 export type NavigationConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1959,7 +1965,7 @@ export type NavigationConnectionQueryVariables = Exact<{
 }>;
 
 
-export type NavigationConnectionQuery = { __typename?: 'Query', navigationConnection: { __typename?: 'NavigationConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavigationConnectionEdges', cursor: string, node?: { __typename: 'Navigation', id: string, ctaText: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'NavigationLinks', label: string } | null> | null } | null } | null> | null } };
+export type NavigationConnectionQuery = { __typename?: 'Query', navigationConnection: { __typename?: 'NavigationConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavigationConnectionEdges', cursor: string, node?: { __typename: 'Navigation', id: string, navbarTitle: string, ctaText: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'NavigationLinks', label: string } | null> | null } | null } | null> | null } };
 
 export type ImpactQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2154,6 +2160,7 @@ export const TiersPartsFragmentDoc = gql`
 export const HeroPartsFragmentDoc = gql`
     fragment HeroParts on Hero {
   __typename
+  topLabel
   tagline
   subtitle
   primaryButton
@@ -2205,6 +2212,7 @@ export const NavigationPartsFragmentDoc = gql`
     __typename
     label
   }
+  navbarTitle
   ctaText
 }
     `;
@@ -3403,7 +3411,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "https://content.tinajs.io/1.5/content/9bff4b70-8364-4205-b688-7c79939891bf/github/tina",
+        url: "http://localhost:9000/graphql",
         queries,
       })
     )

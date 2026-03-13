@@ -86,7 +86,7 @@ var config_default = defineConfig({
           { type: "string", name: "title", label: "Titre du programme", isTitle: true, required: true },
           { type: "string", name: "level", label: "Niveau", description: "Ex: Niveaux 1\u20132, Fili\xE8re Vocational", required: true },
           { type: "string", name: "icon", label: "Ic\xF4ne FontAwesome", description: "Ex: fas fa-book-reader", required: true },
-          { type: "string", name: "ages", label: "Tranche d'\xE2ge", description: "Ex: 6 \u2013 10 ans", required: true },
+          { type: "string", name: "ages", label: "Tranche d'\xE2ge", description: "Ex: 6 \u2013 10 ans" },
           { type: "string", name: "description", label: "Description", required: true, ui: { component: "textarea" } },
           { type: "string", name: "color", label: "Couleur", required: true, options: [{ value: "blue", label: "Bleu" }, { value: "pink", label: "Rose" }] },
           { type: "image", name: "image", label: "Image", required: true },
@@ -119,6 +119,7 @@ var config_default = defineConfig({
         ui: singletonUI,
         match: { include: "hero" },
         fields: [
+          { type: "string", name: "topLabel", label: "Texte au-dessus du titre (majuscules)" },
           { type: "string", name: "tagline", label: "Titre principal", isTitle: true, required: true },
           { type: "string", name: "subtitle", label: "Sous-titre", ui: { component: "textarea" } },
           { type: "string", name: "primaryButton", label: "Bouton principal" },
@@ -195,6 +196,7 @@ var config_default = defineConfig({
               { type: "string", name: "label", label: "Texte du lien", required: true }
             ]
           },
+          { type: "string", name: "navbarTitle", label: "Titre \xE0 c\xF4t\xE9 du logo", required: true },
           { type: "string", name: "ctaText", label: "Texte du bouton CTA", isTitle: true, required: true }
         ]
       },

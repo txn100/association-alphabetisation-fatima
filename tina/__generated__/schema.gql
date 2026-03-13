@@ -252,7 +252,7 @@ type Programs implements Node & Document {
   title: String!
   level: String!
   icon: String!
-  ages: String!
+  ages: String
   description: String!
   color: String!
   image: String!
@@ -326,6 +326,7 @@ type TiersConnection implements Connection {
 }
 
 type Hero implements Node & Document {
+  topLabel: String
   tagline: String!
   subtitle: String
   primaryButton: String
@@ -336,6 +337,7 @@ type Hero implements Node & Document {
 }
 
 input HeroFilter {
+  topLabel: StringFilter
   tagline: StringFilter
   subtitle: StringFilter
   primaryButton: StringFilter
@@ -457,6 +459,7 @@ type NavigationLinks {
 
 type Navigation implements Node & Document {
   links: [NavigationLinks]
+  navbarTitle: String!
   ctaText: String!
   id: ID!
   _sys: SystemInfo!
@@ -469,6 +472,7 @@ input NavigationLinksFilter {
 
 input NavigationFilter {
   links: NavigationLinksFilter
+  navbarTitle: StringFilter
   ctaText: StringFilter
 }
 
@@ -980,6 +984,7 @@ input TiersMutation {
 }
 
 input HeroMutation {
+  topLabel: String
   tagline: String
   subtitle: String
   primaryButton: String
@@ -1027,6 +1032,7 @@ input NavigationLinksMutation {
 
 input NavigationMutation {
   links: [NavigationLinksMutation]
+  navbarTitle: String
   ctaText: String
 }
 

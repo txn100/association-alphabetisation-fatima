@@ -52,6 +52,7 @@ fragment TiersParts on Tiers {
 
 fragment HeroParts on Hero {
   __typename
+  topLabel
   tagline
   subtitle
   primaryButton
@@ -100,6 +101,7 @@ fragment NavigationParts on Navigation {
     __typename
     label
   }
+  navbarTitle
   ctaText
 }
 
