@@ -6,10 +6,22 @@
     "description": "Pour poursuivre cette belle mission, nous avons besoin de VOUS ! Des jeunes de 11 à 18 ans issus de milieux défavorisés comptent sur votre soutien."
   },
   "socialProof": [
-    { "value": "2 000+", "label": "Élèves aidés" },
-    { "value": "37 ans", "label": "D'engagement" },
-    { "value": "160", "label": "Élèves cette année" },
-    { "value": "100%", "label": "Dédié aux élèves" }
+    {
+      "value": "2 000+",
+      "label": "Élèves aidés"
+    },
+    {
+      "value": "37 ans",
+      "label": "D'engagement"
+    },
+    {
+      "value": "130",
+      "label": "Élèves cette année"
+    },
+    {
+      "value": "100%",
+      "label": "Dédié aux élèves"
+    }
   ],
   "tabs": {
     "donLabel": "Don Ponctuel",
@@ -19,10 +31,22 @@
     "heading": "Faire un don maintenant",
     "subtitle": "Par virement bancaire ou mobile",
     "steps": [
-      { "title": "Ouvrez votre app bancaire", "detail": "MCB Juice, MCB Mobile, ou votre banque habituelle" },
-      { "title": "Effectuez un virement vers", "detail": "" },
-      { "title": "En référence, indiquez", "detail": "" },
-      { "title": "Prévenez-nous", "detail": "Pour recevoir votre reçu fiscal NSIF" }
+      {
+        "title": "Ouvrez votre app bancaire",
+        "detail": "MCB Juice, MCB Mobile, ou votre banque habituelle"
+      },
+      {
+        "title": "Effectuez un virement vers",
+        "detail": ""
+      },
+      {
+        "title": "En référence, indiquez",
+        "detail": ""
+      },
+      {
+        "title": "Prévenez-nous",
+        "detail": "Pour recevoir votre reçu fiscal NSIF"
+      }
     ],
     "referenceFormat": "DON + votre nom",
     "bankName": "MCB",
@@ -50,10 +74,26 @@
   "donEnAction": {
     "heading": "Votre Don en Action",
     "items": [
-      { "icon": "fas fa-utensils", "title": "Repas", "subtitle": "Quotidien" },
-      { "icon": "fas fa-book-open", "title": "Fournitures", "subtitle": "Scolaires" },
-      { "icon": "fas fa-chalkboard-teacher", "title": "Enseignants", "subtitle": "Qualifiés" },
-      { "icon": "fas fa-bus", "title": "Sorties", "subtitle": "Éducatives" }
+      {
+        "icon": "fas fa-utensils",
+        "title": "Repas",
+        "subtitle": "Quotidien"
+      },
+      {
+        "icon": "fas fa-book-open",
+        "title": "Fournitures",
+        "subtitle": "Scolaires"
+      },
+      {
+        "icon": "fas fa-chalkboard-teacher",
+        "title": "Enseignants",
+        "subtitle": "Qualifiés"
+      },
+      {
+        "icon": "fas fa-bus",
+        "title": "Sorties",
+        "subtitle": "Éducatives"
+      }
     ]
   },
   "csr": {
