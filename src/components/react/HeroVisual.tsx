@@ -22,8 +22,11 @@ export default function HeroVisual(props: any) {
           width={96}
           height={96}
         />
-        <p className="text-[0.65rem] sm:text-sm md:text-lg tracking-[0.15em] sm:tracking-[0.2em] uppercase text-white/90 font-semibold mb-1.5 sm:mb-3 md:mb-4 drop-shadow">
-          Association d'Alphabétisation de Fatima
+        <p
+          className="text-[0.65rem] sm:text-sm md:text-lg tracking-[0.15em] sm:tracking-[0.2em] uppercase text-white/90 font-semibold mb-1.5 sm:mb-3 md:mb-4 drop-shadow"
+          data-tina-field={hero ? tinaField(hero, "topLabel") : undefined}
+        >
+          {hero?.topLabel || "Association d'Alphabétisation de Fatima"}
         </p>
         <h1
           className="font-heading text-[1.7rem] sm:text-4xl md:text-5xl font-extrabold text-white leading-tight mb-2 sm:mb-4 md:mb-6 drop-shadow-md"

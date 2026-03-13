@@ -126,6 +126,7 @@ export default defineConfig({
         ui: singletonUI,
         match: { include: "hero" },
         fields: [
+          { type: "string", name: "topLabel", label: "Texte au-dessus du titre (majuscules)" },
           { type: "string", name: "tagline", label: "Titre principal", isTitle: true, required: true },
           { type: "string", name: "subtitle", label: "Sous-titre", ui: { component: "textarea" } },
           { type: "string", name: "primaryButton", label: "Bouton principal" },
