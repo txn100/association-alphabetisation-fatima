@@ -12,7 +12,7 @@ export default function HeroVisual(props: any) {
   return (
     <section
       id="accueil"
-      className="relative hero-bg h-screen min-h-[500px] flex items-start sm:items-center justify-center pt-16 sm:pt-20 md:pt-24 pb-32 sm:pb-40"
+      className="relative hero-bg h-screen min-h-[500px] flex items-start sm:items-center justify-center pt-20 sm:pt-24 md:pt-28 pb-32 sm:pb-40"
     >
       <div className="relative z-10 text-center px-4 sm:px-5 max-w-4xl mx-auto mt-4 sm:mt-0">
         <img

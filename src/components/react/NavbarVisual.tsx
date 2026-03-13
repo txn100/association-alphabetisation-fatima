@@ -46,12 +46,12 @@ export default function NavbarVisual(props: any) {
             <img
               src="/images/logo-fatima-hq.webp"
               alt="Logo Association d'Alphabétisation de Fatima"
-              className="h-9 sm:h-12 md:h-16 w-auto flex-shrink-0"
+              className="h-10 sm:h-12 md:h-16 w-auto flex-shrink-0"
               width={64}
               height={64}
             />
             <span
-              className="navbar-title font-heading font-bold text-brand-blue leading-tight text-xs sm:text-sm md:text-base"
+              className="navbar-title font-heading font-semibold text-brand-blue leading-tight text-[0.65rem] sm:text-xs md:text-sm"
               data-tina-field={nav ? tinaField(nav, "navbarTitle") : undefined}
             >
               {navbarTitle}
