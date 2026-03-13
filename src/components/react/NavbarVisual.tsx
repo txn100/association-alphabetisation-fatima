@@ -57,18 +57,18 @@ export default function NavbarVisual(props: any) {
       aria-label={ui?.navAriaLabel || "Navigation principale"}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-14 sm:h-16 md:h-20 items-center">
+        <div className="flex justify-between h-14 sm:h-16 lg:h-[4.5rem] items-center">
           {/* Logo */}
           <a href="#accueil" onClick={smoothScroll("#accueil")} className="flex-shrink-0 flex items-center gap-1.5 sm:gap-2">
             <img
               src="/images/logo-fatima-hq.webp"
               alt="Logo Association d'Alphabétisation de Fatima"
-              className="h-9 sm:h-11 md:h-14 w-auto flex-shrink-0"
+              className="h-9 sm:h-11 lg:h-12 w-auto flex-shrink-0"
               width={64}
               height={64}
             />
             <span
-              className="navbar-title font-heading font-semibold text-brand-blue leading-tight text-[0.65rem] sm:text-xs md:text-sm"
+              className="navbar-title font-heading font-semibold text-brand-blue leading-tight text-[0.65rem] sm:text-xs lg:text-xs xl:text-sm"
               data-tina-field={nav ? tinaField(nav, "navbarTitle") : undefined}
             >
               {navbarTitle}
@@ -76,7 +76,7 @@ export default function NavbarVisual(props: any) {
           </a>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-4 lg:space-x-6 xl:space-x-8 items-center">
+          <div className="hidden lg:flex items-center gap-1 xl:gap-3">
             {links.map((link: any, i: number) => {
               const href = resolveHref(link);
               return (
@@ -84,7 +84,7 @@ export default function NavbarVisual(props: any) {
                   key={i}
                   href={href}
                   onClick={smoothScroll(href)}
-                  className="text-gray-600 hover:text-brand-blue font-semibold transition"
+                  className="text-gray-600 hover:text-brand-blue text-[13px] xl:text-sm font-medium whitespace-nowrap px-1.5 xl:px-2 py-1 rounded transition"
                   data-tina-field={tinaField(link, "label")}
                 >
                   {href === "#projets" && (
@@ -97,24 +97,24 @@ export default function NavbarVisual(props: any) {
             {/* Language switcher */}
             <a
               href={ui?.langSwitchHref || "/en/"}
-              className="text-gray-500 hover:text-brand-blue font-bold text-sm border border-gray-300 px-3 py-1 rounded-full transition hover:border-brand-blue"
+              className="text-gray-400 hover:text-brand-blue text-xs font-semibold border border-gray-300 px-2 py-0.5 rounded-full transition hover:border-brand-blue ml-1"
             >
               {ui?.langSwitchLabel || "EN"}
             </a>
             <a
               href="#faire-un-don"
               onClick={smoothScroll("#faire-un-don")}
-              className="bg-brand-pink hover:bg-pink-600 text-white px-5 py-2 rounded-full font-bold shadow-sm transition transform hover:scale-105"
+              className="bg-brand-pink hover:bg-pink-600 text-white text-sm px-4 py-1.5 rounded-full font-bold shadow-sm transition transform hover:scale-105 whitespace-nowrap ml-1"
               data-tina-field={nav ? tinaField(nav, "ctaText") : undefined}
             >
-              <i className="fas fa-heart mr-2" /> {ctaText}
+              <i className="fas fa-heart mr-1.5 text-xs" /> {ctaText}
             </a>
           </div>
 
           {/* Mobile Menu Button */}
           <button
             id="mobile-menu-btn"
-            className="md:hidden text-gray-600 hover:text-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 rounded p-2 -mr-2 outline-none"
+            className="lg:hidden text-gray-600 hover:text-brand-blue focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 rounded p-2 -mr-2 outline-none"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu-panel"
             aria-label={ui?.menuAriaLabel || "Ouvrir le menu"}
@@ -128,7 +128,7 @@ export default function NavbarVisual(props: any) {
       {/* Mobile Menu Panel — always in DOM, toggled via CSS + JS */}
       <div
         id="mobile-menu-panel"
-        className={`md:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg ${menuOpen ? "" : "hidden"}`}
+        className={`lg:hidden bg-white border-t border-gray-100 absolute w-full shadow-lg ${menuOpen ? "" : "hidden"}`}
       >
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           {links.map((link: any, i: number) => {
