@@ -41,7 +41,7 @@ const programs = defineCollection({
     level: z.string(),
     title: z.string(),
     icon: z.string(),
-    ages: z.string(),
+    ages: z.string().optional(),
     description: z.string(),
     color: z.string(),
     image: z.string(),

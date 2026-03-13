@@ -92,7 +92,7 @@ export default defineConfig({
           { type: "string", name: "title", label: "Titre du programme", isTitle: true, required: true },
           { type: "string", name: "level", label: "Niveau", description: "Ex: Niveaux 1–2, Filière Vocational", required: true },
           { type: "string", name: "icon", label: "Icône FontAwesome", description: "Ex: fas fa-book-reader", required: true },
-          { type: "string", name: "ages", label: "Tranche d'âge", description: "Ex: 6 – 10 ans", required: true },
+          { type: "string", name: "ages", label: "Tranche d'âge", description: "Ex: 6 – 10 ans" },
           { type: "string", name: "description", label: "Description", required: true, ui: { component: "textarea" } },
           { type: "string", name: "color", label: "Couleur", required: true, options: [{ value: "blue", label: "Bleu" }, { value: "pink", label: "Rose" }] },
           { type: "image", name: "image", label: "Image", required: true },

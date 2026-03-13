@@ -85,10 +85,12 @@ export default function ProgramsVisual(props: any) {
                     {step.title}
                   </h3>
 
-                  <p className="text-sm text-gray-500 font-semibold mb-3" data-tina-field={tinaField(step, "ages")}>
-                    <i className="fas fa-child mr-1" />
-                    {step.ages}
-                  </p>
+                  {step.ages && (
+                    <p className="text-sm text-gray-500 font-semibold mb-3" data-tina-field={tinaField(step, "ages")}>
+                      <i className="fas fa-child mr-1" />
+                      {step.ages}
+                    </p>
+                  )}
 
                   <p
                     className="text-gray-600 text-sm leading-relaxed"
