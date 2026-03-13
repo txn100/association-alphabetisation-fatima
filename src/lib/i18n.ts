@@ -44,6 +44,14 @@ export interface UIStrings {
   formPhoneNotProvided: string;
   formMessageEmpty: string;
 
+  // Donate — tablist and form sr-only labels
+  tablistLabel: string;
+  srLabelFullName: string;
+  srLabelPhone: string;
+  srLabelEmail: string;
+  srLabelFormula: string;
+  srLabelMessage: string;
+
   // Language switcher
   langSwitchLabel: string;
   langSwitchHref: string;
@@ -82,6 +90,13 @@ export const uiStrings: Record<Locale, UIStrings> = {
     formPhoneNotProvided: "Non renseigné",
     formMessageEmpty: "(aucun)",
 
+    tablistLabel: "Type de contribution",
+    srLabelFullName: "Nom complet",
+    srLabelPhone: "Téléphone",
+    srLabelEmail: "Email",
+    srLabelFormula: "Formule de parrainage",
+    srLabelMessage: "Message",
+
     langSwitchLabel: "EN",
     langSwitchHref: "/en/",
   },
@@ -116,6 +131,13 @@ export const uiStrings: Record<Locale, UIStrings> = {
     formSubjectPrefix: "Sponsorship Request",
     formPhoneNotProvided: "Not provided",
     formMessageEmpty: "(none)",
+
+    tablistLabel: "Contribution type",
+    srLabelFullName: "Full name",
+    srLabelPhone: "Phone",
+    srLabelEmail: "Email",
+    srLabelFormula: "Sponsorship plan",
+    srLabelMessage: "Message",
 
     langSwitchLabel: "FR",
     langSwitchHref: "/",

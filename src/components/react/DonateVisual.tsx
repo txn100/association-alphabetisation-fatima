@@ -43,7 +43,7 @@ export default function DonateVisual(props: any) {
     .sort((a: any, b: any) => a.order - b.order);
 
   const [activeTab, setActiveTab] = useState<"don" | "parrain">("don");
-  const [selectedTier, setSelectedTier] = useState<number | null>(null);
+  const [selectedTier, setSelectedTier] = useState<number | "libre" | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleTierClick = (amount: number) => {
@@ -153,7 +153,7 @@ export default function DonateVisual(props: any) {
           </div>
 
           {/* Tab Toggle */}
-          <div className="flex rounded-xl bg-white shadow-md p-1.5 mb-8 border border-gray-100 max-w-md mx-auto" role="tablist" aria-label="Type de contribution">
+          <div className="flex rounded-xl bg-white shadow-md p-1.5 mb-8 border border-gray-100 max-w-md mx-auto" role="tablist" aria-label={ui?.tablistLabel || "Type de contribution"}>
             <button
               type="button"
               role="tab"
@@ -373,7 +373,7 @@ export default function DonateVisual(props: any) {
                   <form ref={formRef} id="parrain-form" className="space-y-3" onSubmit={(e) => { e.preventDefault(); sendVia("email"); }}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <label htmlFor="parrain-nom" className="sr-only">Nom complet</label>
+                        <label htmlFor="parrain-nom" className="sr-only">{ui?.srLabelFullName || "Nom complet"}</label>
                         <input
                           id="parrain-nom"
                           type="text"
@@ -384,7 +384,7 @@ export default function DonateVisual(props: any) {
                         />
                       </div>
                       <div>
-                        <label htmlFor="parrain-tel" className="sr-only">Téléphone</label>
+                        <label htmlFor="parrain-tel" className="sr-only">{ui?.srLabelPhone || "Téléphone"}</label>
                         <input
                           id="parrain-tel"
                           type="tel"
@@ -396,7 +396,7 @@ export default function DonateVisual(props: any) {
                     </div>
 
                     <div>
-                      <label htmlFor="parrain-email" className="sr-only">Email</label>
+                      <label htmlFor="parrain-email" className="sr-only">{ui?.srLabelEmail || "Email"}</label>
                       <input
                         id="parrain-email"
                         type="email"
@@ -408,13 +408,16 @@ export default function DonateVisual(props: any) {
                     </div>
 
                     <div>
-                      <label htmlFor="parrain-formule" className="sr-only">Formule de parrainage</label>
+                      <label htmlFor="parrain-formule" className="sr-only">{ui?.srLabelFormula || "Formule de parrainage"}</label>
                       <select
                         id="parrain-formule"
                         name="formule"
                         className="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:border-brand-pink focus:ring-2 focus:ring-brand-pink/20 outline-none transition text-sm bg-white"
                         value={selectedTier ?? tiers.find((t: any) => t.highlighted)?.amount ?? ""}
-                        onChange={(e) => setSelectedTier(Number(e.target.value) || null)}
+                        onChange={(e) => {
+                          const v = e.target.value;
+                          setSelectedTier(v === "libre" ? "libre" : Number(v) || null);
+                        }}
                       >
                         {tiers.map((tier: any) => (
                           <option key={tier._sys?.filename} value={tier.amount}>
@@ -426,7 +429,7 @@ export default function DonateVisual(props: any) {
                     </div>
 
                     <div>
-                      <label htmlFor="parrain-message" className="sr-only">Message</label>
+                      <label htmlFor="parrain-message" className="sr-only">{ui?.srLabelMessage || "Message"}</label>
                       <textarea
                         id="parrain-message"
                         name="message"
