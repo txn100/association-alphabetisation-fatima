@@ -1,10 +1,19 @@
 {
   "sinceLabel": "Depuis 1989",
   "headline": "Plus de 2 000 vies transformées",
-  "description": "Chaque jour, 160 élèves trouvent ici un lieu d'apprentissage, de respect et d'espoir.",
+  "description": "Chaque jour, 130 élèves trouvent ici un lieu d'apprentissage, de respect et d'espoir.",
   "images": [
-    { "src": "/images/marine-program.webp", "alt": "Programme marin" },
-    { "src": "/images/food-donation.webp", "alt": "Solidarité communautaire" },
-    { "src": "/images/music-performance.webp", "alt": "Spectacle musical" }
+    {
+      "src": "/images/marine-program.webp",
+      "alt": "Programme marin"
+    },
+    {
+      "src": "/images/food-donation.webp",
+      "alt": "Solidarité communautaire"
+    },
+    {
+      "src": "/images/music-performance.webp",
+      "alt": "Spectacle musical"
+    }
   ]
 }
