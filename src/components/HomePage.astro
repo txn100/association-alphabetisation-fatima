@@ -124,128 +124,126 @@ const uiJson = JSON.stringify(ui);
     data-phone1={footerData.data.footer.phone1}
     data-phone1-link={footerData.data.footer.phone1Link}
   ></div>
-</Layout>
 
-<!-- Vanilla JS for interactive elements (client:tina doesn't hydrate on production) -->
-<script define:vars={{ lang, uiJson }}>
-  // Make locale + UI strings available to the vanilla JS block below
-  window.__lang = lang;
-  window.__uiStrings = JSON.parse(uiJson);
-</script>
+  <!-- Vanilla JS for interactive elements (client:tina doesn't hydrate on production) -->
+  <script define:vars={{ lang, uiJson }}>
+    window.__lang = lang;
+    window.__uiStrings = JSON.parse(uiJson);
+  </script>
 
-<script>
-  // Skip if inside TinaCMS admin iframe (React handles everything there)
-  if (window.self === window.top) {
-    const ui = (window as any).__uiStrings || {};
+  <script>
+    if (window.self === window.top) {
+      const ui = (window as any).__uiStrings || {};
 
-    // === MOBILE MENU TOGGLE ===
-    const menuBtn = document.getElementById("mobile-menu-btn");
-    const menuPanel = document.getElementById("mobile-menu-panel");
-    if (menuBtn && menuPanel) {
-      menuBtn.addEventListener("click", () => {
-        const isOpen = !menuPanel.classList.contains("hidden");
-        menuPanel.classList.toggle("hidden", isOpen);
-        menuBtn.setAttribute("aria-expanded", String(!isOpen));
-      });
-      menuPanel.querySelectorAll(".mobile-nav-link").forEach((link) => {
-        link.addEventListener("click", () => {
-          menuPanel.classList.add("hidden");
-          menuBtn.setAttribute("aria-expanded", "false");
+      // === MOBILE MENU TOGGLE ===
+      const menuBtn = document.getElementById("mobile-menu-btn");
+      const menuPanel = document.getElementById("mobile-menu-panel");
+      if (menuBtn && menuPanel) {
+        menuBtn.addEventListener("click", () => {
+          const isOpen = !menuPanel.classList.contains("hidden");
+          menuPanel.classList.toggle("hidden", isOpen);
+          menuBtn.setAttribute("aria-expanded", String(!isOpen));
         });
-      });
-      window.addEventListener("scroll", () => {
-        if (!menuPanel.classList.contains("hidden")) {
-          menuPanel.classList.add("hidden");
-          menuBtn.setAttribute("aria-expanded", "false");
-        }
-      }, { passive: true });
-    }
+        menuPanel.querySelectorAll(".mobile-nav-link").forEach((link) => {
+          link.addEventListener("click", () => {
+            menuPanel.classList.add("hidden");
+            menuBtn.setAttribute("aria-expanded", "false");
+          });
+        });
+        window.addEventListener("scroll", () => {
+          if (!menuPanel.classList.contains("hidden")) {
+            menuPanel.classList.add("hidden");
+            menuBtn.setAttribute("aria-expanded", "false");
+          }
+        }, { passive: true });
+      }
 
-    // === SMOOTH SCROLL for anchor links ===
-    document.querySelectorAll('a[href^="#"]').forEach((link) => {
-      link.addEventListener("click", (e) => {
-        const href = (link as HTMLAnchorElement).getAttribute("href");
-        if (!href || href === "#") return;
-        const target = document.querySelector(href);
-        if (target) {
-          e.preventDefault();
-          target.scrollIntoView({ behavior: "smooth" });
-        }
-      });
-    });
-
-    // === DONATE TAB SWITCHING ===
-    const tabBtns = document.querySelectorAll("[data-tab-btn]");
-    const tabContents = document.querySelectorAll("[data-tab-content]");
-    tabBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const tab = (btn as HTMLElement).dataset.tabBtn;
-        tabBtns.forEach((b) => {
-          const bTab = (b as HTMLElement).dataset.tabBtn;
-          b.setAttribute("aria-selected", String(bTab === tab));
-          if (bTab === tab) {
-            b.className = b.className
-              .replace("text-gray-500 hover:text-gray-700", "")
-              .replace("bg-brand-blue text-white shadow-sm", "")
-              .replace("bg-brand-pink text-white shadow-sm", "")
-              + (bTab === "don" ? " bg-brand-blue text-white shadow-sm" : " bg-brand-pink text-white shadow-sm");
-          } else {
-            b.className = b.className
-              .replace("bg-brand-blue text-white shadow-sm", "")
-              .replace("bg-brand-pink text-white shadow-sm", "")
-              + " text-gray-500 hover:text-gray-700";
+      // === SMOOTH SCROLL for anchor links ===
+      document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener("click", (e) => {
+          const href = (link as HTMLAnchorElement).getAttribute("href");
+          if (!href || href === "#") return;
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: "smooth" });
           }
         });
-        tabContents.forEach((content) => {
-          const cTab = (content as HTMLElement).dataset.tabContent;
-          content.classList.toggle("hidden", cTab !== tab);
+      });
+
+      // === DONATE TAB SWITCHING ===
+      const tabBtns = document.querySelectorAll("[data-tab-btn]");
+      const tabContents = document.querySelectorAll("[data-tab-content]");
+      tabBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const tab = (btn as HTMLElement).dataset.tabBtn;
+          tabBtns.forEach((b) => {
+            const bTab = (b as HTMLElement).dataset.tabBtn;
+            b.setAttribute("aria-selected", String(bTab === tab));
+            if (bTab === tab) {
+              b.className = b.className
+                .replace("text-gray-500 hover:text-gray-700", "")
+                .replace("bg-brand-blue text-white shadow-sm", "")
+                .replace("bg-brand-pink text-white shadow-sm", "")
+                + (bTab === "don" ? " bg-brand-blue text-white shadow-sm" : " bg-brand-pink text-white shadow-sm");
+            } else {
+              b.className = b.className
+                .replace("bg-brand-blue text-white shadow-sm", "")
+                .replace("bg-brand-pink text-white shadow-sm", "")
+                + " text-gray-500 hover:text-gray-700";
+            }
+          });
+          tabContents.forEach((content) => {
+            const cTab = (content as HTMLElement).dataset.tabContent;
+            content.classList.toggle("hidden", cTab !== tab);
+          });
         });
       });
-    });
 
-    // === PARRAIN FORM: WhatsApp & Email send ===
-    const parrainForm = document.getElementById("parrain-form") as HTMLFormElement | null;
-    if (parrainForm) {
-      const contactMeta = document.getElementById("contact-meta");
-      const waNumber = contactMeta?.dataset.whatsapp || "23052611030";
-      const contactEmail = contactMeta?.dataset.email || "direction@ecolefatima.com";
+      // === PARRAIN FORM: WhatsApp & Email send ===
+      const parrainForm = document.getElementById("parrain-form") as HTMLFormElement | null;
+      if (parrainForm) {
+        const contactMeta = document.getElementById("contact-meta");
+        const waNumber = contactMeta?.dataset.whatsapp || "23052611030";
+        const contactEmail = contactMeta?.dataset.email || "direction@ecolefatima.com";
 
-      const getFormData = () => {
-        const fd = new FormData(parrainForm);
-        const nom = fd.get("nom") as string;
-        const email = fd.get("email") as string;
-        const tel = fd.get("telephone") || (ui.formPhoneNotProvided || "Non renseigné");
-        const selectEl = parrainForm.querySelector("select") as HTMLSelectElement;
-        const formule = selectEl?.selectedOptions[0]?.text || "";
-        const msg = fd.get("message") || (ui.formMessageEmpty || "(aucun)");
-        return { nom, email, tel, formule, msg };
-      };
+        const getFormData = () => {
+          const fd = new FormData(parrainForm);
+          const nom = fd.get("nom") as string;
+          const email = fd.get("email") as string;
+          const tel = fd.get("telephone") || (ui.formPhoneNotProvided || "Non renseigné");
+          const selectEl = parrainForm.querySelector("select") as HTMLSelectElement;
+          const formule = selectEl?.selectedOptions[0]?.text || "";
+          const msg = fd.get("message") || (ui.formMessageEmpty || "(aucun)");
+          return { nom, email, tel, formule, msg };
+        };
 
-      // WhatsApp button
-      const waBtn = parrainForm.querySelector('[data-send="whatsapp"]');
-      if (waBtn) {
-        waBtn.addEventListener("click", (e) => {
+        // WhatsApp button
+        const waBtn = parrainForm.querySelector('[data-send="whatsapp"]');
+        if (waBtn) {
+          waBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            const { nom, email, tel, formule, msg } = getFormData();
+            if (!nom || !email) { parrainForm.reportValidity(); return; }
+            const text = encodeURIComponent(
+              `${ui.formGreeting || "Bonjour,"}\n\n${ui.formIntro || "Je souhaite devenir parrain."}\n\n${ui.formNameLabel || "Nom"} : ${nom}\n${ui.formEmailLabel || "Email"} : ${email}\n${ui.formPhoneLabel || "Téléphone"} : ${tel}\n${ui.formFormulaLabel || "Formule"} : ${formule}\n\n${ui.formMessageLabel || "Message"} : ${msg}`
+            );
+            window.open(`https://wa.me/${waNumber}?text=${text}`, "_blank");
+          });
+        }
+
+        // Email button (form submit)
+        parrainForm.addEventListener("submit", (e) => {
           e.preventDefault();
           const { nom, email, tel, formule, msg } = getFormData();
           if (!nom || !email) { parrainForm.reportValidity(); return; }
-          const text = encodeURIComponent(
-            `${ui.formGreeting || "Bonjour,"}\n\n${ui.formIntro || "Je souhaite devenir parrain."}\n\n${ui.formNameLabel || "Nom"} : ${nom}\n${ui.formEmailLabel || "Email"} : ${email}\n${ui.formPhoneLabel || "Téléphone"} : ${tel}\n${ui.formFormulaLabel || "Formule"} : ${formule}\n\n${ui.formMessageLabel || "Message"} : ${msg}`
+          const subject = encodeURIComponent(`${ui.formSubjectPrefix || "Demande de Parrainage"} — ${nom}`);
+          const body = encodeURIComponent(
+            `${ui.formGreeting || "Bonjour,"}\n\n${ui.formIntro || "Je souhaite devenir parrain."}\n\n${ui.formNameLabel || "Nom"} : ${nom}\n${ui.formEmailLabel || "Email"} : ${email}\n${ui.formPhoneLabel || "Téléphone"} : ${tel}\n${ui.formFormulaLabel || "Formule"} : ${formule}\n\n${ui.formMessageLabel || "Message"} :\n${msg}\n\n${ui.formClosing || "Cordialement"}`
           );
-          window.open(`https://wa.me/${waNumber}?text=${text}`, "_blank");
+          window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
         });
       }
-
-      // Email button (form submit)
-      parrainForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const { nom, email, tel, formule, msg } = getFormData();
-        if (!nom || !email) { parrainForm.reportValidity(); return; }
-        const subject = encodeURIComponent(`${ui.formSubjectPrefix || "Demande de Parrainage"} — ${nom}`);
-        const body = encodeURIComponent(
-          `${ui.formGreeting || "Bonjour,"}\n\n${ui.formIntro || "Je souhaite devenir parrain."}\n\n${ui.formNameLabel || "Nom"} : ${nom}\n${ui.formEmailLabel || "Email"} : ${email}\n${ui.formPhoneLabel || "Téléphone"} : ${tel}\n${ui.formFormulaLabel || "Formule"} : ${formule}\n\n${ui.formMessageLabel || "Message"} :\n${msg}\n\n${ui.formClosing || "Cordialement"}`
-        );
-        window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
-      });
     }
-  }
-</script>
+  </script>
+</Layout>

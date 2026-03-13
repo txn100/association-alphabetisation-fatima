@@ -29,7 +29,9 @@ export default function FooterVisual(props: any) {
                 />
               </div>
               <h3 className="text-white font-bold text-lg">
-                Association d'Alphabétisation de Fatima
+                {props.lang === "en"
+                  ? "Fatima Literacy Association"
+                  : "Association d'Alphabétisation de Fatima"}
               </h3>
             </div>
             <p
@@ -65,11 +67,31 @@ export default function FooterVisual(props: any) {
             <ul className="space-y-4 text-sm">
               <li className="flex items-start">
                 <i className="fas fa-map-marker-alt mt-1 mr-3 text-brand-blue" />
-                <span
-                  data-tina-field={footer ? tinaField(footer, "address") : undefined}
-                  style={{ whiteSpace: "pre-line" }}
-                >
-                  {footer?.address || ""}
+                <span data-tina-field={footer ? tinaField(footer, "address") : undefined}>
+                  {(() => {
+                    const raw = footer?.address || "";
+                    const match = raw.match(/(https?:\/\/\S+)/);
+                    const addr = raw.replace(/\n*https?:\/\/\S+/, "").trim();
+                    return (
+                      <>
+                        {addr}
+                        {match && (
+                          <>
+                            <br />
+                            <a
+                              href={match[1]}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-brand-light-blue hover:text-white transition underline"
+                            >
+                              <i className="fas fa-external-link-alt mr-1 text-xs" />
+                              {props.lang === "en" ? "View on map" : "Voir sur la carte"}
+                            </a>
+                          </>
+                        )}
+                      </>
+                    );
+                  })()}
                 </span>
               </li>
               <li className="flex items-center">

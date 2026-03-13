@@ -2,12 +2,13 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import cloudflare from '@astrojs/cloudflare';
 import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
 import tinaDirective from './astro-tina-directive/register';
 
 export default defineConfig({
   site: 'https://association-alphabetisation-fatima.pages.dev',
   adapter: cloudflare(),
-  integrations: [react(), tinaDirective()],
+  integrations: [react(), sitemap(), tinaDirective()],
   vite: {
     plugins: [tailwindcss()],
     build: {

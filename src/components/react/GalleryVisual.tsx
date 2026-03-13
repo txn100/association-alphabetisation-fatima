@@ -48,7 +48,7 @@ export default function GalleryVisual(props: any) {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[140px] sm:auto-rows-[160px] md:auto-rows-[180px]">
+        <div className="grid grid-cols-2 md:grid-cols-4 grid-flow-row-dense gap-2 md:gap-3 auto-rows-[140px] sm:auto-rows-[160px] md:auto-rows-[180px]">
           {photos.map((photo: any) => (
             <div
               key={photo._sys?.filename}

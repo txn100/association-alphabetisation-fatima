@@ -1,6 +1,6 @@
 {
   "src": "/images/fatima-fb-cover.jpg",
-  "alt": "Emplacement photo — cliquez pour ajouter une image",
-  "span": "",
+  "alt": "Photo de couverture Facebook de l'association",
+  "span": "col-span-2",
   "order": 11
 }

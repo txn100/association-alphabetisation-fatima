@@ -4,3 +4,5 @@ Allow: /
 # CMS admin area
 User-agent: *
 Disallow: /admin
+
+Sitemap: https://association-alphabetisation-fatima.pages.dev/sitemap-index.xml
