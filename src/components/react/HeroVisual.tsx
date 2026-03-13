@@ -18,39 +18,39 @@ export default function HeroVisual(props: any) {
         <img
           src="/images/logo-fatima-2019.png"
           alt="Logo Association d'Alphabétisation de Fatima"
-          className="h-16 sm:h-18 md:h-20 w-auto mx-auto mb-1 sm:mb-2 md:mb-3 drop-shadow-lg"
+          className="h-20 sm:h-18 md:h-20 w-auto mx-auto mb-2 sm:mb-2 md:mb-3 drop-shadow-lg"
           width={96}
           height={96}
         />
         <p
-          className="text-[0.55rem] sm:text-xs md:text-base tracking-[0.15em] sm:tracking-[0.2em] uppercase text-white/90 font-semibold mb-1 sm:mb-2 md:mb-3 drop-shadow"
+          className="text-[0.7rem] sm:text-xs md:text-base tracking-[0.15em] sm:tracking-[0.2em] uppercase text-white/90 font-semibold mb-2 sm:mb-2 md:mb-3 drop-shadow"
           data-tina-field={hero ? tinaField(hero, "topLabel") : undefined}
         >
           {hero?.topLabel || "Association d'Alphabétisation de Fatima"}
         </p>
         <h1
-          className="font-heading text-[1.4rem] sm:text-3xl md:text-4xl font-extrabold text-white leading-tight mb-1.5 sm:mb-3 md:mb-5 drop-shadow-md"
+          className="font-heading text-[1.6rem] sm:text-3xl md:text-4xl font-extrabold text-white leading-tight mb-2.5 sm:mb-3 md:mb-5 drop-shadow-md"
           data-tina-field={hero ? tinaField(hero, "tagline") : undefined}
         >
           {hero?.tagline || "Ensemble, donnons à ces enfants une chance de réussir !"}
         </h1>
         <p
-          className="text-xs sm:text-base md:text-lg text-gray-100 mb-2 sm:mb-4 md:mb-6 max-w-2xl mx-auto font-light leading-relaxed"
+          className="text-sm sm:text-base md:text-lg text-gray-100 mb-3 sm:mb-4 md:mb-6 max-w-2xl mx-auto font-light leading-relaxed"
           data-tina-field={hero ? tinaField(hero, "subtitle") : undefined}
         >
           {hero?.subtitle || ""}
         </p>
-        <div className="flex flex-col sm:flex-row gap-1.5 sm:gap-3 justify-center">
+        <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 justify-center">
           <a
             href="#apropos"
-            className="px-6 py-2.5 sm:py-2.5 bg-white text-brand-blue font-bold rounded-lg shadow-lg hover:bg-gray-100 transition duration-300 text-xs sm:text-sm"
+            className="px-8 py-3 sm:py-2.5 bg-white text-brand-blue font-bold rounded-lg shadow-lg hover:bg-gray-100 transition duration-300 text-sm sm:text-sm"
             data-tina-field={hero ? tinaField(hero, "primaryButton") : undefined}
           >
             {hero?.primaryButton || "Découvrir notre mission"}
           </a>
           <a
             href="#faire-un-don"
-            className="px-6 py-2.5 sm:py-2.5 bg-brand-pink text-white font-bold rounded-lg hover:bg-pink-600 transition duration-300 shadow-lg text-xs sm:text-sm"
+            className="px-8 py-3 sm:py-2.5 bg-brand-pink text-white font-bold rounded-lg hover:bg-pink-600 transition duration-300 shadow-lg text-sm sm:text-sm"
             data-tina-field={hero ? tinaField(hero, "secondaryButton") : undefined}
           >
             <i className="fas fa-heart mr-2" />
