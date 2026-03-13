@@ -39,6 +39,20 @@ fragment ProgramsParts on Programs {
   order
 }
 
+fragment ProjectsParts on Projects {
+  __typename
+  title
+  category
+  status
+  description
+  image
+  imageAlt
+  completionDate
+  beneficiaries
+  impact
+  order
+}
+
 fragment TiersParts on Tiers {
   __typename
   amount
@@ -226,6 +240,13 @@ fragment ProgramsSectionParts on ProgramsSection {
   heading
   description
   mobileIndicator
+}
+
+fragment ProjectsSectionParts on ProjectsSection {
+  __typename
+  heading
+  headingHighlight
+  description
 }
 
 fragment GallerySectionParts on GallerySection {

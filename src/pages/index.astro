@@ -8,6 +8,7 @@ import StatsVisual from "../components/react/StatsVisual";
 import AboutVisual from "../components/react/AboutVisual";
 import ProgramsVisual from "../components/react/ProgramsVisual";
 import ImpactBannerVisual from "../components/react/ImpactBannerVisual";
+import ProjectsVisual from "../components/react/ProjectsVisual";
 import NewsVisual from "../components/react/NewsVisual";
 import GalleryVisual from "../components/react/GalleryVisual";
 import DonateVisual from "../components/react/DonateVisual";
@@ -21,6 +22,7 @@ import {
   getHeroData, getAboutData, getFooterData, getNavigationData,
   getImpactData, getPedagogyData, getDonateData,
   getStatsSectionData, getProgramsSectionData, getGallerySectionData,
+  getProjectsData, getProjectsSectionData,
 } from "../lib/content";
 
 const [
@@ -28,11 +30,13 @@ const [
   heroData, aboutData, footerData, navigationData,
   impactData, pedagogyData, donateData,
   statsSectionData, programsSectionData, gallerySectionData,
+  projectsData, projectsSectionData,
 ] = await Promise.all([
   getStatsData(), getProgramsData(), getNewsData(), getGalleryData(), getTiersData(),
   getHeroData(), getAboutData(), getFooterData(), getNavigationData(),
   getImpactData(), getPedagogyData(), getDonateData(),
   getStatsSectionData(), getProgramsSectionData(), getGallerySectionData(),
+  getProjectsData(), getProjectsSectionData(),
 ]);
 ---
 
@@ -56,6 +60,13 @@ const [
       client:tina
     />
     <ImpactBannerVisual {...impactData} client:tina />
+    <ProjectsVisual
+      {...projectsData}
+      sectionData={projectsSectionData.data}
+      sectionQuery={projectsSectionData.query}
+      sectionVariables={projectsSectionData.variables}
+      client:tina
+    />
     <NewsVisual
       {...newsData}
       sectionData={pedagogyData.data}

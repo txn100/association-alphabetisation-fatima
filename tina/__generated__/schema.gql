@@ -62,6 +62,8 @@ type Query {
   statsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: StatsFilter): StatsConnection!
   programs(relativePath: String): Programs!
   programsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ProgramsFilter): ProgramsConnection!
+  projects(relativePath: String): Projects!
+  projectsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ProjectsFilter): ProjectsConnection!
   tiers(relativePath: String): Tiers!
   tiersConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TiersFilter): TiersConnection!
   hero(relativePath: String): Hero!
@@ -84,6 +86,8 @@ type Query {
   statsSectionConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: StatsSectionFilter): StatsSectionConnection!
   programsSection(relativePath: String): ProgramsSection!
   programsSectionConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ProgramsSectionFilter): ProgramsSectionConnection!
+  projectsSection(relativePath: String): ProjectsSection!
+  projectsSectionConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ProjectsSectionFilter): ProjectsSectionConnection!
   gallerySection(relativePath: String): GallerySection!
   gallerySectionConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: GallerySectionFilter): GallerySectionConnection!
 }
@@ -93,6 +97,7 @@ input DocumentFilter {
   gallery: GalleryFilter
   stats: StatsFilter
   programs: ProgramsFilter
+  projects: ProjectsFilter
   tiers: TiersFilter
   hero: HeroFilter
   about: AboutFilter
@@ -104,6 +109,7 @@ input DocumentFilter {
   site: SiteFilter
   statsSection: StatsSectionFilter
   programsSection: ProgramsSectionFilter
+  projectsSection: ProjectsSectionFilter
   gallerySection: GallerySectionFilter
 }
 
@@ -130,7 +136,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = News | Gallery | Stats | Programs | Tiers | Hero | About | Footer | Navigation | Impact | Pedagogy | Donate | Site | StatsSection | ProgramsSection | GallerySection | Folder
+union DocumentNode = News | Gallery | Stats | Programs | Projects | Tiers | Hero | About | Footer | Navigation | Impact | Pedagogy | Donate | Site | StatsSection | ProgramsSection | ProjectsSection | GallerySection | Folder
 
 type News implements Node & Document {
   title: String!
@@ -284,6 +290,46 @@ type ProgramsConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
   edges: [ProgramsConnectionEdges]
+}
+
+type Projects implements Node & Document {
+  title: String!
+  category: String!
+  status: String!
+  description: String!
+  image: String!
+  imageAlt: String!
+  completionDate: String
+  beneficiaries: String
+  impact: String
+  order: Float!
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ProjectsFilter {
+  title: StringFilter
+  category: StringFilter
+  status: StringFilter
+  description: StringFilter
+  image: ImageFilter
+  imageAlt: StringFilter
+  completionDate: StringFilter
+  beneficiaries: StringFilter
+  impact: StringFilter
+  order: NumberFilter
+}
+
+type ProjectsConnectionEdges {
+  cursor: String!
+  node: Projects
+}
+
+type ProjectsConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [ProjectsConnectionEdges]
 }
 
 type Tiers implements Node & Document {
@@ -831,6 +877,32 @@ type ProgramsSectionConnection implements Connection {
   edges: [ProgramsSectionConnectionEdges]
 }
 
+type ProjectsSection implements Node & Document {
+  heading: String!
+  headingHighlight: String
+  description: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ProjectsSectionFilter {
+  heading: StringFilter
+  headingHighlight: StringFilter
+  description: StringFilter
+}
+
+type ProjectsSectionConnectionEdges {
+  cursor: String!
+  node: ProjectsSection
+}
+
+type ProjectsSectionConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [ProjectsSectionConnectionEdges]
+}
+
 type GallerySection implements Node & Document {
   heading: String!
   headingHighlight: String
@@ -871,6 +943,8 @@ type Mutation {
   createStats(relativePath: String!, params: StatsMutation!): Stats!
   updatePrograms(relativePath: String!, params: ProgramsMutation!): Programs!
   createPrograms(relativePath: String!, params: ProgramsMutation!): Programs!
+  updateProjects(relativePath: String!, params: ProjectsMutation!): Projects!
+  createProjects(relativePath: String!, params: ProjectsMutation!): Projects!
   updateTiers(relativePath: String!, params: TiersMutation!): Tiers!
   createTiers(relativePath: String!, params: TiersMutation!): Tiers!
   updateHero(relativePath: String!, params: HeroMutation!): Hero!
@@ -893,6 +967,8 @@ type Mutation {
   createStatsSection(relativePath: String!, params: StatsSectionMutation!): StatsSection!
   updateProgramsSection(relativePath: String!, params: ProgramsSectionMutation!): ProgramsSection!
   createProgramsSection(relativePath: String!, params: ProgramsSectionMutation!): ProgramsSection!
+  updateProjectsSection(relativePath: String!, params: ProjectsSectionMutation!): ProjectsSection!
+  createProjectsSection(relativePath: String!, params: ProjectsSectionMutation!): ProjectsSection!
   updateGallerySection(relativePath: String!, params: GallerySectionMutation!): GallerySection!
   createGallerySection(relativePath: String!, params: GallerySectionMutation!): GallerySection!
 }
@@ -902,6 +978,7 @@ input DocumentUpdateMutation {
   gallery: GalleryMutation
   stats: StatsMutation
   programs: ProgramsMutation
+  projects: ProjectsMutation
   tiers: TiersMutation
   hero: HeroMutation
   about: AboutMutation
@@ -913,6 +990,7 @@ input DocumentUpdateMutation {
   site: SiteMutation
   statsSection: StatsSectionMutation
   programsSection: ProgramsSectionMutation
+  projectsSection: ProjectsSectionMutation
   gallerySection: GallerySectionMutation
   relativePath: String
 }
@@ -922,6 +1000,7 @@ input DocumentMutation {
   gallery: GalleryMutation
   stats: StatsMutation
   programs: ProgramsMutation
+  projects: ProjectsMutation
   tiers: TiersMutation
   hero: HeroMutation
   about: AboutMutation
@@ -933,6 +1012,7 @@ input DocumentMutation {
   site: SiteMutation
   statsSection: StatsSectionMutation
   programsSection: ProgramsSectionMutation
+  projectsSection: ProjectsSectionMutation
   gallerySection: GallerySectionMutation
 }
 
@@ -970,6 +1050,19 @@ input ProgramsMutation {
   color: String
   image: String
   imageAlt: String
+  order: Float
+}
+
+input ProjectsMutation {
+  title: String
+  category: String
+  status: String
+  description: String
+  image: String
+  imageAlt: String
+  completionDate: String
+  beneficiaries: String
+  impact: String
   order: Float
 }
 
@@ -1164,6 +1257,12 @@ input ProgramsSectionMutation {
   heading: String
   description: String
   mobileIndicator: String
+}
+
+input ProjectsSectionMutation {
+  heading: String
+  headingHighlight: String
+  description: String
 }
 
 input GallerySectionMutation {

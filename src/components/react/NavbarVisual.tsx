@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { tinaField, useTina } from "tinacms/dist/react";
 
-const sectionAnchors = ["#accueil", "#apropos", "#parcours", "#pedagogie", "#galerie"];
+const sectionAnchors = ["#accueil", "#apropos", "#parcours", "#projets", "#pedagogie", "#galerie"];
 
 export default function NavbarVisual(props: any) {
   const { data } = useTina({
@@ -68,6 +68,9 @@ export default function NavbarVisual(props: any) {
                 className="text-gray-600 hover:text-brand-blue font-semibold transition"
                 data-tina-field={tinaField(link, "label")}
               >
+                {sectionAnchors[i] === "#projets" && (
+                  <i className="fas fa-seedling text-emerald-500 mr-1 text-xs" />
+                )}
                 {link.label}
               </a>
             ))}
@@ -108,6 +111,9 @@ export default function NavbarVisual(props: any) {
               className="mobile-nav-link block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-brand-blue hover:bg-gray-50"
               data-tina-field={tinaField(link, "label")}
             >
+              {sectionAnchors[i] === "#projets" && (
+                <i className="fas fa-seedling text-emerald-500 mr-1.5" />
+              )}
               {link.label}
             </a>
           ))}

@@ -90,6 +90,8 @@ export type Query = {
   statsConnection: StatsConnection;
   programs: Programs;
   programsConnection: ProgramsConnection;
+  projects: Projects;
+  projectsConnection: ProjectsConnection;
   tiers: Tiers;
   tiersConnection: TiersConnection;
   hero: Hero;
@@ -112,6 +114,8 @@ export type Query = {
   statsSectionConnection: StatsSectionConnection;
   programsSection: ProgramsSection;
   programsSectionConnection: ProgramsSectionConnection;
+  projectsSection: ProjectsSection;
+  projectsSectionConnection: ProjectsSectionConnection;
   gallerySection: GallerySection;
   gallerySectionConnection: GallerySectionConnection;
 };
@@ -195,6 +199,21 @@ export type QueryProgramsConnectionArgs = {
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<ProgramsFilter>;
+};
+
+
+export type QueryProjectsArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryProjectsConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ProjectsFilter>;
 };
 
 
@@ -363,6 +382,21 @@ export type QueryProgramsSectionConnectionArgs = {
 };
 
 
+export type QueryProjectsSectionArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryProjectsSectionConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ProjectsSectionFilter>;
+};
+
+
 export type QueryGallerySectionArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -382,6 +416,7 @@ export type DocumentFilter = {
   gallery?: InputMaybe<GalleryFilter>;
   stats?: InputMaybe<StatsFilter>;
   programs?: InputMaybe<ProgramsFilter>;
+  projects?: InputMaybe<ProjectsFilter>;
   tiers?: InputMaybe<TiersFilter>;
   hero?: InputMaybe<HeroFilter>;
   about?: InputMaybe<AboutFilter>;
@@ -393,6 +428,7 @@ export type DocumentFilter = {
   site?: InputMaybe<SiteFilter>;
   statsSection?: InputMaybe<StatsSectionFilter>;
   programsSection?: InputMaybe<ProgramsSectionFilter>;
+  projectsSection?: InputMaybe<ProjectsSectionFilter>;
   gallerySection?: InputMaybe<GallerySectionFilter>;
 };
 
@@ -433,7 +469,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = News | Gallery | Stats | Programs | Tiers | Hero | About | Footer | Navigation | Impact | Pedagogy | Donate | Site | StatsSection | ProgramsSection | GallerySection | Folder;
+export type DocumentNode = News | Gallery | Stats | Programs | Projects | Tiers | Hero | About | Footer | Navigation | Impact | Pedagogy | Donate | Site | StatsSection | ProgramsSection | ProjectsSection | GallerySection | Folder;
 
 export type News = Node & Document & {
   __typename?: 'News';
@@ -599,6 +635,49 @@ export type ProgramsConnection = Connection & {
   pageInfo: PageInfo;
   totalCount: Scalars['Float']['output'];
   edges?: Maybe<Array<Maybe<ProgramsConnectionEdges>>>;
+};
+
+export type Projects = Node & Document & {
+  __typename?: 'Projects';
+  title: Scalars['String']['output'];
+  category: Scalars['String']['output'];
+  status: Scalars['String']['output'];
+  description: Scalars['String']['output'];
+  image: Scalars['String']['output'];
+  imageAlt: Scalars['String']['output'];
+  completionDate?: Maybe<Scalars['String']['output']>;
+  beneficiaries?: Maybe<Scalars['String']['output']>;
+  impact?: Maybe<Scalars['String']['output']>;
+  order: Scalars['Float']['output'];
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type ProjectsFilter = {
+  title?: InputMaybe<StringFilter>;
+  category?: InputMaybe<StringFilter>;
+  status?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  imageAlt?: InputMaybe<StringFilter>;
+  completionDate?: InputMaybe<StringFilter>;
+  beneficiaries?: InputMaybe<StringFilter>;
+  impact?: InputMaybe<StringFilter>;
+  order?: InputMaybe<NumberFilter>;
+};
+
+export type ProjectsConnectionEdges = {
+  __typename?: 'ProjectsConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Projects>;
+};
+
+export type ProjectsConnection = Connection & {
+  __typename?: 'ProjectsConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<ProjectsConnectionEdges>>>;
 };
 
 export type Tiers = Node & Document & {
@@ -1194,6 +1273,35 @@ export type ProgramsSectionConnection = Connection & {
   edges?: Maybe<Array<Maybe<ProgramsSectionConnectionEdges>>>;
 };
 
+export type ProjectsSection = Node & Document & {
+  __typename?: 'ProjectsSection';
+  heading: Scalars['String']['output'];
+  headingHighlight?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type ProjectsSectionFilter = {
+  heading?: InputMaybe<StringFilter>;
+  headingHighlight?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type ProjectsSectionConnectionEdges = {
+  __typename?: 'ProjectsSectionConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<ProjectsSection>;
+};
+
+export type ProjectsSectionConnection = Connection & {
+  __typename?: 'ProjectsSectionConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<ProjectsSectionConnectionEdges>>>;
+};
+
 export type GallerySection = Node & Document & {
   __typename?: 'GallerySection';
   heading: Scalars['String']['output'];
@@ -1238,6 +1346,8 @@ export type Mutation = {
   createStats: Stats;
   updatePrograms: Programs;
   createPrograms: Programs;
+  updateProjects: Projects;
+  createProjects: Projects;
   updateTiers: Tiers;
   createTiers: Tiers;
   updateHero: Hero;
@@ -1260,6 +1370,8 @@ export type Mutation = {
   createStatsSection: StatsSection;
   updateProgramsSection: ProgramsSection;
   createProgramsSection: ProgramsSection;
+  updateProjectsSection: ProjectsSection;
+  createProjectsSection: ProjectsSection;
   updateGallerySection: GallerySection;
   createGallerySection: GallerySection;
 };
@@ -1343,6 +1455,18 @@ export type MutationUpdateProgramsArgs = {
 export type MutationCreateProgramsArgs = {
   relativePath: Scalars['String']['input'];
   params: ProgramsMutation;
+};
+
+
+export type MutationUpdateProjectsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ProjectsMutation;
+};
+
+
+export type MutationCreateProjectsArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ProjectsMutation;
 };
 
 
@@ -1478,6 +1602,18 @@ export type MutationCreateProgramsSectionArgs = {
 };
 
 
+export type MutationUpdateProjectsSectionArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ProjectsSectionMutation;
+};
+
+
+export type MutationCreateProjectsSectionArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ProjectsSectionMutation;
+};
+
+
 export type MutationUpdateGallerySectionArgs = {
   relativePath: Scalars['String']['input'];
   params: GallerySectionMutation;
@@ -1494,6 +1630,7 @@ export type DocumentUpdateMutation = {
   gallery?: InputMaybe<GalleryMutation>;
   stats?: InputMaybe<StatsMutation>;
   programs?: InputMaybe<ProgramsMutation>;
+  projects?: InputMaybe<ProjectsMutation>;
   tiers?: InputMaybe<TiersMutation>;
   hero?: InputMaybe<HeroMutation>;
   about?: InputMaybe<AboutMutation>;
@@ -1505,6 +1642,7 @@ export type DocumentUpdateMutation = {
   site?: InputMaybe<SiteMutation>;
   statsSection?: InputMaybe<StatsSectionMutation>;
   programsSection?: InputMaybe<ProgramsSectionMutation>;
+  projectsSection?: InputMaybe<ProjectsSectionMutation>;
   gallerySection?: InputMaybe<GallerySectionMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1514,6 +1652,7 @@ export type DocumentMutation = {
   gallery?: InputMaybe<GalleryMutation>;
   stats?: InputMaybe<StatsMutation>;
   programs?: InputMaybe<ProgramsMutation>;
+  projects?: InputMaybe<ProjectsMutation>;
   tiers?: InputMaybe<TiersMutation>;
   hero?: InputMaybe<HeroMutation>;
   about?: InputMaybe<AboutMutation>;
@@ -1525,6 +1664,7 @@ export type DocumentMutation = {
   site?: InputMaybe<SiteMutation>;
   statsSection?: InputMaybe<StatsSectionMutation>;
   programsSection?: InputMaybe<ProgramsSectionMutation>;
+  projectsSection?: InputMaybe<ProjectsSectionMutation>;
   gallerySection?: InputMaybe<GallerySectionMutation>;
 };
 
@@ -1562,6 +1702,19 @@ export type ProgramsMutation = {
   color?: InputMaybe<Scalars['String']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
   imageAlt?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Scalars['Float']['input']>;
+};
+
+export type ProjectsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  category?: InputMaybe<Scalars['String']['input']>;
+  status?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  imageAlt?: InputMaybe<Scalars['String']['input']>;
+  completionDate?: InputMaybe<Scalars['String']['input']>;
+  beneficiaries?: InputMaybe<Scalars['String']['input']>;
+  impact?: InputMaybe<Scalars['String']['input']>;
   order?: InputMaybe<Scalars['Float']['input']>;
 };
 
@@ -1758,6 +1911,12 @@ export type ProgramsSectionMutation = {
   mobileIndicator?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type ProjectsSectionMutation = {
+  heading?: InputMaybe<Scalars['String']['input']>;
+  headingHighlight?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type GallerySectionMutation = {
   heading?: InputMaybe<Scalars['String']['input']>;
   headingHighlight?: InputMaybe<Scalars['String']['input']>;
@@ -1771,6 +1930,8 @@ export type GalleryPartsFragment = { __typename: 'Gallery', src: string, alt: st
 export type StatsPartsFragment = { __typename: 'Stats', value: string, label: string, order: number };
 
 export type ProgramsPartsFragment = { __typename: 'Programs', title: string, level: string, icon: string, ages?: string | null, description: string, color: string, image: string, imageAlt: string, order: number };
+
+export type ProjectsPartsFragment = { __typename: 'Projects', title: string, category: string, status: string, description: string, image: string, imageAlt: string, completionDate?: string | null, beneficiaries?: string | null, impact?: string | null, order: number };
 
 export type TiersPartsFragment = { __typename: 'Tiers', amount: number, label: string, period: string, description: string, icon: string, highlighted?: boolean | null, order: number };
 
@@ -1793,6 +1954,8 @@ export type SitePartsFragment = { __typename: 'Site', title: string, description
 export type StatsSectionPartsFragment = { __typename: 'StatsSection', badges?: Array<{ __typename: 'StatsSectionBadges', label: string } | null> | null };
 
 export type ProgramsSectionPartsFragment = { __typename: 'ProgramsSection', heading: string, description?: string | null, mobileIndicator?: string | null };
+
+export type ProjectsSectionPartsFragment = { __typename: 'ProjectsSection', heading: string, headingHighlight?: string | null, description?: string | null };
 
 export type GallerySectionPartsFragment = { __typename: 'GallerySection', heading: string, headingHighlight?: string | null, description?: string | null };
 
@@ -1871,6 +2034,25 @@ export type ProgramsConnectionQueryVariables = Exact<{
 
 
 export type ProgramsConnectionQuery = { __typename?: 'Query', programsConnection: { __typename?: 'ProgramsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProgramsConnectionEdges', cursor: string, node?: { __typename: 'Programs', id: string, title: string, level: string, icon: string, ages?: string | null, description: string, color: string, image: string, imageAlt: string, order: number, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
+export type ProjectsQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type ProjectsQuery = { __typename?: 'Query', projects: { __typename: 'Projects', id: string, title: string, category: string, status: string, description: string, image: string, imageAlt: string, completionDate?: string | null, beneficiaries?: string | null, impact?: string | null, order: number, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type ProjectsConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ProjectsFilter>;
+}>;
+
+
+export type ProjectsConnectionQuery = { __typename?: 'Query', projectsConnection: { __typename?: 'ProjectsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectsConnectionEdges', cursor: string, node?: { __typename: 'Projects', id: string, title: string, category: string, status: string, description: string, image: string, imageAlt: string, completionDate?: string | null, beneficiaries?: string | null, impact?: string | null, order: number, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type TiersQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2081,6 +2263,25 @@ export type ProgramsSectionConnectionQueryVariables = Exact<{
 
 export type ProgramsSectionConnectionQuery = { __typename?: 'Query', programsSectionConnection: { __typename?: 'ProgramsSectionConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProgramsSectionConnectionEdges', cursor: string, node?: { __typename: 'ProgramsSection', id: string, heading: string, description?: string | null, mobileIndicator?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
+export type ProjectsSectionQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type ProjectsSectionQuery = { __typename?: 'Query', projectsSection: { __typename: 'ProjectsSection', id: string, heading: string, headingHighlight?: string | null, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type ProjectsSectionConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ProjectsSectionFilter>;
+}>;
+
+
+export type ProjectsSectionConnectionQuery = { __typename?: 'Query', projectsSectionConnection: { __typename?: 'ProjectsSectionConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProjectsSectionConnectionEdges', cursor: string, node?: { __typename: 'ProjectsSection', id: string, heading: string, headingHighlight?: string | null, description?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+
 export type GallerySectionQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
@@ -2142,6 +2343,21 @@ export const ProgramsPartsFragmentDoc = gql`
   color
   image
   imageAlt
+  order
+}
+    `;
+export const ProjectsPartsFragmentDoc = gql`
+    fragment ProjectsParts on Projects {
+  __typename
+  title
+  category
+  status
+  description
+  image
+  imageAlt
+  completionDate
+  beneficiaries
+  impact
   order
 }
     `;
@@ -2343,6 +2559,14 @@ export const ProgramsSectionPartsFragmentDoc = gql`
   heading
   description
   mobileIndicator
+}
+    `;
+export const ProjectsSectionPartsFragmentDoc = gql`
+    fragment ProjectsSectionParts on ProjectsSection {
+  __typename
+  heading
+  headingHighlight
+  description
 }
     `;
 export const GallerySectionPartsFragmentDoc = gql`
@@ -2581,6 +2805,63 @@ export const ProgramsConnectionDocument = gql`
   }
 }
     ${ProgramsPartsFragmentDoc}`;
+export const ProjectsDocument = gql`
+    query projects($relativePath: String!) {
+  projects(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ProjectsParts
+  }
+}
+    ${ProjectsPartsFragmentDoc}`;
+export const ProjectsConnectionDocument = gql`
+    query projectsConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ProjectsFilter) {
+  projectsConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ProjectsParts
+      }
+    }
+  }
+}
+    ${ProjectsPartsFragmentDoc}`;
 export const TiersDocument = gql`
     query tiers($relativePath: String!) {
   tiers(relativePath: $relativePath) {
@@ -3208,6 +3489,63 @@ export const ProgramsSectionConnectionDocument = gql`
   }
 }
     ${ProgramsSectionPartsFragmentDoc}`;
+export const ProjectsSectionDocument = gql`
+    query projectsSection($relativePath: String!) {
+  projectsSection(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ProjectsSectionParts
+  }
+}
+    ${ProjectsSectionPartsFragmentDoc}`;
+export const ProjectsSectionConnectionDocument = gql`
+    query projectsSectionConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ProjectsSectionFilter) {
+  projectsSectionConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ProjectsSectionParts
+      }
+    }
+  }
+}
+    ${ProjectsSectionPartsFragmentDoc}`;
 export const GallerySectionDocument = gql`
     query gallerySection($relativePath: String!) {
   gallerySection(relativePath: $relativePath) {
@@ -3292,6 +3630,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
     programsConnection(variables?: ProgramsConnectionQueryVariables, options?: C): Promise<{data: ProgramsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProgramsConnectionQueryVariables, query: string}> {
         return requester<{data: ProgramsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProgramsConnectionQueryVariables, query: string}, ProgramsConnectionQueryVariables>(ProgramsConnectionDocument, variables, options);
       },
+    projects(variables: ProjectsQueryVariables, options?: C): Promise<{data: ProjectsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProjectsQueryVariables, query: string}> {
+        return requester<{data: ProjectsQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProjectsQueryVariables, query: string}, ProjectsQueryVariables>(ProjectsDocument, variables, options);
+      },
+    projectsConnection(variables?: ProjectsConnectionQueryVariables, options?: C): Promise<{data: ProjectsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProjectsConnectionQueryVariables, query: string}> {
+        return requester<{data: ProjectsConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProjectsConnectionQueryVariables, query: string}, ProjectsConnectionQueryVariables>(ProjectsConnectionDocument, variables, options);
+      },
     tiers(variables: TiersQueryVariables, options?: C): Promise<{data: TiersQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TiersQueryVariables, query: string}> {
         return requester<{data: TiersQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TiersQueryVariables, query: string}, TiersQueryVariables>(TiersDocument, variables, options);
       },
@@ -3357,6 +3701,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     programsSectionConnection(variables?: ProgramsSectionConnectionQueryVariables, options?: C): Promise<{data: ProgramsSectionConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProgramsSectionConnectionQueryVariables, query: string}> {
         return requester<{data: ProgramsSectionConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProgramsSectionConnectionQueryVariables, query: string}, ProgramsSectionConnectionQueryVariables>(ProgramsSectionConnectionDocument, variables, options);
+      },
+    projectsSection(variables: ProjectsSectionQueryVariables, options?: C): Promise<{data: ProjectsSectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProjectsSectionQueryVariables, query: string}> {
+        return requester<{data: ProjectsSectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProjectsSectionQueryVariables, query: string}, ProjectsSectionQueryVariables>(ProjectsSectionDocument, variables, options);
+      },
+    projectsSectionConnection(variables?: ProjectsSectionConnectionQueryVariables, options?: C): Promise<{data: ProjectsSectionConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProjectsSectionConnectionQueryVariables, query: string}> {
+        return requester<{data: ProjectsSectionConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ProjectsSectionConnectionQueryVariables, query: string}, ProjectsSectionConnectionQueryVariables>(ProjectsSectionConnectionDocument, variables, options);
       },
     gallerySection(variables: GallerySectionQueryVariables, options?: C): Promise<{data: GallerySectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GallerySectionQueryVariables, query: string}> {
         return requester<{data: GallerySectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: GallerySectionQueryVariables, query: string}, GallerySectionQueryVariables>(GallerySectionDocument, variables, options);

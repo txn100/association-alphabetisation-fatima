@@ -95,6 +95,25 @@ var config_default = defineConfig({
         ]
       },
       {
+        name: "projects",
+        label: "Projets",
+        path: "src/content/projects",
+        format: "json",
+        ui: { router: () => "/" },
+        fields: [
+          { type: "string", name: "title", label: "Titre du projet", isTitle: true, required: true },
+          { type: "string", name: "category", label: "Cat\xE9gorie", required: true, options: ["\xC9co-responsable", "Infrastructure", "Communautaire"] },
+          { type: "string", name: "status", label: "Statut", required: true, options: [{ value: "completed", label: "Termin\xE9" }, { value: "in-progress", label: "En cours" }, { value: "planned", label: "Planifi\xE9" }] },
+          { type: "string", name: "description", label: "Description", required: true, ui: { component: "textarea" } },
+          { type: "image", name: "image", label: "Image principale", required: true },
+          { type: "string", name: "imageAlt", label: "Texte alternatif de l'image", required: true },
+          { type: "string", name: "completionDate", label: "Date de r\xE9alisation", description: "Ex: Mars 2025" },
+          { type: "string", name: "beneficiaries", label: "B\xE9n\xE9ficiaires", description: "Ex: 350 \xE9l\xE8ves" },
+          { type: "string", name: "impact", label: "Impact concret", description: "Ex: Eau potable disponible chaque jour" },
+          { type: "number", name: "order", label: "Ordre d'affichage", required: true }
+        ]
+      },
+      {
         name: "tiers",
         label: "Formules de Parrainage",
         path: "src/content/tiers",
@@ -416,6 +435,19 @@ var config_default = defineConfig({
           { type: "string", name: "heading", label: "Titre", isTitle: true, required: true },
           { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
           { type: "string", name: "mobileIndicator", label: "Texte indicateur mobile" }
+        ]
+      },
+      {
+        name: "projectsSection",
+        label: "Section Projets",
+        path: "src/data",
+        format: "json",
+        ui: singletonUI,
+        match: { include: "projects-section" },
+        fields: [
+          { type: "string", name: "heading", label: "Titre", isTitle: true, required: true },
+          { type: "string", name: "headingHighlight", label: "Mot en surbrillance" },
+          { type: "string", name: "description", label: "Description", ui: { component: "textarea" } }
         ]
       },
       {

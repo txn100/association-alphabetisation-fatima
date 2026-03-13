@@ -1,0 +1,12 @@
+{
+  "title": "Installation d'une Fontaine à Eau",
+  "category": "Infrastructure",
+  "status": "completed",
+  "description": "Installation d'une fontaine à eau potable dans la cour de l'école, offrant un accès gratuit et sûr à l'eau pour tous les élèves et le personnel. Ce projet améliore les conditions d'hygiène et le bien-être quotidien.",
+  "image": "/images/school-uodv4.webp",
+  "imageAlt": "Fontaine à eau installée dans la cour de l'école",
+  "completionDate": "Janvier 2026",
+  "beneficiaries": "130",
+  "impact": "Eau potable disponible chaque jour",
+  "order": 1
+}

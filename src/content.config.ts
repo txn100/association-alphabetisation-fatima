@@ -50,6 +50,22 @@ const programs = defineCollection({
   }),
 });
 
+const projects = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: './src/content/projects' }),
+  schema: z.object({
+    title: z.string(),
+    category: z.string(),
+    status: z.string(),
+    description: z.string(),
+    image: z.string(),
+    imageAlt: z.string(),
+    completionDate: z.string().optional().default(''),
+    beneficiaries: z.string().optional().default(''),
+    impact: z.string().optional().default(''),
+    order: z.number(),
+  }),
+});
+
 const tiers = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/tiers' }),
   schema: z.object({
@@ -63,4 +79,4 @@ const tiers = defineCollection({
   }),
 });
 
-export const collections = { news, gallery, stats, programs, tiers };
+export const collections = { news, gallery, stats, programs, projects, tiers };

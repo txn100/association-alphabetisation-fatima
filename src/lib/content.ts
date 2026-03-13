@@ -39,6 +39,9 @@ export async function getProgramsSectionData() {
 export async function getGallerySectionData() {
   return client.queries.gallerySection({ relativePath: "gallery-section.json" });
 }
+export async function getProjectsSectionData() {
+  return client.queries.projectsSection({ relativePath: "projects-section.json" });
+}
 
 export async function getStatsData() {
   return client.queries.statsConnection();
@@ -54,4 +57,7 @@ export async function getGalleryData() {
 }
 export async function getTiersData() {
   return client.queries.tiersConnection();
+}
+export async function getProjectsData() {
+  return client.queries.projectsConnection();
 }
