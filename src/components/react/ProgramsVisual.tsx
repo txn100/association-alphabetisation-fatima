@@ -14,7 +14,7 @@ export default function ProgramsVisual(props: any & { lang?: string; ui?: any })
 
   const lang = props.lang || "fr";
   const ui = props.ui || {};
-  const prefix = lang === "en" ? "/en" : "";
+
   const edges = data.programsConnection?.edges || [];
   const steps = edges
     .filter((e: any) => e?.node)
@@ -103,7 +103,7 @@ export default function ProgramsVisual(props: any & { lang?: string; ui?: any })
                   </p>
                   {step.slug && (
                     <a
-                      href={`${prefix}/programmes/${step.slug}`}
+                      href={`${lang === "en" ? "/en/programs" : "/programmes"}/${step.slug}`}
                       className={`inline-flex items-center mt-4 text-sm font-bold transition ${
                         step.color === "pink" ? "text-brand-pink hover:text-pink-700" : "text-brand-blue hover:text-blue-700"
                       }`}

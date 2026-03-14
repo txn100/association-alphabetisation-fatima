@@ -12,11 +12,26 @@ const FALLBACK_ANCHORS: Record<string, string> = {
   galerie: "#galerie",  gallery: "#galerie",
 };
 
+/** FR→EN route equivalents for full-path links (translated slugs). */
+const FR_TO_EN_ROUTES: Record<string, string> = {
+  "/actualites/": "/en/news/",
+  "/programmes/": "/en/programs/",
+  "/faire-un-don/": "/en/donate/",
+  "/notre-histoire/": "/en/our-story/",
+  "/impact-et-transparence/": "/en/impact-transparency/",
+  "/contact/": "/en/contact/",
+};
+
 /** Return link.href if present, otherwise derive from label. */
-function resolveHref(link: { href?: string; label?: string }): string {
-  if (link.href) return link.href;
-  const key = (link.label || "").toLowerCase().trim();
-  return FALLBACK_ANCHORS[key] || "#";
+function resolveHref(link: { href?: string; label?: string }, lang?: string): string {
+  let href = link.href || FALLBACK_ANCHORS[(link.label || "").toLowerCase().trim()] || "#";
+  if (lang === "en" && href.startsWith("/")) {
+    const exact = FR_TO_EN_ROUTES[href];
+    if (exact) return exact;
+    const prefix = Object.keys(FR_TO_EN_ROUTES).find((fr) => href.startsWith(fr));
+    if (prefix) return FR_TO_EN_ROUTES[prefix] + href.slice(prefix.length);
+  }
+  return href;
 }
 
 export default function NavbarVisual(props: any) {
@@ -78,7 +93,7 @@ export default function NavbarVisual(props: any) {
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center gap-1 xl:gap-3">
             {links.map((link: any, i: number) => {
-              const href = resolveHref(link);
+              const href = resolveHref(link, props.lang);
               return (
                 <a
                   key={i}
@@ -132,7 +147,7 @@ export default function NavbarVisual(props: any) {
       >
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           {links.map((link: any, i: number) => {
-            const href = resolveHref(link);
+            const href = resolveHref(link, props.lang);
             return (
               <a
                 key={i}

@@ -163,7 +163,7 @@ export default function NewsVisual(props: any) {
                     </p>
                     {item.slug && (
                       <a
-                        href={`${props.lang === "en" ? "/en" : ""}/actualites/${item.slug}`}
+                        href={`${props.lang === "en" ? "/en/news" : "/actualites"}/${item.slug}`}
                         className="inline-flex items-center mt-2 text-xs font-bold text-brand-blue hover:text-blue-700 transition"
                       >
                         {ui?.readMore || "Lire la suite"} <i className="fas fa-arrow-right ml-1" />

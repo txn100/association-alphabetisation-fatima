@@ -165,11 +165,11 @@ export default function FooterVisual(props: any) {
                 {props.lang === "en" ? "Useful Links" : "Liens utiles"}
               </p>
               <ul className="space-y-2 text-sm">
-                <li><a href={props.lang === "en" ? "/en/notre-histoire" : "/notre-histoire"} className="hover:text-white transition">{props.lang === "en" ? "Our Story" : "Notre Histoire"}</a></li>
-                <li><a href={props.lang === "en" ? "/en/actualites/" : "/actualites/"} className="hover:text-white transition">{props.lang === "en" ? "News" : "Actualités"}</a></li>
-                <li><a href={props.lang === "en" ? "/en/impact-et-transparence" : "/impact-et-transparence"} className="hover:text-white transition">{props.lang === "en" ? "Impact & Transparency" : "Impact & Transparence"}</a></li>
-                <li><a href={props.lang === "en" ? "/en/faire-un-don" : "/faire-un-don"} className="hover:text-white transition">{props.lang === "en" ? "Donate" : "Faire un Don"}</a></li>
-                <li><a href={props.lang === "en" ? "/en/contact" : "/contact"} className="hover:text-white transition">Contact</a></li>
+                <li><a href={props.lang === "en" ? "/en/our-story/" : "/notre-histoire/"} className="hover:text-white transition">{props.lang === "en" ? "Our Story" : "Notre Histoire"}</a></li>
+                <li><a href={props.lang === "en" ? "/en/news/" : "/actualites/"} className="hover:text-white transition">{props.lang === "en" ? "News" : "Actualités"}</a></li>
+                <li><a href={props.lang === "en" ? "/en/impact-transparency/" : "/impact-et-transparence/"} className="hover:text-white transition">{props.lang === "en" ? "Impact & Transparency" : "Impact & Transparence"}</a></li>
+                <li><a href={props.lang === "en" ? "/en/donate/" : "/faire-un-don/"} className="hover:text-white transition">{props.lang === "en" ? "Donate" : "Faire un Don"}</a></li>
+                <li><a href={props.lang === "en" ? "/en/contact/" : "/contact/"} className="hover:text-white transition">Contact</a></li>
               </ul>
             </nav>
           </div>
