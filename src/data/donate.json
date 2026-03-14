@@ -66,8 +66,8 @@
     "phonePlaceholder": "Téléphone",
     "emailPlaceholder": "Email *",
     "messagePlaceholder": "Message (optionnel)",
-    "whatsappButton": "Envoyer via WhatsApp",
-    "emailButton": "Ou envoyer par email",
+    "whatsappButton": "",
+    "emailButton": "envoyer par email",
     "responseTime": "Réponse sous 48h",
     "receiptLabel": "Reçu fiscal NSIF"
   },
