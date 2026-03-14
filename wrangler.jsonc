@@ -1,5 +1,12 @@
 {
   "name": "association-alphabetisation-fatima",
   "compatibility_date": "2026-03-09",
-  "pages_build_output_dir": "dist"
+  "pages_build_output_dir": "dist",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "fatima-donations",
+      "database_id": "7012e62c-8552-43e6-a751-f0280f668890"
+    }
+  ]
 }

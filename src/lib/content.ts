@@ -154,3 +154,13 @@ export async function getProjectsData(locale: Locale = "fr") {
 export async function getGalleryData() {
   return client.queries.galleryConnection();
 }
+
+// ---------------------------------------------------------------------------
+// Donate page content (static JSON — not a TinaCMS collection yet)
+// ---------------------------------------------------------------------------
+
+export async function getDonatePageData(locale: Locale = "fr") {
+  if (locale === "en") return loadEnSingleton("donate-page");
+  const mod = await import("../data/donate-page.json");
+  return mod.default || mod;
+}

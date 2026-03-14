@@ -1,0 +1,351 @@
+---
+/**
+ * Shared donate page renderer.
+ * Used by /donate (FR) and /en/donate/ (EN).
+ * Pure Astro + vanilla JS — no React hydration needed.
+ */
+import Layout from "../layouts/Layout.astro";
+import type { Locale, UIStrings } from "../lib/i18n";
+
+interface Props {
+  lang: Locale;
+  ui: UIStrings;
+  donatePageData: any;
+  donateData: any;     // existing donate.json for bank transfer fallback
+  navigationData: any;
+  siteData: any;
+}
+
+const { lang, ui, donatePageData, donateData, navigationData, siteData } = Astro.props;
+
+const page = donatePageData;
+const donate = donateData?.data?.donate || donateData;
+const nav = navigationData?.data?.navigation || navigationData;
+const site = siteData?.data?.site || siteData;
+const langPrefix = lang === "en" ? "/en" : "";
+
+// Bank transfer info from existing donate.json
+const bankName = donate?.bankName || "MCB";
+const accountNumber = donate?.accountNumber || "000162618670";
+const accountHolder = donate?.accountHolder || "Association d'Alphabétisation de Fatima";
+---
+
+<Layout
+  lang={lang}
+  title={page.title + " — " + (site?.title || "Association d'Alphabétisation de Fatima")}
+  description={page.metaDescription}
+>
+  <!-- Simple top bar with back link -->
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href={langPrefix + "/"} class="flex items-center gap-2 text-brand-dark-blue hover:text-brand-light-blue transition">
+        <i class="fas fa-arrow-left text-sm"></i>
+        <img src="/images/logo.webp" alt="Logo" class="h-8 w-auto" />
+      </a>
+      <h1 class="text-lg font-bold text-brand-dark-blue">{page.title}</h1>
+      <a href={ui.langSwitchHref + "donate/"} class="text-sm font-medium border border-brand-dark-blue rounded-full px-3 py-1 hover:bg-brand-dark-blue hover:text-white transition">
+        {ui.langSwitchLabel}
+      </a>
+    </div>
+  </header>
+
+  <main class="max-w-2xl mx-auto px-4 py-8 sm:py-12">
+    <!-- Hero -->
+    <section class="text-center mb-10">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark-blue mb-4">
+        {page.heroHeading}
+      </h2>
+      <p class="text-lg text-gray-600 max-w-xl mx-auto">
+        {page.heroDescription}
+      </p>
+    </section>
+
+    <!-- Donation form card -->
+    <div class="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
+
+      <!-- Amount selection -->
+      <div class="mb-8">
+        <label class="block text-sm font-semibold text-gray-700 mb-3">{ui.donateAmount}</label>
+        <div id="amount-grid" class="grid grid-cols-3 sm:grid-cols-5 gap-2 mb-3">
+          {page.presetAmounts.map((amt: number) => (
+            <button
+              type="button"
+              class="amount-btn py-3 px-2 rounded-xl border-2 border-gray-200 text-center font-bold text-brand-dark-blue hover:border-brand-light-blue hover:bg-blue-50 transition cursor-pointer"
+              data-amount={amt}
+            >
+              Rs {amt.toLocaleString()}
+            </button>
+          ))}
+        </div>
+        <div class="relative">
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 font-semibold">Rs</span>
+          <input
+            id="custom-amount"
+            type="number"
+            min="10"
+            step="1"
+            placeholder={page.customAmountPlaceholder}
+            class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:border-brand-light-blue focus:ring-2 focus:ring-brand-light-blue/20 outline-none transition"
+          />
+        </div>
+      </div>
+
+      <!-- Donor details form -->
+      <div class="mb-8">
+        <h3 class="text-sm font-semibold text-gray-700 mb-3">{page.formHeading}</h3>
+
+        <div class="space-y-3">
+          <input
+            id="donor-name"
+            type="text"
+            required
+            placeholder={page.formNamePlaceholder}
+            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-brand-light-blue focus:ring-2 focus:ring-brand-light-blue/20 outline-none transition"
+          />
+          <input
+            id="donor-email"
+            type="email"
+            required
+            placeholder={page.formEmailPlaceholder}
+            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-brand-light-blue focus:ring-2 focus:ring-brand-light-blue/20 outline-none transition"
+          />
+          <input
+            id="donor-phone"
+            type="tel"
+            placeholder={page.formPhonePlaceholder}
+            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-brand-light-blue focus:ring-2 focus:ring-brand-light-blue/20 outline-none transition"
+          />
+
+          <!-- Tax receipt checkbox -->
+          <label class="flex items-start gap-3 cursor-pointer p-3 rounded-xl border-2 border-gray-200 hover:border-brand-light-blue transition">
+            <input
+              id="tax-receipt"
+              type="checkbox"
+              class="mt-1 h-5 w-5 rounded border-gray-300 text-brand-light-blue focus:ring-brand-light-blue"
+            />
+            <div>
+              <span class="text-sm font-medium text-gray-700">{page.formTaxReceiptLabel}</span>
+              <p class="text-xs text-gray-500 mt-0.5">{page.formNicHelp}</p>
+            </div>
+          </label>
+
+          <!-- NIC field (hidden by default, shown when tax receipt checked) -->
+          <div id="nic-wrapper" class="hidden">
+            <input
+              id="donor-nic"
+              type="text"
+              placeholder={page.formNicPlaceholder}
+              class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-brand-light-blue focus:ring-2 focus:ring-brand-light-blue/20 outline-none transition"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust signal -->
+      <div class="flex items-center gap-2 mb-6 p-3 bg-green-50 rounded-xl">
+        <i class="fas fa-shield-halved text-green-600"></i>
+        <span class="text-sm text-green-700 font-medium">{page.trustBadge}</span>
+      </div>
+
+      <!-- Error message -->
+      <div id="form-error" class="hidden mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700">
+      </div>
+
+      <!-- Pay button -->
+      <button
+        id="pay-btn"
+        type="button"
+        class="w-full py-4 bg-brand-orange hover:bg-brand-orange/90 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-xl transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        <i class="fas fa-lock mr-2 text-sm"></i>
+        <span id="pay-btn-text">{page.payButtonText}</span>
+      </button>
+
+      <p class="text-xs text-gray-400 text-center mt-3">
+        <i class="fas fa-shield-halved mr-1"></i>
+        {page.securityNote}
+      </p>
+    </div>
+
+    <!-- Bank transfer fallback -->
+    <div class="mt-8 bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+      <h3 class="font-bold text-brand-dark-blue mb-3">
+        <i class="fas fa-university mr-2"></i>
+        {page.bankTransferTitle}
+      </h3>
+      <p class="text-sm text-gray-600 mb-4">{page.bankTransferDescription}</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
+        <div class="bg-gray-50 p-3 rounded-lg">
+          <span class="text-gray-500 text-xs">{ui.bankLabel}</span>
+          <p class="font-semibold">{bankName}</p>
+        </div>
+        <div class="bg-gray-50 p-3 rounded-lg">
+          <span class="text-gray-500 text-xs">{ui.accountLabel}</span>
+          <p class="font-semibold font-mono text-xs">{accountNumber}</p>
+        </div>
+        <div class="bg-gray-50 p-3 rounded-lg">
+          <span class="text-gray-500 text-xs">{ui.holderLabel}</span>
+          <p class="font-semibold text-xs">{accountHolder}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to home -->
+    <div class="text-center mt-8">
+      <a href={langPrefix + "/"} class="text-brand-light-blue hover:text-brand-dark-blue transition font-medium">
+        <i class="fas fa-arrow-left mr-1"></i>
+        {page.backToHome}
+      </a>
+    </div>
+  </main>
+
+  <!-- Hidden form for Peach Hosted Checkout redirect -->
+  <form id="peach-form" method="POST" style="display:none">
+  </form>
+
+  <!-- Vanilla JS: amount selection, form validation, checkout flow -->
+  <script define:vars={{ lang, peachCheckoutUrl: '', langPrefix }}>
+    window.__donateLang = lang;
+    window.__langPrefix = langPrefix;
+  </script>
+
+  <script>
+    if (typeof window !== 'undefined') {
+      const lang = (window as any).__donateLang || 'fr';
+      const langPrefix = (window as any).__langPrefix || '';
+
+      let selectedAmount = 0;
+
+      // --- Amount selection ---
+      const amountBtns = document.querySelectorAll('.amount-btn');
+      const customInput = document.getElementById('custom-amount') as HTMLInputElement;
+
+      amountBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          amountBtns.forEach(b => b.classList.remove('border-brand-light-blue', 'bg-blue-50'));
+          btn.classList.add('border-brand-light-blue', 'bg-blue-50');
+          selectedAmount = Number((btn as HTMLElement).dataset.amount);
+          customInput.value = '';
+        });
+      });
+
+      customInput?.addEventListener('input', () => {
+        if (customInput.value) {
+          amountBtns.forEach(b => b.classList.remove('border-brand-light-blue', 'bg-blue-50'));
+          selectedAmount = Number(customInput.value);
+        }
+      });
+
+      // --- Tax receipt checkbox toggles NIC field ---
+      const taxCheckbox = document.getElementById('tax-receipt') as HTMLInputElement;
+      const nicWrapper = document.getElementById('nic-wrapper');
+      taxCheckbox?.addEventListener('change', () => {
+        if (nicWrapper) {
+          nicWrapper.classList.toggle('hidden', !taxCheckbox.checked);
+        }
+      });
+
+      // --- Pay button ---
+      const payBtn = document.getElementById('pay-btn') as HTMLButtonElement;
+      const payBtnText = document.getElementById('pay-btn-text');
+      const formError = document.getElementById('form-error');
+
+      function showError(msg: string) {
+        if (formError) {
+          formError.textContent = msg;
+          formError.classList.remove('hidden');
+        }
+      }
+
+      function hideError() {
+        formError?.classList.add('hidden');
+      }
+
+      payBtn?.addEventListener('click', async () => {
+        hideError();
+
+        // --- Validate ---
+        const amount = selectedAmount || Number(customInput?.value);
+        const donorName = (document.getElementById('donor-name') as HTMLInputElement)?.value?.trim();
+        const donorEmail = (document.getElementById('donor-email') as HTMLInputElement)?.value?.trim();
+        const donorPhone = (document.getElementById('donor-phone') as HTMLInputElement)?.value?.trim();
+        const taxReceiptRequested = taxCheckbox?.checked || false;
+        const donorNic = (document.getElementById('donor-nic') as HTMLInputElement)?.value?.trim();
+
+        if (!amount || amount < 10) {
+          showError(lang === 'en' ? 'Please select or enter an amount (minimum Rs 10)' : 'Veuillez sélectionner ou saisir un montant (minimum Rs 10)');
+          return;
+        }
+        if (!donorName) {
+          showError(lang === 'en' ? 'Please enter your name' : 'Veuillez entrer votre nom');
+          return;
+        }
+        if (!donorEmail || !donorEmail.includes('@')) {
+          showError(lang === 'en' ? 'Please enter a valid email' : 'Veuillez entrer un email valide');
+          return;
+        }
+        if (taxReceiptRequested && !donorNic) {
+          showError(lang === 'en' ? 'NIC or passport number required for tax receipt' : 'NIC ou passeport requis pour le reçu fiscal');
+          return;
+        }
+
+        // --- Disable button ---
+        payBtn.disabled = true;
+        if (payBtnText) {
+          payBtnText.textContent = lang === 'en' ? 'Processing...' : 'Traitement en cours...';
+        }
+
+        try {
+          // --- Call our API to create checkout ---
+          const res = await fetch('/api/checkout/create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              amount,
+              type: 'one-time',
+              donorName,
+              donorEmail,
+              donorPhone: donorPhone || null,
+              donorNic: donorNic || null,
+              taxReceiptRequested,
+              locale: lang,
+            }),
+          });
+
+          const data = await res.json();
+
+          if (!res.ok || data.error) {
+            throw new Error(data.error || 'Checkout creation failed');
+          }
+
+          // --- Submit hidden form to Peach Hosted Checkout ---
+          const form = document.getElementById('peach-form') as HTMLFormElement;
+          form.action = data.formAction;
+
+          // Clear existing inputs
+          form.innerHTML = '';
+
+          // Add all signed fields as hidden inputs
+          for (const [key, value] of Object.entries(data.fields)) {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = key;
+            input.value = String(value);
+            form.appendChild(input);
+          }
+
+          // Submit — redirects to Peach
+          form.submit();
+
+        } catch (err: any) {
+          console.error('Checkout error:', err);
+          showError(err.message || (lang === 'en' ? 'Something went wrong. Please try again.' : 'Une erreur est survenue. Veuillez réessayer.'));
+          payBtn.disabled = false;
+          if (payBtnText) {
+            payBtnText.textContent = lang === 'en' ? 'Pay now' : 'Payer maintenant';
+          }
+        }
+      });
+    }
+  </script>
+</Layout>

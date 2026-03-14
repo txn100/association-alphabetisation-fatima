@@ -55,6 +55,28 @@ export interface UIStrings {
   // Language switcher
   langSwitchLabel: string;
   langSwitchHref: string;
+
+  // Donate page
+  donateOnlineCta: string;
+  donatePageTitle: string;
+  donateOneTime: string;
+  donateMonthly: string;
+  donatePayNow: string;
+  donateProcessing: string;
+  donateAmount: string;
+  donateCustomAmount: string;
+  donateDonorName: string;
+  donateDonorEmail: string;
+  donateDonorPhone: string;
+  donateTaxReceipt: string;
+  donateDonorNic: string;
+  donateNicHelp: string;
+  donateSuccessTitle: string;
+  donateFailedTitle: string;
+  donateRetry: string;
+  donateBackHome: string;
+  donateBackToDonate: string;
+  donateSecurityNote: string;
 }
 
 export const uiStrings: Record<Locale, UIStrings> = {
@@ -99,6 +121,27 @@ export const uiStrings: Record<Locale, UIStrings> = {
 
     langSwitchLabel: "EN",
     langSwitchHref: "/en/",
+
+    donateOnlineCta: "Faire un don en ligne",
+    donatePageTitle: "Faire un don",
+    donateOneTime: "Don ponctuel",
+    donateMonthly: "Parrainage mensuel",
+    donatePayNow: "Payer maintenant",
+    donateProcessing: "Traitement en cours...",
+    donateAmount: "Montant",
+    donateCustomAmount: "Autre montant (Rs)",
+    donateDonorName: "Nom complet",
+    donateDonorEmail: "Adresse email",
+    donateDonorPhone: "Téléphone (optionnel)",
+    donateTaxReceipt: "Je souhaite un reçu fiscal (NSIF)",
+    donateDonorNic: "NIC ou passeport",
+    donateNicHelp: "Requis par la MRA pour la déduction fiscale (jusqu'à Rs 100 000/an)",
+    donateSuccessTitle: "Merci pour votre don !",
+    donateFailedTitle: "Le paiement n'a pas abouti",
+    donateRetry: "Réessayer",
+    donateBackHome: "Retour à l'accueil",
+    donateBackToDonate: "Retour aux dons",
+    donateSecurityNote: "Paiement sécurisé par Peach Payments",
   },
   en: {
     navAriaLabel: "Main navigation",
@@ -141,6 +184,27 @@ export const uiStrings: Record<Locale, UIStrings> = {
 
     langSwitchLabel: "FR",
     langSwitchHref: "/",
+
+    donateOnlineCta: "Donate online",
+    donatePageTitle: "Make a Donation",
+    donateOneTime: "One-time donation",
+    donateMonthly: "Monthly sponsorship",
+    donatePayNow: "Pay now",
+    donateProcessing: "Processing...",
+    donateAmount: "Amount",
+    donateCustomAmount: "Other amount (Rs)",
+    donateDonorName: "Full name",
+    donateDonorEmail: "Email address",
+    donateDonorPhone: "Phone (optional)",
+    donateTaxReceipt: "I want a tax receipt (NSIF)",
+    donateDonorNic: "NIC or passport number",
+    donateNicHelp: "Required by MRA for donation tax deduction (up to Rs 100,000/year)",
+    donateSuccessTitle: "Thank you for your donation!",
+    donateFailedTitle: "Payment could not be completed",
+    donateRetry: "Try again",
+    donateBackHome: "Back to home",
+    donateBackToDonate: "Back to donate",
+    donateSecurityNote: "Secure payment by Peach Payments",
   },
 };
 

@@ -273,6 +273,17 @@ export default function DonateVisual(props: any) {
                   ))}
                 </div>
 
+                {/* Online donation CTA */}
+                <div className="border-t border-gray-100 pt-5">
+                  <a
+                    href={props.lang === "en" ? "/en/donate/" : "/donate"}
+                    className="block w-full py-3 bg-brand-orange hover:bg-brand-orange/90 text-white font-bold text-center rounded-xl shadow-md hover:shadow-lg transition-all"
+                  >
+                    <i className="fas fa-credit-card mr-2" />
+                    {props.lang === "en" ? "Donate online" : "Faire un don en ligne"}
+                  </a>
+                </div>
+
                 <div className="border-t border-gray-100 pt-5 text-center space-y-2">
                   <p className="text-xs text-gray-500 flex items-center justify-center gap-1.5">
                     <i className="fas fa-shield-alt text-green-500" />

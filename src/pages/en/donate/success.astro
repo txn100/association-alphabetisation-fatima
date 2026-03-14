@@ -1,0 +1,79 @@
+---
+/**
+ * English donation success page (/en/donate/success).
+ */
+import Layout from "../../../layouts/Layout.astro";
+import { getDonatePageData, getSiteData } from "../../../lib/content";
+import type { Locale } from "../../../lib/i18n";
+
+const lang: Locale = "en";
+const [page, siteData] = await Promise.all([
+  getDonatePageData(lang),
+  getSiteData(lang),
+]);
+const site = siteData?.data?.site || siteData;
+const ref = Astro.url.searchParams.get("ref") || "";
+---
+
+<Layout lang={lang} title={page.successTitle + " — " + (site?.title || "")}>
+  <main class="min-h-screen flex items-center justify-center px-4 py-16">
+    <div class="max-w-md w-full text-center">
+      <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+        <i class="fas fa-check text-green-600 text-3xl"></i>
+      </div>
+      <h1 class="text-3xl font-extrabold text-brand-dark-blue mb-4">{page.successTitle}</h1>
+      <p class="text-gray-600 mb-4">{page.successMessage}</p>
+
+      <div id="donation-details" class="hidden bg-gray-50 rounded-xl p-4 mb-6 text-sm text-left">
+        <div class="flex justify-between mb-2">
+          <span class="text-gray-500">Amount</span>
+          <span id="detail-amount" class="font-bold"></span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-500">Reference</span>
+          <span id="detail-ref" class="font-mono text-xs"></span>
+        </div>
+      </div>
+
+      <div id="tax-receipt-notice" class="hidden bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6 text-sm text-blue-700">
+        <i class="fas fa-receipt mr-2"></i>
+        {page.successTaxReceipt}
+      </div>
+
+      <div class="space-y-3">
+        <a href="/en/" class="block w-full py-3 bg-brand-dark-blue text-white rounded-xl font-bold hover:bg-brand-dark-blue/90 transition">
+          {page.backToHome}
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script define:vars={{ ref }}>
+    window.__donationRef = ref;
+  </script>
+  <script>
+    if (typeof window !== 'undefined') {
+      const ref = (window as any).__donationRef;
+      if (ref) {
+        fetch(`/api/checkout/status/${ref}`)
+          .then(r => r.json())
+          .then(data => {
+            if (data.amount) {
+              const details = document.getElementById('donation-details');
+              const amountEl = document.getElementById('detail-amount');
+              const refEl = document.getElementById('detail-ref');
+              if (details && amountEl && refEl) {
+                amountEl.textContent = `Rs ${data.amount.toLocaleString()}`;
+                refEl.textContent = data.publicId;
+                details.classList.remove('hidden');
+              }
+              if (data.taxReceiptRequested) {
+                document.getElementById('tax-receipt-notice')?.classList.remove('hidden');
+              }
+            }
+          })
+          .catch(() => {});
+      }
+    }
+  </script>
+</Layout>

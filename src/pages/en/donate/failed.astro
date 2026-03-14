@@ -1,0 +1,39 @@
+---
+/**
+ * English donation failure page (/en/donate/failed).
+ */
+import Layout from "../../../layouts/Layout.astro";
+import { getDonatePageData, getSiteData } from "../../../lib/content";
+import type { Locale } from "../../../lib/i18n";
+
+const lang: Locale = "en";
+const [page, siteData] = await Promise.all([
+  getDonatePageData(lang),
+  getSiteData(lang),
+]);
+const site = siteData?.data?.site || siteData;
+---
+
+<Layout lang={lang} title={page.failedTitle + " — " + (site?.title || "")}>
+  <main class="min-h-screen flex items-center justify-center px-4 py-16">
+    <div class="max-w-md w-full text-center">
+      <div class="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
+        <i class="fas fa-times text-red-600 text-3xl"></i>
+      </div>
+      <h1 class="text-3xl font-extrabold text-brand-dark-blue mb-4">{page.failedTitle}</h1>
+      <p class="text-gray-600 mb-6">{page.failedMessage}</p>
+
+      <div class="space-y-3">
+        <a href="/en/donate/" class="block w-full py-3 bg-brand-orange text-white rounded-xl font-bold hover:bg-brand-orange/90 transition">
+          <i class="fas fa-redo mr-2"></i>
+          {page.failedRetryText}
+        </a>
+        <p class="text-sm text-gray-500">{page.failedBankAlternative}</p>
+        <a href="/en/" class="block text-brand-light-blue hover:text-brand-dark-blue transition font-medium">
+          <i class="fas fa-arrow-left mr-1"></i>
+          {page.backToHome}
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,28 @@
+---
+/**
+ * English donate page (/en/donate/).
+ */
+import DonatePage from "../../components/DonatePage.astro";
+import { uiStrings } from "../../lib/i18n";
+import type { Locale } from "../../lib/i18n";
+import { getDonateData, getDonatePageData, getNavigationData, getSiteData } from "../../lib/content";
+
+const lang: Locale = "en";
+const ui = uiStrings[lang];
+
+const [donatePageData, donateData, navigationData, siteData] = await Promise.all([
+  getDonatePageData(lang),
+  getDonateData(lang),
+  getNavigationData(lang),
+  getSiteData(lang),
+]);
+---
+
+<DonatePage
+  lang={lang}
+  ui={ui}
+  donatePageData={donatePageData}
+  donateData={donateData}
+  navigationData={navigationData}
+  siteData={siteData}
+/>
