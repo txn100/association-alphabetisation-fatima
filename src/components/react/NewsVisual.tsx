@@ -1,4 +1,19 @@
 import { tinaField, useTina } from "tinacms/dist/react";
+import type { UIStrings } from "../../lib/i18n";
+
+/** Map TinaCMS category enum values to uiStrings keys. */
+const categoryKeys: Record<string, keyof UIStrings> = {
+  Formation: "catFormation",
+  Culture: "catCulture",
+  "Vie Scolaire": "catVieScolaire",
+  Environnement: "catEnvironnement",
+};
+
+function translateCategory(category: string, ui?: UIStrings): string {
+  const key = categoryKeys[category];
+  if (key && ui) return ui[key] as string;
+  return category; // fallback to raw value for unknown categories
+}
 
 export default function NewsVisual(props: any) {
   const { data } = useTina({
@@ -12,6 +27,7 @@ export default function NewsVisual(props: any) {
     data: props.sectionData || {},
   });
 
+  const ui: UIStrings | undefined = props.ui;
   const edges = data.newsConnection?.edges || [];
   const news = edges
     .filter((e: any) => e?.node)
@@ -135,7 +151,9 @@ export default function NewsVisual(props: any) {
                     <p className="text-xs text-gray-500 mb-2">
                       <span data-tina-field={tinaField(item, "year")}>{item.year}</span>
                       {" "}&bull;{" "}
-                      <span data-tina-field={tinaField(item, "category")}>{item.category}</span>
+                      <span data-tina-field={tinaField(item, "category")}>
+                        {translateCategory(item.category, ui)}
+                      </span>
                     </p>
                     <p
                       className="text-sm text-gray-600"
@@ -145,10 +163,10 @@ export default function NewsVisual(props: any) {
                     </p>
                     {item.slug && (
                       <a
-                        href={`/actualites/${item.slug}`}
+                        href={`${props.lang === "en" ? "/en" : ""}/actualites/${item.slug}`}
                         className="inline-flex items-center mt-2 text-xs font-bold text-brand-blue hover:text-blue-700 transition"
                       >
-                        Lire la suite <i className="fas fa-arrow-right ml-1" />
+                        {ui?.readMore || "Lire la suite"} <i className="fas fa-arrow-right ml-1" />
                       </a>
                     )}
                   </div>

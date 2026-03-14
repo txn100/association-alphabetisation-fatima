@@ -24,6 +24,7 @@ const cache = new Map<string, string>();
 const SKIP_KEYS = new Set([
   "_sys", "_values", "__typename", "id",
   "slug", "icon", "color",
+  "category", "status",                          // enum values — translated via uiStrings instead
   "phone1", "phone1Link", "phone2", "phone2Link",
   "whatsappNumber", "email",
   "bankName", "accountNumber", "accountHolder", "referenceFormat",
