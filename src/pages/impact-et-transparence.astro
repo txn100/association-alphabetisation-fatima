@@ -19,7 +19,7 @@ const stats = statsEntries
 <Layout
   lang="fr"
   title={`Impact & Transparence — ${site.organizationName}`}
-  description={`Chiffres clés, accréditations (NSIF ${footer.nsifCode}, CSR ${footer.csrCode}) et informations de transparence de l'Association d'Alphabétisation de Fatima, ONG enregistrée à Maurice.`}
+  description={`Chiffres clés, accréditations (CSR ${footer.csrCode}) et informations de transparence de l'Association d'Alphabétisation de Fatima, ONG enregistrée à Maurice.`}
   canonicalPath="/impact-et-transparence/"
 >
   <!-- Simple Navbar -->
@@ -111,21 +111,13 @@ const stats = statsEntries
               </tr>
               <tr class="border-b border-gray-100 bg-gray-50">
                 <td class="px-6 py-4 font-semibold text-gray-700">
-                  Code NSIF (National Social Inclusion Fund)
-                </td>
-                <td class="px-6 py-4 font-mono font-bold text-brand-blue">
-                  {footer.nsifCode}
-                </td>
-              </tr>
-              <tr class="border-b border-gray-100">
-                <td class="px-6 py-4 font-semibold text-gray-700">
                   Code CSR (Corporate Social Responsibility)
                 </td>
                 <td class="px-6 py-4 font-mono font-bold text-brand-blue">
                   {footer.csrCode}
                 </td>
               </tr>
-              <tr class="border-b border-gray-100 bg-gray-50">
+              <tr class="border-b border-gray-100">
                 <td class="px-6 py-4 font-semibold text-gray-700">Affiliée ANFEN</td>
                 <td class="px-6 py-4 text-gray-600">
                   <span class="inline-flex items-center gap-2">
@@ -249,7 +241,6 @@ const stats = statsEntries
       "name": site.organizationName,
       "foundingDate": "1989",
       "identifier": [
-        { "@type": "PropertyValue", "name": "NSIF Code", "value": footer.nsifCode },
         { "@type": "PropertyValue", "name": "CSR Code", "value": footer.csrCode }
       ]
     }

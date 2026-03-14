@@ -356,6 +356,7 @@ var config_default = defineConfig({
               { type: "string", name: "phonePlaceholder", label: "Placeholder t\xE9l\xE9phone" },
               { type: "string", name: "emailPlaceholder", label: "Placeholder email" },
               { type: "string", name: "messagePlaceholder", label: "Placeholder message" },
+              { type: "string", name: "whatsappNumber", label: "Num\xE9ro WhatsApp (format international, ex: 23059855253)", required: true },
               { type: "string", name: "whatsappButton", label: "Bouton WhatsApp" },
               { type: "string", name: "emailButton", label: "Bouton Email" },
               { type: "string", name: "responseTime", label: "Temps de r\xE9ponse" },

@@ -672,6 +672,7 @@ type DonateParrainSection {
   phonePlaceholder: String
   emailPlaceholder: String
   messagePlaceholder: String
+  whatsappNumber: String!
   whatsappButton: String
   emailButton: String
   responseTime: String
@@ -755,6 +756,7 @@ input DonateParrainSectionFilter {
   phonePlaceholder: StringFilter
   emailPlaceholder: StringFilter
   messagePlaceholder: StringFilter
+  whatsappNumber: StringFilter
   whatsappButton: StringFilter
   emailButton: StringFilter
   responseTime: StringFilter
@@ -1213,6 +1215,7 @@ input DonateParrainSectionMutation {
   phonePlaceholder: String
   emailPlaceholder: String
   messagePlaceholder: String
+  whatsappNumber: String
   whatsappButton: String
   emailButton: String
   responseTime: String

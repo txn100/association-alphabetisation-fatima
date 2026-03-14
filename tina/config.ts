@@ -334,6 +334,7 @@ export default defineConfig({
               { type: "string", name: "phonePlaceholder", label: "Placeholder téléphone" },
               { type: "string", name: "emailPlaceholder", label: "Placeholder email" },
               { type: "string", name: "messagePlaceholder", label: "Placeholder message" },
+              { type: "string", name: "whatsappNumber", label: "Numéro WhatsApp (format international, ex: 23059855253)", required: true },
               { type: "string", name: "whatsappButton", label: "Bouton WhatsApp" },
               { type: "string", name: "emailButton", label: "Bouton Email" },
               { type: "string", name: "responseTime", label: "Temps de réponse" },

@@ -150,15 +150,6 @@ export default function FooterVisual(props: any) {
                   </span>
                 </li>
                 <li className="flex justify-between">
-                  <span>NSIF Code:</span>
-                  <span
-                    className="text-white font-mono"
-                    data-tina-field={footer ? tinaField(footer, "nsifCode") : undefined}
-                  >
-                    {footer?.nsifCode || ""}
-                  </span>
-                </li>
-                <li className="flex justify-between">
                   <span>CSR Code:</span>
                   <span
                     className="text-white font-mono"

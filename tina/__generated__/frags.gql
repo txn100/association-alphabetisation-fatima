@@ -198,6 +198,7 @@ fragment DonateParts on Donate {
     phonePlaceholder
     emailPlaceholder
     messagePlaceholder
+    whatsappNumber
     whatsappButton
     emailButton
     responseTime

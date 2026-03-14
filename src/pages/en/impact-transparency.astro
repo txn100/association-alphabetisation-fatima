@@ -17,7 +17,7 @@ const stats = (statsResult.data.statsConnection?.edges || [])
   .sort((a: any, b: any) => a.order - b.order);
 
 const pageTitle = `Impact & Transparency — ${siteData.organizationName}`;
-const pageDescription = `Key figures, accreditations (NSIF ${footerData.nsifCode}, CSR ${footerData.csrCode}) and transparency information for ${siteData.organizationName}, a registered NGO in Mauritius.`;
+const pageDescription = `Key figures, accreditations (CSR ${footerData.csrCode}) and transparency information for ${siteData.organizationName}, a registered NGO in Mauritius.`;
 const canonicalPath = '/en/impact-transparency/';
 ---
 
@@ -111,21 +111,13 @@ const canonicalPath = '/en/impact-transparency/';
               </tr>
               <tr class="border-b border-gray-100 bg-gray-50">
                 <td class="px-6 py-4 font-semibold text-gray-700">
-                  NSIF Code (National Social Inclusion Fund)
-                </td>
-                <td class="px-6 py-4 font-mono font-bold text-brand-blue">
-                  {footerData.nsifCode}
-                </td>
-              </tr>
-              <tr class="border-b border-gray-100">
-                <td class="px-6 py-4 font-semibold text-gray-700">
                   CSR Code (Corporate Social Responsibility)
                 </td>
                 <td class="px-6 py-4 font-mono font-bold text-brand-blue">
                   {footerData.csrCode}
                 </td>
               </tr>
-              <tr class="border-b border-gray-100 bg-gray-50">
+              <tr class="border-b border-gray-100">
                 <td class="px-6 py-4 font-semibold text-gray-700">ANFEN Affiliate</td>
                 <td class="px-6 py-4 text-gray-600">
                   <span class="inline-flex items-center gap-2">
@@ -249,7 +241,6 @@ const canonicalPath = '/en/impact-transparency/';
       "name": siteData.organizationName,
       "foundingDate": "1989",
       "identifier": [
-        { "@type": "PropertyValue", "name": "NSIF Code", "value": footerData.nsifCode },
         { "@type": "PropertyValue", "name": "CSR Code", "value": footerData.csrCode }
       ]
     }

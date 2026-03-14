@@ -31,7 +31,7 @@ export default function DonateVisual(props: any) {
 
   // Contact info from footer (centralized source of truth)
   const footer = footerData?.footer;
-  const whatsappNumber = footer?.whatsappNumber || "23052611030";
+  const whatsappNumber = parrain?.whatsappNumber || footer?.whatsappNumber || "23059855253";
   const contactEmail = footer?.email || "direction@ecolefatima.com";
   const phone1 = footer?.phone1 || "261 30 32";
   const phone1Link = footer?.phone1Link || "+23026130032";
