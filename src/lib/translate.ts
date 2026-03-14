@@ -23,7 +23,7 @@ const cache = new Map<string, string>();
 // Keys whose values must never be translated (TinaCMS internals + technical fields).
 const SKIP_KEYS = new Set([
   "_sys", "_values", "__typename", "id",
-  "slug", "icon", "color",
+  "slug", "icon", "color", "href",
   "category", "status",                          // enum values — translated via uiStrings instead
   "phone1", "phone1Link", "phone2", "phone2Link",
   "whatsappNumber", "email",
