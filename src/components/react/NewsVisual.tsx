@@ -143,6 +143,14 @@ export default function NewsVisual(props: any) {
                     >
                       {item.description}
                     </p>
+                    {item.slug && (
+                      <a
+                        href={`/actualites/${item.slug}`}
+                        className="inline-flex items-center mt-2 text-xs font-bold text-brand-blue hover:text-blue-700 transition"
+                      >
+                        Lire la suite <i className="fas fa-arrow-right ml-1" />
+                      </a>
+                    )}
                   </div>
                 </div>
               ))}

@@ -139,6 +139,7 @@ type Collection {
 union DocumentNode = News | Gallery | Stats | Programs | Projects | Tiers | Hero | About | Footer | Navigation | Impact | Pedagogy | Donate | Site | StatsSection | ProgramsSection | ProjectsSection | GallerySection | Folder
 
 type News implements Node & Document {
+  slug: String!
   title: String!
   date: String!
   month: String!
@@ -168,6 +169,7 @@ input ImageFilter {
 }
 
 input NewsFilter {
+  slug: StringFilter
   title: StringFilter
   date: StringFilter
   month: StringFilter
@@ -255,6 +257,7 @@ type StatsConnection implements Connection {
 }
 
 type Programs implements Node & Document {
+  slug: String!
   title: String!
   level: String!
   icon: String!
@@ -270,6 +273,7 @@ type Programs implements Node & Document {
 }
 
 input ProgramsFilter {
+  slug: StringFilter
   title: StringFilter
   level: StringFilter
   icon: StringFilter
@@ -1019,6 +1023,7 @@ input DocumentMutation {
 }
 
 input NewsMutation {
+  slug: String
   title: String
   date: String
   month: String
@@ -1044,6 +1049,7 @@ input StatsMutation {
 }
 
 input ProgramsMutation {
+  slug: String
   title: String
   level: String
   icon: String

@@ -1,0 +1,237 @@
+---
+export const prerender = true;
+
+import Layout from '../../layouts/Layout.astro';
+import { getFooterData, getSiteData, getStatsData } from '../../lib/content';
+
+const footerResult = await getFooterData("en");
+const footerData = footerResult.data.footer;
+
+const siteResult = await getSiteData("en");
+const siteData = siteResult.data.site;
+
+const statsResult = await getStatsData("en");
+const stats = (statsResult.data.statsConnection?.edges || [])
+  .filter((e: any) => e?.node)
+  .map((e: any) => e.node)
+  .sort((a: any, b: any) => a.order - b.order);
+
+const pageTitle = `Impact & Transparency — ${siteData.organizationName}`;
+const pageDescription = `Key figures, accreditations (NSIF ${footerData.nsifCode}, CSR ${footerData.csrCode}) and transparency information for ${siteData.organizationName}, a registered NGO in Mauritius.`;
+const canonicalPath = '/en/impact-et-transparence/';
+---
+
+<Layout lang="en" title={pageTitle} description={pageDescription} canonicalPath={canonicalPath}>
+  <!-- Simple Navbar -->
+  <nav class="bg-white shadow-md fixed w-full z-50" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-14 sm:h-16 items-center">
+        <a href="/en/" class="flex items-center gap-2">
+          <img
+            src="/images/logo-fatima-hq.webp"
+            alt={`Logo ${siteData.organizationName}`}
+            class="h-10 w-auto mix-blend-multiply"
+            width="40"
+            height="40"
+          />
+          <span class="font-heading font-bold text-brand-blue text-sm hidden sm:block">
+            {siteData.organizationName}
+          </span>
+        </a>
+        <a
+          href="/en/#faire-un-don"
+          class="bg-brand-pink hover:bg-pink-600 text-white px-4 py-2 rounded-full font-bold text-sm transition"
+        >
+          <i class="fas fa-heart mr-1"></i> Support Us
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-14 sm:pt-16">
+    <!-- Breadcrumb -->
+    <div class="bg-gray-50 border-b border-gray-200 py-3">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav aria-label="Breadcrumb" class="text-sm text-gray-500">
+          <a href="/en/" class="hover:text-brand-blue transition">Home</a>
+          <span class="mx-2">&rsaquo;</span>
+          <span class="text-gray-800 font-semibold">Impact &amp; Transparency</span>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Dark Header -->
+    <div class="bg-brand-dark text-white py-12 sm:py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="font-heading text-3xl sm:text-4xl font-bold mb-3">
+          Impact &amp; Transparency
+        </h1>
+        <p class="text-blue-100 text-lg max-w-2xl">
+          Key figures, official accreditations and governance information about the association.
+        </p>
+      </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+      <!-- Stats Grid (4 stats, sorted by order) -->
+      <section>
+        <h2 class="font-heading text-2xl font-bold text-gray-800 mb-6">
+          Key Figures
+        </h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {stats.map((stat: any) => (
+            <div class="bg-white rounded-2xl shadow-md p-6 text-center border border-gray-100">
+              <p class="font-heading text-3xl font-bold text-brand-blue mb-1">
+                {stat.value}
+              </p>
+              <p class="text-sm text-gray-500">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Accreditations Table -->
+      <section>
+        <h2 class="font-heading text-2xl font-bold text-gray-800 mb-6">
+          Accreditations &amp; Registrations
+        </h2>
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-gray-100">
+                <td class="px-6 py-4 font-semibold text-gray-700 w-1/2">Registered NGO</td>
+                <td class="px-6 py-4 text-gray-600">
+                  <span class="inline-flex items-center gap-2">
+                    <i class="fas fa-check-circle text-green-500"></i> {footerData.ngoRegistered}
+                  </span>
+                </td>
+              </tr>
+              <tr class="border-b border-gray-100 bg-gray-50">
+                <td class="px-6 py-4 font-semibold text-gray-700">
+                  NSIF Code (National Social Inclusion Fund)
+                </td>
+                <td class="px-6 py-4 font-mono font-bold text-brand-blue">
+                  {footerData.nsifCode}
+                </td>
+              </tr>
+              <tr class="border-b border-gray-100">
+                <td class="px-6 py-4 font-semibold text-gray-700">
+                  CSR Code (Corporate Social Responsibility)
+                </td>
+                <td class="px-6 py-4 font-mono font-bold text-brand-blue">
+                  {footerData.csrCode}
+                </td>
+              </tr>
+              <tr class="border-b border-gray-100 bg-gray-50">
+                <td class="px-6 py-4 font-semibold text-gray-700">ANFEN Affiliate</td>
+                <td class="px-6 py-4 text-gray-600">
+                  <span class="inline-flex items-center gap-2">
+                    <i class="fas fa-check-circle text-green-500"></i> Yes
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4 font-semibold text-gray-700">Founded in</td>
+                <td class="px-6 py-4 text-gray-600">1989</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Governance -->
+      <section>
+        <h2 class="font-heading text-2xl font-bold text-gray-800 mb-6">
+          Governance
+        </h2>
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-user text-white text-sm"></i>
+              </div>
+              <div>
+                <p class="font-bold text-gray-800">{footerData.president}</p>
+                <p class="text-sm text-gray-500">President</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
+            <div class="flex items-center gap-4">
+              <div class="w-10 h-10 bg-brand-pink rounded-full flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-user text-white text-sm"></i>
+              </div>
+              <div>
+                <p class="font-bold text-gray-800">{footerData.director}</p>
+                <p class="text-sm text-gray-500">Director</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Info -->
+      <section>
+        <h2 class="font-heading text-2xl font-bold text-gray-800 mb-6">
+          Contact
+        </h2>
+        <div class="bg-white rounded-2xl shadow-md p-8 border border-gray-100">
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <p class="text-sm text-gray-500 mb-1">Address</p>
+              <p class="text-gray-800 font-semibold whitespace-pre-line">
+                {footerData.address}
+              </p>
+            </div>
+            <div class="space-y-3">
+              <div>
+                <p class="text-sm text-gray-500 mb-1">Phone</p>
+                <a
+                  href={`tel:${footerData.phone1Link}`}
+                  class="text-brand-blue font-semibold hover:underline"
+                >
+                  {footerData.phone1}
+                </a>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500 mb-1">Email</p>
+                <a
+                  href={`mailto:${footerData.email}`}
+                  class="text-brand-blue font-semibold hover:underline"
+                >
+                  {footerData.email}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a
+          href="/en/#faire-un-don"
+          class="inline-flex items-center justify-center bg-brand-pink hover:bg-pink-600 text-white px-8 py-3 rounded-full font-bold shadow-md transition transform hover:scale-105"
+        >
+          <i class="fas fa-heart mr-2"></i> Make a Donation
+        </a>
+        <a
+          href="/en/notre-histoire/"
+          class="inline-flex items-center justify-center border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white px-8 py-3 rounded-full font-bold transition"
+        >
+          <i class="fas fa-book mr-2"></i> Our Story
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Minimal Footer -->
+  <footer class="bg-brand-dark text-white py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-gray-400 text-sm">
+        &copy; {siteData.organizationName}<br />
+        <a href={`mailto:${footerData.email}`} class="hover:text-white transition">{footerData.email}</a>
+      </p>
+    </div>
+  </footer>
+</Layout>

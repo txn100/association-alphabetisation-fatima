@@ -1,0 +1,143 @@
+---
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+import footerData from '../data/footer.json';
+import siteData from '../data/site.json';
+
+const pageTitle = `Nous Contacter — ${siteData.organizationName}`;
+const pageDescription = "Contactez l'Association d'Alphabétisation de Fatima à Trou aux Biches, Maurice. Téléphone, email, WhatsApp et adresse postale.";
+const canonicalPath = '/contact/';
+---
+
+<Layout lang="fr" title={pageTitle} description={pageDescription} canonicalPath={canonicalPath}>
+  <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3 group">
+        <img src="/images/logo-fatima-hq.webp" alt="Logo" class="h-10 w-auto" width="40" height="40" loading="eager" />
+        <span class="navbar-title font-heading font-bold text-brand-dark uppercase tracking-wide hidden sm:block">{siteData.organizationName}</span>
+      </a>
+      <a href="/#faire-un-don" class="inline-flex items-center gap-2 bg-brand-pink hover:bg-pink-600 text-white font-heading font-bold text-sm px-5 py-2.5 rounded-full transition-colors shadow-md">
+        <i class="fas fa-heart text-xs"></i> Soutenir
+      </a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="bg-gray-100 border-b border-gray-200">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+        <nav aria-label="Fil d'Ariane" class="text-sm text-gray-500">
+          <ol class="flex items-center gap-1.5 flex-wrap">
+            <li><a href="/" class="hover:text-brand-blue transition-colors">Accueil</a></li>
+            <li aria-hidden="true"><i class="fas fa-chevron-right text-[10px] text-gray-400 mx-1"></i></li>
+            <li class="text-brand-dark font-semibold" aria-current="page">Nous Contacter</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <div class="bg-brand-dark text-white py-12 sm:py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="font-heading text-3xl sm:text-4xl font-extrabold mb-3">{footerData.contactHeading}</h1>
+        <p class="text-blue-100 text-lg">Nous sommes joignables par téléphone, email et WhatsApp.</p>
+      </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid sm:grid-cols-2 gap-8">
+        <div class="space-y-6">
+          <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i class="fas fa-map-marker-alt text-white text-sm"></i>
+              </div>
+              <div>
+                <p class="font-bold text-gray-800 mb-1">Adresse</p>
+                <p class="text-gray-600 text-sm">{footerData.address}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i class="fas fa-phone text-white text-sm"></i>
+              </div>
+              <div class="space-y-2">
+                <p class="font-bold text-gray-800 mb-1">Téléphone</p>
+                <a href={`tel:${footerData.phone1Link}`} class="block text-brand-blue font-semibold hover:underline">{footerData.phone1}</a>
+                <a href={`tel:${footerData.phone2Link}`} class="block text-brand-blue font-semibold hover:underline">{footerData.phone2}</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i class="fas fa-envelope text-white text-sm"></i>
+              </div>
+              <div>
+                <p class="font-bold text-gray-800 mb-1">Email</p>
+                <a href={`mailto:${footerData.email}`} class="text-brand-blue font-semibold hover:underline">{footerData.email}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="bg-white rounded-2xl shadow-md p-6 border border-gray-100">
+            <h2 class="font-heading text-lg font-bold text-gray-800 mb-4">Nous écrire</h2>
+            <div class="space-y-3">
+              <a href={`https://wa.me/${footerData.whatsappNumber}`} target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-3 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-full font-bold transition w-full">
+                <i class="fab fa-whatsapp text-lg"></i> WhatsApp
+              </a>
+              <a href={`mailto:${footerData.email}`} class="flex items-center justify-center gap-3 border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white px-6 py-3 rounded-full font-bold transition w-full">
+                <i class="fas fa-envelope"></i> Envoyer un email
+              </a>
+              <a href={`tel:${footerData.phone1Link}`} class="flex items-center justify-center gap-3 bg-gray-100 hover:bg-gray-200 text-gray-800 px-6 py-3 rounded-full font-bold transition w-full">
+                <i class="fas fa-phone"></i> Appeler
+              </a>
+            </div>
+          </div>
+
+          <div class="bg-brand-pink/10 border border-brand-pink/30 rounded-2xl p-6">
+            <h2 class="font-heading text-lg font-bold text-gray-800 mb-2">Soutenir l'école</h2>
+            <p class="text-sm text-gray-600 mb-4">Vous pouvez aussi faire un don en ligne ou devenir parrain.</p>
+            <a href="/#faire-un-don" class="inline-flex items-center bg-brand-pink hover:bg-pink-600 text-white px-6 py-2 rounded-full font-bold text-sm transition">
+              <i class="fas fa-heart mr-2"></i> Faire un don
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bg-brand-dark border-t border-white/10 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-white/50 text-sm">
+        <a href={`mailto:${footerData.email}`} class="hover:text-white transition-colors">{footerData.email}</a>
+      </p>
+      <p class="text-white/30 text-xs mt-2">&copy; {new Date().getFullYear()} {siteData.organizationName}. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": pageTitle,
+    "description": pageDescription,
+    "mainEntity": {
+      "@type": "EducationalOrganization",
+      "name": siteData.organizationName,
+      "telephone": footerData.phone1Link,
+      "email": footerData.email,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": footerData.address,
+        "addressLocality": "Triolet",
+        "addressRegion": "Pamplemousses",
+        "addressCountry": "MU"
+      }
+    }
+  })} />
+</Layout>

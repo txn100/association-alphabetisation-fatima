@@ -1,9 +1,0 @@
-{
-  "amount": 4000,
-  "label": "Rs 4,000",
-  "period": "/month",
-  "description": "Full tuition for a student",
-  "icon": "fas fa-graduation-cap",
-  "highlighted": true,
-  "order": 3
-}

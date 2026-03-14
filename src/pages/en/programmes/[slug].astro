@@ -1,0 +1,262 @@
+---
+export const prerender = true;
+import Layout from '../../../layouts/Layout.astro';
+import { getProgramsData, getSiteData, getFooterData } from '../../../lib/content';
+
+export async function getStaticPaths() {
+  const programsResult = await getProgramsData("en");
+  const programs = (programsResult.data.programsConnection?.edges || [])
+    .filter((e: any) => e?.node)
+    .map((e: any) => e.node);
+  return programs.map((program: any) => ({
+    params: { slug: program.slug },
+    props: { program },
+  }));
+}
+
+const { program } = Astro.props;
+const slug = program.slug;
+const siteResult = await getSiteData("en");
+const footerResult = await getFooterData("en");
+const siteData = siteResult.data.site;
+const footerData = footerResult.data.footer;
+const pageTitle = `${program.title} — ${siteData.organizationName}`;
+const pageDescription = program.description.substring(0, 160);
+const canonicalPath = `/en/programmes/${slug}/`;
+
+const colorMap: Record<string, { badge: string; accent: string; gradient: string }> = {
+  blue: {
+    badge: 'bg-brand-blue',
+    accent: 'text-brand-blue',
+    gradient: 'from-brand-blue/10 to-brand-light-blue/5',
+  },
+  pink: {
+    badge: 'bg-brand-pink',
+    accent: 'text-brand-pink',
+    gradient: 'from-brand-pink/10 to-brand-light-pink/5',
+  },
+};
+const colors = colorMap[program.color] || colorMap.blue;
+---
+
+<Layout lang="en" title={pageTitle} description={pageDescription} canonicalPath={canonicalPath}>
+  <!-- Simple Navbar -->
+  <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="/en/" class="flex items-center gap-3 group">
+        <img
+          src="/images/logo-fatima-hq.webp"
+          alt={`Logo ${siteData.organizationName}`}
+          class="h-10 w-auto"
+          width="40"
+          height="40"
+          loading="eager"
+        />
+        <span class="navbar-title font-heading font-bold text-brand-dark uppercase tracking-wide hidden sm:block">
+          {siteData.organizationName}
+        </span>
+      </a>
+      <a
+        href="/en/#faire-un-don"
+        class="inline-flex items-center gap-2 bg-brand-pink hover:bg-pink-600 text-white font-heading font-bold text-sm px-5 py-2.5 rounded-full transition-colors shadow-md"
+      >
+        <i class="fas fa-heart text-xs"></i>
+        Support
+      </a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 border-b border-gray-200">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+        <nav aria-label="Breadcrumb" class="text-sm text-gray-500">
+          <ol class="flex items-center gap-1.5 flex-wrap">
+            <li>
+              <a href="/en/" class="hover:text-brand-blue transition-colors">Home</a>
+            </li>
+            <li aria-hidden="true"><i class="fas fa-chevron-right text-[10px] text-gray-400 mx-1"></i></li>
+            <li>
+              <a href="/en/#parcours" class="hover:text-brand-blue transition-colors">Programs</a>
+            </li>
+            <li aria-hidden="true"><i class="fas fa-chevron-right text-[10px] text-gray-400 mx-1"></i></li>
+            <li class="text-brand-dark font-semibold" aria-current="page">{program.title}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Hero Banner -->
+    <section class="relative overflow-hidden bg-brand-dark">
+      {program.image && (
+        <div class="absolute inset-0">
+          <img
+            src={program.image}
+            alt={program.imageAlt || program.title}
+            class="w-full h-full object-cover opacity-30"
+            loading="eager"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/90 via-brand-dark/70 to-brand-dark/50"></div>
+        </div>
+      )}
+      <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <div class="max-w-2xl">
+          <!-- Level Badge -->
+          <span class={`inline-flex items-center gap-2 ${colors.badge} text-white text-sm font-bold px-4 py-1.5 rounded-full mb-6`}>
+            <i class={`${program.icon} text-xs`}></i>
+            {program.level}
+          </span>
+
+          <h1 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white mb-4 leading-tight">
+            {program.title}
+          </h1>
+
+          {program.ages && (
+            <div class="flex items-center gap-2 text-white/80 text-lg">
+              <i class="fas fa-users"></i>
+              <span>{program.ages}</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+
+    <!-- Program Description -->
+    <section class={`bg-gradient-to-b ${colors.gradient} py-12 sm:py-16`}>
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-2xl shadow-lg p-8 sm:p-10">
+          <div class="flex items-center gap-3 mb-6">
+            <div class={`w-12 h-12 ${colors.badge} rounded-xl flex items-center justify-center`}>
+              <i class={`${program.icon} text-white text-xl`}></i>
+            </div>
+            <h2 class="font-heading font-extrabold text-2xl text-brand-dark">
+              About the Program
+            </h2>
+          </div>
+          <p class="text-gray-600 text-lg leading-relaxed whitespace-pre-line">
+            {program.description}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info Cards -->
+    <section class="py-12 sm:py-16 bg-white">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-3 gap-6 sm:gap-8">
+          <!-- Supervision -->
+          <div class="bg-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100 hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-brand-blue/10 rounded-xl flex items-center justify-center mb-5">
+              <i class="fas fa-chalkboard-teacher text-brand-blue text-2xl"></i>
+            </div>
+            <h3 class="font-heading font-bold text-lg text-brand-dark mb-2">Supervision</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">
+              Personalized support from qualified teachers and dedicated volunteers, in a caring and safe environment.
+            </p>
+          </div>
+
+          <!-- Approach -->
+          <div class="bg-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100 hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-brand-pink/10 rounded-xl flex items-center justify-center mb-5">
+              <i class="fas fa-puzzle-piece text-brand-pink text-2xl"></i>
+            </div>
+            <h3 class="font-heading font-bold text-lg text-brand-dark mb-2">Approach</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">
+              Teaching methods adapted to each child's pace, combining academic learning and creative activities to rebuild confidence.
+            </p>
+          </div>
+
+          <!-- Location -->
+          <div class="bg-gray-50 rounded-2xl p-6 sm:p-8 border border-gray-100 hover:shadow-lg transition-shadow">
+            <div class="w-14 h-14 bg-brand-yellow/10 rounded-xl flex items-center justify-center mb-5">
+              <i class="fas fa-map-marker-alt text-brand-yellow text-2xl"></i>
+            </div>
+            <h3 class="font-heading font-bold text-lg text-brand-dark mb-2">Location</h3>
+            <p class="text-gray-500 text-sm leading-relaxed">
+              {footerData.address}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Program Image (Full Width) -->
+    {program.image && (
+      <section class="py-8 sm:py-12 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="rounded-2xl overflow-hidden shadow-lg">
+            <img
+              src={program.image}
+              alt={program.imageAlt || program.title}
+              class="w-full h-64 sm:h-80 lg:h-96 object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- CTA Section -->
+    <section class="bg-brand-dark py-16 sm:py-20">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="font-heading font-extrabold text-2xl sm:text-3xl text-white mb-4">
+          Support Our Mission
+        </h2>
+        <p class="text-white/70 mb-8 max-w-lg mx-auto">
+          Every donation directly contributes to the education and future of our students.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            href="/en/#faire-un-don"
+            class="inline-flex items-center gap-2 bg-brand-pink hover:bg-pink-600 text-white font-heading font-bold px-8 py-3.5 rounded-full transition-colors shadow-lg"
+          >
+            <i class="fas fa-heart"></i>
+            Donate
+          </a>
+          <a
+            href="/en/#parcours"
+            class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-heading font-bold px-8 py-3.5 rounded-full transition-colors border border-white/20"
+          >
+            <i class="fas fa-arrow-left text-sm"></i>
+            View All Programs
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Minimal Footer -->
+  <footer class="bg-brand-dark border-t border-white/10 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-white/50 text-sm">
+        <a href={`mailto:${footerData.email}`} class="hover:text-white transition-colors">
+          {footerData.email}
+        </a>
+      </p>
+      <p class="text-white/30 text-xs mt-2">
+        &copy; {new Date().getFullYear()} {siteData.organizationName}. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "EducationalOccupationalProgram",
+    "name": program.title,
+    "description": program.description,
+    "educationalProgramMode": "full-time",
+    "provider": {
+      "@type": "EducationalOrganization",
+      "name": siteData.organizationName,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": footerData.address,
+        "addressLocality": "Triolet",
+        "addressCountry": "MU"
+      }
+    },
+    ...(program.ages ? { "programPrerequisites": { "@type": "EducationalOccupationalCredential", "credentialCategory": program.ages } } : {}),
+    "image": program.image ? new URL(program.image, Astro.url).href : undefined,
+  })} />
+</Layout>

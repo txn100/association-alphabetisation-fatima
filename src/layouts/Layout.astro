@@ -6,21 +6,33 @@ import type { Locale } from "../lib/i18n";
 const siteModule = await import("../data/site.json");
 const site = siteModule.default || siteModule;
 
+// Read footer data for structured data (phone, email, codes)
+const footerModule = await import("../data/footer.json");
+const footer = footerModule.default || footerModule;
+
 interface Props {
   lang?: Locale;
   title?: string;
   description?: string;
+  canonicalPath?: string;
 }
 
 const {
   lang = "fr",
   title = site.title || "Association d'Alphabétisation de Fatima — Trou-aux-Biches, Maurice",
   description = site.description || "Depuis 37 ans, nous aidons des enfants défavorisés à sortir de l'échec scolaire. Plus de 2 000 élèves ont pu retrouver le chemin de la confiance, de l'estime de soi et de la réussite.",
+  canonicalPath,
 } = Astro.props;
 
 const ogLocale = lang === "en" ? "en_US" : "fr_FR";
 const ogImage = new URL("/images/school-uodv3.jpg", Astro.url).href;
 const baseUrl = new URL("/", Astro.url).href.replace(/\/$/, "");
+
+// Dynamic canonical and hreflang URLs based on current page
+const pagePath = canonicalPath ?? Astro.url.pathname;
+const canonicalUrl = `${baseUrl}${pagePath}`;
+const frUrl = pagePath.startsWith("/en/") ? `${baseUrl}${pagePath.replace(/^\/en/, "")}` : `${baseUrl}${pagePath}`;
+const enUrl = pagePath.startsWith("/en/") ? `${baseUrl}${pagePath}` : `${baseUrl}/en${pagePath}`;
 ---
 
 <!doctype html>
@@ -31,13 +43,15 @@ const baseUrl = new URL("/", Astro.url).href.replace(/\/$/, "");
     <meta name="description" content={description} />
 
     <!-- Canonical + hreflang for bilingual SEO -->
-    <link rel="canonical" href={lang === "en" ? `${baseUrl}/en/` : `${baseUrl}/`} />
-    <link rel="alternate" hreflang="fr" href={`${baseUrl}/`} />
-    <link rel="alternate" hreflang="en" href={`${baseUrl}/en/`} />
-    <link rel="alternate" hreflang="x-default" href={`${baseUrl}/`} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="fr" href={frUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={frUrl} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
@@ -89,19 +103,36 @@ const baseUrl = new URL("/", Astro.url).href.replace(/\/$/, "");
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "EducationalOrganization",
+      "@type": ["EducationalOrganization", "NGO"],
       "name": "Association d'Alphabétisation de Fatima",
       "alternateName": lang === "en" ? "Fatima Literacy Association" : "Association d'Alphabétisation de Fatima",
-      "description": description,
+      "url": "https://association-alphabetisation-fatima.pages.dev/",
+      "logo": "https://association-alphabetisation-fatima.pages.dev/images/logo-fatima-hq.webp",
       "foundingDate": "1989",
+      "description": description,
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Trou aux Biches Road",
         "addressLocality": "Triolet",
+        "addressRegion": "Pamplemousses",
         "addressCountry": "MU"
       },
-      "telephone": "+230-261-30-32",
-      "email": "direction@ecolefatima.com"
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": footer.phone1Link,
+        "contactType": "customer support",
+        "availableLanguage": ["French", "English"]
+      },
+      "email": footer.email,
+      "sameAs": [],
+      "areaServed": {
+        "@type": "Country",
+        "name": "Mauritius"
+      },
+      "identifier": [
+        { "@type": "PropertyValue", "name": "NSIF Code", "value": footer.nsifCode },
+        { "@type": "PropertyValue", "name": "CSR Code", "value": footer.csrCode }
+      ]
     })} />
   </head>
   <body class="font-sans text-gray-700 bg-gray-50 antialiased">

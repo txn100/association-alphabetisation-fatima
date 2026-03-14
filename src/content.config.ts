@@ -4,6 +4,7 @@ import { glob } from 'astro/loaders';
 const news = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/news' }),
   schema: z.object({
+    slug: z.string(),
     date: z.string(),
     month: z.string(),
     day: z.string(),
@@ -38,6 +39,7 @@ const stats = defineCollection({
 const programs = defineCollection({
   loader: glob({ pattern: '**/*.json', base: './src/content/programs' }),
   schema: z.object({
+    slug: z.string(),
     level: z.string(),
     title: z.string(),
     icon: z.string(),

@@ -1,0 +1,267 @@
+---
+export const prerender = true;
+
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const donateModule = await import('../data/donate.json');
+const donate = donateModule.default || donateModule;
+
+const footerModule = await import('../data/footer.json');
+const footer = footerModule.default || footerModule;
+
+const siteModule = await import('../data/site.json');
+const site = siteModule.default || siteModule;
+
+const tiersRaw = await getCollection('tiers');
+const tiers = tiersRaw.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0)).map(t => t.data);
+
+const header = donate.emotionalHeader;
+const don = donate.donPonctuel;
+const parrain = donate.parrainSection;
+const donEnAction = donate.donEnAction;
+const csr = donate.csr;
+const socialProof = donate.socialProof || [];
+
+const whatsappNumber = footer.whatsappNumber;
+const phone1 = footer.phone1;
+const phone1Link = footer.phone1Link;
+
+const pageTitle = `Faire un Don — ${site.organizationName}`;
+const pageDescription = "Soutenez l'Association d'Alphabétisation de Fatima par un don ponctuel ou un parrainage mensuel. 100% de votre don est dédié aux élèves.";
+---
+
+<Layout lang="fr" title={pageTitle} description={pageDescription} canonicalPath="/faire-un-don/">
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md fixed w-full z-50" aria-label="Navigation principale">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-14 sm:h-16 items-center">
+        <a href="/" class="flex items-center gap-2">
+          <img
+            src="/images/logo-fatima-hq.webp"
+            alt={`Logo ${site.organizationName}`}
+            class="h-10 w-auto mix-blend-multiply"
+            width="40"
+            height="40"
+          />
+          <span class="font-heading font-bold text-brand-blue text-sm hidden sm:block">
+            {site.organizationName}
+          </span>
+        </a>
+        <a href="/" class="text-brand-blue hover:text-brand-dark font-bold text-sm transition">
+          <i class="fas fa-arrow-left mr-1"></i> Accueil
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-14 sm:pt-16">
+    <!-- Breadcrumb -->
+    <div class="bg-gray-50 border-b border-gray-200 py-3">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav aria-label="Fil d'Ariane" class="text-sm text-gray-500">
+          <a href="/" class="hover:text-brand-blue transition">Accueil</a>
+          <span class="mx-2">&rsaquo;</span>
+          <span class="text-gray-800 font-semibold">Faire un Don</span>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Emotional Header -->
+    <div class="bg-brand-dark text-white py-12 sm:py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <span class="inline-block bg-brand-pink/20 text-brand-pink px-4 py-1 rounded-full text-sm font-bold mb-4">
+          {header.badge}
+        </span>
+        <h1 class="font-heading text-3xl sm:text-4xl font-extrabold mb-3">
+          {header.heading} <span class="text-brand-pink">{header.headingHighlight}</span>
+        </h1>
+        <p class="text-blue-100 text-lg max-w-2xl mx-auto">{header.description}</p>
+
+        <!-- Social Proof -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-8 max-w-2xl mx-auto">
+          {socialProof.map((stat: { value: string; label: string }) => (
+            <div class="text-center">
+              <p class="text-2xl font-extrabold text-white">{stat.value}</p>
+              <p class="text-xs text-blue-200">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Two columns: Don Ponctuel + Devenir Parrain -->
+    <section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid lg:grid-cols-2 gap-8">
+
+        <!-- Don Ponctuel -->
+        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 sm:p-8">
+          <h2 class="font-heading text-xl font-bold text-gray-800 mb-2">
+            <i class="fas fa-hand-holding-heart text-brand-blue mr-2"></i>
+            {don.heading}
+          </h2>
+          <p class="text-gray-500 text-sm mb-6">{don.subtitle}</p>
+
+          <ol class="space-y-4">
+            {don.steps.map((step: { title: string; detail: string }, i: number) => (
+              <li class="flex gap-3">
+                <span class="flex-shrink-0 w-7 h-7 bg-brand-blue text-white rounded-full flex items-center justify-center text-xs font-bold">
+                  {i + 1}
+                </span>
+                <div>
+                  <p class="font-semibold text-gray-800 text-sm">{step.title}</p>
+                  {i === 1 && (
+                    <div class="mt-1 bg-gray-50 rounded-lg p-3 text-sm">
+                      <p class="font-bold text-brand-blue">{don.bankName}</p>
+                      <p class="font-mono text-gray-700">{don.accountNumber}</p>
+                      <p class="text-gray-500 text-xs">{don.accountHolder}</p>
+                    </div>
+                  )}
+                  {i === 2 && (
+                    <p class="mt-1 font-mono text-sm bg-brand-blue/10 text-brand-blue px-3 py-1.5 rounded-lg inline-block">
+                      {don.referenceFormat}
+                    </p>
+                  )}
+                  {step.detail && i !== 1 && i !== 2 && (
+                    <p class="text-gray-500 text-xs mt-0.5">{step.detail}</p>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <div class="border-t border-gray-100 pt-5 mt-6 text-center space-y-2">
+            <p class="text-xs text-gray-500 flex items-center justify-center gap-1.5">
+              <i class="fas fa-shield-alt text-green-500"></i>
+              {don.trustSignal}
+            </p>
+            <p class="text-xs text-gray-500">
+              {don.receiptNote}{" "}
+              <a href={`tel:${phone1Link}`} class="text-brand-blue underline hover:text-brand-dark">{phone1}</a>
+            </p>
+          </div>
+        </div>
+
+        <!-- Devenir Parrain (WhatsApp) -->
+        <div class="bg-white rounded-2xl shadow-lg border-2 border-brand-pink p-6 sm:p-8">
+          <h2 class="font-heading text-xl font-bold text-gray-800 mb-2">
+            <i class="fas fa-heart text-brand-pink mr-2"></i>
+            {parrain.heading}
+          </h2>
+          <p class="text-gray-500 text-sm mb-6">{parrain.subtitle}</p>
+
+          <!-- Tiers -->
+          <p class="text-sm font-semibold text-gray-700 mb-3">{parrain.chooseLabel}</p>
+          <div class="space-y-3 mb-6">
+            {tiers.map((tier: { label: string; period: string; description: string; icon: string; highlighted: boolean }) => (
+              <div class={`flex items-center gap-3 p-3 rounded-xl border-2 transition ${tier.highlighted ? 'border-brand-pink bg-pink-50' : 'border-gray-200 hover:border-brand-pink/50'}`}>
+                <div class={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${tier.highlighted ? 'bg-brand-pink text-white' : 'bg-gray-100 text-gray-600'}`}>
+                  <i class={tier.icon}></i>
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center gap-2">
+                    <span class="font-bold text-gray-800">{tier.label}</span>
+                    <span class="text-gray-500 text-sm">{tier.period}</span>
+                    {tier.highlighted && (
+                      <span class="text-[10px] font-bold bg-brand-pink text-white px-2 py-0.5 rounded-full">
+                        {parrain.highlightedBadge}
+                      </span>
+                    )}
+                  </div>
+                  <p class="text-gray-500 text-xs">{tier.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <!-- WhatsApp CTA -->
+          <a
+            href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent("Bonjour, je souhaite devenir parrain de l'Association d'Alphabétisation de Fatima.")}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center justify-center gap-3 w-full bg-green-500 hover:bg-green-600 text-white px-6 py-3.5 rounded-full font-bold transition shadow-md hover:shadow-lg"
+          >
+            <i class="fab fa-whatsapp text-xl"></i>
+            {parrain.whatsappButton}
+          </a>
+
+          <!-- Email fallback -->
+          <a
+            href={`mailto:${footer.email}?subject=${encodeURIComponent("Demande de parrainage")}&body=${encodeURIComponent("Bonjour,\n\nJe souhaite devenir parrain de l'Association d'Alphabétisation de Fatima.\n\nCordialement,")}`}
+            class="flex items-center justify-center gap-2 w-full mt-3 border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white px-6 py-3 rounded-full font-bold transition"
+          >
+            <i class="fas fa-envelope"></i>
+            {parrain.emailButton}
+          </a>
+
+          <div class="flex items-center justify-center gap-4 mt-4 text-xs text-gray-400">
+            <span><i class="fas fa-clock mr-1"></i> {parrain.responseTime}</span>
+            <span><i class="fas fa-receipt mr-1"></i> {parrain.receiptLabel}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Don en Action -->
+    <section class="bg-gray-50 py-12">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="font-heading text-2xl font-bold text-center text-gray-800 mb-8">{donEnAction.heading}</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+          {donEnAction.items.map((item: { icon: string; title: string; subtitle: string }) => (
+            <div class="text-center">
+              <div class="w-14 h-14 bg-brand-blue/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                <i class={`${item.icon} text-brand-blue text-xl`}></i>
+              </div>
+              <p class="font-bold text-gray-800 text-sm">{item.title}</p>
+              <p class="text-gray-500 text-xs">{item.subtitle}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CSR Section -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="bg-brand-dark text-white rounded-2xl p-8">
+        <h2 class="font-heading text-xl font-bold mb-3">
+          <i class="fas fa-building mr-2 text-brand-pink"></i>
+          {csr.heading}
+        </h2>
+        <p class="text-blue-100 text-sm mb-4">{csr.text}</p>
+        <div class="flex flex-col sm:flex-row gap-4 items-start">
+          <div class="bg-white/10 rounded-lg px-4 py-2">
+            <p class="text-xs text-blue-200">Code CSR</p>
+            <p class="font-mono font-bold">{csr.csrCode}</p>
+          </div>
+          <div>
+            <p class="font-bold">{csr.contactName}</p>
+            <p class="text-sm text-blue-200">{csr.contactRole}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-brand-dark text-white py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-gray-400 text-sm">
+        &copy; {new Date().getFullYear()} {site.organizationName}. Tous droits réservés.<br />
+        <a href={`mailto:${footer.email}`} class="hover:text-white transition">{footer.email}</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "DonateAction",
+    "name": "Faire un don",
+    "description": pageDescription,
+    "recipient": {
+      "@type": "NGO",
+      "name": site.organizationName,
+      "url": "https://association-alphabetisation-fatima.pages.dev/"
+    }
+  })} />
+</Layout>

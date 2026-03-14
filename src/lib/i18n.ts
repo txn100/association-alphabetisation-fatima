@@ -52,6 +52,28 @@ export interface UIStrings {
   srLabelFormula: string;
   srLabelMessage: string;
 
+  // Donate page — wizard steps
+  donateStepAmount: string;
+  donateStepDetails: string;
+  donateStepPayment: string;
+  donateContinue: string;
+  donateBack: string;
+  donateCompleted: string;
+  donateMcbJuice: string;
+  donateBankTransfer: string;
+  donateYourDonation: string;
+  donateReference: string;
+  donateShareWhatsapp: string;
+  donateCopyRef: string;
+  donateConfirmation: string;
+  donateCopied: string;
+  donateMinAmount: string;
+  donateRequiredFields: string;
+  donateNicRequired: string;
+
+  // Programs
+  learnMore: string;
+
   // Language switcher
   langSwitchLabel: string;
   langSwitchHref: string;
@@ -97,6 +119,26 @@ export const uiStrings: Record<Locale, UIStrings> = {
     srLabelFormula: "Formule de parrainage",
     srLabelMessage: "Message",
 
+    donateStepAmount: "Montant",
+    donateStepDetails: "Coordonnées",
+    donateStepPayment: "Paiement",
+    donateContinue: "Continuer",
+    donateBack: "Retour",
+    donateCompleted: "J'ai effectué mon paiement",
+    donateMcbJuice: "MCB Juice",
+    donateBankTransfer: "Virement bancaire",
+    donateYourDonation: "Vous faites un don de",
+    donateReference: "Référence",
+    donateShareWhatsapp: "Partager via WhatsApp",
+    donateCopyRef: "Copier la référence",
+    donateConfirmation: "Confirmation sous 24-48h",
+    donateCopied: "Copié !",
+    donateMinAmount: "Veuillez choisir un montant (minimum Rs 50)",
+    donateRequiredFields: "Veuillez remplir votre nom et email",
+    donateNicRequired: "Veuillez indiquer votre NIC ou passeport pour le reçu fiscal",
+
+    learnMore: "En savoir plus",
+
     langSwitchLabel: "EN",
     langSwitchHref: "/en/",
   },
@@ -138,6 +180,26 @@ export const uiStrings: Record<Locale, UIStrings> = {
     srLabelEmail: "Email",
     srLabelFormula: "Sponsorship plan",
     srLabelMessage: "Message",
+
+    donateStepAmount: "Amount",
+    donateStepDetails: "Details",
+    donateStepPayment: "Payment",
+    donateContinue: "Continue",
+    donateBack: "Back",
+    donateCompleted: "I have completed my payment",
+    donateMcbJuice: "MCB Juice",
+    donateBankTransfer: "Bank Transfer",
+    donateYourDonation: "You are donating",
+    donateReference: "Reference",
+    donateShareWhatsapp: "Share via WhatsApp",
+    donateCopyRef: "Copy reference",
+    donateConfirmation: "Confirmation within 24-48h",
+    donateCopied: "Copied!",
+    donateMinAmount: "Please choose an amount (minimum Rs 50)",
+    donateRequiredFields: "Please fill in your name and email",
+    donateNicRequired: "Please provide your NIC or passport for the tax receipt",
+
+    learnMore: "Learn more",
 
     langSwitchLabel: "FR",
     langSwitchHref: "/",

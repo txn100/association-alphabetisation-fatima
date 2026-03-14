@@ -1,0 +1,187 @@
+---
+export const prerender = true;
+
+import Layout from '../../../layouts/Layout.astro';
+import { getNewsData, getFooterData, getSiteData } from '../../../lib/content';
+
+export async function getStaticPaths() {
+  const newsResult = await getNewsData("en");
+  const newsItems = (newsResult.data.newsConnection?.edges || [])
+    .filter((e: any) => e?.node)
+    .map((e: any) => e.node);
+  return newsItems.map((item: any) => ({
+    params: { slug: item.slug },
+    props: { article: item },
+  }));
+}
+
+const { article } = Astro.props;
+const slug = article.slug;
+
+const footerResult = await getFooterData("en");
+const siteResult = await getSiteData("en");
+
+const footerData = footerResult.data.footer;
+const siteData = siteResult.data.site;
+
+const pageTitle = `${article.title} — ${siteData.organizationName}`;
+const pageDescription = article.description?.substring(0, 160) || article.title;
+const canonicalPath = `/en/actualites/${slug}/`;
+
+const categoryColors: Record<string, string> = {
+  'Formation': 'bg-brand-blue text-white',
+  'Training': 'bg-brand-blue text-white',
+  'Culture': 'bg-brand-pink text-white',
+  'Vie Scolaire': 'bg-brand-yellow text-brand-dark',
+  'School Life': 'bg-brand-yellow text-brand-dark',
+  'Environnement': 'bg-green-500 text-white',
+  'Environment': 'bg-green-500 text-white',
+};
+---
+
+<Layout lang="en" title={pageTitle} description={pageDescription} canonicalPath={canonicalPath}>
+  <!-- Navbar -->
+  <nav class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="/en/" class="flex items-center gap-3 group">
+        <img
+          src="/images/logo-fatima-hq.webp"
+          alt={`Logo ${siteData.organizationName}`}
+          class="h-10 w-auto"
+          width="40"
+          height="40"
+          loading="eager"
+        />
+        <span class="navbar-title font-heading font-bold text-brand-dark uppercase tracking-wide hidden sm:block">
+          {siteData.organizationName}
+        </span>
+      </a>
+      <a
+        href="/en/#faire-un-don"
+        class="inline-flex items-center gap-2 bg-brand-pink hover:bg-pink-600 text-white font-heading font-bold text-sm px-5 py-2.5 rounded-full transition-colors shadow-md"
+      >
+        <i class="fas fa-heart text-xs"></i>
+        Support
+      </a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 border-b border-gray-200">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+        <nav aria-label="Breadcrumb" class="text-sm text-gray-500">
+          <ol class="flex items-center gap-1.5 flex-wrap">
+            <li><a href="/en/" class="hover:text-brand-blue transition-colors">Home</a></li>
+            <li aria-hidden="true"><i class="fas fa-chevron-right text-[10px] text-gray-400 mx-1"></i></li>
+            <li><a href="/en/actualites/" class="hover:text-brand-blue transition-colors">News</a></li>
+            <li aria-hidden="true"><i class="fas fa-chevron-right text-[10px] text-gray-400 mx-1"></i></li>
+            <li class="text-brand-dark font-semibold" aria-current="page">{article.title}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-brand-dark">
+      {article.image && (
+        <div class="absolute inset-0">
+          <img
+            src={article.image}
+            alt={article.imageAlt || article.title}
+            class="w-full h-full object-cover opacity-30"
+            loading="eager"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-brand-dark/90 via-brand-dark/70 to-brand-dark/50"></div>
+        </div>
+      )}
+      <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+        <div class="flex items-center gap-3 mb-4">
+          <time datetime={article.date} class="text-white/60 text-sm font-semibold">
+            {article.day} {article.month} {article.year}
+          </time>
+          <span class={`text-xs font-bold px-3 py-1 rounded-full ${categoryColors[article.category] || 'bg-gray-200 text-gray-700'}`}>
+            {article.category}
+          </span>
+        </div>
+        <h1 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight">
+          {article.title}
+        </h1>
+      </div>
+    </section>
+
+    <!-- Article Body -->
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="bg-white rounded-2xl shadow-lg p-8 sm:p-10">
+        {article.image && (
+          <div class="rounded-xl overflow-hidden mb-8 -mx-2">
+            <img
+              src={article.image}
+              alt={article.imageAlt || article.title}
+              class="w-full h-64 sm:h-80 object-cover"
+              loading="eager"
+            />
+          </div>
+        )}
+        <!-- TODO: replace description with full body text once news body field is added to TinaCMS -->
+        <p class="text-gray-600 text-lg leading-relaxed whitespace-pre-line">
+          {article.description}
+        </p>
+      </div>
+
+      <!-- Back link -->
+      <div class="mt-8">
+        <a
+          href="/en/actualites/"
+          class="inline-flex items-center gap-2 text-brand-blue hover:text-blue-700 font-bold transition-colors"
+        >
+          <i class="fas fa-arrow-left text-sm"></i> All news
+        </a>
+      </div>
+    </article>
+
+    <!-- CTA -->
+    <section class="bg-brand-dark py-16">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="font-heading font-extrabold text-2xl text-white mb-4">Support our mission</h2>
+        <p class="text-white/70 mb-8">Every donation directly contributes to the education of our students.</p>
+        <a
+          href="/en/#faire-un-don"
+          class="inline-flex items-center gap-2 bg-brand-pink hover:bg-pink-600 text-white font-heading font-bold px-8 py-3.5 rounded-full transition-colors shadow-lg"
+        >
+          <i class="fas fa-heart"></i> Donate
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-brand-dark border-t border-white/10 py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-white/50 text-sm">
+        <a href={`mailto:${footerData.email}`} class="hover:text-white transition-colors">{footerData.email}</a>
+      </p>
+      <p class="text-white/30 text-xs mt-2">
+        &copy; {new Date().getFullYear()} {siteData.organizationName}. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": article.title,
+    "datePublished": article.date,
+    "description": article.description,
+    "image": article.image ? new URL(article.image, Astro.url).href : undefined,
+    "publisher": {
+      "@type": "EducationalOrganization",
+      "name": siteData.organizationName,
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://association-alphabetisation-fatima.pages.dev/images/logo-fatima-hq.webp"
+      }
+    },
+  })} />
+</Layout>

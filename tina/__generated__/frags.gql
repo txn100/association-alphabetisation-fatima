@@ -1,5 +1,6 @@
 fragment NewsParts on News {
   __typename
+  slug
   title
   date
   month
@@ -28,6 +29,7 @@ fragment StatsParts on Stats {
 
 fragment ProgramsParts on Programs {
   __typename
+  slug
   title
   level
   icon

@@ -1,124 +1,80 @@
 /**
- * Fetch content using the TinaCMS generated client (FR) or static JSON (EN).
- * Returns { data, query, variables } for each collection,
- * which useTina() uses for live visual editing in the admin iframe.
+ * Fetch content using the TinaCMS generated client.
  *
- * For EN locale, we wrap raw JSON in the same shape so useTina()
- * returns data as-is (query: "" = no live editing subscription).
+ * For EN locale the same FR data is fetched from TinaCMS and translated to
+ * English at build time using the DeepL API (see src/lib/translate.ts).
+ *
+ * Returns { data, query, variables } for each collection, which useTina()
+ * uses for live visual editing in the admin iframe.
+ * query: "" on EN results disables TinaCMS live editing for the EN page.
  */
 
 import type { Locale } from "./i18n";
 import client from "../../tina/__generated__/client";
-
-// ---------------------------------------------------------------------------
-// Helpers to wrap static JSON in TinaCMS-compatible shape
-// ---------------------------------------------------------------------------
-
-/** Wrap a singleton JSON file so it looks like a TinaCMS query result. */
-function wrapSingleton<T>(collectionName: string, data: T) {
-  return {
-    data: { [collectionName]: data } as any,
-    query: "",
-    variables: {},
-  };
-}
-
-/** Wrap an array of multi-doc items as a TinaCMS Connection result. */
-function wrapConnection<T extends Record<string, any>>(collectionName: string, nodes: T[]) {
-  return {
-    data: {
-      [`${collectionName}Connection`]: {
-        edges: nodes.map((node, i) => ({
-          node: { ...node, _sys: { filename: `en-${i}` } },
-        })),
-      },
-    } as any,
-    query: "",
-    variables: {},
-  };
-}
-
-/** Dynamic import of a JSON file from src/data/en/ */
-async function loadEnSingleton(name: string) {
-  const mod = await import(`../data/en/${name}.json`);
-  return mod.default || mod;
-}
-
-/** Dynamic import of all JSON files from a content/en/ subdirectory. */
-async function loadEnCollection(dir: string): Promise<any[]> {
-  // Use Vite's import.meta.glob with eager loading for each EN content dir
-  const modules: Record<string, any> = import.meta.glob(
-    "../content/en/**/*.json",
-    { eager: true }
-  );
-  const prefix = `../content/en/${dir}/`;
-  return Object.entries(modules)
-    .filter(([path]) => path.startsWith(prefix))
-    .map(([, mod]) => mod.default || mod);
-}
+import { withTranslation, translateValue } from "./translate";
 
 // ---------------------------------------------------------------------------
 // Singleton loaders
 // ---------------------------------------------------------------------------
 
 export async function getHeroData(locale: Locale = "fr") {
-  if (locale === "en") return wrapSingleton("hero", await loadEnSingleton("hero"));
-  return client.queries.hero({ relativePath: "hero.json" });
+  const data = await client.queries.hero({ relativePath: "hero.json" });
+  return locale === "en" ? withTranslation(data) : data;
 }
 
 export async function getAboutData(locale: Locale = "fr") {
-  if (locale === "en") return wrapSingleton("about", await loadEnSingleton("about"));
-  return client.queries.about({ relativePath: "about.json" });
+  const data = await client.queries.about({ relativePath: "about.json" });
+  return locale === "en" ? withTranslation(data) : data;
 }
 
 export async function getFooterData(locale: Locale = "fr") {
-  if (locale === "en") return wrapSingleton("footer", await loadEnSingleton("footer"));
-  return client.queries.footer({ relativePath: "footer.json" });
+  const data = await client.queries.footer({ relativePath: "footer.json" });
+  return locale === "en" ? withTranslation(data) : data;
 }
 
 export async function getNavigationData(locale: Locale = "fr") {
-  if (locale === "en") return wrapSingleton("navigation", await loadEnSingleton("navigation"));
-  return client.queries.navigation({ relativePath: "navigation.json" });
+  const data = await client.queries.navigation({ relativePath: "navigation.json" });
+  return locale === "en" ? withTranslation(data) : data;
 }
 
 export async function getImpactData(locale: Locale = "fr") {
-  if (locale === "en") return wrapSingleton("impact", await loadEnSingleton("impact"));
-  return client.queries.impact({ relativePath: "impact.json" });
+  const data = await client.queries.impact({ relativePath: "impact.json" });
+  return locale === "en" ? withTranslation(data) : data;
 }
 
 export async function getPedagogyData(locale: Locale = "fr") {
-  if (locale === "en") return wrapSingleton("pedagogy", await loadEnSingleton("pedagogy"));
-  return client.queries.pedagogy({ relativePath: "pedagogy.json" });
+  const data = await client.queries.pedagogy({ relativePath: "pedagogy.json" });
+  return locale === "en" ? withTranslation(data) : data;
 }
 
 export async function getDonateData(locale: Locale = "fr") {
-  if (locale === "en") return wrapSingleton("donate", await loadEnSingleton("donate"));
-  return client.queries.donate({ relativePath: "donate.json" });
+  const data = await client.queries.donate({ relativePath: "donate.json" });
+  return locale === "en" ? withTranslation(data) : data;
 }
 
 export async function getSiteData(locale: Locale = "fr") {
-  if (locale === "en") return wrapSingleton("site", await loadEnSingleton("site"));
-  return client.queries.site({ relativePath: "site.json" });
+  const data = await client.queries.site({ relativePath: "site.json" });
+  return locale === "en" ? withTranslation(data) : data;
 }
 
 export async function getStatsSectionData(locale: Locale = "fr") {
-  if (locale === "en") return wrapSingleton("statsSection", await loadEnSingleton("stats-section"));
-  return client.queries.statsSection({ relativePath: "stats-section.json" });
+  const data = await client.queries.statsSection({ relativePath: "stats-section.json" });
+  return locale === "en" ? withTranslation(data) : data;
 }
 
 export async function getProgramsSectionData(locale: Locale = "fr") {
-  if (locale === "en") return wrapSingleton("programsSection", await loadEnSingleton("programs-section"));
-  return client.queries.programsSection({ relativePath: "programs-section.json" });
+  const data = await client.queries.programsSection({ relativePath: "programs-section.json" });
+  return locale === "en" ? withTranslation(data) : data;
 }
 
 export async function getGallerySectionData(locale: Locale = "fr") {
-  if (locale === "en") return wrapSingleton("gallerySection", await loadEnSingleton("gallery-section"));
-  return client.queries.gallerySection({ relativePath: "gallery-section.json" });
+  const data = await client.queries.gallerySection({ relativePath: "gallery-section.json" });
+  return locale === "en" ? withTranslation(data) : data;
 }
 
 export async function getProjectsSectionData(locale: Locale = "fr") {
-  if (locale === "en") return wrapSingleton("projectsSection", await loadEnSingleton("projects-section"));
-  return client.queries.projectsSection({ relativePath: "projects-section.json" });
+  const data = await client.queries.projectsSection({ relativePath: "projects-section.json" });
+  return locale === "en" ? withTranslation(data) : data;
 }
 
 // ---------------------------------------------------------------------------
@@ -126,29 +82,33 @@ export async function getProjectsSectionData(locale: Locale = "fr") {
 // ---------------------------------------------------------------------------
 
 export async function getStatsData(locale: Locale = "fr") {
-  if (locale === "en") return wrapConnection("stats", await loadEnCollection("stats"));
-  return client.queries.statsConnection();
+  const data = await client.queries.statsConnection();
+  return locale === "en" ? withTranslation(data) : data;
 }
 
 export async function getProgramsData(locale: Locale = "fr") {
-  if (locale === "en") return wrapConnection("programs", await loadEnCollection("programs"));
-  return client.queries.programsConnection();
+  const data = await client.queries.programsConnection();
+  return locale === "en" ? withTranslation(data) : data;
 }
 
 export async function getNewsData(locale: Locale = "fr") {
-  if (locale === "en") return wrapConnection("news", await loadEnCollection("news"));
-  return client.queries.newsConnection();
+  const data = await client.queries.newsConnection();
+  return locale === "en" ? withTranslation(data) : data;
 }
 
 export async function getTiersData(locale: Locale = "fr") {
-  if (locale === "en") return wrapConnection("tiers", await loadEnCollection("tiers"));
-  return client.queries.tiersConnection();
+  const data = await client.queries.tiersConnection();
+  return locale === "en" ? withTranslation(data) : data;
 }
 
 export async function getProjectsData(locale: Locale = "fr") {
-  if (locale === "en") return wrapConnection("projects", await loadEnCollection("projects"));
-  return client.queries.projectsConnection();
+  const data = await client.queries.projectsConnection();
+  return locale === "en" ? withTranslation(data) : data;
 }
+
+// ---------------------------------------------------------------------------
+// Standalone page content loaders (static JSON only, no TinaCMS collection)
+// ---------------------------------------------------------------------------
 
 // Gallery is language-independent (images only) — always use FR/TinaCMS
 export async function getGalleryData() {

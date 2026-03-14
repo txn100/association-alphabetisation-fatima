@@ -473,6 +473,7 @@ export type DocumentNode = News | Gallery | Stats | Programs | Projects | Tiers 
 
 export type News = Node & Document & {
   __typename?: 'News';
+  slug: Scalars['String']['output'];
   title: Scalars['String']['output'];
   date: Scalars['String']['output'];
   month: Scalars['String']['output'];
@@ -502,6 +503,7 @@ export type ImageFilter = {
 };
 
 export type NewsFilter = {
+  slug?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
   date?: InputMaybe<StringFilter>;
   month?: InputMaybe<StringFilter>;
@@ -598,6 +600,7 @@ export type StatsConnection = Connection & {
 
 export type Programs = Node & Document & {
   __typename?: 'Programs';
+  slug: Scalars['String']['output'];
   title: Scalars['String']['output'];
   level: Scalars['String']['output'];
   icon: Scalars['String']['output'];
@@ -613,6 +616,7 @@ export type Programs = Node & Document & {
 };
 
 export type ProgramsFilter = {
+  slug?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
   level?: InputMaybe<StringFilter>;
   icon?: InputMaybe<StringFilter>;
@@ -1671,6 +1675,7 @@ export type DocumentMutation = {
 };
 
 export type NewsMutation = {
+  slug?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   date?: InputMaybe<Scalars['String']['input']>;
   month?: InputMaybe<Scalars['String']['input']>;
@@ -1696,6 +1701,7 @@ export type StatsMutation = {
 };
 
 export type ProgramsMutation = {
+  slug?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   level?: InputMaybe<Scalars['String']['input']>;
   icon?: InputMaybe<Scalars['String']['input']>;
@@ -1926,13 +1932,13 @@ export type GallerySectionMutation = {
   description?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type NewsPartsFragment = { __typename: 'News', title: string, date: string, month: string, day: string, year: string, category: string, description?: string | null, image?: string | null, imageAlt?: string | null };
+export type NewsPartsFragment = { __typename: 'News', slug: string, title: string, date: string, month: string, day: string, year: string, category: string, description?: string | null, image?: string | null, imageAlt?: string | null };
 
 export type GalleryPartsFragment = { __typename: 'Gallery', src: string, alt: string, span?: string | null, order: number };
 
 export type StatsPartsFragment = { __typename: 'Stats', value: string, label: string, order: number };
 
-export type ProgramsPartsFragment = { __typename: 'Programs', title: string, level: string, icon: string, ages?: string | null, description: string, color: string, image: string, imageAlt: string, order: number };
+export type ProgramsPartsFragment = { __typename: 'Programs', slug: string, title: string, level: string, icon: string, ages?: string | null, description: string, color: string, image: string, imageAlt: string, order: number };
 
 export type ProjectsPartsFragment = { __typename: 'Projects', title: string, category: string, status: string, description: string, image: string, imageAlt: string, completionDate?: string | null, beneficiaries?: string | null, impact?: string | null, order: number };
 
@@ -1967,7 +1973,7 @@ export type NewsQueryVariables = Exact<{
 }>;
 
 
-export type NewsQuery = { __typename?: 'Query', news: { __typename: 'News', id: string, title: string, date: string, month: string, day: string, year: string, category: string, description?: string | null, image?: string | null, imageAlt?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type NewsQuery = { __typename?: 'Query', news: { __typename: 'News', id: string, slug: string, title: string, date: string, month: string, day: string, year: string, category: string, description?: string | null, image?: string | null, imageAlt?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type NewsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1979,7 +1985,7 @@ export type NewsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type NewsConnectionQuery = { __typename?: 'Query', newsConnection: { __typename?: 'NewsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NewsConnectionEdges', cursor: string, node?: { __typename: 'News', id: string, title: string, date: string, month: string, day: string, year: string, category: string, description?: string | null, image?: string | null, imageAlt?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type NewsConnectionQuery = { __typename?: 'Query', newsConnection: { __typename?: 'NewsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NewsConnectionEdges', cursor: string, node?: { __typename: 'News', id: string, slug: string, title: string, date: string, month: string, day: string, year: string, category: string, description?: string | null, image?: string | null, imageAlt?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type GalleryQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2024,7 +2030,7 @@ export type ProgramsQueryVariables = Exact<{
 }>;
 
 
-export type ProgramsQuery = { __typename?: 'Query', programs: { __typename: 'Programs', id: string, title: string, level: string, icon: string, ages?: string | null, description: string, color: string, image: string, imageAlt: string, order: number, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type ProgramsQuery = { __typename?: 'Query', programs: { __typename: 'Programs', id: string, slug: string, title: string, level: string, icon: string, ages?: string | null, description: string, color: string, image: string, imageAlt: string, order: number, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type ProgramsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -2036,7 +2042,7 @@ export type ProgramsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ProgramsConnectionQuery = { __typename?: 'Query', programsConnection: { __typename?: 'ProgramsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProgramsConnectionEdges', cursor: string, node?: { __typename: 'Programs', id: string, title: string, level: string, icon: string, ages?: string | null, description: string, color: string, image: string, imageAlt: string, order: number, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type ProgramsConnectionQuery = { __typename?: 'Query', programsConnection: { __typename?: 'ProgramsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ProgramsConnectionEdges', cursor: string, node?: { __typename: 'Programs', id: string, slug: string, title: string, level: string, icon: string, ages?: string | null, description: string, color: string, image: string, imageAlt: string, order: number, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type ProjectsQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2307,6 +2313,7 @@ export type GallerySectionConnectionQuery = { __typename?: 'Query', gallerySecti
 export const NewsPartsFragmentDoc = gql`
     fragment NewsParts on News {
   __typename
+  slug
   title
   date
   month
@@ -2338,6 +2345,7 @@ export const StatsPartsFragmentDoc = gql`
 export const ProgramsPartsFragmentDoc = gql`
     fragment ProgramsParts on Programs {
   __typename
+  slug
   title
   level
   icon

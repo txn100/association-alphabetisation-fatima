@@ -1,0 +1,172 @@
+---
+export const prerender = true;
+
+import Layout from '../../layouts/Layout.astro';
+import { getAboutData, getFooterData, getSiteData } from '../../lib/content';
+
+const aboutResult = await getAboutData("en");
+const about = aboutResult.data.about;
+const photos: { src: string; alt: string }[] = (about as any).photos ?? [];
+
+const footerResult = await getFooterData("en");
+const footer = footerResult.data.footer;
+
+const siteResult = await getSiteData("en");
+const site = siteResult.data.site;
+---
+
+<Layout
+  lang="en"
+  title={`Our Story — ${site.organizationName}`}
+  description="Since 1989, the Association d'Alphab&eacute;tisation de Fatima has been helping underprivileged children in Trou-aux-Biches, Mauritius. Discover our history, our mission, and our team."
+  canonicalPath="/en/notre-histoire/"
+>
+  <!-- Simple Navbar -->
+  <nav class="bg-white shadow-md fixed w-full z-50" aria-label="Main navigation">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-14 sm:h-16 items-center">
+        <a href="/en/" class="flex items-center gap-2">
+          <img
+            src="/images/logo-fatima-hq.webp"
+            alt={`Logo ${site.organizationName}`}
+            class="h-10 w-auto mix-blend-multiply"
+            width="40"
+            height="40"
+          />
+          <span class="font-heading font-bold text-brand-blue text-sm hidden sm:block">
+            {site.organizationName}
+          </span>
+        </a>
+        <a
+          href="/en/#faire-un-don"
+          class="bg-brand-pink hover:bg-pink-600 text-white px-4 py-2 rounded-full font-bold text-sm transition"
+        >
+          <i class="fas fa-heart mr-1"></i> Support Us
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="pt-14 sm:pt-16">
+    <!-- Breadcrumb -->
+    <div class="bg-gray-50 border-b border-gray-200 py-3">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav aria-label="Breadcrumb" class="text-sm text-gray-500">
+          <a href="/en/" class="hover:text-brand-blue transition">Home</a>
+          <span class="mx-2">&rsaquo;</span>
+          <span class="text-gray-800 font-semibold">Our Story</span>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Dark Header -->
+    <div class="bg-brand-dark text-white py-12 sm:py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="font-heading text-3xl sm:text-4xl font-bold mb-3">
+          {about.heading}
+        </h1>
+        <p class="text-blue-100 text-lg">
+          Since 1989, serving underprivileged children in northern Mauritius.
+        </p>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <!-- 2-column: Image + Paragraphs -->
+      <div class="grid lg:grid-cols-2 gap-10 mb-12">
+        <div>
+          <img
+            src={about.mainImage}
+            alt={about.mainImageAlt}
+            class="rounded-2xl shadow-lg w-full h-72 object-cover"
+            width="600"
+            height="288"
+          />
+        </div>
+        <div class="flex flex-col justify-center">
+          <p class="text-gray-700 leading-relaxed mb-4">{about.paragraph1}</p>
+          <p class="text-gray-700 leading-relaxed mb-4">{about.paragraph2}</p>
+          <p class="text-gray-700 leading-relaxed">{about.paragraph3}</p>
+        </div>
+      </div>
+
+      <!-- Pink-bordered Blockquote -->
+      <blockquote class="border-l-4 border-brand-pink pl-6 py-4 my-10 bg-pink-50 rounded-r-xl">
+        <p class="text-gray-700 italic text-lg leading-relaxed">
+          &laquo;&nbsp;{about.quote}&nbsp;&raquo;
+        </p>
+      </blockquote>
+
+      <!-- Photo Strip (3 images) -->
+      {photos.length > 0 && (
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12">
+          {photos.map((photo) => (
+            <img
+              src={photo.src}
+              alt={photo.alt}
+              class="rounded-xl shadow-md w-full h-40 sm:h-48 object-cover"
+              loading="lazy"
+              decoding="async"
+              width="300"
+              height="192"
+            />
+          ))}
+        </div>
+      )}
+
+      <!-- Leadership Section -->
+      <div class="bg-white rounded-2xl shadow-md p-8 mb-10">
+        <h2 class="font-heading text-2xl font-bold text-gray-800 mb-6">
+          Our Leadership Team
+        </h2>
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-brand-blue rounded-full flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-user text-white"></i>
+            </div>
+            <div>
+              <p class="font-bold text-gray-800">{footer.president}</p>
+              <p class="text-sm text-gray-500">President</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-brand-pink rounded-full flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-user text-white"></i>
+            </div>
+            <div>
+              <p class="font-bold text-gray-800">{footer.director}</p>
+              <p class="text-sm text-gray-500">Director</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a
+          href="/en/#faire-un-don"
+          class="inline-flex items-center justify-center bg-brand-pink hover:bg-pink-600 text-white px-8 py-3 rounded-full font-bold shadow-md transition transform hover:scale-105"
+        >
+          <i class="fas fa-heart mr-2"></i> Support Our Mission
+        </a>
+        <a
+          href="/en/impact-et-transparence/"
+          class="inline-flex items-center justify-center border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white px-8 py-3 rounded-full font-bold transition"
+        >
+          <i class="fas fa-chart-bar mr-2"></i> Impact &amp; Transparency
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Minimal Footer -->
+  <footer class="bg-brand-dark text-white py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-gray-400 text-sm">
+        &copy; {site.organizationName}<br />
+        <a href={`mailto:${footer.email}`} class="hover:text-white transition">{footer.email}</a>
+      </p>
+    </div>
+  </footer>
+</Layout>

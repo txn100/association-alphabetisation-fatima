@@ -6,5 +6,6 @@ dist/
 .env.*
 !.env.example
 *.local
+.dev.vars
 .wrangler/
 tina/__generated__/.cache/

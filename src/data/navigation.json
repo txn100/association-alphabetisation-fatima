@@ -23,6 +23,10 @@
     {
       "label": "Galerie",
       "href": "#galerie"
+    },
+    {
+      "label": "Actualités",
+      "href": "/actualites/"
     }
   ],
   "navbarTitle": "ASSOCIATION D'ALPHABETISATION DE FATIMA",

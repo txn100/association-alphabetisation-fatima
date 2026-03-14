@@ -1,6 +1,6 @@
 import { tinaField, useTina } from "tinacms/dist/react";
 
-export default function ProgramsVisual(props: any) {
+export default function ProgramsVisual(props: any & { lang?: string; ui?: any }) {
   const { data } = useTina({
     query: props.query,
     variables: props.variables,
@@ -12,6 +12,9 @@ export default function ProgramsVisual(props: any) {
     data: props.sectionData || {},
   });
 
+  const lang = props.lang || "fr";
+  const ui = props.ui || {};
+  const prefix = lang === "en" ? "/en" : "";
   const edges = data.programsConnection?.edges || [];
   const steps = edges
     .filter((e: any) => e?.node)
@@ -98,6 +101,16 @@ export default function ProgramsVisual(props: any) {
                   >
                     {step.description}
                   </p>
+                  {step.slug && (
+                    <a
+                      href={`${prefix}/programmes/${step.slug}`}
+                      className={`inline-flex items-center mt-4 text-sm font-bold transition ${
+                        step.color === "pink" ? "text-brand-pink hover:text-pink-700" : "text-brand-blue hover:text-blue-700"
+                      }`}
+                    >
+                      {ui.learnMore || "En savoir plus"} <i className="fas fa-arrow-right ml-1 text-xs" />
+                    </a>
+                  )}
                 </div>
               </div>
             ))}

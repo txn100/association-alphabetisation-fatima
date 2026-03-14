@@ -1,9 +1,0 @@
-{
-  "amount": 2000,
-  "label": "Rs 2,000",
-  "period": "/month",
-  "description": "Partial tuition for a student",
-  "icon": "fas fa-book",
-  "highlighted": false,
-  "order": 2
-}

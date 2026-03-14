@@ -169,6 +169,18 @@ export default function FooterVisual(props: any) {
                 </li>
               </ul>
             </div>
+            <nav aria-label="Liens utiles" className="mt-6">
+              <p className="text-xs text-gray-400 mb-2 uppercase tracking-wide">
+                {props.lang === "en" ? "Useful Links" : "Liens utiles"}
+              </p>
+              <ul className="space-y-2 text-sm">
+                <li><a href={props.lang === "en" ? "/en/notre-histoire" : "/notre-histoire"} className="hover:text-white transition">{props.lang === "en" ? "Our Story" : "Notre Histoire"}</a></li>
+                <li><a href={props.lang === "en" ? "/en/actualites/" : "/actualites/"} className="hover:text-white transition">{props.lang === "en" ? "News" : "Actualités"}</a></li>
+                <li><a href={props.lang === "en" ? "/en/impact-et-transparence" : "/impact-et-transparence"} className="hover:text-white transition">{props.lang === "en" ? "Impact & Transparency" : "Impact & Transparence"}</a></li>
+                <li><a href={props.lang === "en" ? "/en/faire-un-don" : "/faire-un-don"} className="hover:text-white transition">{props.lang === "en" ? "Donate" : "Faire un Don"}</a></li>
+                <li><a href={props.lang === "en" ? "/en/contact" : "/contact"} className="hover:text-white transition">Contact</a></li>
+              </ul>
+            </nav>
           </div>
         </div>
 

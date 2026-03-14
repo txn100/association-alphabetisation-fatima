@@ -38,6 +38,7 @@ export default defineConfig({
         format: "json",
         ui: { router: () => "/" },
         fields: [
+          { type: "string", name: "slug", label: "Slug (URL)", description: "Ex: club-mer, rentree", required: true },
           { type: "string", name: "title", label: "Titre", isTitle: true, required: true },
           { type: "string", name: "date", label: "Date de publication", description: "Format: YYYY-MM-DD (ex: 2026-03-01)", required: true },
           { type: "string", name: "month", label: "Mois (abrégé)", description: "Ex: Fév, Mar, Avr, Déc", required: true },
@@ -89,6 +90,7 @@ export default defineConfig({
         format: "json",
         ui: { router: () => "/" },
         fields: [
+          { type: "string", name: "slug", label: "Slug (URL)", description: "Ex: alphabetisation, preparation-cpe", required: true },
           { type: "string", name: "title", label: "Titre du programme", isTitle: true, required: true },
           { type: "string", name: "level", label: "Niveau", description: "Ex: Niveaux 1–2, Filière Vocational", required: true },
           { type: "string", name: "icon", label: "Icône FontAwesome", description: "Ex: fas fa-book-reader", required: true },
