@@ -17,6 +17,8 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+        env:
+          DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
 
       - uses: cloudflare/wrangler-action@v3
         with:
