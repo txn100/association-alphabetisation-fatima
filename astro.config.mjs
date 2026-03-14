@@ -8,7 +8,16 @@ import tinaDirective from './astro-tina-directive/register';
 export default defineConfig({
   site: 'https://association-alphabetisation-fatima.pages.dev',
   adapter: cloudflare(),
-  integrations: [react(), sitemap(), tinaDirective()],
+  integrations: [
+    react(),
+    sitemap({
+      i18n: {
+        defaultLocale: 'fr',
+        locales: { fr: 'fr', en: 'en' },
+      },
+    }),
+    tinaDirective(),
+  ],
   vite: {
     plugins: [tailwindcss()],
     build: {

@@ -14,7 +14,7 @@ const canonicalPath = '/contact/';
   <nav class="bg-white shadow-sm sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <a href="/" class="flex items-center gap-3 group">
-        <img src="/images/logo-fatima-hq.webp" alt="Logo" class="h-10 w-auto" width="40" height="40" loading="eager" />
+        <img src="/images/logo-fatima-hq.webp" alt={`Logo ${siteData.organizationName}`} class="h-10 w-auto" width="40" height="40" loading="eager" />
         <span class="navbar-title font-heading font-bold text-brand-dark uppercase tracking-wide hidden sm:block">{siteData.organizationName}</span>
       </a>
       <a href="/#faire-un-don" class="inline-flex items-center gap-2 bg-brand-pink hover:bg-pink-600 text-white font-heading font-bold text-sm px-5 py-2.5 rounded-full transition-colors shadow-md">
@@ -139,5 +139,13 @@ const canonicalPath = '/contact/';
         "addressCountry": "MU"
       }
     }
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://association-alphabetisation-fatima.pages.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Nous Contacter" }
+    ]
   })} />
 </Layout>

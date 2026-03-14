@@ -33,12 +33,12 @@ export default function ImpactBannerVisual(props: any) {
           >
             {impact?.sinceLabel || "Depuis 1989"}
           </p>
-          <h3
+          <h2
             className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-4"
             data-tina-field={impact ? tinaField(impact, "headline") : undefined}
           >
             {impact?.headline || "Plus de 2 000 vies transformées"}
-          </h3>
+          </h2>
           <p
             className="text-white/90 max-w-xl mx-auto text-sm md:text-base"
             data-tina-field={impact ? tinaField(impact, "description") : undefined}

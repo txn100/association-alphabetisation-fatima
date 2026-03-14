@@ -265,4 +265,12 @@ const pageDescription = "Support the Association d'Alphabétisation de Fatima wi
       "url": "https://association-alphabetisation-fatima.pages.dev/"
     }
   })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://association-alphabetisation-fatima.pages.dev/en/" },
+      { "@type": "ListItem", "position": 2, "name": "Donate" }
+    ]
+  })} />
 </Layout>

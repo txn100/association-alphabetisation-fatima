@@ -169,4 +169,31 @@ const photos: { src: string; alt: string }[] = (about as any).photos ?? [];
       </p>
     </div>
   </footer>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": `Notre Histoire — ${site.organizationName}`,
+    "description": "Depuis 1989, l'Association d'Alphabétisation de Fatima aide des enfants défavorisés de Trou-aux-Biches, Maurice.",
+    "mainEntity": {
+      "@type": "EducationalOrganization",
+      "name": site.organizationName,
+      "foundingDate": "1989",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Triolet",
+        "addressRegion": "Pamplemousses",
+        "addressCountry": "MU"
+      }
+    }
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://association-alphabetisation-fatima.pages.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Notre Histoire" }
+    ]
+  })} />
 </Layout>

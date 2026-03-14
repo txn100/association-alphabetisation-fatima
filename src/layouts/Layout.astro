@@ -15,6 +15,8 @@ interface Props {
   title?: string;
   description?: string;
   canonicalPath?: string;
+  ogImage?: string;
+  ogType?: string;
 }
 
 const {
@@ -22,10 +24,14 @@ const {
   title = site.title || "Association d'Alphabétisation de Fatima — Trou-aux-Biches, Maurice",
   description = site.description || "Depuis 37 ans, nous aidons des enfants défavorisés à sortir de l'échec scolaire. Plus de 2 000 élèves ont pu retrouver le chemin de la confiance, de l'estime de soi et de la réussite.",
   canonicalPath,
+  ogImage: ogImageProp,
+  ogType = "website",
 } = Astro.props;
 
 const ogLocale = lang === "en" ? "en_US" : "fr_FR";
-const ogImage = new URL("/images/school-uodv3.jpg", Astro.url).href;
+const ogImage = ogImageProp
+  ? new URL(ogImageProp, Astro.url).href
+  : new URL("/images/school-uodv3.jpg", Astro.url).href;
 const baseUrl = new URL("/", Astro.url).href.replace(/\/$/, "");
 
 // Dynamic canonical and hreflang URLs based on current page
@@ -33,6 +39,7 @@ const pagePath = canonicalPath ?? Astro.url.pathname;
 const canonicalUrl = `${baseUrl}${pagePath}`;
 const frUrl = pagePath.startsWith("/en/") ? `${baseUrl}${pagePath.replace(/^\/en/, "")}` : `${baseUrl}${pagePath}`;
 const enUrl = pagePath.startsWith("/en/") ? `${baseUrl}${pagePath}` : `${baseUrl}/en${pagePath}`;
+const ogLocaleAlt = lang === "en" ? "fr_FR" : "en_US";
 ---
 
 <!doctype html>
@@ -40,6 +47,7 @@ const enUrl = pagePath.startsWith("/en/") ? `${baseUrl}${pagePath}` : `${baseUrl
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0e86b3" />
     <meta name="description" content={description} />
 
     <!-- Canonical + hreflang for bilingual SEO -->
@@ -50,12 +58,17 @@ const enUrl = pagePath.startsWith("/en/") ? `${baseUrl}${pagePath}` : `${baseUrl
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Association d'Alphabétisation de Fatima" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Association d'Alphabétisation de Fatima — École à Trou-aux-Biches, Maurice" />
     <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlt} />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />

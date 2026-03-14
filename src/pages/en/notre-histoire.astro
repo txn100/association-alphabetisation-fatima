@@ -18,7 +18,7 @@ const site = siteResult.data.site;
 <Layout
   lang="en"
   title={`Our Story — ${site.organizationName}`}
-  description="Since 1989, the Association d'Alphab&eacute;tisation de Fatima has been helping underprivileged children in Trou-aux-Biches, Mauritius. Discover our history, our mission, and our team."
+  description="Since 1989, the Association d'Alphabétisation de Fatima has been helping underprivileged children in Trou-aux-Biches, Mauritius. Discover our history, our mission, and our team."
   canonicalPath="/en/notre-histoire/"
 >
   <!-- Simple Navbar -->
@@ -169,4 +169,31 @@ const site = siteResult.data.site;
       </p>
     </div>
   </footer>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": `Our Story — ${site.organizationName}`,
+    "description": "Since 1989, the Association d'Alphabétisation de Fatima has been helping underprivileged children in Trou-aux-Biches, Mauritius.",
+    "mainEntity": {
+      "@type": "EducationalOrganization",
+      "name": site.organizationName,
+      "foundingDate": "1989",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Triolet",
+        "addressRegion": "Pamplemousses",
+        "addressCountry": "MU"
+      }
+    }
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://association-alphabetisation-fatima.pages.dev/en/" },
+      { "@type": "ListItem", "position": 2, "name": "Our Story" }
+    ]
+  })} />
 </Layout>

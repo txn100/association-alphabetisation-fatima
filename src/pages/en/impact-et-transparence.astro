@@ -234,4 +234,29 @@ const canonicalPath = '/en/impact-et-transparence/';
       </p>
     </div>
   </footer>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "name": `Impact & Transparency — ${siteData.organizationName}`,
+    "description": `Key figures, accreditations and transparency information for the Association d'Alphabétisation de Fatima.`,
+    "mainEntity": {
+      "@type": "NGO",
+      "name": siteData.organizationName,
+      "foundingDate": "1989",
+      "identifier": [
+        { "@type": "PropertyValue", "name": "NSIF Code", "value": footerData.nsifCode },
+        { "@type": "PropertyValue", "name": "CSR Code", "value": footerData.csrCode }
+      ]
+    }
+  })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://association-alphabetisation-fatima.pages.dev/en/" },
+      { "@type": "ListItem", "position": 2, "name": "Impact & Transparency" }
+    ]
+  })} />
 </Layout>

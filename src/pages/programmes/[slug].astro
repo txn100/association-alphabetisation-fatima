@@ -254,4 +254,13 @@ const colors = colorMap[program.color] || colorMap.blue;
     ...(program.ages ? { "programPrerequisites": { "@type": "EducationalOccupationalCredential", "credentialCategory": program.ages } } : {}),
     "image": program.image ? new URL(program.image, Astro.url).href : undefined,
   })} />
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://association-alphabetisation-fatima.pages.dev/" },
+      { "@type": "ListItem", "position": 2, "name": "Le Parcours", "item": "https://association-alphabetisation-fatima.pages.dev/#parcours" },
+      { "@type": "ListItem", "position": 3, "name": program.title }
+    ]
+  })} />
 </Layout>
