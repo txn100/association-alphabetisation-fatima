@@ -3,6 +3,7 @@ export const prerender = true;
 
 import Layout from '../../layouts/Layout.astro';
 import { getDonateData, getFooterData, getSiteData, getTiersData } from '../../lib/content';
+import { uiStrings } from '../../lib/i18n';
 
 const donateResult = await getDonateData("en");
 const footerResult = await getFooterData("en");
@@ -23,6 +24,7 @@ const parrain = donate.parrainSection;
 const donEnAction = donate.donEnAction;
 const csr = donate.csr;
 const socialProof = donate.socialProof || [];
+const ui = uiStrings.en;
 
 const whatsappNumber = parrain.whatsappNumber || footerData.whatsappNumber;
 const phone1 = footerData.phone1;
@@ -118,10 +120,10 @@ const pageDescription = "Support the Association d'Alphabétisation de Fatima wi
                     <div class="mt-1 bg-gray-50 rounded-lg p-3 text-sm">
                       <div class="flex gap-1 mb-2 bg-gray-200 rounded-lg p-0.5 w-fit" id="account-tabs">
                         <button type="button" data-tab="private" class="account-tab text-xs font-bold px-3 py-1.5 rounded-md transition bg-white text-brand-blue shadow-sm">
-                          <i class="fas fa-user mr-1"></i>Individual
+                          <i class="fas fa-user mr-1"></i>{ui.accountPrivateLabel}
                         </button>
                         <button type="button" data-tab="csr" class="account-tab text-xs font-bold px-3 py-1.5 rounded-md transition text-gray-500 hover:text-gray-700">
-                          <i class="fas fa-building mr-1"></i>Company (CSR)
+                          <i class="fas fa-building mr-1"></i>{ui.accountCSRLabel}
                         </button>
                       </div>
                       <p class="font-bold text-brand-blue">{don.bankName}</p>
@@ -242,7 +244,7 @@ const pageDescription = "Support the Association d'Alphabétisation de Fatima wi
         <p class="text-blue-100 text-sm mb-4">{csr.text}</p>
         <div class="flex flex-col sm:flex-row gap-4 items-start">
           <div class="bg-white/10 rounded-lg px-4 py-2">
-            <p class="text-xs text-blue-200">CSR Code</p>
+            <p class="text-xs text-blue-200">{ui.csrCodeLabel}</p>
             <p class="font-mono font-bold">{csr.csrCode}</p>
           </div>
           <div>
@@ -258,7 +260,7 @@ const pageDescription = "Support the Association d'Alphabétisation de Fatima wi
   <footer class="bg-brand-dark text-white py-8">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <p class="text-gray-400 text-sm">
-        &copy; {new Date().getFullYear()} {siteData.organizationName}. All rights reserved.<br />
+        &copy; {new Date().getFullYear()} {siteData.organizationName}. {ui.copyrightSuffix}<br />
         <a href={`mailto:${footerData.email}`} class="hover:text-white transition">{footerData.email}</a>
       </p>
     </div>

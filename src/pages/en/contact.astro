@@ -3,6 +3,9 @@ export const prerender = true;
 
 import Layout from '../../layouts/Layout.astro';
 import { getFooterData, getSiteData } from '../../lib/content';
+import { uiStrings } from '../../lib/i18n';
+
+const ui = uiStrings.en;
 
 const footerResult = await getFooterData("en");
 const siteResult = await getSiteData("en");
@@ -45,7 +48,7 @@ const canonicalPath = '/en/contact/';
 
     <div class="bg-brand-dark text-white py-12 sm:py-16">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="font-heading text-3xl sm:text-4xl font-extrabold mb-3">Contact Us</h1>
+        <h1 class="font-heading text-3xl sm:text-4xl font-extrabold mb-3">{footerData.contactHeading}</h1>
         <p class="text-blue-100 text-lg">Reach us by phone, email or WhatsApp.</p>
       </div>
     </div>
@@ -124,7 +127,7 @@ const canonicalPath = '/en/contact/';
       <p class="text-white/50 text-sm">
         <a href={`mailto:${footerData.email}`} class="hover:text-white transition-colors">{footerData.email}</a>
       </p>
-      <p class="text-white/30 text-xs mt-2">&copy; {new Date().getFullYear()} {siteData.organizationName}. All rights reserved.</p>
+      <p class="text-white/30 text-xs mt-2">&copy; {new Date().getFullYear()} {siteData.organizationName}. {ui.copyrightSuffix}</p>
     </div>
   </footer>
 

@@ -3,6 +3,9 @@ export const prerender = true;
 
 import Layout from '../../layouts/Layout.astro';
 import { getAboutData, getFooterData, getSiteData } from '../../lib/content';
+import { uiStrings } from '../../lib/i18n';
+
+const ui = uiStrings.en;
 
 const aboutResult = await getAboutData("en");
 const about = aboutResult.data.about;
@@ -130,7 +133,7 @@ const site = siteResult.data.site;
             </div>
             <div>
               <p class="font-bold text-gray-800">{footer.president}</p>
-              <p class="text-sm text-gray-500">President</p>
+              <p class="text-sm text-gray-500">{ui.presidentLabel}</p>
             </div>
           </div>
           <div class="flex items-center gap-4">
@@ -139,7 +142,7 @@ const site = siteResult.data.site;
             </div>
             <div>
               <p class="font-bold text-gray-800">{footer.director}</p>
-              <p class="text-sm text-gray-500">Director</p>
+              <p class="text-sm text-gray-500">{ui.directorLabel}</p>
             </div>
           </div>
         </div>
@@ -167,7 +170,7 @@ const site = siteResult.data.site;
   <footer class="bg-brand-dark text-white py-8">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <p class="text-gray-400 text-sm">
-        &copy; {site.organizationName}<br />
+        &copy; {site.organizationName}. {ui.copyrightSuffix}<br />
         <a href={`mailto:${footer.email}`} class="hover:text-white transition">{footer.email}</a>
       </p>
     </div>

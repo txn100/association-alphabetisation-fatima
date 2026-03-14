@@ -2,6 +2,7 @@
 export const prerender = true;
 
 import Layout from '../layouts/Layout.astro';
+import { uiStrings } from '../lib/i18n';
 
 const aboutModule = await import('../data/about.json');
 const about = aboutModule.default || aboutModule;
@@ -130,7 +131,7 @@ const photos: { src: string; alt: string }[] = (about as any).photos ?? [];
             </div>
             <div>
               <p class="font-bold text-gray-800">{footer.president}</p>
-              <p class="text-sm text-gray-500">Présidente</p>
+              <p class="text-sm text-gray-500">{uiStrings.fr.presidentLabel}</p>
             </div>
           </div>
           <div class="flex items-center gap-4">
@@ -139,7 +140,7 @@ const photos: { src: string; alt: string }[] = (about as any).photos ?? [];
             </div>
             <div>
               <p class="font-bold text-gray-800">{footer.director}</p>
-              <p class="text-sm text-gray-500">Directrice</p>
+              <p class="text-sm text-gray-500">{uiStrings.fr.directorLabel}</p>
             </div>
           </div>
         </div>
@@ -167,7 +168,7 @@ const photos: { src: string; alt: string }[] = (about as any).photos ?? [];
   <footer class="bg-brand-dark text-white py-8">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <p class="text-gray-400 text-sm">
-        &copy; {site.organizationName}<br />
+        &copy; {footer.copyright}<br />
         <a href={`mailto:${footer.email}`} class="hover:text-white transition">{footer.email}</a>
       </p>
     </div>

@@ -3,6 +3,9 @@ export const prerender = true;
 
 import Layout from '../../layouts/Layout.astro';
 import { getFooterData, getSiteData, getStatsData } from '../../lib/content';
+import { uiStrings } from '../../lib/i18n';
+
+const ui = uiStrings.en;
 
 const footerResult = await getFooterData("en");
 const footerData = footerResult.data.footer;
@@ -147,7 +150,7 @@ const canonicalPath = '/en/impact-transparency/';
               </div>
               <div>
                 <p class="font-bold text-gray-800">{footerData.president}</p>
-                <p class="text-sm text-gray-500">President</p>
+                <p class="text-sm text-gray-500">{ui.presidentLabel}</p>
               </div>
             </div>
           </div>
@@ -158,7 +161,7 @@ const canonicalPath = '/en/impact-transparency/';
               </div>
               <div>
                 <p class="font-bold text-gray-800">{footerData.director}</p>
-                <p class="text-sm text-gray-500">Director</p>
+                <p class="text-sm text-gray-500">{ui.directorLabel}</p>
               </div>
             </div>
           </div>
@@ -224,7 +227,7 @@ const canonicalPath = '/en/impact-transparency/';
   <footer class="bg-brand-dark text-white py-8">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <p class="text-gray-400 text-sm">
-        &copy; {siteData.organizationName}<br />
+        &copy; {siteData.organizationName}. {ui.copyrightSuffix}<br />
         <a href={`mailto:${footerData.email}`} class="hover:text-white transition">{footerData.email}</a>
       </p>
     </div>

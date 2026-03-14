@@ -21,9 +21,12 @@
 const cache = new Map<string, string>();
 
 // Manual overrides for strings DeepL doesn't translate well (proper nouns, etc.).
+// Also used as identity mappings to prevent translation of proper nouns.
 const MANUAL_OVERRIDES: Record<string, string> = {
   "Le Parcours": "Programs",
   "Accueil": "Home",
+  "/mois": "/month",
+  "Oui": "Yes",
 };
 // Pre-seed cache with manual overrides so they're never sent to DeepL.
 for (const [fr, en] of Object.entries(MANUAL_OVERRIDES)) {
@@ -37,14 +40,19 @@ const SKIP_KEYS = new Set([
   "category", "status",                          // enum values — translated via uiStrings instead
   "phone1", "phone1Link", "phone2", "phone2Link",
   "whatsappNumber", "email",
-  "bankName", "accountNumberPrivate", "accountNumberCSR", "accountHolder", "referenceFormat",
+  "bankName", "accountNumberPrivate", "accountNumberCSR", "accountHolder",
   "nsifCode", "csrCode",
+  "address",                                     // physical address — never translate place names
+  "organizationName", "navbarTitle", "copyright", // org identity — keep French legal name
+  "contactName",                                  // person names
+  "president", "director",                        // person names
 ]);
 
 /** Returns true if the string is natural-language text worth translating. */
 function isTranslatable(str: string): boolean {
   if (!str || str.trim().length < 3) return false;
-  if (str.startsWith("/")) return false;             // file / asset paths
+  if (cache.has(str)) return true;                   // always allow manual overrides through
+  if (str.startsWith("/") && str.length > 6) return false; // file / asset paths (but allow short like "/mois")
   if (str.startsWith("http")) return false;          // full URLs
   if (str.startsWith("mailto:")) return false;       // email links
   if (str.startsWith("tel:")) return false;          // phone links
