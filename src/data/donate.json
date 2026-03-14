@@ -48,9 +48,9 @@
         "detail": "Pour recevoir votre reçu fiscal NSIF"
       }
     ],
-    "referenceFormat": "DON + votre nom",
+    "referenceFormat": "DON + votre nom/compagnie ",
     "bankName": "MCB",
-    "accountNumber": "000162618670",
+    "accountNumber": "000162618670 (privé) ou 000162709609 (CSR) ",
     "accountHolder": "Association d'Alphabétisation de Fatima",
     "trustSignal": "100% de votre don est dédié aux élèves",
     "receiptNote": "Pour un reçu fiscal, contactez-nous au"
