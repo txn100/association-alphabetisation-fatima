@@ -20,6 +20,16 @@
 // In-memory cache — lives for the duration of a single build/dev session.
 const cache = new Map<string, string>();
 
+// Manual overrides for strings DeepL doesn't translate well (proper nouns, etc.).
+const MANUAL_OVERRIDES: Record<string, string> = {
+  "Le Parcours": "Programs",
+  "Accueil": "Home",
+};
+// Pre-seed cache with manual overrides so they're never sent to DeepL.
+for (const [fr, en] of Object.entries(MANUAL_OVERRIDES)) {
+  cache.set(fr, en);
+}
+
 // Keys whose values must never be translated (TinaCMS internals + technical fields).
 const SKIP_KEYS = new Set([
   "_sys", "_values", "__typename", "id",
