@@ -215,15 +215,12 @@ const uiJson = JSON.stringify(ui);
               ? (accountNumEl.dataset.csr || "")
               : (accountNumEl.dataset.private || "");
             accountBtns.forEach((b) => {
-              if (b.dataset.accountBtn === tab) {
-                b.className = b.className
-                  .replace("text-gray-500 hover:text-gray-700", "")
-                  + " bg-white text-brand-blue shadow-sm";
-              } else {
-                b.className = b.className
-                  .replace("bg-white text-brand-blue shadow-sm", "")
-                  + " text-gray-500 hover:text-gray-700";
-              }
+              const isActive = b.dataset.accountBtn === tab;
+              b.classList.toggle("bg-white", isActive);
+              b.classList.toggle("text-brand-blue", isActive);
+              b.classList.toggle("shadow-sm", isActive);
+              b.classList.toggle("text-gray-500", !isActive);
+              b.classList.toggle("hover:text-gray-700", !isActive);
             });
           });
         });
