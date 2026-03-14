@@ -25,6 +25,8 @@ export interface UIStrings {
   // Donate — banking labels
   bankLabel: string;
   accountLabel: string;
+  accountPrivateLabel: string;
+  accountCSRLabel: string;
   holderLabel: string;
 
   // Donate — CSR
@@ -107,6 +109,8 @@ export const uiStrings: Record<Locale, UIStrings> = {
 
     bankLabel: "Banque",
     accountLabel: "N° de compte",
+    accountPrivateLabel: "Particulier",
+    accountCSRLabel: "Entreprise (CSR)",
     holderLabel: "Titulaire",
 
     csrCodeLabel: "Code CSR",
@@ -179,6 +183,8 @@ export const uiStrings: Record<Locale, UIStrings> = {
 
     bankLabel: "Bank",
     accountLabel: "Account No.",
+    accountPrivateLabel: "Individual",
+    accountCSRLabel: "Company (CSR)",
     holderLabel: "Account Holder",
 
     csrCodeLabel: "CSR Code",

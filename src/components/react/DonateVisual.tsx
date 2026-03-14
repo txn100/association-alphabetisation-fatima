@@ -43,6 +43,7 @@ export default function DonateVisual(props: any) {
     .sort((a: any, b: any) => a.order - b.order);
 
   const [activeTab, setActiveTab] = useState<"don" | "parrain">("don");
+  const [accountTab, setAccountTab] = useState<"private" | "csr">("private");
   const [selectedTier, setSelectedTier] = useState<number | "libre" | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -226,6 +227,33 @@ export default function DonateVisual(props: any) {
                         </p>
                         {i === 1 && (
                           <div className="mt-2 bg-gray-50 rounded-xl p-4 border border-gray-200">
+                            {/* Account type toggle */}
+                            <div className="flex gap-1 mb-3 bg-gray-200 rounded-lg p-0.5 w-fit">
+                              <button
+                                type="button"
+                                onClick={() => setAccountTab("private")}
+                                className={`text-xs font-bold px-3 py-1.5 rounded-md transition ${
+                                  accountTab === "private"
+                                    ? "bg-white text-brand-blue shadow-sm"
+                                    : "text-gray-500 hover:text-gray-700"
+                                }`}
+                              >
+                                <i className="fas fa-user mr-1" />
+                                {ui?.accountPrivateLabel || "Particulier"}
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setAccountTab("csr")}
+                                className={`text-xs font-bold px-3 py-1.5 rounded-md transition ${
+                                  accountTab === "csr"
+                                    ? "bg-white text-brand-blue shadow-sm"
+                                    : "text-gray-500 hover:text-gray-700"
+                                }`}
+                              >
+                                <i className="fas fa-building mr-1" />
+                                {ui?.accountCSRLabel || "Entreprise (CSR)"}
+                              </button>
+                            </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                               <div>
                                 <span className="text-gray-500 text-xs uppercase tracking-wide block mb-0.5">{ui?.bankLabel || "Banque"}</span>
@@ -240,9 +268,11 @@ export default function DonateVisual(props: any) {
                                 <span className="text-gray-500 text-xs uppercase tracking-wide block mb-0.5">{ui?.accountLabel || "N° de compte"}</span>
                                 <span
                                   className="font-mono font-bold text-brand-blue text-base"
-                                  data-tina-field={don ? tinaField(don, "accountNumber") : undefined}
+                                  data-tina-field={don ? tinaField(don, accountTab === "csr" ? "accountNumberCSR" : "accountNumberPrivate") : undefined}
                                 >
-                                  {don?.accountNumber || ""}
+                                  {accountTab === "csr"
+                                    ? (don?.accountNumberCSR || "")
+                                    : (don?.accountNumberPrivate || "")}
                                 </span>
                               </div>
                               <div className="sm:col-span-2">

@@ -181,7 +181,8 @@ fragment DonateParts on Donate {
     }
     referenceFormat
     bankName
-    accountNumber
+    accountNumberPrivate
+    accountNumberCSR
     accountHolder
     trustSignal
     receiptNote

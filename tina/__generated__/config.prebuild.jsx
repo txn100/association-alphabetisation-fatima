@@ -335,7 +335,8 @@ var config_default = defineConfig({
               },
               { type: "string", name: "referenceFormat", label: "Format r\xE9f\xE9rence" },
               { type: "string", name: "bankName", label: "Nom banque" },
-              { type: "string", name: "accountNumber", label: "Num\xE9ro de compte" },
+              { type: "string", name: "accountNumberPrivate", label: "N\xB0 compte Particulier" },
+              { type: "string", name: "accountNumberCSR", label: "N\xB0 compte Entreprise (CSR)" },
               { type: "string", name: "accountHolder", label: "Titulaire du compte" },
               { type: "string", name: "trustSignal", label: "Message de confiance" },
               { type: "string", name: "receiptNote", label: "Note re\xE7u fiscal" }

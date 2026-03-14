@@ -655,7 +655,8 @@ type DonateDonPonctuel {
   steps: [DonateDonPonctuelSteps]
   referenceFormat: String
   bankName: String
-  accountNumber: String
+  accountNumberPrivate: String
+  accountNumberCSR: String
   accountHolder: String
   trustSignal: String
   receiptNote: String
@@ -739,7 +740,8 @@ input DonateDonPonctuelFilter {
   steps: DonateDonPonctuelStepsFilter
   referenceFormat: StringFilter
   bankName: StringFilter
-  accountNumber: StringFilter
+  accountNumberPrivate: StringFilter
+  accountNumberCSR: StringFilter
   accountHolder: StringFilter
   trustSignal: StringFilter
   receiptNote: StringFilter
@@ -1198,7 +1200,8 @@ input DonateDonPonctuelMutation {
   steps: [DonateDonPonctuelStepsMutation]
   referenceFormat: String
   bankName: String
-  accountNumber: String
+  accountNumberPrivate: String
+  accountNumberCSR: String
   accountHolder: String
   trustSignal: String
   receiptNote: String

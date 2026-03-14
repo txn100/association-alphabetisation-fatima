@@ -27,7 +27,7 @@ const SKIP_KEYS = new Set([
   "category", "status",                          // enum values — translated via uiStrings instead
   "phone1", "phone1Link", "phone2", "phone2Link",
   "whatsappNumber", "email",
-  "bankName", "accountNumber", "accountHolder", "referenceFormat",
+  "bankName", "accountNumberPrivate", "accountNumberCSR", "accountHolder", "referenceFormat",
   "nsifCode", "csrCode",
 ]);
 
