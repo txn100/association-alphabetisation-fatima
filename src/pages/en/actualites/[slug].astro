@@ -3,6 +3,7 @@ export const prerender = true;
 
 import Layout from '../../../layouts/Layout.astro';
 import { getNewsData, getFooterData, getSiteData } from '../../../lib/content';
+import { uiStrings } from '../../../lib/i18n';
 
 export async function getStaticPaths() {
   const newsResult = await getNewsData("en");
@@ -28,14 +29,22 @@ const pageTitle = `${article.title} — ${siteData.organizationName}`;
 const pageDescription = article.description?.substring(0, 160) || article.title;
 const canonicalPath = `/en/actualites/${slug}/`;
 
+const ui = uiStrings.en;
+
+// Colors keyed by FR enum value (category is now in SKIP_KEYS, never translated by DeepL)
 const categoryColors: Record<string, string> = {
   'Formation': 'bg-brand-blue text-white',
-  'Training': 'bg-brand-blue text-white',
   'Culture': 'bg-brand-pink text-white',
   'Vie Scolaire': 'bg-brand-yellow text-brand-dark',
-  'School Life': 'bg-brand-yellow text-brand-dark',
   'Environnement': 'bg-green-500 text-white',
-  'Environment': 'bg-green-500 text-white',
+};
+
+// Display labels from uiStrings
+const categoryLabels: Record<string, string> = {
+  'Formation': ui.catFormation,
+  'Culture': ui.catCulture,
+  'Vie Scolaire': ui.catVieScolaire,
+  'Environnement': ui.catEnvironnement,
 };
 ---
 
@@ -101,7 +110,7 @@ const categoryColors: Record<string, string> = {
             {article.day} {article.month} {article.year}
           </time>
           <span class={`text-xs font-bold px-3 py-1 rounded-full ${categoryColors[article.category] || 'bg-gray-200 text-gray-700'}`}>
-            {article.category}
+            {categoryLabels[article.category] || article.category}
           </span>
         </div>
         <h1 class="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white leading-tight">

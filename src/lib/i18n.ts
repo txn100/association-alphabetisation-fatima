@@ -74,6 +74,18 @@ export interface UIStrings {
   // Programs
   learnMore: string;
 
+  // News categories
+  catFormation: string;
+  catCulture: string;
+  catVieScolaire: string;
+  catEnvironnement: string;
+  readMore: string;
+
+  // Project categories
+  catEcoResponsable: string;
+  catInfrastructure: string;
+  catCommunautaire: string;
+
   // Language switcher
   langSwitchLabel: string;
   langSwitchHref: string;
@@ -139,6 +151,16 @@ export const uiStrings: Record<Locale, UIStrings> = {
 
     learnMore: "En savoir plus",
 
+    catFormation: "Formation",
+    catCulture: "Culture",
+    catVieScolaire: "Vie Scolaire",
+    catEnvironnement: "Environnement",
+    readMore: "Lire la suite",
+
+    catEcoResponsable: "Éco-responsable",
+    catInfrastructure: "Infrastructure",
+    catCommunautaire: "Communautaire",
+
     langSwitchLabel: "EN",
     langSwitchHref: "/en/",
   },
@@ -200,6 +222,16 @@ export const uiStrings: Record<Locale, UIStrings> = {
     donateNicRequired: "Please provide your NIC or passport for the tax receipt",
 
     learnMore: "Learn more",
+
+    catFormation: "Training",
+    catCulture: "Culture",
+    catVieScolaire: "School Life",
+    catEnvironnement: "Environment",
+    readMore: "Read more",
+
+    catEcoResponsable: "Eco-friendly",
+    catInfrastructure: "Infrastructure",
+    catCommunautaire: "Community",
 
     langSwitchLabel: "FR",
     langSwitchHref: "/",

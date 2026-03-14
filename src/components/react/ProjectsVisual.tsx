@@ -7,19 +7,38 @@ const statusStyles: Record<string, { bg: string; text: string }> = {
   planned: { bg: "bg-blue-100", text: "text-blue-700" },
 };
 
-const statusLabels: Record<string, { fr: string; en: string }> = {
-  completed: { fr: "Terminé", en: "Completed" },
-  "in-progress": { fr: "En cours", en: "In Progress" },
-  planned: { fr: "Planifié", en: "Planned" },
+/** Map TinaCMS status enum values to uiStrings keys. */
+const statusKeys: Record<string, keyof UIStrings> = {
+  completed: "statusCompleted",
+  "in-progress": "statusInProgress",
+  planned: "statusPlanned",
+};
+
+/** Map TinaCMS category enum values to uiStrings keys. */
+const categoryKeys: Record<string, keyof UIStrings> = {
+  "Éco-responsable": "catEcoResponsable",
+  Infrastructure: "catInfrastructure",
+  Communautaire: "catCommunautaire",
 };
 
 const categoryIcons: Record<string, string> = {
   "Éco-responsable": "fas fa-seedling",
-  "Eco-friendly": "fas fa-seedling",
   Infrastructure: "fas fa-tools",
   Communautaire: "fas fa-hands-helping",
-  Community: "fas fa-hands-helping",
 };
+
+function translateStatus(status: string, ui?: UIStrings): string {
+  const key = statusKeys[status];
+  if (key && ui) return ui[key] as string;
+  // Fallback: capitalize the raw status value
+  return status.charAt(0).toUpperCase() + status.slice(1);
+}
+
+function translateCategory(category: string, ui?: UIStrings): string {
+  const key = categoryKeys[category];
+  if (key && ui) return ui[key] as string;
+  return category; // fallback to raw value for unknown categories
+}
 
 export default function ProjectsVisual(props: any) {
   const { data } = useTina({
@@ -33,6 +52,7 @@ export default function ProjectsVisual(props: any) {
     data: props.sectionData || {},
   });
 
+  const ui: UIStrings | undefined = props.ui;
   const edges = data.projectsConnection?.edges || [];
   const projects = edges
     .filter((e: any) => e?.node)
@@ -66,19 +86,16 @@ export default function ProjectsVisual(props: any) {
             data-tina-field={section ? tinaField(section, "description") : undefined}
           >
             {section?.description ||
-              "Des initiatives concrètes pour améliorer le quotidien de nos élèves et préserver notre environnement."}
+              "Des initiatives concretes pour ameliorer le quotidien de nos eleves et preserver notre environnement."}
           </p>
         </div>
 
         {/* Projects Grid — 2 columns on desktop, 1 on mobile */}
         <div className="grid md:grid-cols-2 gap-6 md:gap-8">
           {projects.map((project: any) => {
-            const ui: UIStrings | undefined = props.ui;
-            const lang = props.lang || "fr";
             const style = statusStyles[project.status] || statusStyles.completed;
-            const statusLabel = ui
-              ? (project.status === "completed" ? ui.statusCompleted : project.status === "in-progress" ? ui.statusInProgress : ui.statusPlanned)
-              : (statusLabels[project.status]?.[lang as "fr" | "en"] || statusLabels.completed[lang as "fr" | "en"]);
+            const statusLabel = translateStatus(project.status, ui);
+            const categoryLabel = translateCategory(project.category, ui);
             const catIcon = categoryIcons[project.category] || "fas fa-project-diagram";
 
             return (
@@ -114,7 +131,7 @@ export default function ProjectsVisual(props: any) {
                     data-tina-field={tinaField(project, "category")}
                   >
                     <i className={catIcon} />
-                    {project.category}
+                    {categoryLabel}
                   </span>
 
                   <h3
