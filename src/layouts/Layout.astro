@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import type { Locale } from "../lib/i18n";
+import { getAltLangPath } from "../lib/i18n";
 
 // Read site settings from site.json as fallback
 const siteModule = await import("../data/site.json");
@@ -37,8 +38,10 @@ const baseUrl = new URL("/", Astro.url).href.replace(/\/$/, "");
 // Dynamic canonical and hreflang URLs based on current page
 const pagePath = canonicalPath ?? Astro.url.pathname;
 const canonicalUrl = `${baseUrl}${pagePath}`;
-const frUrl = pagePath.startsWith("/en/") ? `${baseUrl}${pagePath.replace(/^\/en/, "")}` : `${baseUrl}${pagePath}`;
-const enUrl = pagePath.startsWith("/en/") ? `${baseUrl}${pagePath}` : `${baseUrl}/en${pagePath}`;
+const frPath = lang === "fr" ? pagePath : getAltLangPath(pagePath, "en", "fr");
+const enPath = lang === "en" ? pagePath : getAltLangPath(pagePath, "fr", "en");
+const frUrl = `${baseUrl}${frPath}`;
+const enUrl = `${baseUrl}${enPath}`;
 const ogLocaleAlt = lang === "en" ? "fr_FR" : "en_US";
 ---
 
@@ -137,7 +140,7 @@ const ogLocaleAlt = lang === "en" ? "fr_FR" : "en_US";
         "availableLanguage": ["French", "English"]
       },
       "email": footer.email,
-      "sameAs": [],
+      "sameAs": ["https://www.facebook.com/alphabetisation.fatima"],
       "areaServed": {
         "@type": "Country",
         "name": "Mauritius"

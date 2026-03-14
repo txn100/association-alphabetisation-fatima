@@ -19,7 +19,7 @@ const site = siteResult.data.site;
   lang="en"
   title={`Our Story — ${site.organizationName}`}
   description="Since 1989, the Association d'Alphabétisation de Fatima has been helping underprivileged children in Trou-aux-Biches, Mauritius. Discover our history, our mission, and our team."
-  canonicalPath="/en/notre-histoire/"
+  canonicalPath="/en/our-story/"
 >
   <!-- Simple Navbar -->
   <nav class="bg-white shadow-md fixed w-full z-50" aria-label="Main navigation">
@@ -37,12 +37,15 @@ const site = siteResult.data.site;
             {site.organizationName}
           </span>
         </a>
-        <a
-          href="/en/#faire-un-don"
-          class="bg-brand-pink hover:bg-pink-600 text-white px-4 py-2 rounded-full font-bold text-sm transition"
-        >
-          <i class="fas fa-heart mr-1"></i> Support Us
-        </a>
+        <div class="flex items-center gap-2">
+          <a href="/notre-histoire/" class="text-xs font-bold border border-brand-blue text-brand-blue px-3 py-1.5 rounded-full hover:bg-brand-blue hover:text-white transition" hreflang="fr">FR</a>
+          <a
+            href="/en/#faire-un-don"
+            class="bg-brand-pink hover:bg-pink-600 text-white px-4 py-2 rounded-full font-bold text-sm transition"
+          >
+            <i class="fas fa-heart mr-1"></i> Support Us
+          </a>
+        </div>
       </div>
     </div>
   </nav>
@@ -151,7 +154,7 @@ const site = siteResult.data.site;
           <i class="fas fa-heart mr-2"></i> Support Our Mission
         </a>
         <a
-          href="/en/impact-et-transparence/"
+          href="/en/impact-transparency/"
           class="inline-flex items-center justify-center border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white px-8 py-3 rounded-full font-bold transition"
         >
           <i class="fas fa-chart-bar mr-2"></i> Impact &amp; Transparency

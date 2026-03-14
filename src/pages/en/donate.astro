@@ -32,7 +32,7 @@ const pageTitle = `Donate — ${siteData.organizationName}`;
 const pageDescription = "Support the Association d'Alphabétisation de Fatima with a one-time donation or monthly sponsorship. 100% of your donation goes directly to students.";
 ---
 
-<Layout lang="en" title={pageTitle} description={pageDescription} canonicalPath="/en/faire-un-don/">
+<Layout lang="en" title={pageTitle} description={pageDescription} canonicalPath="/en/donate/">
   <!-- Navbar -->
   <nav class="bg-white shadow-md fixed w-full z-50" aria-label="Main navigation">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -49,9 +49,12 @@ const pageDescription = "Support the Association d'Alphabétisation de Fatima wi
             {siteData.organizationName}
           </span>
         </a>
-        <a href="/en/" class="text-brand-blue hover:text-brand-dark font-bold text-sm transition">
-          <i class="fas fa-arrow-left mr-1"></i> Home
-        </a>
+        <div class="flex items-center gap-2">
+          <a href="/faire-un-don/" class="text-xs font-bold border border-brand-blue text-brand-blue px-3 py-1.5 rounded-full hover:bg-brand-blue hover:text-white transition" hreflang="fr">FR</a>
+          <a href="/en/" class="text-brand-blue hover:text-brand-dark font-bold text-sm transition">
+            <i class="fas fa-arrow-left mr-1"></i> Home
+          </a>
+        </div>
       </div>
     </div>
   </nav>

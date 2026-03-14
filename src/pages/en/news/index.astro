@@ -18,7 +18,7 @@ const news = (newsResult.data.newsConnection?.edges || [])
 
 const pageTitle = `News — ${siteData.organizationName}`;
 const pageDescription = "Latest news from the Association d'Alphab\u00e9tisation de Fatima: events, school outings, shows and educational activities.";
-const canonicalPath = '/en/actualites/';
+const canonicalPath = '/en/news/';
 
 const categoryColors: Record<string, string> = {
   'Formation': 'bg-brand-blue text-white',
@@ -48,13 +48,16 @@ const categoryColors: Record<string, string> = {
           {siteData.organizationName}
         </span>
       </a>
-      <a
-        href="/en/#faire-un-don"
-        class="inline-flex items-center gap-2 bg-brand-pink hover:bg-pink-600 text-white font-heading font-bold text-sm px-5 py-2.5 rounded-full transition-colors shadow-md"
-      >
-        <i class="fas fa-heart text-xs"></i>
-        Support
-      </a>
+      <div class="flex items-center gap-2">
+        <a href="/actualites/" class="text-xs font-bold border border-brand-blue text-brand-blue px-3 py-1.5 rounded-full hover:bg-brand-blue hover:text-white transition" hreflang="fr">FR</a>
+        <a
+          href="/en/#faire-un-don"
+          class="inline-flex items-center gap-2 bg-brand-pink hover:bg-pink-600 text-white font-heading font-bold text-sm px-5 py-2.5 rounded-full transition-colors shadow-md"
+        >
+          <i class="fas fa-heart text-xs"></i>
+          Support
+        </a>
+      </div>
     </div>
   </nav>
 
@@ -88,7 +91,7 @@ const categoryColors: Record<string, string> = {
         {news.map((item: any) => (
           <article class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow group">
             {item.image && (
-              <a href={`/en/actualites/${item.slug}`} class="block overflow-hidden">
+              <a href={`/en/news/${item.slug}`} class="block overflow-hidden">
                 <img
                   src={item.image}
                   alt={item.imageAlt || item.title}
@@ -108,13 +111,13 @@ const categoryColors: Record<string, string> = {
                 </span>
               </div>
               <h2 class="font-heading text-lg font-bold text-gray-800 mb-2 group-hover:text-brand-blue transition-colors">
-                <a href={`/en/actualites/${item.slug}`}>{item.title}</a>
+                <a href={`/en/news/${item.slug}`}>{item.title}</a>
               </h2>
               {item.description && (
                 <p class="text-gray-600 text-sm leading-relaxed line-clamp-3 mb-4">{item.description}</p>
               )}
               <a
-                href={`/en/actualites/${item.slug}`}
+                href={`/en/news/${item.slug}`}
                 class="inline-flex items-center text-sm font-bold text-brand-blue hover:text-blue-700 transition-colors"
               >
                 Read more <i class="fas fa-arrow-right ml-1 text-xs"></i>
@@ -163,7 +166,7 @@ const categoryColors: Record<string, string> = {
       "itemListElement": news.map((item: any, i: number) => ({
         "@type": "ListItem",
         "position": i + 1,
-        "url": `https://association-alphabetisation-fatima.pages.dev/en/actualites/${item.slug}`,
+        "url": `https://association-alphabetisation-fatima.pages.dev/en/news/${item.slug}`,
         "name": item.title,
       })),
     },

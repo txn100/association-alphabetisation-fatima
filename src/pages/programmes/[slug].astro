@@ -18,6 +18,7 @@ const slug = program.slug || entryId;
 const pageTitle = `${program.title} — ${siteData.organizationName}`;
 const pageDescription = program.description.substring(0, 160);
 const canonicalPath = `/programmes/${slug}/`;
+const altLangHref = `/en/programs/${slug}/`;
 
 const colorMap: Record<string, { badge: string; accent: string; gradient: string }> = {
   blue: {
@@ -51,13 +52,16 @@ const colors = colorMap[program.color] || colorMap.blue;
           {siteData.organizationName}
         </span>
       </a>
-      <a
-        href="/#faire-un-don"
-        class="inline-flex items-center gap-2 bg-brand-pink hover:bg-pink-600 text-white font-heading font-bold text-sm px-5 py-2.5 rounded-full transition-colors shadow-md"
-      >
-        <i class="fas fa-heart text-xs"></i>
-        Soutenir
-      </a>
+      <div class="flex items-center gap-2">
+        <a href={altLangHref} class="text-xs font-bold border border-brand-blue text-brand-blue px-3 py-1.5 rounded-full hover:bg-brand-blue hover:text-white transition" hreflang="en">EN</a>
+        <a
+          href="/#faire-un-don"
+          class="inline-flex items-center gap-2 bg-brand-pink hover:bg-pink-600 text-white font-heading font-bold text-sm px-5 py-2.5 rounded-full transition-colors shadow-md"
+        >
+          <i class="fas fa-heart text-xs"></i>
+          Soutenir
+        </a>
+      </div>
     </div>
   </nav>
 

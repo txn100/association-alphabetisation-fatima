@@ -247,3 +247,41 @@ export function getLocaleConfig(locale: Locale) {
     hreflang: { fr: "/", en: "/en/" },
   };
 }
+
+/**
+ * Route equivalents between FR and EN URL paths.
+ * Used for hreflang generation and language switcher links on sub-pages.
+ */
+export const routeEquivalents: { fr: string; en: string }[] = [
+  { fr: "/", en: "/en/" },
+  { fr: "/contact/", en: "/en/contact/" },
+  { fr: "/faire-un-don/", en: "/en/donate/" },
+  { fr: "/notre-histoire/", en: "/en/our-story/" },
+  { fr: "/impact-et-transparence/", en: "/en/impact-transparency/" },
+  { fr: "/actualites/", en: "/en/news/" },
+  { fr: "/programmes/", en: "/en/programs/" },
+];
+
+/**
+ * Given a URL path in one language, returns the equivalent path in the target language.
+ * Handles exact matches (static pages) and prefix matches (dynamic slug pages).
+ */
+export function getAltLangPath(
+  currentPath: string,
+  currentLang: Locale,
+  targetLang: Locale
+): string {
+  if (currentLang === targetLang) return currentPath;
+  for (const route of routeEquivalents) {
+    const src = currentLang === "fr" ? route.fr : route.en;
+    const tgt = currentLang === "fr" ? route.en : route.fr;
+    if (currentPath === src) return tgt;
+    if (src !== "/" && currentPath.startsWith(src)) {
+      return tgt + currentPath.slice(src.length);
+    }
+  }
+  // Fallback: simple prefix swap
+  return targetLang === "en"
+    ? "/en" + currentPath
+    : currentPath.replace(/^\/en/, "") || "/";
+}

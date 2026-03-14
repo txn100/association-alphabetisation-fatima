@@ -18,7 +18,7 @@ const stats = (statsResult.data.statsConnection?.edges || [])
 
 const pageTitle = `Impact & Transparency — ${siteData.organizationName}`;
 const pageDescription = `Key figures, accreditations (NSIF ${footerData.nsifCode}, CSR ${footerData.csrCode}) and transparency information for ${siteData.organizationName}, a registered NGO in Mauritius.`;
-const canonicalPath = '/en/impact-et-transparence/';
+const canonicalPath = '/en/impact-transparency/';
 ---
 
 <Layout lang="en" title={pageTitle} description={pageDescription} canonicalPath={canonicalPath}>
@@ -38,12 +38,15 @@ const canonicalPath = '/en/impact-et-transparence/';
             {siteData.organizationName}
           </span>
         </a>
-        <a
-          href="/en/#faire-un-don"
-          class="bg-brand-pink hover:bg-pink-600 text-white px-4 py-2 rounded-full font-bold text-sm transition"
-        >
-          <i class="fas fa-heart mr-1"></i> Support Us
-        </a>
+        <div class="flex items-center gap-2">
+          <a href="/impact-et-transparence/" class="text-xs font-bold border border-brand-blue text-brand-blue px-3 py-1.5 rounded-full hover:bg-brand-blue hover:text-white transition" hreflang="fr">FR</a>
+          <a
+            href="/en/#faire-un-don"
+            class="bg-brand-pink hover:bg-pink-600 text-white px-4 py-2 rounded-full font-bold text-sm transition"
+          >
+            <i class="fas fa-heart mr-1"></i> Support Us
+          </a>
+        </div>
       </div>
     </div>
   </nav>
@@ -216,7 +219,7 @@ const canonicalPath = '/en/impact-et-transparence/';
           <i class="fas fa-heart mr-2"></i> Make a Donation
         </a>
         <a
-          href="/en/notre-histoire/"
+          href="/en/our-story/"
           class="inline-flex items-center justify-center border-2 border-brand-blue text-brand-blue hover:bg-brand-blue hover:text-white px-8 py-3 rounded-full font-bold transition"
         >
           <i class="fas fa-book mr-2"></i> Our Story

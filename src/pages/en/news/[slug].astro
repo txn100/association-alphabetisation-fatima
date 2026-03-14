@@ -27,7 +27,8 @@ const siteData = siteResult.data.site;
 
 const pageTitle = `${article.title} — ${siteData.organizationName}`;
 const pageDescription = article.description?.substring(0, 160) || article.title;
-const canonicalPath = `/en/actualites/${slug}/`;
+const canonicalPath = `/en/news/${slug}/`;
+const altLangHref = `/actualites/${article.slug}/`;
 
 const ui = uiStrings.en;
 
@@ -65,13 +66,16 @@ const categoryLabels: Record<string, string> = {
           {siteData.organizationName}
         </span>
       </a>
-      <a
-        href="/en/#faire-un-don"
-        class="inline-flex items-center gap-2 bg-brand-pink hover:bg-pink-600 text-white font-heading font-bold text-sm px-5 py-2.5 rounded-full transition-colors shadow-md"
-      >
-        <i class="fas fa-heart text-xs"></i>
-        Support
-      </a>
+      <div class="flex items-center gap-2">
+        <a href={altLangHref} class="text-xs font-bold border border-brand-blue text-brand-blue px-3 py-1.5 rounded-full hover:bg-brand-blue hover:text-white transition" hreflang="fr">FR</a>
+        <a
+          href="/en/#faire-un-don"
+          class="inline-flex items-center gap-2 bg-brand-pink hover:bg-pink-600 text-white font-heading font-bold text-sm px-5 py-2.5 rounded-full transition-colors shadow-md"
+        >
+          <i class="fas fa-heart text-xs"></i>
+          Support
+        </a>
+      </div>
     </div>
   </nav>
 
@@ -83,7 +87,7 @@ const categoryLabels: Record<string, string> = {
           <ol class="flex items-center gap-1.5 flex-wrap">
             <li><a href="/en/" class="hover:text-brand-blue transition-colors">Home</a></li>
             <li aria-hidden="true"><i class="fas fa-chevron-right text-[10px] text-gray-400 mx-1"></i></li>
-            <li><a href="/en/actualites/" class="hover:text-brand-blue transition-colors">News</a></li>
+            <li><a href="/en/news/" class="hover:text-brand-blue transition-colors">News</a></li>
             <li aria-hidden="true"><i class="fas fa-chevron-right text-[10px] text-gray-400 mx-1"></i></li>
             <li class="text-brand-dark font-semibold" aria-current="page">{article.title}</li>
           </ol>
@@ -141,7 +145,7 @@ const categoryLabels: Record<string, string> = {
       <!-- Back link -->
       <div class="mt-8">
         <a
-          href="/en/actualites/"
+          href="/en/news/"
           class="inline-flex items-center gap-2 text-brand-blue hover:text-blue-700 font-bold transition-colors"
         >
           <i class="fas fa-arrow-left text-sm"></i> All news
@@ -198,7 +202,7 @@ const categoryLabels: Record<string, string> = {
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://association-alphabetisation-fatima.pages.dev/en/" },
-      { "@type": "ListItem", "position": 2, "name": "News", "item": "https://association-alphabetisation-fatima.pages.dev/en/actualites/" },
+      { "@type": "ListItem", "position": 2, "name": "News", "item": "https://association-alphabetisation-fatima.pages.dev/en/news/" },
       { "@type": "ListItem", "position": 3, "name": article.title }
     ]
   })} />
