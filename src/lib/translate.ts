@@ -1,8 +1,8 @@
 /**
  * Build-time FR→EN translation using the DeepL free API.
  *
- * Called during `astro build`. An in-memory cache prevents duplicate API
- * calls for repeated strings within the same build.
+ * Called during `astro build`. A persistent disk cache (.translation-cache.json)
+ * ensures each string is only translated once across all builds, saving API quota.
  *
  * Uses a two-pass approach:
  *   1. Collect all unique translatable strings from the data tree
@@ -17,8 +17,42 @@
  * If the key is missing the original French text is returned unchanged.
  */
 
-// In-memory cache — lives for the duration of a single build/dev session.
-const cache = new Map<string, string>();
+import { readFileSync, writeFileSync } from "node:fs";
+import { resolve } from "node:path";
+
+// ── Persistent disk cache ──
+
+const CACHE_FILE = resolve(".translation-cache.json");
+let cacheModified = false;
+
+function loadDiskCache(): Map<string, string> {
+  const map = new Map<string, string>();
+  try {
+    const data = JSON.parse(readFileSync(CACHE_FILE, "utf-8"));
+    for (const [k, v] of Object.entries(data)) {
+      if (typeof v === "string") map.set(k, v);
+    }
+    console.log(`[translate] Loaded ${map.size} cached translations from disk`);
+  } catch {
+    // File doesn't exist yet or is invalid — start fresh
+  }
+  return map;
+}
+
+function saveDiskCache(map: Map<string, string>): void {
+  try {
+    const obj: Record<string, string> = {};
+    const keys = [...map.keys()].sort();
+    for (const k of keys) obj[k] = map.get(k)!;
+    writeFileSync(CACHE_FILE, JSON.stringify(obj, null, 2) + "\n", "utf-8");
+    console.log(`[translate] Saved ${map.size} translations to disk cache`);
+  } catch (err) {
+    console.warn("[translate] Could not save translation cache:", err);
+  }
+}
+
+// In-memory cache — seeded from disk, then overlaid with manual overrides.
+const cache = loadDiskCache();
 
 // Manual overrides for strings DeepL doesn't translate well (proper nouns, etc.).
 // Also used as identity mappings to prevent translation of proper nouns.
@@ -140,6 +174,7 @@ async function batchTranslate(texts: string[]): Promise<void> {
             const translations = json.translations || [];
             for (let j = 0; j < batch.length; j++) {
               cache.set(batch[j], translations[j]?.text ?? batch[j]);
+              cacheModified = true;
             }
             continue;
           }
@@ -152,6 +187,7 @@ async function batchTranslate(texts: string[]): Promise<void> {
       const translations = json.translations || [];
       for (let j = 0; j < batch.length; j++) {
         cache.set(batch[j], translations[j]?.text ?? batch[j]);
+        cacheModified = true;
       }
     } catch (err) {
       console.warn("[translate] DeepL fetch failed:", err);
@@ -187,9 +223,15 @@ export async function translateValue(value: unknown): Promise<any> {
   const strings = collectStrings(value);
   const uncached = [...strings];
 
-  // Pass 2: batch translate all uncached strings
   if (uncached.length > 0) {
+    console.log(`[translate] ${uncached.length} new strings to translate`);
     await batchTranslate(uncached);
+  }
+
+  // Persist new translations to disk so future builds skip the API
+  if (cacheModified) {
+    saveDiskCache(cache);
+    cacheModified = false;
   }
 
   // Pass 3: rebuild tree with translations
