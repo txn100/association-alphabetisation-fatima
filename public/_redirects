@@ -1,1 +1,13 @@
 /admin  /admin/index.html  200
+
+# Redirect wrong EN slugs (FR slug with /en/ prefix) to correct EN pages
+/en/faire-un-don      /en/donate/               301
+/en/faire-un-don/     /en/donate/               301
+/en/notre-histoire    /en/our-story/            301
+/en/notre-histoire/   /en/our-story/            301
+/en/impact-et-transparence    /en/impact-transparency/  301
+/en/impact-et-transparence/   /en/impact-transparency/  301
+/en/actualites        /en/news/                 301
+/en/actualites/       /en/news/                 301
+/en/actualites/*      /en/news/:splat           301
+/en/programmes/*      /en/programs/:splat       301
