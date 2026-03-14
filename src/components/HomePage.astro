@@ -204,6 +204,31 @@ const uiJson = JSON.stringify(ui);
         });
       });
 
+      // === ACCOUNT TYPE TOGGLE (Particulier / Entreprise CSR) ===
+      const accountBtns = document.querySelectorAll<HTMLButtonElement>("[data-account-btn]");
+      const accountNumEl = document.querySelector<HTMLElement>("[data-account-num]");
+      if (accountBtns.length && accountNumEl) {
+        accountBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const tab = btn.dataset.accountBtn;
+            accountNumEl.textContent = tab === "csr"
+              ? (accountNumEl.dataset.csr || "")
+              : (accountNumEl.dataset.private || "");
+            accountBtns.forEach((b) => {
+              if (b.dataset.accountBtn === tab) {
+                b.className = b.className
+                  .replace("text-gray-500 hover:text-gray-700", "")
+                  + " bg-white text-brand-blue shadow-sm";
+              } else {
+                b.className = b.className
+                  .replace("bg-white text-brand-blue shadow-sm", "")
+                  + " text-gray-500 hover:text-gray-700";
+              }
+            });
+          });
+        });
+      }
+
       // === PARRAIN FORM: WhatsApp & Email send ===
       const parrainForm = document.getElementById("parrain-form") as HTMLFormElement | null;
       if (parrainForm) {

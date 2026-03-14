@@ -231,6 +231,7 @@ export default function DonateVisual(props: any) {
                             <div className="flex gap-1 mb-3 bg-gray-200 rounded-lg p-0.5 w-fit">
                               <button
                                 type="button"
+                                data-account-btn="private"
                                 onClick={() => setAccountTab("private")}
                                 className={`text-xs font-bold px-3 py-1.5 rounded-md transition ${
                                   accountTab === "private"
@@ -243,6 +244,7 @@ export default function DonateVisual(props: any) {
                               </button>
                               <button
                                 type="button"
+                                data-account-btn="csr"
                                 onClick={() => setAccountTab("csr")}
                                 className={`text-xs font-bold px-3 py-1.5 rounded-md transition ${
                                   accountTab === "csr"
@@ -269,6 +271,9 @@ export default function DonateVisual(props: any) {
                                 <span
                                   className="font-mono font-bold text-brand-blue text-base"
                                   data-tina-field={don ? tinaField(don, accountTab === "csr" ? "accountNumberCSR" : "accountNumberPrivate") : undefined}
+                                  data-account-num
+                                  data-private={don?.accountNumberPrivate || ""}
+                                  data-csr={don?.accountNumberCSR || ""}
                                 >
                                   {accountTab === "csr"
                                     ? (don?.accountNumberCSR || "")
