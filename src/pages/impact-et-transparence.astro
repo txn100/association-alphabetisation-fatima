@@ -178,6 +178,16 @@ const stats = statsEntries
               <p class="text-gray-800 font-semibold whitespace-pre-line">
                 {footer.address}
               </p>
+              {footer.mapUrl && (
+                <a
+                  href={footer.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1.5 text-sm text-brand-blue hover:underline mt-2"
+                >
+                  <i class="fas fa-map-marker-alt"></i> Voir sur Google Maps
+                </a>
+              )}
             </div>
             <div class="space-y-3">
               <div>

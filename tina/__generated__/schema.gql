@@ -457,10 +457,15 @@ type Footer implements Node & Document {
   director: String
   contactHeading: String
   address: String
+  mapUrl: String
+  latitude: String
+  longitude: String
   phone1: String
   phone1Link: String
   phone2: String
   phone2Link: String
+  phone3: String
+  phone3Link: String
   email: String
   whatsappNumber: String
   transparencyHeading: String
@@ -479,10 +484,15 @@ input FooterFilter {
   director: StringFilter
   contactHeading: StringFilter
   address: StringFilter
+  mapUrl: StringFilter
+  latitude: StringFilter
+  longitude: StringFilter
   phone1: StringFilter
   phone1Link: StringFilter
   phone2: StringFilter
   phone2Link: StringFilter
+  phone3: StringFilter
+  phone3Link: StringFilter
   email: StringFilter
   whatsappNumber: StringFilter
   transparencyHeading: StringFilter
@@ -697,6 +707,8 @@ type DonateCsr {
   csrCode: String
   contactName: String
   contactRole: String
+  contactPhone: String
+  contactPhoneLink: String
 }
 
 type Donate implements Node & Document {
@@ -782,6 +794,8 @@ input DonateCsrFilter {
   csrCode: StringFilter
   contactName: StringFilter
   contactRole: StringFilter
+  contactPhone: StringFilter
+  contactPhoneLink: StringFilter
 }
 
 input DonateFilter {
@@ -1118,10 +1132,15 @@ input FooterMutation {
   director: String
   contactHeading: String
   address: String
+  mapUrl: String
+  latitude: String
+  longitude: String
   phone1: String
   phone1Link: String
   phone2: String
   phone2Link: String
+  phone3: String
+  phone3Link: String
   email: String
   whatsappNumber: String
   transparencyHeading: String
@@ -1242,6 +1261,8 @@ input DonateCsrMutation {
   csrCode: String
   contactName: String
   contactRole: String
+  contactPhone: String
+  contactPhoneLink: String
 }
 
 input DonateMutation {

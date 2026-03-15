@@ -73,6 +73,10 @@ const ogLocaleAlt = lang === "en" ? "fr_FR" : "en_US";
     <meta property="og:locale" content={ogLocale} />
     <meta property="og:locale:alternate" content={ogLocaleAlt} />
 
+    <!-- Place/Location OG tags for local findability -->
+    <meta property="place:location:latitude" content={footer.latitude || "-20.0437428"} />
+    <meta property="place:location:longitude" content={footer.longitude || "57.5507039"} />
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -119,13 +123,14 @@ const ogLocaleAlt = lang === "en" ? "fr_FR" : "en_US";
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": ["EducationalOrganization", "NGO"],
+      "@type": ["EducationalOrganization", "NGO", "NonprofitOrganization"],
       "name": "Association d'Alphabétisation de Fatima",
       "alternateName": lang === "en" ? "Fatima Literacy Association" : "Association d'Alphabétisation de Fatima",
       "url": "https://association-alphabetisation-fatima.pages.dev/",
       "logo": "https://association-alphabetisation-fatima.pages.dev/images/logo-fatima-hq.webp",
       "foundingDate": "1989",
       "description": description,
+      "telephone": footer.phone1Link,
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Trou aux Biches Road",
@@ -133,6 +138,12 @@ const ogLocaleAlt = lang === "en" ? "fr_FR" : "en_US";
         "addressRegion": "Pamplemousses",
         "addressCountry": "MU"
       },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": footer.latitude || "-20.0437428",
+        "longitude": footer.longitude || "57.5507039"
+      },
+      "hasMap": footer.mapUrl || "https://maps.app.goo.gl/27dvyVGLUWBr9JLp7",
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": footer.phone1Link,

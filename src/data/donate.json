@@ -54,7 +54,7 @@
     "accountNumberCSR": "000162709609",
     "accountHolder": "Association d'Alphabétisation de Fatima",
     "trustSignal": "100% de votre don est dédié aux élèves",
-    "receiptNote": "Pour un reçu fiscal, contactez-nous par mail direction@ecolefatima.com ou "
+    "receiptNote": "Pour un reçu fiscal, contactez-nous au"
   },
   "parrainSection": {
     "heading": "Devenez Parrain",
@@ -103,6 +103,8 @@
     "text": "Vous souhaitez financer un projet spécifique (Salle informatique, Sorties éducatives et sportives, Projets éco-responsables...etc).",
     "csrCode": "NCSRF/2017/0278",
     "contactName": "Pauline MARTIN",
-    "contactRole": "Présidente - Tel (230) 59 85 52 53 (Whatsapp"
+    "contactRole": "Présidente",
+    "contactPhone": "(230) 59 85 52 53",
+    "contactPhoneLink": "+23059855253"
   }
 }

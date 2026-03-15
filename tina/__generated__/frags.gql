@@ -98,10 +98,15 @@ fragment FooterParts on Footer {
   director
   contactHeading
   address
+  mapUrl
+  latitude
+  longitude
   phone1
   phone1Link
   phone2
   phone2Link
+  phone3
+  phone3Link
   email
   whatsappNumber
   transparencyHeading
@@ -222,6 +227,8 @@ fragment DonateParts on Donate {
     csrCode
     contactName
     contactRole
+    contactPhone
+    contactPhoneLink
   }
 }
 

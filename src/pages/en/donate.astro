@@ -249,7 +249,14 @@ const pageDescription = "Support the Association d'Alphabétisation de Fatima wi
           </div>
           <div>
             <p class="font-bold">{csr.contactName}</p>
-            <p class="text-sm text-blue-200">{csr.contactRole}</p>
+            <p class="text-sm text-blue-200">
+              {csr.contactRole}
+              {csr.contactPhone && (
+                <> — <a href={`tel:${csr.contactPhoneLink}`} class="underline hover:text-white transition">
+                  <i class="fab fa-whatsapp mr-1"></i>{csr.contactPhone}
+                </a></>
+              )}
+            </p>
           </div>
         </div>
       </div>

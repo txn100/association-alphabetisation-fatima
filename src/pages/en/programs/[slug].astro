@@ -258,9 +258,14 @@ const colors = colorMap[program.color] || colorMap.blue;
       "name": siteData.organizationName,
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": footerData.address,
+        "streetAddress": "Trou aux Biches Road, Paroisse Notre Dame de Fatima",
         "addressLocality": "Triolet",
         "addressCountry": "MU"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": footerData.latitude,
+        "longitude": footerData.longitude
       }
     },
     ...(program.ages ? { "programPrerequisites": { "@type": "EducationalOccupationalCredential", "credentialCategory": program.ages } } : {}),

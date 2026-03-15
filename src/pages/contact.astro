@@ -57,6 +57,9 @@ const canonicalPath = '/contact/';
               <div>
                 <p class="font-bold text-gray-800 mb-1">Adresse</p>
                 <p class="text-gray-600 text-sm">{footerData.address}</p>
+                <a href={footerData.mapUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-brand-blue text-sm font-semibold hover:underline mt-2">
+                  <i class="fas fa-external-link-alt text-xs"></i> Voir sur la carte
+                </a>
               </div>
             </div>
           </div>
@@ -70,6 +73,9 @@ const canonicalPath = '/contact/';
                 <p class="font-bold text-gray-800 mb-1">Téléphone</p>
                 <a href={`tel:${footerData.phone1Link}`} class="block text-brand-blue font-semibold hover:underline">{footerData.phone1}</a>
                 <a href={`tel:${footerData.phone2Link}`} class="block text-brand-blue font-semibold hover:underline">{footerData.phone2}</a>
+                <a href={`tel:${footerData.phone3Link}`} class="block text-brand-blue font-semibold hover:underline">
+                  <i class="fab fa-whatsapp text-green-500 mr-1"></i>{footerData.phone3}
+                </a>
               </div>
             </div>
           </div>
@@ -112,6 +118,21 @@ const canonicalPath = '/contact/';
           </div>
         </div>
       </div>
+
+      <div class="mt-8">
+        <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden">
+          <iframe
+            src={`https://www.google.com/maps?q=${footerData.latitude},${footerData.longitude}&z=15&output=embed`}
+            width="100%"
+            height="350"
+            style="border:0"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Localisation de l'Association d'Alphabétisation de Fatima"
+          ></iframe>
+        </div>
+      </div>
     </div>
   </main>
 
@@ -140,7 +161,13 @@ const canonicalPath = '/contact/';
         "addressLocality": "Triolet",
         "addressRegion": "Pamplemousses",
         "addressCountry": "MU"
-      }
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": footerData.latitude,
+        "longitude": footerData.longitude
+      },
+      "hasMap": footerData.mapUrl
     }
   })} />
   <script type="application/ld+json" set:html={JSON.stringify({

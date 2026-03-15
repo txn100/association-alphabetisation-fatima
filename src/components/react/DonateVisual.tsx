@@ -567,6 +567,19 @@ export default function DonateVisual(props: any) {
                 <br />
                 {ui?.csrContactLabel || "Contactez"} <strong data-tina-field={tinaField(csr, "contactName")}>{csr.contactName || ""}</strong>{" "}
                 (<span data-tina-field={tinaField(csr, "contactRole")}>{csr.contactRole || ""}</span>)
+                {csr.contactPhone && (
+                  <>
+                    {" — "}
+                    <a
+                      href={`tel:${csr.contactPhoneLink || ""}`}
+                      className="text-brand-blue underline hover:text-brand-dark"
+                      data-tina-field={tinaField(csr, "contactPhone")}
+                    >
+                      <i className="fas fa-phone text-xs mr-1" />
+                      {csr.contactPhone}
+                    </a>
+                  </>
+                )}
               </p>
             </div>
           )}

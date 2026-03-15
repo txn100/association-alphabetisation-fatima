@@ -187,12 +187,17 @@ var config_default = defineConfig({
           { type: "string", name: "director", label: "Directrice" },
           { type: "string", name: "contactHeading", label: "Titre contact" },
           { type: "string", name: "address", label: "Adresse", ui: { component: "textarea" } },
-          { type: "string", name: "phone1", label: "T\xE9l\xE9phone 1" },
-          { type: "string", name: "phone1Link", label: "Lien tel 1" },
-          { type: "string", name: "phone2", label: "T\xE9l\xE9phone 2" },
-          { type: "string", name: "phone2Link", label: "Lien tel 2" },
+          { type: "string", name: "mapUrl", label: "Lien Google Maps" },
+          { type: "string", name: "latitude", label: "Latitude GPS" },
+          { type: "string", name: "longitude", label: "Longitude GPS" },
+          { type: "string", name: "phone1", label: "T\xE9l\xE9phone 1 (fixe)" },
+          { type: "string", name: "phone1Link", label: "Lien tel 1 (ex: +2302613032)" },
+          { type: "string", name: "phone2", label: "T\xE9l\xE9phone 2 (fixe)" },
+          { type: "string", name: "phone2Link", label: "Lien tel 2 (ex: +2302616719)" },
+          { type: "string", name: "phone3", label: "T\xE9l\xE9phone 3 (mobile/WhatsApp)" },
+          { type: "string", name: "phone3Link", label: "Lien tel 3 (ex: +23059855253)" },
           { type: "string", name: "email", label: "Email" },
-          { type: "string", name: "whatsappNumber", label: "Num\xE9ro WhatsApp" },
+          { type: "string", name: "whatsappNumber", label: "Num\xE9ro WhatsApp (format: 23059855253)" },
           { type: "string", name: "transparencyHeading", label: "Titre transparence" },
           { type: "string", name: "ngoRegistered", label: "ONG enregistr\xE9e" },
           { type: "string", name: "nsifCode", label: "Code NSIF" },
@@ -392,7 +397,9 @@ var config_default = defineConfig({
               { type: "string", name: "text", label: "Texte", ui: { component: "textarea" } },
               { type: "string", name: "csrCode", label: "Code CSR" },
               { type: "string", name: "contactName", label: "Nom du contact" },
-              { type: "string", name: "contactRole", label: "R\xF4le du contact" }
+              { type: "string", name: "contactRole", label: "R\xF4le du contact" },
+              { type: "string", name: "contactPhone", label: "T\xE9l\xE9phone du contact" },
+              { type: "string", name: "contactPhoneLink", label: "Lien tel du contact (ex: +23059855253)" }
             ]
           }
         ]

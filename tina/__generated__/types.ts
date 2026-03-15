@@ -816,10 +816,15 @@ export type Footer = Node & Document & {
   director?: Maybe<Scalars['String']['output']>;
   contactHeading?: Maybe<Scalars['String']['output']>;
   address?: Maybe<Scalars['String']['output']>;
+  mapUrl?: Maybe<Scalars['String']['output']>;
+  latitude?: Maybe<Scalars['String']['output']>;
+  longitude?: Maybe<Scalars['String']['output']>;
   phone1?: Maybe<Scalars['String']['output']>;
   phone1Link?: Maybe<Scalars['String']['output']>;
   phone2?: Maybe<Scalars['String']['output']>;
   phone2Link?: Maybe<Scalars['String']['output']>;
+  phone3?: Maybe<Scalars['String']['output']>;
+  phone3Link?: Maybe<Scalars['String']['output']>;
   email?: Maybe<Scalars['String']['output']>;
   whatsappNumber?: Maybe<Scalars['String']['output']>;
   transparencyHeading?: Maybe<Scalars['String']['output']>;
@@ -838,10 +843,15 @@ export type FooterFilter = {
   director?: InputMaybe<StringFilter>;
   contactHeading?: InputMaybe<StringFilter>;
   address?: InputMaybe<StringFilter>;
+  mapUrl?: InputMaybe<StringFilter>;
+  latitude?: InputMaybe<StringFilter>;
+  longitude?: InputMaybe<StringFilter>;
   phone1?: InputMaybe<StringFilter>;
   phone1Link?: InputMaybe<StringFilter>;
   phone2?: InputMaybe<StringFilter>;
   phone2Link?: InputMaybe<StringFilter>;
+  phone3?: InputMaybe<StringFilter>;
+  phone3Link?: InputMaybe<StringFilter>;
   email?: InputMaybe<StringFilter>;
   whatsappNumber?: InputMaybe<StringFilter>;
   transparencyHeading?: InputMaybe<StringFilter>;
@@ -1080,6 +1090,8 @@ export type DonateCsr = {
   csrCode?: Maybe<Scalars['String']['output']>;
   contactName?: Maybe<Scalars['String']['output']>;
   contactRole?: Maybe<Scalars['String']['output']>;
+  contactPhone?: Maybe<Scalars['String']['output']>;
+  contactPhoneLink?: Maybe<Scalars['String']['output']>;
 };
 
 export type Donate = Node & Document & {
@@ -1166,6 +1178,8 @@ export type DonateCsrFilter = {
   csrCode?: InputMaybe<StringFilter>;
   contactName?: InputMaybe<StringFilter>;
   contactRole?: InputMaybe<StringFilter>;
+  contactPhone?: InputMaybe<StringFilter>;
+  contactPhoneLink?: InputMaybe<StringFilter>;
 };
 
 export type DonateFilter = {
@@ -1770,10 +1784,15 @@ export type FooterMutation = {
   director?: InputMaybe<Scalars['String']['input']>;
   contactHeading?: InputMaybe<Scalars['String']['input']>;
   address?: InputMaybe<Scalars['String']['input']>;
+  mapUrl?: InputMaybe<Scalars['String']['input']>;
+  latitude?: InputMaybe<Scalars['String']['input']>;
+  longitude?: InputMaybe<Scalars['String']['input']>;
   phone1?: InputMaybe<Scalars['String']['input']>;
   phone1Link?: InputMaybe<Scalars['String']['input']>;
   phone2?: InputMaybe<Scalars['String']['input']>;
   phone2Link?: InputMaybe<Scalars['String']['input']>;
+  phone3?: InputMaybe<Scalars['String']['input']>;
+  phone3Link?: InputMaybe<Scalars['String']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   whatsappNumber?: InputMaybe<Scalars['String']['input']>;
   transparencyHeading?: InputMaybe<Scalars['String']['input']>;
@@ -1894,6 +1913,8 @@ export type DonateCsrMutation = {
   csrCode?: InputMaybe<Scalars['String']['input']>;
   contactName?: InputMaybe<Scalars['String']['input']>;
   contactRole?: InputMaybe<Scalars['String']['input']>;
+  contactPhone?: InputMaybe<Scalars['String']['input']>;
+  contactPhoneLink?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DonateMutation = {
@@ -1954,7 +1975,7 @@ export type HeroPartsFragment = { __typename: 'Hero', topLabel?: string | null, 
 
 export type AboutPartsFragment = { __typename: 'About', heading: string, paragraph1?: string | null, paragraph2?: string | null, paragraph3?: string | null, quote?: string | null, mainImage?: string | null, mainImageAlt?: string | null, photos?: Array<{ __typename: 'AboutPhotos', src: string, alt: string } | null> | null };
 
-export type FooterPartsFragment = { __typename: 'Footer', orgDescription: string, president?: string | null, director?: string | null, contactHeading?: string | null, address?: string | null, phone1?: string | null, phone1Link?: string | null, phone2?: string | null, phone2Link?: string | null, email?: string | null, whatsappNumber?: string | null, transparencyHeading?: string | null, ngoRegistered?: string | null, nsifCode?: string | null, csrCode?: string | null, copyright?: string | null };
+export type FooterPartsFragment = { __typename: 'Footer', orgDescription: string, president?: string | null, director?: string | null, contactHeading?: string | null, address?: string | null, mapUrl?: string | null, latitude?: string | null, longitude?: string | null, phone1?: string | null, phone1Link?: string | null, phone2?: string | null, phone2Link?: string | null, phone3?: string | null, phone3Link?: string | null, email?: string | null, whatsappNumber?: string | null, transparencyHeading?: string | null, ngoRegistered?: string | null, nsifCode?: string | null, csrCode?: string | null, copyright?: string | null };
 
 export type NavigationPartsFragment = { __typename: 'Navigation', navbarTitle: string, ctaText: string, links?: Array<{ __typename: 'NavigationLinks', label: string, href?: string | null } | null> | null };
 
@@ -1962,7 +1983,7 @@ export type ImpactPartsFragment = { __typename: 'Impact', sinceLabel: string, he
 
 export type PedagogyPartsFragment = { __typename: 'Pedagogy', heading: string, description?: string | null, newsHeading?: string | null, features?: Array<{ __typename: 'PedagogyFeatures', title: string, description: string } | null> | null, photos?: Array<{ __typename: 'PedagogyPhotos', src: string, alt: string } | null> | null };
 
-export type DonatePartsFragment = { __typename: 'Donate', emotionalHeader?: { __typename: 'DonateEmotionalHeader', badge?: string | null, heading?: string | null, headingHighlight?: string | null, description?: string | null } | null, socialProof?: Array<{ __typename: 'DonateSocialProof', value: string, label: string } | null> | null, tabs?: { __typename: 'DonateTabs', donLabel?: string | null, parrainLabel?: string | null } | null, donPonctuel?: { __typename: 'DonateDonPonctuel', heading?: string | null, subtitle?: string | null, referenceFormat?: string | null, bankName?: string | null, accountNumberPrivate?: string | null, accountNumberCSR?: string | null, accountHolder?: string | null, trustSignal?: string | null, receiptNote?: string | null, steps?: Array<{ __typename: 'DonateDonPonctuelSteps', title: string, detail?: string | null } | null> | null } | null, parrainSection?: { __typename: 'DonateParrainSection', heading?: string | null, subtitle?: string | null, chooseLabel?: string | null, highlightedBadge?: string | null, freeAmountOption?: string | null, formHeading?: string | null, namePlaceholder?: string | null, phonePlaceholder?: string | null, emailPlaceholder?: string | null, messagePlaceholder?: string | null, whatsappNumber: string, whatsappButton?: string | null, emailButton?: string | null, responseTime?: string | null, receiptLabel?: string | null } | null, donEnAction?: { __typename: 'DonateDonEnAction', heading?: string | null, items?: Array<{ __typename: 'DonateDonEnActionItems', icon: string, title: string, subtitle: string } | null> | null } | null, csr?: { __typename: 'DonateCsr', heading?: string | null, text?: string | null, csrCode?: string | null, contactName?: string | null, contactRole?: string | null } | null };
+export type DonatePartsFragment = { __typename: 'Donate', emotionalHeader?: { __typename: 'DonateEmotionalHeader', badge?: string | null, heading?: string | null, headingHighlight?: string | null, description?: string | null } | null, socialProof?: Array<{ __typename: 'DonateSocialProof', value: string, label: string } | null> | null, tabs?: { __typename: 'DonateTabs', donLabel?: string | null, parrainLabel?: string | null } | null, donPonctuel?: { __typename: 'DonateDonPonctuel', heading?: string | null, subtitle?: string | null, referenceFormat?: string | null, bankName?: string | null, accountNumberPrivate?: string | null, accountNumberCSR?: string | null, accountHolder?: string | null, trustSignal?: string | null, receiptNote?: string | null, steps?: Array<{ __typename: 'DonateDonPonctuelSteps', title: string, detail?: string | null } | null> | null } | null, parrainSection?: { __typename: 'DonateParrainSection', heading?: string | null, subtitle?: string | null, chooseLabel?: string | null, highlightedBadge?: string | null, freeAmountOption?: string | null, formHeading?: string | null, namePlaceholder?: string | null, phonePlaceholder?: string | null, emailPlaceholder?: string | null, messagePlaceholder?: string | null, whatsappNumber: string, whatsappButton?: string | null, emailButton?: string | null, responseTime?: string | null, receiptLabel?: string | null } | null, donEnAction?: { __typename: 'DonateDonEnAction', heading?: string | null, items?: Array<{ __typename: 'DonateDonEnActionItems', icon: string, title: string, subtitle: string } | null> | null } | null, csr?: { __typename: 'DonateCsr', heading?: string | null, text?: string | null, csrCode?: string | null, contactName?: string | null, contactRole?: string | null, contactPhone?: string | null, contactPhoneLink?: string | null } | null };
 
 export type SitePartsFragment = { __typename: 'Site', title: string, description?: string | null, organizationName?: string | null };
 
@@ -2131,7 +2152,7 @@ export type FooterQueryVariables = Exact<{
 }>;
 
 
-export type FooterQuery = { __typename?: 'Query', footer: { __typename: 'Footer', id: string, orgDescription: string, president?: string | null, director?: string | null, contactHeading?: string | null, address?: string | null, phone1?: string | null, phone1Link?: string | null, phone2?: string | null, phone2Link?: string | null, email?: string | null, whatsappNumber?: string | null, transparencyHeading?: string | null, ngoRegistered?: string | null, nsifCode?: string | null, csrCode?: string | null, copyright?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type FooterQuery = { __typename?: 'Query', footer: { __typename: 'Footer', id: string, orgDescription: string, president?: string | null, director?: string | null, contactHeading?: string | null, address?: string | null, mapUrl?: string | null, latitude?: string | null, longitude?: string | null, phone1?: string | null, phone1Link?: string | null, phone2?: string | null, phone2Link?: string | null, phone3?: string | null, phone3Link?: string | null, email?: string | null, whatsappNumber?: string | null, transparencyHeading?: string | null, ngoRegistered?: string | null, nsifCode?: string | null, csrCode?: string | null, copyright?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type FooterConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -2143,7 +2164,7 @@ export type FooterConnectionQueryVariables = Exact<{
 }>;
 
 
-export type FooterConnectionQuery = { __typename?: 'Query', footerConnection: { __typename?: 'FooterConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'FooterConnectionEdges', cursor: string, node?: { __typename: 'Footer', id: string, orgDescription: string, president?: string | null, director?: string | null, contactHeading?: string | null, address?: string | null, phone1?: string | null, phone1Link?: string | null, phone2?: string | null, phone2Link?: string | null, email?: string | null, whatsappNumber?: string | null, transparencyHeading?: string | null, ngoRegistered?: string | null, nsifCode?: string | null, csrCode?: string | null, copyright?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type FooterConnectionQuery = { __typename?: 'Query', footerConnection: { __typename?: 'FooterConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'FooterConnectionEdges', cursor: string, node?: { __typename: 'Footer', id: string, orgDescription: string, president?: string | null, director?: string | null, contactHeading?: string | null, address?: string | null, mapUrl?: string | null, latitude?: string | null, longitude?: string | null, phone1?: string | null, phone1Link?: string | null, phone2?: string | null, phone2Link?: string | null, phone3?: string | null, phone3Link?: string | null, email?: string | null, whatsappNumber?: string | null, transparencyHeading?: string | null, ngoRegistered?: string | null, nsifCode?: string | null, csrCode?: string | null, copyright?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type NavigationQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2207,7 +2228,7 @@ export type DonateQueryVariables = Exact<{
 }>;
 
 
-export type DonateQuery = { __typename?: 'Query', donate: { __typename: 'Donate', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, emotionalHeader?: { __typename: 'DonateEmotionalHeader', badge?: string | null, heading?: string | null, headingHighlight?: string | null, description?: string | null } | null, socialProof?: Array<{ __typename: 'DonateSocialProof', value: string, label: string } | null> | null, tabs?: { __typename: 'DonateTabs', donLabel?: string | null, parrainLabel?: string | null } | null, donPonctuel?: { __typename: 'DonateDonPonctuel', heading?: string | null, subtitle?: string | null, referenceFormat?: string | null, bankName?: string | null, accountNumberPrivate?: string | null, accountNumberCSR?: string | null, accountHolder?: string | null, trustSignal?: string | null, receiptNote?: string | null, steps?: Array<{ __typename: 'DonateDonPonctuelSteps', title: string, detail?: string | null } | null> | null } | null, parrainSection?: { __typename: 'DonateParrainSection', heading?: string | null, subtitle?: string | null, chooseLabel?: string | null, highlightedBadge?: string | null, freeAmountOption?: string | null, formHeading?: string | null, namePlaceholder?: string | null, phonePlaceholder?: string | null, emailPlaceholder?: string | null, messagePlaceholder?: string | null, whatsappNumber: string, whatsappButton?: string | null, emailButton?: string | null, responseTime?: string | null, receiptLabel?: string | null } | null, donEnAction?: { __typename: 'DonateDonEnAction', heading?: string | null, items?: Array<{ __typename: 'DonateDonEnActionItems', icon: string, title: string, subtitle: string } | null> | null } | null, csr?: { __typename: 'DonateCsr', heading?: string | null, text?: string | null, csrCode?: string | null, contactName?: string | null, contactRole?: string | null } | null } };
+export type DonateQuery = { __typename?: 'Query', donate: { __typename: 'Donate', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, emotionalHeader?: { __typename: 'DonateEmotionalHeader', badge?: string | null, heading?: string | null, headingHighlight?: string | null, description?: string | null } | null, socialProof?: Array<{ __typename: 'DonateSocialProof', value: string, label: string } | null> | null, tabs?: { __typename: 'DonateTabs', donLabel?: string | null, parrainLabel?: string | null } | null, donPonctuel?: { __typename: 'DonateDonPonctuel', heading?: string | null, subtitle?: string | null, referenceFormat?: string | null, bankName?: string | null, accountNumberPrivate?: string | null, accountNumberCSR?: string | null, accountHolder?: string | null, trustSignal?: string | null, receiptNote?: string | null, steps?: Array<{ __typename: 'DonateDonPonctuelSteps', title: string, detail?: string | null } | null> | null } | null, parrainSection?: { __typename: 'DonateParrainSection', heading?: string | null, subtitle?: string | null, chooseLabel?: string | null, highlightedBadge?: string | null, freeAmountOption?: string | null, formHeading?: string | null, namePlaceholder?: string | null, phonePlaceholder?: string | null, emailPlaceholder?: string | null, messagePlaceholder?: string | null, whatsappNumber: string, whatsappButton?: string | null, emailButton?: string | null, responseTime?: string | null, receiptLabel?: string | null } | null, donEnAction?: { __typename: 'DonateDonEnAction', heading?: string | null, items?: Array<{ __typename: 'DonateDonEnActionItems', icon: string, title: string, subtitle: string } | null> | null } | null, csr?: { __typename: 'DonateCsr', heading?: string | null, text?: string | null, csrCode?: string | null, contactName?: string | null, contactRole?: string | null, contactPhone?: string | null, contactPhoneLink?: string | null } | null } };
 
 export type DonateConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -2219,7 +2240,7 @@ export type DonateConnectionQueryVariables = Exact<{
 }>;
 
 
-export type DonateConnectionQuery = { __typename?: 'Query', donateConnection: { __typename?: 'DonateConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'DonateConnectionEdges', cursor: string, node?: { __typename: 'Donate', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, emotionalHeader?: { __typename: 'DonateEmotionalHeader', badge?: string | null, heading?: string | null, headingHighlight?: string | null, description?: string | null } | null, socialProof?: Array<{ __typename: 'DonateSocialProof', value: string, label: string } | null> | null, tabs?: { __typename: 'DonateTabs', donLabel?: string | null, parrainLabel?: string | null } | null, donPonctuel?: { __typename: 'DonateDonPonctuel', heading?: string | null, subtitle?: string | null, referenceFormat?: string | null, bankName?: string | null, accountNumberPrivate?: string | null, accountNumberCSR?: string | null, accountHolder?: string | null, trustSignal?: string | null, receiptNote?: string | null, steps?: Array<{ __typename: 'DonateDonPonctuelSteps', title: string, detail?: string | null } | null> | null } | null, parrainSection?: { __typename: 'DonateParrainSection', heading?: string | null, subtitle?: string | null, chooseLabel?: string | null, highlightedBadge?: string | null, freeAmountOption?: string | null, formHeading?: string | null, namePlaceholder?: string | null, phonePlaceholder?: string | null, emailPlaceholder?: string | null, messagePlaceholder?: string | null, whatsappNumber: string, whatsappButton?: string | null, emailButton?: string | null, responseTime?: string | null, receiptLabel?: string | null } | null, donEnAction?: { __typename: 'DonateDonEnAction', heading?: string | null, items?: Array<{ __typename: 'DonateDonEnActionItems', icon: string, title: string, subtitle: string } | null> | null } | null, csr?: { __typename: 'DonateCsr', heading?: string | null, text?: string | null, csrCode?: string | null, contactName?: string | null, contactRole?: string | null } | null } | null } | null> | null } };
+export type DonateConnectionQuery = { __typename?: 'Query', donateConnection: { __typename?: 'DonateConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'DonateConnectionEdges', cursor: string, node?: { __typename: 'Donate', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, emotionalHeader?: { __typename: 'DonateEmotionalHeader', badge?: string | null, heading?: string | null, headingHighlight?: string | null, description?: string | null } | null, socialProof?: Array<{ __typename: 'DonateSocialProof', value: string, label: string } | null> | null, tabs?: { __typename: 'DonateTabs', donLabel?: string | null, parrainLabel?: string | null } | null, donPonctuel?: { __typename: 'DonateDonPonctuel', heading?: string | null, subtitle?: string | null, referenceFormat?: string | null, bankName?: string | null, accountNumberPrivate?: string | null, accountNumberCSR?: string | null, accountHolder?: string | null, trustSignal?: string | null, receiptNote?: string | null, steps?: Array<{ __typename: 'DonateDonPonctuelSteps', title: string, detail?: string | null } | null> | null } | null, parrainSection?: { __typename: 'DonateParrainSection', heading?: string | null, subtitle?: string | null, chooseLabel?: string | null, highlightedBadge?: string | null, freeAmountOption?: string | null, formHeading?: string | null, namePlaceholder?: string | null, phonePlaceholder?: string | null, emailPlaceholder?: string | null, messagePlaceholder?: string | null, whatsappNumber: string, whatsappButton?: string | null, emailButton?: string | null, responseTime?: string | null, receiptLabel?: string | null } | null, donEnAction?: { __typename: 'DonateDonEnAction', heading?: string | null, items?: Array<{ __typename: 'DonateDonEnActionItems', icon: string, title: string, subtitle: string } | null> | null } | null, csr?: { __typename: 'DonateCsr', heading?: string | null, text?: string | null, csrCode?: string | null, contactName?: string | null, contactRole?: string | null, contactPhone?: string | null, contactPhoneLink?: string | null } | null } | null } | null> | null } };
 
 export type SiteQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2425,10 +2446,15 @@ export const FooterPartsFragmentDoc = gql`
   director
   contactHeading
   address
+  mapUrl
+  latitude
+  longitude
   phone1
   phone1Link
   phone2
   phone2Link
+  phone3
+  phone3Link
   email
   whatsappNumber
   transparencyHeading
@@ -2553,6 +2579,8 @@ export const DonatePartsFragmentDoc = gql`
     csrCode
     contactName
     contactRole
+    contactPhone
+    contactPhoneLink
   }
 }
     `;
@@ -3781,7 +3809,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "http://localhost:4001/graphql",
+        url: "https://content.tinajs.io/1.5/content/9bff4b70-8364-4205-b688-7c79939891bf/github/tina",
         queries,
       })
     )
