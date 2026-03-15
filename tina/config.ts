@@ -324,7 +324,7 @@ export default defineConfig({
               { type: "string", name: "accountNumberCSR", label: "N° compte Entreprise (CSR)" },
               { type: "string", name: "accountHolder", label: "Titulaire du compte" },
               { type: "string", name: "trustSignal", label: "Message de confiance" },
-              { type: "string", name: "receiptNote", label: "Note reçu fiscal" },
+              { type: "string", name: "receiptNote", label: "Note reçu fiscal", description: "Texte affiché avant les numéros de téléphone et l'email de contact (ex: Pour un reçu fiscal, contactez-nous au)" },
             ],
           },
           {

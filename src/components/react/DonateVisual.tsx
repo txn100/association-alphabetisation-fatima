@@ -34,7 +34,9 @@ export default function DonateVisual(props: any) {
   const whatsappNumber = parrain?.whatsappNumber || footer?.whatsappNumber || "23059855253";
   const contactEmail = footer?.email || "direction@ecolefatima.com";
   const phone1 = footer?.phone1 || "261 30 32";
-  const phone1Link = footer?.phone1Link || "+23026130032";
+  const phone1Link = footer?.phone1Link || "+2302613032";
+  const phone2 = footer?.phone2;
+  const phone2Link = footer?.phone2Link;
 
   const tiersEdges = tiersData?.tiersConnection?.edges || [];
   const tiers = tiersEdges
@@ -321,6 +323,14 @@ export default function DonateVisual(props: any) {
                   >
                     {don?.receiptNote || "Pour un reçu fiscal, contactez-nous au"}{" "}
                     <a href={`tel:${phone1Link}`} className="text-brand-blue underline hover:text-brand-dark">{phone1}</a>
+                    {phone2 && (
+                      <>
+                        {" / "}
+                        <a href={`tel:${phone2Link}`} className="text-brand-blue underline hover:text-brand-dark">{phone2}</a>
+                      </>
+                    )}
+                    {" "}ou par mail{" "}
+                    <a href={`mailto:${contactEmail}`} className="text-brand-blue underline hover:text-brand-dark">{contactEmail}</a>
                   </p>
                 </div>
               </div>

@@ -344,7 +344,7 @@ var config_default = defineConfig({
               { type: "string", name: "accountNumberCSR", label: "N\xB0 compte Entreprise (CSR)" },
               { type: "string", name: "accountHolder", label: "Titulaire du compte" },
               { type: "string", name: "trustSignal", label: "Message de confiance" },
-              { type: "string", name: "receiptNote", label: "Note re\xE7u fiscal" }
+              { type: "string", name: "receiptNote", label: "Note re\xE7u fiscal", description: "Texte affich\xE9 avant les num\xE9ros de t\xE9l\xE9phone et l'email de contact (ex: Pour un re\xE7u fiscal, contactez-nous au)" }
             ]
           },
           {

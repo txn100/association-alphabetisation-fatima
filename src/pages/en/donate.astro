@@ -29,6 +29,8 @@ const ui = uiStrings.en;
 const whatsappNumber = parrain.whatsappNumber || footerData.whatsappNumber;
 const phone1 = footerData.phone1;
 const phone1Link = footerData.phone1Link;
+const phone2 = footerData.phone2;
+const phone2Link = footerData.phone2Link;
 
 const pageTitle = `Donate — ${siteData.organizationName}`;
 const pageDescription = "Support the Association d'Alphabétisation de Fatima with a one-time donation or monthly sponsorship. 100% of your donation goes directly to students.";
@@ -152,6 +154,14 @@ const pageDescription = "Support the Association d'Alphabétisation de Fatima wi
             <p class="text-xs text-gray-500">
               {don.receiptNote}{" "}
               <a href={`tel:${phone1Link}`} class="text-brand-blue underline hover:text-brand-dark">{phone1}</a>
+              {phone2 && (
+                <>
+                  {" / "}
+                  <a href={`tel:${phone2Link}`} class="text-brand-blue underline hover:text-brand-dark">{phone2}</a>
+                </>
+              )}
+              {" "}or by email{" "}
+              <a href={`mailto:${footerData.email}`} class="text-brand-blue underline hover:text-brand-dark">{footerData.email}</a>
             </p>
           </div>
         </div>

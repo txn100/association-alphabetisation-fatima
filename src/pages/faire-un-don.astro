@@ -26,6 +26,8 @@ const socialProof = donate.socialProof || [];
 const whatsappNumber = parrain.whatsappNumber || footer.whatsappNumber;
 const phone1 = footer.phone1;
 const phone1Link = footer.phone1Link;
+const phone2 = footer.phone2;
+const phone2Link = footer.phone2Link;
 
 const pageTitle = `Faire un Don — ${site.organizationName}`;
 const pageDescription = "Soutenez l'Association d'Alphabétisation de Fatima par un don ponctuel ou un parrainage mensuel. 100% de votre don est dédié aux élèves.";
@@ -149,6 +151,14 @@ const pageDescription = "Soutenez l'Association d'Alphabétisation de Fatima par
             <p class="text-xs text-gray-500">
               {don.receiptNote}{" "}
               <a href={`tel:${phone1Link}`} class="text-brand-blue underline hover:text-brand-dark">{phone1}</a>
+              {phone2 && (
+                <>
+                  {" / "}
+                  <a href={`tel:${phone2Link}`} class="text-brand-blue underline hover:text-brand-dark">{phone2}</a>
+                </>
+              )}
+              {" "}ou par mail{" "}
+              <a href={`mailto:${footer.email}`} class="text-brand-blue underline hover:text-brand-dark">{footer.email}</a>
             </p>
           </div>
         </div>
