@@ -73,10 +73,12 @@ const SKIP_KEYS = new Set([
   "slug", "icon", "color", "href",
   "category", "status",                          // enum values — translated via uiStrings instead
   "phone1", "phone1Link", "phone2", "phone2Link",
+  "phone3", "phone3Link",                          // WhatsApp mobile number
+  "contactPhone", "contactPhoneLink",              // CSR contact phone
   "whatsappNumber", "email",
   "bankName", "accountNumberPrivate", "accountNumberCSR", "accountHolder",
   "nsifCode", "csrCode",
-  "address",                                     // physical address — never translate place names
+  "address", "mapUrl", "latitude", "longitude",    // physical location — never translate
   "organizationName", "navbarTitle", "copyright", // org identity — keep French legal name
   "contactName",                                  // person names
   "president", "director",                        // person names
