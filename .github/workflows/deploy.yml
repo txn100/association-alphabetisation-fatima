@@ -7,6 +7,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
 
@@ -21,6 +23,20 @@ jobs:
           NEXT_PUBLIC_TINA_CLIENT_ID: ${{ secrets.TINA_CLIENT_ID }}
           TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
           DEEPL_API_KEY: ${{ secrets.DEEPL_API_KEY }}
+
+      # Commit updated translation cache so future builds don't re-translate
+      - name: Commit translation cache
+        run: |
+          if git diff --quiet .translation-cache.json 2>/dev/null; then
+            echo "Translation cache unchanged — nothing to commit"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add .translation-cache.json
+            git commit -m "chore: update DeepL translation cache [skip ci]"
+            git push
+            echo "Translation cache committed and pushed"
+          fi
 
       - uses: cloudflare/wrangler-action@v3
         with:

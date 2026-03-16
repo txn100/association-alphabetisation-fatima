@@ -4,10 +4,16 @@
  * Called during `astro build`. A persistent disk cache (.translation-cache.json)
  * ensures each string is only translated once across all builds, saving API quota.
  *
- * Uses a two-pass approach:
+ * Architecture:
  *   1. Collect all unique translatable strings from the data tree
- *   2. Send them to DeepL in a single batched API call
+ *   2. Send only uncached strings to DeepL in batched API calls
  *   3. Rebuild the tree with translated values
+ *   4. Persist cache to disk so future builds skip the API entirely
+ *
+ * Key safeguards:
+ *   - Mutex prevents concurrent Promise.all() calls from double-translating
+ *   - String normalization (.trim()) prevents whitespace-induced cache misses
+ *   - Usage logging after translation shows remaining DeepL quota
  *
  * Setup:
  *   1. Get a free key at https://www.deepl.com/pro (free plan, 500k chars/mo)
@@ -18,23 +24,35 @@
  */
 
 import { readFileSync, writeFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+// ── Reliable path resolution (works in CI, dev, any CWD) ──
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const PROJECT_ROOT = resolve(__dirname, "../..");
+const CACHE_FILE = resolve(PROJECT_ROOT, ".translation-cache.json");
 
 // ── Persistent disk cache ──
 
-const CACHE_FILE = resolve(".translation-cache.json");
 let cacheModified = false;
+
+/** Normalize strings before cache lookup to prevent whitespace-induced misses. */
+function normalizeKey(str: string): string {
+  return str.trim();
+}
 
 function loadDiskCache(): Map<string, string> {
   const map = new Map<string, string>();
   try {
     const data = JSON.parse(readFileSync(CACHE_FILE, "utf-8"));
     for (const [k, v] of Object.entries(data)) {
-      if (typeof v === "string") map.set(k, v);
+      if (typeof v === "string") map.set(normalizeKey(k), v);
     }
     console.log(`[translate] Loaded ${map.size} cached translations from disk`);
   } catch {
     // File doesn't exist yet or is invalid — start fresh
+    console.log(`[translate] No cache file found at ${CACHE_FILE} — starting fresh`);
   }
   return map;
 }
@@ -55,16 +73,14 @@ function saveDiskCache(map: Map<string, string>): void {
 const cache = loadDiskCache();
 
 // Manual overrides for strings DeepL doesn't translate well (proper nouns, etc.).
-// Also used as identity mappings to prevent translation of proper nouns.
 const MANUAL_OVERRIDES: Record<string, string> = {
   "Le Parcours": "Programs",
   "Accueil": "Home",
   "/mois": "/month",
   "Oui": "Yes",
 };
-// Pre-seed cache with manual overrides so they're never sent to DeepL.
 for (const [fr, en] of Object.entries(MANUAL_OVERRIDES)) {
-  cache.set(fr, en);
+  cache.set(normalizeKey(fr), en);
 }
 
 // Keys whose values must never be translated (TinaCMS internals + technical fields).
@@ -86,26 +102,28 @@ const SKIP_KEYS = new Set([
 
 /** Returns true if the string is natural-language text worth translating. */
 function isTranslatable(str: string): boolean {
-  if (!str || str.trim().length < 3) return false;
-  if (cache.has(str)) return true;                   // always allow manual overrides through
-  if (str.startsWith("/") && str.length > 6) return false; // file / asset paths (but allow short like "/mois")
-  if (str.startsWith("http")) return false;          // full URLs
-  if (str.startsWith("mailto:")) return false;       // email links
-  if (str.startsWith("tel:")) return false;          // phone links
-  if (/^\d{4}-\d{2}-\d{2}/.test(str)) return false; // ISO dates
-  if (/^\d+$/.test(str)) return false;               // pure numeric strings
-  if (/^[A-Za-z0-9+/]{20,}={0,2}$/.test(str)) return false; // base64 strings (TinaCMS IDs)
+  const trimmed = str.trim();
+  if (!trimmed || trimmed.length < 3) return false;
+  if (cache.has(normalizeKey(str))) return true;      // always allow manual overrides through
+  if (trimmed.startsWith("/") && trimmed.length > 6) return false; // file / asset paths (but allow short like "/mois")
+  if (trimmed.startsWith("http")) return false;       // full URLs
+  if (trimmed.startsWith("mailto:")) return false;    // email links
+  if (trimmed.startsWith("tel:")) return false;       // phone links
+  if (/^\d{4}-\d{2}-\d{2}/.test(trimmed)) return false; // ISO dates
+  if (/^\d+$/.test(trimmed)) return false;            // pure numeric strings
+  if (/^[A-Za-z0-9+/]{20,}={0,2}$/.test(trimmed)) return false; // base64 strings (TinaCMS IDs)
   return true;
 }
 
 // ── Pass 1: collect all unique translatable strings ──
 
-function collectStrings(value: unknown, parentKey?: string): Set<string> {
+function collectStrings(value: unknown): Set<string> {
   const strings = new Set<string>();
   if (value === null || value === undefined) return strings;
   if (typeof value === "boolean" || typeof value === "number") return strings;
   if (typeof value === "string") {
-    if (isTranslatable(value) && !cache.has(value)) strings.add(value);
+    const key = normalizeKey(value);
+    if (isTranslatable(value) && !cache.has(key)) strings.add(key);
     return strings;
   }
   if (Array.isArray(value)) {
@@ -117,7 +135,7 @@ function collectStrings(value: unknown, parentKey?: string): Set<string> {
   if (typeof value === "object") {
     for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
       if (SKIP_KEYS.has(k)) continue;
-      for (const s of collectStrings(v, k)) strings.add(s);
+      for (const s of collectStrings(v)) strings.add(s);
     }
   }
   return strings;
@@ -134,10 +152,9 @@ async function batchTranslate(texts: string[]): Promise<void> {
     return;
   }
 
-  // Split into chunks of MAX_BATCH_SIZE
   for (let i = 0; i < texts.length; i += MAX_BATCH_SIZE) {
     const batch = texts.slice(i, i + MAX_BATCH_SIZE);
-    console.log(`[translate] Sending batch ${Math.floor(i / MAX_BATCH_SIZE) + 1}: ${batch.length} strings`);
+    console.log(`[translate] Sending batch ${Math.floor(i / MAX_BATCH_SIZE) + 1}: ${batch.length} strings (${batch.reduce((n, s) => n + s.length, 0)} chars)`);
 
     try {
       const res = await fetch("https://api-free.deepl.com/v2/translate", {
@@ -155,7 +172,6 @@ async function batchTranslate(texts: string[]): Promise<void> {
 
       if (!res.ok) {
         console.warn(`[translate] DeepL ${res.status} for batch — falling back to FR`);
-        // On rate limit, wait and retry once
         if (res.status === 429) {
           console.log("[translate] Rate limited — waiting 2s and retrying...");
           await new Promise((r) => setTimeout(r, 2000));
@@ -197,6 +213,23 @@ async function batchTranslate(texts: string[]): Promise<void> {
   }
 }
 
+/** Log remaining DeepL quota after any API calls. */
+async function logDeeplUsage(): Promise<void> {
+  const apiKey = import.meta.env.DEEPL_API_KEY;
+  if (!apiKey) return;
+  try {
+    const res = await fetch("https://api-free.deepl.com/v2/usage", {
+      headers: { Authorization: `DeepL-Auth-Key ${apiKey}` },
+    });
+    if (res.ok) {
+      const { character_count, character_limit } = await res.json();
+      const remaining = character_limit - character_count;
+      const pct = ((character_count / character_limit) * 100).toFixed(1);
+      console.log(`[translate] DeepL usage: ${character_count.toLocaleString()}/${character_limit.toLocaleString()} chars (${pct}% used, ${remaining.toLocaleString()} remaining)`);
+    }
+  } catch { /* non-critical */ }
+}
+
 // ── Pass 2: rebuild tree using cached translations ──
 
 function applyTranslations(value: unknown): unknown {
@@ -204,7 +237,7 @@ function applyTranslations(value: unknown): unknown {
   if (typeof value === "boolean" || typeof value === "number") return value;
   if (typeof value === "string") {
     if (!isTranslatable(value)) return value;
-    return cache.get(value) ?? value;
+    return cache.get(normalizeKey(value)) ?? value;
   }
   if (Array.isArray(value)) {
     return value.map((item) => applyTranslations(item));
@@ -219,24 +252,43 @@ function applyTranslations(value: unknown): unknown {
   return value;
 }
 
+// ── Mutex: prevents concurrent translateValue() calls from double-translating ──
+// When en/index.astro fires 17 content loaders via Promise.all(), the while-loop
+// ensures each caller waits for the previous one to finish and populate the cache.
+// Without `while`, all waiting callers would resume simultaneously after the first
+// lock release and send duplicate strings to DeepL.
+
+let translationLock: Promise<void> | null = null;
+
 /** Recursively translates all natural-language string values in any value. */
 export async function translateValue(value: unknown): Promise<any> {
+  // Spin-wait: after a lock releases, re-check in case another caller grabbed it
+  while (translationLock) await translationLock;
+
   // Pass 1: collect unique strings not yet cached
-  const strings = collectStrings(value);
-  const uncached = [...strings];
+  const uncached = [...collectStrings(value)];
 
   if (uncached.length > 0) {
     console.log(`[translate] ${uncached.length} new strings to translate`);
-    await batchTranslate(uncached);
+    // Hold the lock while translating so concurrent calls wait
+    let unlock!: () => void;
+    translationLock = new Promise((r) => { unlock = r; });
+    try {
+      await batchTranslate(uncached);
+      await logDeeplUsage();
+    } finally {
+      translationLock = null;
+      unlock();
+    }
+
+    // Persist after each batch so the cache is saved even if a later call crashes
+    if (cacheModified) {
+      saveDiskCache(cache);
+      cacheModified = false;
+    }
   }
 
-  // Persist new translations to disk so future builds skip the API
-  if (cacheModified) {
-    saveDiskCache(cache);
-    cacheModified = false;
-  }
-
-  // Pass 3: rebuild tree with translations
+  // Pass 2: rebuild tree with translations
   return applyTranslations(value);
 }
 
