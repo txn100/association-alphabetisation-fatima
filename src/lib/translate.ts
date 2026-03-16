@@ -24,14 +24,13 @@
  */
 
 import { readFileSync, writeFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { resolve } from "node:path";
 
-// ── Reliable path resolution (works in CI, dev, any CWD) ──
+// ── Cache file path ──
+// Uses process.cwd() which is always the project root during Astro builds.
+// Note: import.meta.url resolves to dist/ during build — do NOT use it here.
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const PROJECT_ROOT = resolve(__dirname, "../..");
-const CACHE_FILE = resolve(PROJECT_ROOT, ".translation-cache.json");
+const CACHE_FILE = resolve(process.cwd(), ".translation-cache.json");
 
 // ── Persistent disk cache ──
 
