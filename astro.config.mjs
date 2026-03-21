@@ -6,13 +6,15 @@ import sitemap from '@astrojs/sitemap';
 import tinaDirective from './astro-tina-directive/register';
 
 export default defineConfig({
-  site: 'https://association-alphabetisation-fatima.pages.dev',
+  site: 'https://ecolefatima.com',
+  trailingSlash: 'always',
   adapter: cloudflare(),
   integrations: [
     react(),
     sitemap({
+      filter: (page) => !page.includes('/admin'),
       serialize(item) {
-        const BASE = 'https://association-alphabetisation-fatima.pages.dev';
+        const BASE = 'https://ecolefatima.com';
         // Exact FR→EN route equivalents (translated slugs — NOT a simple /en/ prefix)
         const FR_TO_EN = {
           '/': '/en/',
