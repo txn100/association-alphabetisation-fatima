@@ -94,7 +94,7 @@ const categoryLabels: Record<string, string> = {
         {news.map((item: any) => (
           <article class="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition-shadow group">
             {item.image && (
-              <a href={`/en/news/${item.slug}`} class="block overflow-hidden">
+              <a href={`/en/news/${item.slug}/`} class="block overflow-hidden">
                 <img
                   src={item.image}
                   alt={item.imageAlt || item.title}
@@ -114,13 +114,13 @@ const categoryLabels: Record<string, string> = {
                 </span>
               </div>
               <h2 class="font-heading text-lg font-bold text-gray-800 mb-2 group-hover:text-brand-blue transition-colors">
-                <a href={`/en/news/${item.slug}`}>{item.title}</a>
+                <a href={`/en/news/${item.slug}/`}>{item.title}</a>
               </h2>
               {item.description && (
                 <p class="text-gray-600 text-sm leading-relaxed line-clamp-3 mb-4">{item.description}</p>
               )}
               <a
-                href={`/en/news/${item.slug}`}
+                href={`/en/news/${item.slug}/`}
                 class="inline-flex items-center text-sm font-bold text-brand-blue hover:text-blue-700 transition-colors"
               >
                 {ui.readMore} <i class="fas fa-arrow-right ml-1 text-xs"></i>
@@ -169,7 +169,7 @@ const categoryLabels: Record<string, string> = {
       "itemListElement": news.map((item: any, i: number) => ({
         "@type": "ListItem",
         "position": i + 1,
-        "url": `${siteUrl}/en/news/${item.slug}`,
+        "url": `${siteUrl}/en/news/${item.slug}/`,
         "name": item.title,
       })),
     },

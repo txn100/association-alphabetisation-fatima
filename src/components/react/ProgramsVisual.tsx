@@ -103,7 +103,7 @@ export default function ProgramsVisual(props: any & { lang?: string; ui?: any })
                   </p>
                   {step.slug && (
                     <a
-                      href={`${lang === "en" ? "/en/programs" : "/programmes"}/${step.slug}`}
+                      href={`${lang === "en" ? "/en/programs" : "/programmes"}/${step.slug}/`}
                       className={`inline-flex items-center mt-4 text-sm font-bold transition ${
                         step.color === "pink" ? "text-brand-pink hover:text-pink-700" : "text-brand-blue hover:text-blue-700"
                       }`}
