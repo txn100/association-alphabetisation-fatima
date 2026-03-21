@@ -8,6 +8,7 @@ import siteData from '../data/site.json';
 const pageTitle = `Nous Contacter — ${siteData.organizationName}`;
 const pageDescription = "Contactez l'Association d'Alphabétisation de Fatima à Trou aux Biches, Maurice. Téléphone, email, WhatsApp et adresse postale.";
 const canonicalPath = '/contact/';
+const siteUrl = new URL('/', Astro.url).href.replace(/\/$/, '');
 ---
 
 <Layout lang="fr" title={pageTitle} description={pageDescription} canonicalPath={canonicalPath}>
@@ -174,7 +175,7 @@ const canonicalPath = '/contact/';
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://association-alphabetisation-fatima.pages.dev/" },
+      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": `${siteUrl}/` },
       { "@type": "ListItem", "position": 2, "name": "Nous Contacter" }
     ]
   })} />

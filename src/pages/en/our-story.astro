@@ -16,6 +16,7 @@ const footer = footerResult.data.footer;
 
 const siteResult = await getSiteData("en");
 const site = siteResult.data.site;
+const siteUrl = new URL('/', Astro.url).href.replace(/\/$/, '');
 ---
 
 <Layout
@@ -198,7 +199,7 @@ const site = siteResult.data.site;
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://association-alphabetisation-fatima.pages.dev/en/" },
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": `${siteUrl}/en/` },
       { "@type": "ListItem", "position": 2, "name": "Our Story" }
     ]
   })} />

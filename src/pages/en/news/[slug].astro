@@ -29,6 +29,7 @@ const pageTitle = `${article.title} — ${siteData.organizationName}`;
 const pageDescription = article.description?.substring(0, 160) || article.title;
 const canonicalPath = `/en/news/${slug}/`;
 const altLangHref = `/actualites/${article.slug}/`;
+const siteUrl = new URL('/', Astro.url).href.replace(/\/$/, '');
 
 const ui = uiStrings.en;
 
@@ -193,7 +194,7 @@ const categoryLabels: Record<string, string> = {
       "name": siteData.organizationName,
       "logo": {
         "@type": "ImageObject",
-        "url": "https://association-alphabetisation-fatima.pages.dev/images/logo-fatima-hq.webp"
+        "url": `${siteUrl}/images/logo-fatima-hq.webp`
       }
     },
   })} />
@@ -201,8 +202,8 @@ const categoryLabels: Record<string, string> = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://association-alphabetisation-fatima.pages.dev/en/" },
-      { "@type": "ListItem", "position": 2, "name": "News", "item": "https://association-alphabetisation-fatima.pages.dev/en/news/" },
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": `${siteUrl}/en/` },
+      { "@type": "ListItem", "position": 2, "name": "News", "item": `${siteUrl}/en/news/` },
       { "@type": "ListItem", "position": 3, "name": article.title }
     ]
   })} />

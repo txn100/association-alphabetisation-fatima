@@ -20,6 +20,7 @@ const news = (newsResult.data.newsConnection?.edges || [])
 const pageTitle = `News — ${siteData.organizationName}`;
 const pageDescription = "Latest news from the Association d'Alphab\u00e9tisation de Fatima: events, school outings, shows and educational activities.";
 const canonicalPath = '/en/news/';
+const siteUrl = new URL('/', Astro.url).href.replace(/\/$/, '');
 
 const ui = uiStrings.en;
 
@@ -174,7 +175,7 @@ const categoryLabels: Record<string, string> = {
       "itemListElement": news.map((item: any, i: number) => ({
         "@type": "ListItem",
         "position": i + 1,
-        "url": `https://association-alphabetisation-fatima.pages.dev/en/news/${item.slug}`,
+        "url": `${siteUrl}/en/news/${item.slug}`,
         "name": item.title,
       })),
     },
@@ -183,7 +184,7 @@ const categoryLabels: Record<string, string> = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://association-alphabetisation-fatima.pages.dev/en/" },
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": `${siteUrl}/en/` },
       { "@type": "ListItem", "position": 2, "name": "News" }
     ]
   })} />

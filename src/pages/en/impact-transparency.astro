@@ -22,6 +22,7 @@ const stats = (statsResult.data.statsConnection?.edges || [])
 const pageTitle = `Impact & Transparency — ${siteData.organizationName}`;
 const pageDescription = `Key figures, accreditations (CSR ${footerData.csrCode}) and transparency information for ${siteData.organizationName}, a registered NGO in Mauritius.`;
 const canonicalPath = '/en/impact-transparency/';
+const siteUrl = new URL('/', Astro.url).href.replace(/\/$/, '');
 ---
 
 <Layout lang="en" title={pageTitle} description={pageDescription} canonicalPath={canonicalPath}>
@@ -262,7 +263,7 @@ const canonicalPath = '/en/impact-transparency/';
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://association-alphabetisation-fatima.pages.dev/en/" },
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": `${siteUrl}/en/` },
       { "@type": "ListItem", "position": 2, "name": "Impact & Transparency" }
     ]
   })} />
