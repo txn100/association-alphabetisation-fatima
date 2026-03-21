@@ -5,6 +5,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import siteData from '../../data/site.json';
 import footerData from '../../data/footer.json';
+import { categoryColors } from '../../lib/news-utils';
 
 export async function getStaticPaths() {
   const newsEntries = await getCollection('news');
@@ -20,13 +21,6 @@ const pageTitle = `${article.title} — ${siteData.organizationName}`;
 const pageDescription = article.description?.substring(0, 160) || article.title;
 const canonicalPath = `/actualites/${slug}/`;
 const altLangHref = `/en/news/${slug}/`;
-
-const categoryColors: Record<string, string> = {
-  'Formation': 'bg-brand-blue text-white',
-  'Culture': 'bg-brand-pink text-white',
-  'Vie Scolaire': 'bg-brand-yellow text-brand-dark',
-  'Environnement': 'bg-green-500 text-white',
-};
 const siteUrl = new URL('/', Astro.url).href.replace(/\/$/, '');
 ---
 

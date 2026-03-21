@@ -4,6 +4,7 @@ export const prerender = true;
 import Layout from '../../../layouts/Layout.astro';
 import { getNewsData, getFooterData, getSiteData } from '../../../lib/content';
 import { uiStrings } from '../../../lib/i18n';
+import { categoryColors } from '../../../lib/news-utils';
 
 const newsResult = await getNewsData("en");
 const footerResult = await getFooterData("en");
@@ -23,13 +24,6 @@ const canonicalPath = '/en/news/';
 const siteUrl = new URL('/', Astro.url).href.replace(/\/$/, '');
 
 const ui = uiStrings.en;
-
-const categoryColors: Record<string, string> = {
-  'Formation': 'bg-brand-blue text-white',
-  'Culture': 'bg-brand-pink text-white',
-  'Vie Scolaire': 'bg-brand-yellow text-brand-dark',
-  'Environnement': 'bg-green-500 text-white',
-};
 
 // Display labels from uiStrings
 const categoryLabels: Record<string, string> = {

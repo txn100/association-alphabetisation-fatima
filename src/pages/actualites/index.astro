@@ -5,6 +5,7 @@ import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import siteData from '../../data/site.json';
 import footerData from '../../data/footer.json';
+import { categoryColors } from '../../lib/news-utils';
 
 const newsEntries = await getCollection('news');
 const news = newsEntries.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()).map(e => ({ ...e.data, slug: e.data.slug || e.id }));
@@ -12,13 +13,6 @@ const news = newsEntries.sort((a, b) => new Date(b.data.date).getTime() - new Da
 const pageTitle = `Actualités — ${siteData.organizationName}`;
 const pageDescription = "Dernières nouvelles de l'Association d'Alphabétisation de Fatima : événements, sorties scolaires, spectacles et activités pédagogiques.";
 const canonicalPath = '/actualites/';
-
-const categoryColors: Record<string, string> = {
-  'Formation': 'bg-brand-blue text-white',
-  'Culture': 'bg-brand-pink text-white',
-  'Vie Scolaire': 'bg-brand-yellow text-brand-dark',
-  'Environnement': 'bg-green-500 text-white',
-};
 const siteUrl = new URL('/', Astro.url).href.replace(/\/$/, '');
 ---
 

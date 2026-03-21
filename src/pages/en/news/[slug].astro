@@ -4,6 +4,7 @@ export const prerender = true;
 import Layout from '../../../layouts/Layout.astro';
 import { getNewsData, getFooterData, getSiteData } from '../../../lib/content';
 import { uiStrings } from '../../../lib/i18n';
+import { categoryColors } from '../../../lib/news-utils';
 
 export async function getStaticPaths() {
   const newsResult = await getNewsData("en");
@@ -32,14 +33,6 @@ const altLangHref = `/actualites/${article.slug}/`;
 const siteUrl = new URL('/', Astro.url).href.replace(/\/$/, '');
 
 const ui = uiStrings.en;
-
-// Colors keyed by FR enum value (category is now in SKIP_KEYS, never translated by DeepL)
-const categoryColors: Record<string, string> = {
-  'Formation': 'bg-brand-blue text-white',
-  'Culture': 'bg-brand-pink text-white',
-  'Vie Scolaire': 'bg-brand-yellow text-brand-dark',
-  'Environnement': 'bg-green-500 text-white',
-};
 
 // Display labels from uiStrings
 const categoryLabels: Record<string, string> = {
