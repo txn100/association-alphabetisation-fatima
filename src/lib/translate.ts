@@ -229,6 +229,27 @@ async function logDeeplUsage(): Promise<void> {
   } catch { /* non-critical */ }
 }
 
+// ── Post-processing: fix common DeepL translation artifacts ──
+
+/** Fix orphan/mismatched quotes and other DeepL artifacts in translated strings. */
+function cleanTranslation(translated: string): string {
+  let s = translated;
+  // Remove orphan opening quotes with no closing pair (e.g. `Club - "Mer` → `Club - Mer`)
+  // Matches a double-quote preceded by space/dash/start that has no closing quote
+  const doubleQuotes = (s.match(/"/g) || []).length;
+  if (doubleQuotes === 1) {
+    // Single orphan double-quote — remove it
+    s = s.replace(/\s*"(\s*)/g, " ").trim();
+  }
+  // Same for guillemets: orphan « or » without the other
+  const openGuill = (s.match(/«/g) || []).length;
+  const closeGuill = (s.match(/»/g) || []).length;
+  if (openGuill !== closeGuill) {
+    s = s.replace(/\s*[«»]\s*/g, " ").trim();
+  }
+  return s;
+}
+
 // ── Pass 2: rebuild tree using cached translations ──
 
 function applyTranslations(value: unknown): unknown {
@@ -236,7 +257,8 @@ function applyTranslations(value: unknown): unknown {
   if (typeof value === "boolean" || typeof value === "number") return value;
   if (typeof value === "string") {
     if (!isTranslatable(value)) return value;
-    return cache.get(normalizeKey(value)) ?? value;
+    const translated = cache.get(normalizeKey(value)) ?? value;
+    return cleanTranslation(translated);
   }
   if (Array.isArray(value)) {
     return value.map((item) => applyTranslations(item));

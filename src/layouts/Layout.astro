@@ -18,15 +18,21 @@ interface Props {
   canonicalPath?: string;
   ogImage?: string;
   ogType?: string;
+  noindex?: boolean;
+  preloadHero?: boolean;
 }
+
+const siteDescription = site.description || "Depuis 37 ans, nous aidons des enfants défavorisés à sortir de l'échec scolaire. Plus de 2 000 élèves ont pu retrouver le chemin de la confiance, de l'estime de soi et de la réussite.";
 
 const {
   lang = "fr",
   title = site.title || "Association d'Alphabétisation de Fatima — Trou-aux-Biches, Maurice",
-  description = site.description || "Depuis 37 ans, nous aidons des enfants défavorisés à sortir de l'échec scolaire. Plus de 2 000 élèves ont pu retrouver le chemin de la confiance, de l'estime de soi et de la réussite.",
+  description = siteDescription,
   canonicalPath,
   ogImage: ogImageProp,
   ogType = "website",
+  noindex = false,
+  preloadHero = false,
 } = Astro.props;
 
 const ogLocale = lang === "en" ? "en_US" : "fr_FR";
@@ -52,12 +58,17 @@ const ogLocaleAlt = lang === "en" ? "fr_FR" : "en_US";
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0e86b3" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
 
-    <!-- Canonical + hreflang for bilingual SEO -->
-    <link rel="canonical" href={canonicalUrl} />
-    <link rel="alternate" hreflang="fr" href={frUrl} />
-    <link rel="alternate" hreflang="en" href={enUrl} />
-    <link rel="alternate" hreflang="x-default" href={frUrl} />
+    {!noindex && (
+      <>
+        {/* Canonical + hreflang for bilingual SEO */}
+        <link rel="canonical" href={canonicalUrl} />
+        <link rel="alternate" hreflang="fr" href={frUrl} />
+        <link rel="alternate" hreflang="en" href={enUrl} />
+        <link rel="alternate" hreflang="x-default" href={frUrl} />
+      </>
+    )}
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Open Graph -->
@@ -92,8 +103,9 @@ const ogLocaleAlt = lang === "en" ? "fr_FR" : "en_US";
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
 
-    <!-- Preload LCP hero background -->
-    <link rel="preload" as="image" type="image/webp" href="/images/fatima-hero-assembly.webp" fetchpriority="high" />
+    {preloadHero && (
+      <link rel="preload" as="image" type="image/webp" href="/images/fatima-hero-assembly.webp" fetchpriority="high" />
+    )}
 
     <!-- Google Fonts (non-render-blocking) -->
     <link
@@ -129,7 +141,7 @@ const ogLocaleAlt = lang === "en" ? "fr_FR" : "en_US";
       "url": `${baseUrl}/`,
       "logo": `${baseUrl}/images/logo-fatima-hq.webp`,
       "foundingDate": "1989",
-      "description": description,
+      "description": siteDescription,
       "telephone": footer.phone1Link,
       "address": {
         "@type": "PostalAddress",

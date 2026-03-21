@@ -278,7 +278,13 @@ export function getAltLangPath(
   targetLang: Locale
 ): string {
   if (currentLang === targetLang) return currentPath;
-  for (const route of routeEquivalents) {
+  // Sort routes longest-first so /en/news/ matches before /en/ (prevents wrong prefix match)
+  const sorted = [...routeEquivalents].sort((a, b) => {
+    const aLen = (currentLang === "fr" ? a.fr : a.en).length;
+    const bLen = (currentLang === "fr" ? b.fr : b.en).length;
+    return bLen - aLen;
+  });
+  for (const route of sorted) {
     const src = currentLang === "fr" ? route.fr : route.en;
     const tgt = currentLang === "fr" ? route.en : route.fr;
     if (currentPath === src) return tgt;

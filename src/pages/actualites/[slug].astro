@@ -24,7 +24,7 @@ const altLangHref = `/en/news/${slug}/`;
 const siteUrl = new URL('/', Astro.url).href.replace(/\/$/, '');
 ---
 
-<Layout lang="fr" title={pageTitle} description={pageDescription} canonicalPath={canonicalPath}>
+<Layout lang="fr" title={pageTitle} description={pageDescription} canonicalPath={canonicalPath} noindex={true}>
   <!-- Navbar -->
   <nav class="bg-white shadow-sm sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">

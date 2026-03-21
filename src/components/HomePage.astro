@@ -59,6 +59,7 @@ const uiJson = JSON.stringify(ui);
   lang={lang}
   title={siteData.data?.site?.title}
   description={siteData.data?.site?.description}
+  preloadHero={true}
 >
   <NavbarVisual {...navigationData} lang={lang} ui={ui} client:tina />
   <main>
